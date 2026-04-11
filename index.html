@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maugli Bodywork</title>
+  <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -55,8 +56,8 @@
 
     .strip { background: var(--accent); padding: 1.1rem 3.5rem; display: flex; align-items: center; gap: 3rem; overflow-x: auto; }
     .strip-item { display: flex; align-items: center; gap: 1rem; white-space: nowrap; flex-shrink: 0; }
-    .strip-num { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; font-weight: 300; color: var(--accent2); line-height: 1; }
-    .strip-label { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(253,250,246,0.55); }
+    .strip-num { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; font-weight: 300; color: var(--bg-warm); line-height: 1; }
+    .strip-label { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,224,212,0.55); }
     .strip-div { width: 1px; height: 2rem; background: rgba(253,250,246,0.12); flex-shrink: 0; }
 
     .philosophy { padding: 7rem 3.5rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: center; max-width: 1200px; margin: 0 auto; }
@@ -79,8 +80,19 @@
     .svc-num { font-family: 'Unbounded', sans-serif; font-size: 0.58rem; color: var(--line); letter-spacing: 0.1em; }
     .svc-name { font-family: 'Unbounded', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--accent); line-height: 1.35; }
     .svc-dur { font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
-    .svc-price { font-family: 'Unbounded', sans-serif; font-size: 1.6rem; font-weight: 300; color: var(--accent2); margin-top: auto; line-height: 1; }
+    .svc-price { font-family: 'Unbounded', sans-serif; font-size: 1.6rem; font-weight: 300; color: var(--accent); margin-top: auto; line-height: 1; }
     .svc-price span { font-size: 0.65rem; font-family: 'Geologica', sans-serif; color: var(--text-muted); }
+
+    /* ── FOR WHOM ── */
+    .for-whom { padding: 5rem 3.5rem; border-bottom: 1px solid var(--line); }
+    .for-whom-inner { max-width: 900px; margin: 0 auto; }
+    .for-whom-list { margin-top: 2rem; list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .for-whom-list li { font-size: 1rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.4rem; position: relative; }
+    .for-whom-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent2); }
+
+    /* ── SOFT PUSH ── */
+    .soft-push { padding: 3.5rem 3.5rem; text-align: center; }
+    .soft-push p { font-size: 1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.75; font-style: italic; }
 
     /* ── APPROACH BLOCK (перенесён с about) ── */
     .approach-home { background: var(--bg-warm); padding: 6rem 3.5rem; }
@@ -251,18 +263,19 @@
       <li><a href="about.html">Обо мне</a></li>
       <li><a href="contacts.html">Контакты</a></li>
     </ul>
-    <a href="https://calendar.google.com" target="_blank" class="nav-book">Записаться</a>
+    <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="nav-book">Записаться</a>
   </nav>
 
   <section class="hero">
     <div class="hero-left">
       <p class="hero-eyebrow">Телесная практика · Тбилиси</p>
       <h1 class="hero-title">Тело знает.<br>Нужно лишь<br><span>научиться слушать</span></h1>
-      <p class="hero-sub">Персональный подход, мышечное тестирование и работа с причиной — не симптомом.</p>
+      <p class="hero-sub">Помогаю убрать боль в спине, шее и теле через диагностику и работу с причиной, а не симптомом. Первые изменения — уже после 1–2 сеансов.</p>
       <div class="hero-cta">
-        <a href="https://calendar.google.com" target="_blank" class="btn-primary">Записаться</a>
+        <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="btn-primary">Записаться на сеанс</a>
         <a href="services.html" class="btn-ghost">Форматы и цены</a>
       </div>
+      <p style="margin-top:1rem;font-size:0.82rem;color:var(--text-muted);">6+ лет практики · 3 сертификата · работа 1:1</p>
     </div>
     <div class="hero-right">
       <img src="hero.jpg" alt="Maugli Bodywork" />
@@ -270,14 +283,28 @@
   </section>
 
   <div class="strip">
-    <div class="strip-item"><span class="strip-num">5</span><span class="strip-label">лет практики</span></div>
+    <div class="strip-item"><span class="strip-num">6+</span><span class="strip-label">лет опыта</span></div>
     <div class="strip-div"></div>
-    <div class="strip-item"><span class="strip-num">3</span><span class="strip-label">сертификата</span></div>
+    <div class="strip-item"><span class="strip-num">2000+</span><span class="strip-label">часов практики</span></div>
+    <div class="strip-div"></div>
+    <div class="strip-item"><span class="strip-num">200+</span><span class="strip-label">клиентов</span></div>
     <div class="strip-div"></div>
     <div class="strip-item"><span class="strip-num">1:1</span><span class="strip-label">только личные сеансы</span></div>
-    <div class="strip-div"></div>
-    <div class="strip-item"><span class="strip-num">4</span><span class="strip-label">формата работы</span></div>
   </div>
+
+  <!-- КОМУ ПОДОЙДЁТ -->
+  <section class="for-whom reveal">
+    <div class="for-whom-inner">
+      <p class="section-tag">Кому это подойдёт</p>
+      <ul class="for-whom-list">
+        <li>Боль в спине, шее или пояснице — острая или хроническая</li>
+        <li>Ощущение зажатости, усталости и тяжести в теле</li>
+        <li>Сидячая работа — IT, офис, удалёнка</li>
+        <li>Сложно расслабиться и «отключить голову»</li>
+        <li>Хочется понять своё тело и работать с причиной, а не глушить симптомы</li>
+      </ul>
+    </div>
+  </section>
 
   <section class="philosophy">
     <div class="reveal">
@@ -327,13 +354,13 @@
       <div class="services-grid reveal">
         <a href="services.html#warmup25" class="svc-card-link">
           <div class="svc-card">
-            <span class="svc-num">01</span><h3 class="svc-name">Warm-Up</h3><p class="svc-dur">25 минут</p><p class="svc-price">70 <span>GEL</span></p>
+            <span class="svc-num">01</span><h3 class="svc-name">Разминка</h3><p class="svc-dur">25 минут</p><p class="svc-price">70 <span>GEL</span></p>
             <div class="svc-card-overlay"><span>Подробнее</span></div>
           </div>
         </a>
         <a href="services.html#warmup50" class="svc-card-link">
           <div class="svc-card">
-            <span class="svc-num">02</span><h3 class="svc-name">Warm-Up</h3><p class="svc-dur">50 минут</p><p class="svc-price">130 <span>GEL</span></p>
+            <span class="svc-num">02</span><h3 class="svc-name">Aesthetic</h3><p class="svc-dur">50 минут</p><p class="svc-price">130 <span>GEL</span></p>
             <div class="svc-card-overlay"><span>Подробнее</span></div>
           </div>
         </a>
@@ -380,12 +407,17 @@
     </div>
   </section>
 
+  <!-- МЯГКИЙ ДОЖИМ -->
+  <section class="soft-push reveal">
+    <p>Если вы чувствуете, что тело «застряло» — скорее всего, ему просто не хватает правильного воздействия.</p>
+  </section>
+
   <section class="cta">
     <div class="cta-bg"><img src="cta_hands.jpg" alt="" /></div>
     <div class="cta-inner">
       <p class="cta-tag">Записаться</p>
       <h2 class="cta-title">Готовы познакомиться с собственным телом?</h2>
-      <a href="https://calendar.google.com" target="_blank" class="btn-light">Выбрать время</a>
+      <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="btn-light">Выбрать время</a>
     </div>
   </section>
 
