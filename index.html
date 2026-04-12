@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maugli Bodywork</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F2EDE5;
+      --bg-warm: #E8E0D4;
+      --text: #1C1915;
+      --text-muted: #7A6E63;
+      --accent: #1C1915;
+      --accent2: #C4694A;
+      --accent2-light: #E8C4B4;
+      --strip-bg: #3D3530;      /* чуть светлее чёрного */
+      --line: #D0C6B8;
+      --white: #FDFAF6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Geologica', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3.5rem;
+      transition: background 0.4s;
+    }
+    nav.scrolled { background: rgba(242,237,229,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav-logo { font-family: 'Unbounded', sans-serif; font-size: 0.82rem; font-weight: 400; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-book { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.6rem 1.4rem; text-decoration: none; transition: background 0.2s; }
+    .nav-book:hover { background: #a8553a; }
+
+    /* BURGER */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--accent); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg); z-index: 99; flex-direction: column;
+      align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Unbounded', sans-serif; font-size: 1.1rem; font-weight: 300; color: var(--accent); text-decoration: none; letter-spacing: 0.05em; }
+    .mobile-menu .mob-book { color: var(--white); background: var(--accent2); padding: 0.8rem 2rem; margin-top: 1rem; }
+
+    /* ── HERO ── */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+    .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 3.5rem 5rem; }
+    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.8rem; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+    .hero-eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--accent2); }
+    .hero-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.2; color: var(--accent); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+    .hero-title span { color: var(--accent2); }
+    .hero-sub { font-size: 1rem; color: var(--text-muted); max-width: 420px; line-height: 1.75; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+    .hero-cta { display: flex; gap: 1.2rem; align-items: center; opacity: 0; animation: fadeUp 0.7s 0.65s forwards; }
+    .hero-micro { margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted); opacity: 0; animation: fadeUp 0.7s 0.8s forwards; line-height: 1.6; }
+    .btn-primary { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.9rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .btn-primary:hover { background: #a8553a; transform: translateY(-1px); }
+    .btn-ghost { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color 0.2s; }
+    .btn-ghost:hover { color: var(--accent); }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, var(--bg) 0%, transparent 20%); }
+
+    /* ── STRIP ── */
+    .strip-wrapper { background: var(--strip-bg); overflow: hidden; position: relative; }
+    .strip {
+      display: flex; align-items: center; gap: 3rem;
+      padding: 1.1rem 3.5rem;
+      white-space: nowrap;
+      width: max-content;
+    }
+    .strip-item { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+    .strip-num { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; font-weight: 300; color: var(--bg-warm); line-height: 1; }
+    .strip-label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,224,212,0.55); }
+    .strip-div { width: 1px; height: 2rem; background: rgba(232,224,212,0.15); flex-shrink: 0; }
+
+    /* ping-pong scroll on mobile */
+    @media (max-width: 768px) {
+      .strip {
+        animation: pingpong 12s ease-in-out infinite;
+      }
+      @keyframes pingpong {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(calc(-100% + 100vw)); }
+      }
+    }
+
+    /* ── FOR WHOM ── */
+    .for-whom { padding: 5rem 3.5rem; }
+    .for-whom-inner { max-width: 1100px; margin: 0 auto; }
+    .for-whom-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); margin-top: 3rem; }
+    .for-whom-card {
+      background: var(--bg); padding: 2rem 1.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: background 0.25s;
+    }
+    .for-whom-card:hover { background: var(--white); }
+    .for-whom-icon { font-size: 1.5rem; line-height: 1; }
+    .for-whom-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy { padding: 7rem 3.5rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: center; max-width: 1200px; margin: 0 auto; }
+    .section-tag { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .phil-quote { font-family: 'Unbounded', sans-serif; font-size: clamp(1.2rem, 2.2vw, 1.8rem); font-weight: 300; line-height: 1.45; color: var(--accent); }
+    .phil-text { font-size: 1rem; color: var(--text-muted); line-height: 1.85; }
+    .phil-text p + p { margin-top: 1.2rem; }
+    .phil-text strong { color: var(--text); font-weight: 400; }
+
+    /* ── APPROACH ── */
+    .approach-home { background: var(--bg-warm); padding: 6rem 3.5rem; }
+    .approach-home-inner { max-width: 1200px; margin: 0 auto; }
+    .approach-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); margin-top: 3.5rem; }
+    .approach-card { background: var(--bg-warm); padding: 2.5rem 2rem; transition: background 0.25s; }
+    .approach-card:hover { background: var(--white); }
+    .approach-num { font-family: 'Unbounded', sans-serif; font-size: 0.65rem; color: var(--accent2); letter-spacing: 0.15em; margin-bottom: 1.2rem; }
+    .approach-title { font-family: 'Unbounded', sans-serif; font-size: 0.9rem; font-weight: 300; color: var(--accent); margin-bottom: 0.8rem; line-height: 1.3; }
+    .approach-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── SERVICES (с фото-фоном) ── */
+    .services-preview {
+      position: relative; overflow: hidden;
+      padding: 6rem 3.5rem;
+    }
+    .services-preview-bg {
+      position: absolute; inset: 0;
+    }
+    .services-preview-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+    .services-preview-bg::after { content: ''; position: absolute; inset: 0; background: rgba(28,25,21,0.78); }
+    .services-preview-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
+    .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-weight: 300; color: var(--accent); line-height: 1.2; }
+    .section-title-light { font-family: 'Unbounded', sans-serif; font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-weight: 300; color: var(--white); line-height: 1.2; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(255,255,255,0.15); }
+    .svc-card-link { display: block; text-decoration: none; color: inherit; }
+    .svc-card {
+      background: rgba(242,237,229,0.08);
+      backdrop-filter: blur(4px);
+      padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      position: relative; overflow: hidden;
+      transition: background 0.25s, transform 0.25s;
+      border-bottom: 2px solid transparent;
+    }
+    .svc-card:hover {
+      background: rgba(242,237,229,0.18);
+      transform: translateY(-4px);
+      border-bottom-color: var(--accent2);
+    }
+    .svc-card-link:hover .svc-card-bottom { opacity: 1; transform: translateY(0); }
+    .svc-card-bottom {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-top: 0.5rem;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.25s, transform 0.25s;
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent2);
+    }
+    .svc-num { font-family: 'Unbounded', sans-serif; font-size: 0.58rem; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
+    .svc-name { font-family: 'Unbounded', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--white); line-height: 1.35; }
+    .svc-dur { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+    .svc-price { font-family: 'Unbounded', sans-serif; font-size: 1.6rem; font-weight: 300; color: var(--accent2); margin-top: auto; line-height: 1; }
+    .svc-price span { font-size: 0.65rem; font-family: 'Geologica', sans-serif; color: rgba(255,255,255,0.45); }
+
+    /* ── HOW ── */
+    .how { padding: 7rem 3.5rem; max-width: 1200px; margin: 0 auto; }
+    .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; margin-top: 4rem; }
+    .how-photo { width: 100%; aspect-ratio: 3/4; overflow: hidden; margin-bottom: 1.5rem; }
+    .how-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .how-card:hover .how-photo img { transform: scale(1.04); }
+    .how-num { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.7rem; }
+    .how-title { font-family: 'Unbounded', sans-serif; font-size: 0.9rem; font-weight: 300; color: var(--accent); margin-bottom: 0.7rem; line-height: 1.35; }
+    .how-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── SOFT PUSH ── */
+    .soft-push { padding: 3.5rem 3.5rem; text-align: center; }
+    .soft-push p { font-size: 1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.75; font-style: italic; }
+
+    /* ── CTA ── */
+    .cta { position: relative; overflow: hidden; min-height: 500px; display: flex; align-items: center; }
+    .cta-bg { position: absolute; inset: 0; }
+    .cta-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .cta-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(28,25,21,0.9) 40%, rgba(28,25,21,0.25) 100%); }
+    .cta-inner { position: relative; z-index: 2; padding: 5rem 3.5rem; max-width: 580px; }
+    .cta-tag { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .cta-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .cta-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2.1rem); font-weight: 300; color: var(--white); line-height: 1.35; margin-bottom: 2.5rem; }
+    .btn-light { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--white); padding: 0.9rem 2.2rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; }
+    .btn-light:hover { background: var(--accent2-light); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--accent); padding: 2.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Unbounded', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--bg-warm); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(232,224,212,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bg-warm); }
+    .footer-copy { font-size: 0.7rem; color: rgba(232,224,212,0.25); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    .reveal { opacity:0; transform:translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.4rem; }
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .burger { display: flex; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5.5rem 1.4rem 3rem; }
+      .hero-right { height: 60vw; }
+      .hero-right::after { background: linear-gradient(to bottom, var(--bg) 0%, transparent 30%); }
+      .hero-title { font-size: clamp(1.7rem, 7vw, 2.6rem); }
+      .hero-sub { font-size: 0.95rem; }
+
+      .strip { animation: pingpong 10s ease-in-out infinite; padding: 1rem 1.4rem; }
+
+      .for-whom { padding: 3.5rem 1.4rem; }
+      .for-whom-cards { grid-template-columns: 1fr 1fr; }
+
+      .philosophy { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+      .approach-home { padding: 3.5rem 1.4rem; }
+      .approach-grid { grid-template-columns: 1fr; }
+
+      .services-preview { padding: 3.5rem 1.4rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .section-title-light { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+      .how { padding: 3.5rem 1.4rem; }
+      .how-grid { grid-template-columns: 1fr; }
+
+      .soft-push { padding: 3rem 1.4rem; }
+      .cta-inner { padding: 3.5rem 1.4rem; }
+
+      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.4rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">Maugli Bodywork</a>
+    <ul class="nav-links">
+      <li><a href="services.html">Форматы</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+    <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="nav-book">Записаться</a>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Главная</a>
+    <a href="services.html">Форматы</a>
+    <a href="about.html">Обо мне</a>
+    <a href="contacts.html">Контакты</a>
+    <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="mob-book">Записаться</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Телесная практика · Тбилиси</p>
+      <h1 class="hero-title">Тело знает.<br>Нужно лишь<br><span>научиться слушать</span></h1>
+      <p class="hero-sub">Помогаю убрать боль, напряжение и зажатость в теле через диагностику и работу с причиной, а не симптомом.</p>
+      <div class="hero-cta">
+        <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="btn-primary">Записаться на сеанс</a>
+        <a href="services.html" class="btn-ghost">Форматы и цены</a>
+      </div>
+      <p class="hero-micro">6+ лет практики · первые изменения уже после 1–2 сеансов</p>
+    </div>
+    <div class="hero-right">
+      <img src="hero.jpg" alt="Maugli Bodywork" />
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip-wrapper">
+    <div class="strip">
+      <div class="strip-item"><span class="strip-num">6+</span><span class="strip-label">лет опыта</span></div>
+      <div class="strip-div"></div>
+      <div class="strip-item"><span class="strip-num">2000+</span><span class="strip-label">часов практики</span></div>
+      <div class="strip-div"></div>
+      <div class="strip-item"><span class="strip-num">200+</span><span class="strip-label">клиентов</span></div>
+      <div class="strip-div"></div>
+      <div class="strip-item"><span class="strip-num">с 2020</span><span class="strip-label">года</span></div>
+    </div>
+  </div>
+
+  <!-- КОМУ ПОДОЙДЁТ -->
+  <section class="for-whom reveal">
+    <div class="for-whom-inner">
+      <p class="section-tag">Кому это подойдёт</p>
+      <div class="for-whom-cards">
+        <div class="for-whom-card">
+          <div class="for-whom-icon">🔥</div>
+          <p class="for-whom-text">Боль в спине, шее или пояснице — острая или хроническая</p>
+        </div>
+        <div class="for-whom-card">
+          <div class="for-whom-icon">🪨</div>
+          <p class="for-whom-text">Ощущение зажатости, усталости и тяжести в теле</p>
+        </div>
+        <div class="for-whom-card">
+          <div class="for-whom-icon">💻</div>
+          <p class="for-whom-text">Сидячая работа — IT, офис, удалёнка</p>
+        </div>
+        <div class="for-whom-card">
+          <div class="for-whom-icon">🌀</div>
+          <p class="for-whom-text">Сложно расслабиться и «отключить голову»</p>
+        </div>
+        <div class="for-whom-card">
+          <div class="for-whom-icon">🎯</div>
+          <p class="for-whom-text">Хочется работать с причиной, а не глушить симптомы</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy">
+    <div class="reveal">
+      <p class="section-tag">Подход</p>
+      <h2 class="phil-quote">Не навязать свою волю — а помочь телу запустить внутренние процессы</h2>
+    </div>
+    <div class="reveal">
+      <div class="phil-text">
+        <p>Я <strong>не работаю по шаблону</strong>. Каждый сеанс начинается с анализа: беседа, визуальная диагностика, мануальное мышечное тестирование. Только после этого — работа.</p>
+        <p>В арсенале: шведский массаж, миофасциальный релиз, глубокотканная техника, триггерные точки, лимфодренаж, соматика и телесно-ориентированная терапия. Набор инструментов — под ваш запрос.</p>
+        <p>Сторонник <strong>научного подхода</strong>, но с уважением к тому, что работает на практике. Без эзотерики. С уважением к вашим границам.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="approach-home">
+    <div class="approach-home-inner">
+      <p class="section-tag reveal">Мой подход</p>
+      <h2 class="section-title reveal">Три принципа<br>в основе работы</h2>
+      <div class="approach-grid reveal">
+        <div class="approach-card">
+          <p class="approach-num">01</p>
+          <h3 class="approach-title">Причина, не симптом</h3>
+          <p class="approach-text">Без понимания «что, когда и зачем» — работа только с симптомами. Я использую анатомию, мышечное тестирование и теорию Анатомических поездов, чтобы составить общую картину.</p>
+        </div>
+        <div class="approach-card">
+          <p class="approach-num">02</p>
+          <h3 class="approach-title">Научно, но не догматично</h3>
+          <p class="approach-text">Я сторонник доказательного подхода. Но тело во многом остаётся загадкой. Поэтому есть место и для методов, которые хорошо показали себя на деле.</p>
+        </div>
+        <div class="approach-card">
+          <p class="approach-num">03</p>
+          <h3 class="approach-title">Уважение к границам</h3>
+          <p class="approach-text">Я не лезу в чужие «травмы» и эзотерику. Моя задача — создать безопасное пространство и помочь телу запустить внутренние процессы.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES с фото-фоном -->
+  <section class="services-preview">
+    <div class="services-preview-bg">
+      <img src="approach.jpg" alt="" />
+    </div>
+    <div class="services-preview-inner">
+      <div class="section-header reveal">
+        <h2 class="section-title-light">Форматы<br>и цены</h2>
+      </div>
+      <div class="services-grid reveal">
+        <a href="services.html#warmup25" class="svc-card-link">
+          <div class="svc-card">
+            <span class="svc-num">01</span>
+            <h3 class="svc-name">Разминка</h3>
+            <p class="svc-dur">25 минут</p>
+            <p class="svc-price">70 <span>GEL</span></p>
+            <div class="svc-card-bottom">Подробнее →</div>
+          </div>
+        </a>
+        <a href="services.html#warmup50" class="svc-card-link">
+          <div class="svc-card">
+            <span class="svc-num">02</span>
+            <h3 class="svc-name">Aesthetic</h3>
+            <p class="svc-dur">50 минут</p>
+            <p class="svc-price">130 <span>GEL</span></p>
+            <div class="svc-card-bottom">Подробнее →</div>
+          </div>
+        </a>
+        <a href="services.html#bodypractice" class="svc-card-link">
+          <div class="svc-card">
+            <span class="svc-num">03</span>
+            <h3 class="svc-name">Телесная практика</h3>
+            <p class="svc-dur">75 минут</p>
+            <p class="svc-price">170 <span>GEL</span></p>
+            <div class="svc-card-bottom">Подробнее →</div>
+          </div>
+        </a>
+        <a href="services.html#kinesio" class="svc-card-link">
+          <div class="svc-card">
+            <span class="svc-num">04</span>
+            <h3 class="svc-name">Кинезиомассаж</h3>
+            <p class="svc-dur">75 минут</p>
+            <p class="svc-price">190 <span>GEL</span></p>
+            <div class="svc-card-bottom">Подробнее →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="how">
+    <div class="reveal">
+      <p class="section-tag">Как проходит сеанс</p>
+      <h2 class="section-title">Три этапа<br>каждой встречи</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-photo"><img src="diag2.jpg" alt="Диагностика" /></div>
+        <p class="how-num">01 — Диагностика</p>
+        <h3 class="how-title">Слушаем тело</h3>
+        <p class="how-text">Беседа, визуальная диагностика и мануальное мышечное тестирование. Составляем общую картину.</p>
+      </div>
+      <div class="how-card reveal" style="transition-delay:0.12s">
+        <div class="how-photo"><img src="diag1.jpg" alt="Работа" /></div>
+        <p class="how-num">02 — Работа</p>
+        <h3 class="how-title">Идём вглубь</h3>
+        <p class="how-text">Сеанс в спокойном ритме. Слежу за реакциями тела и подстраиваю воздействие.</p>
+      </div>
+      <div class="how-card reveal" style="transition-delay:0.24s">
+        <div class="how-photo"><img src="bodypractice.jpg" alt="Рекомендации" /></div>
+        <p class="how-num">03 — Рекомендации</p>
+        <h3 class="how-title">Закрепляем эффект</h3>
+        <p class="how-text">Советы по движению, дыханию и упражнения для закрепления результата.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOFT PUSH -->
+  <section class="soft-push reveal">
+    <p>Если вы чувствуете, что тело «застряло» — скорее всего, ему просто не хватает правильного воздействия.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-bg"><img src="cta_hands.jpg" alt="" /></div>
+    <div class="cta-inner">
+      <p class="cta-tag">Записаться</p>
+      <h2 class="cta-title">Готовы познакомиться с собственным телом?</h2>
+      <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="btn-light">Оставить заявку</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Maugli Bodywork</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="services.html">Форматы</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+    <span class="footer-copy">Тбилиси, Грузия</span>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+    // Burger menu
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(e => e.forEach(x => {
+      if (x.isIntersecting) { x.target.classList.add('visible'); obs.unobserve(x.target); }
+    }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

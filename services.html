@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Форматы — Maugli Bodywork</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    --price-bg: #5C7A62;   /* шалфейный зелёный */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Geologica', sans-serif; font-weight: 300; line-height: 1.6; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3.5rem; background: rgba(242,237,229,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav-logo { font-family: 'Unbounded', sans-serif; font-size: 0.82rem; font-weight: 400; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-book { font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.6rem 1.4rem; text-decoration: none; }
+    .nav-book:hover { background: #a8553a; }
+
+    .page-header { padding: 9rem 3.5rem 5rem; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+    .page-header::after { content: 'FORMATS'; position: absolute; right: -1rem; bottom: -2rem; font-family: 'Unbounded', sans-serif; font-size: 10rem; font-weight: 300; color: rgba(28,25,21,0.04); line-height: 1; pointer-events: none; }
+    .breadcrumb { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .breadcrumb::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .page-title { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 300; color: var(--accent); line-height: 1.1; }
+    .page-sub { margin-top: 1.5rem; font-size: 1.05rem; color: var(--text-muted); max-width: 480px; line-height: 1.7; }
+
+    .services-section { max-width: 1200px; margin: 0 auto; padding: 5rem 3.5rem; }
+    .service-block { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding: 4.5rem 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .service-block:first-child { padding-top: 0; }
+
+    .service-meta { position: sticky; top: 7rem; }
+    .svc-tag { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
+    .svc-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent2); }
+    .svc-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--accent); line-height: 1.2; margin-bottom: 1.2rem; }
+    .svc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); }
+    .svc-price-block { background: var(--price-bg); padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
+    .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: var(--white); line-height: 1; }
+    .svc-price-cur { font-size: 0.75rem; color: rgba(253,250,246,0.7); }
+
+    .svc-photo { width: 100%; aspect-ratio: 16/9; overflow: hidden; margin-bottom: 2rem; }
+    .svc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .svc-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.82; margin-bottom: 2rem; }
+    .svc-desc p + p { margin-top: 1rem; }
+    .svc-desc strong { color: var(--text); font-weight: 400; }
+    .includes-title { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .includes-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--text); }
+    .includes-list li::before { content: '→'; color: var(--accent2); flex-shrink: 0; }
+    .book-btn { display: inline-block; margin-top: 2rem; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.85rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .book-btn:hover { background: #a8553a; transform: translateY(-1px); }
+
+    .contra-section { background: var(--bg-warm); padding: 5rem 3.5rem; }
+    .contra-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 300; color: var(--accent); margin-bottom: 3rem; line-height: 1.2; }
+    .contra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .contra-block { background: var(--white); border: 1px solid var(--line); padding: 2.2rem; }
+    .contra-block-title { font-family: 'Unbounded', sans-serif; font-size: 0.85rem; font-weight: 300; color: var(--accent); margin-bottom: 1.5rem; }
+    .contra-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .contra-list li { font-size: 0.87rem; color: var(--text-muted); padding-left: 1.1rem; position: relative; line-height: 1.5; }
+    .contra-list li::before { content: '–'; position: absolute; left: 0; color: var(--line); }
+    .contra-note { margin-top: 1.8rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+
+    footer { background: var(--accent); padding: 2.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Unbounded', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--bg-warm); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(232,224,212,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bg-warm); }
+    .footer-copy { font-size: 0.82rem; color: rgba(232,224,212,0.28); }
+
+    .reveal { opacity:0; transform:translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .services-section { padding: 3rem 1.5rem; }
+      .service-block { grid-template-columns: 1fr; gap: 2rem; }
+      .service-meta { position: static; }
+      .contra-section { padding: 4rem 1.5rem; }
+      .contra-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ── MOBILE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      html { font-size: 17px; }
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 0.78rem; }
+      .nav-book { font-size: 0.78rem; padding: 0.55rem 1rem; }
+
+      /* hero */
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5.5rem 1.4rem 3rem; }
+      .hero-right { height: 60vw; }
+      .hero-title { font-size: clamp(1.7rem, 7vw, 2.6rem); }
+      .hero-sub { font-size: 1rem; }
+      .btn-primary, .btn-ghost { font-size: 0.82rem; }
+
+      /* strip */
+      .strip { padding: 0.9rem 1.2rem; gap: 1.4rem; }
+      .strip-num { font-size: 1.1rem; }
+      .strip-label { font-size: 0.75rem; }
+
+      /* philosophy */
+      .philosophy { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+      .phil-quote { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+      .phil-text { font-size: 1rem; }
+
+      /* services grid */
+      .services-preview { padding: 3.5rem 1.4rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .svc-name { font-size: 0.9rem; }
+      .svc-price { font-size: 1.4rem; }
+      .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+      /* how */
+      .how { padding: 3.5rem 1.4rem; }
+      .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .how-title { font-size: 1rem; }
+      .how-text { font-size: 1rem; }
+
+      /* cta */
+      .cta-inner { padding: 3.5rem 1.4rem; }
+      .cta-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+
+      /* service blocks */
+      .service-block { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
+      .service-meta { position: static; }
+      .svc-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+      .svc-desc { font-size: 1rem; }
+      .includes-list li { font-size: 0.95rem; }
+      .book-btn { font-size: 0.85rem; }
+
+      /* about */
+      .about-hero { grid-template-columns: 1fr; }
+      .about-hero-left { height: 65vw; }
+      .about-hero-right { padding: 2.5rem 1.4rem 3.5rem; }
+      .page-title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+      .hero-pullquote { font-size: 0.95rem; }
+      .story { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 1.4rem; }
+      .story-left { position: static; }
+      .story-text { font-size: 1rem; }
+      .approach { padding: 3.5rem 1.4rem; }
+      .approach-grid { grid-template-columns: 1fr; gap: 1px; }
+      .approach-title { font-size: 1rem; }
+      .approach-text { font-size: 1rem; }
+      .approach-photo-strip { padding: 0 1.4rem 3.5rem; }
+      .edu { padding: 3.5rem 1.4rem; }
+      .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .edu-cert { font-size: 0.95rem; }
+      .edu-desc { font-size: 0.95rem; }
+
+      /* contacts */
+      .contacts-hero { grid-template-columns: 1fr; min-height: auto; }
+      .contacts-left { padding: 6rem 1.4rem 3.5rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .contacts-right { padding: 3.5rem 1.4rem; }
+      .contact-value { font-size: 1rem; }
+      .booking-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+      .bstep-text { font-size: 0.95rem; }
+      .location-section { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+
+      /* footer */
+      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.4rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+
+    /* BURGER */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--accent); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Unbounded', sans-serif; font-size: 1.1rem; font-weight: 300; color: var(--accent); text-decoration: none; letter-spacing: 0.05em; }
+    .mobile-menu .mob-book { color: var(--white); background: var(--accent2); padding: 0.8rem 2rem; margin-top: 1rem; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .burger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">Maugli Bodywork</a>
+    <ul class="nav-links">
+      <li><a href="services.html" class="active">Форматы</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+    <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="nav-book">Записаться</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Главная</a>
+    <a href="services.html">Форматы</a>
+    <a href="about.html">Обо мне</a>
+    <a href="contacts.html">Контакты</a>
+    <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="mob-book">Записаться</a>
+  </div>
+
+  <div class="page-header">
+    <p class="breadcrumb"><a href="index.html">Главная</a> · Форматы</p>
+    <h1 class="page-title">Форматы<br>и цены</h1>
+    <p class="page-sub">Четыре формата — от короткой разминки до глубокого кинезиологического сеанса. Каждый подбирается под запрос.</p>
+  </div>
+
+  <section class="services-section">
+
+    <div id="warmup25" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Формат 01</p>
+        <h2 class="svc-title">Разминка<br>25 мин</h2>
+        <div class="svc-badges"><span class="badge">25 минут</span><span class="badge">Экспресс</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">70</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="warmup.jpg" alt="Warm-Up" /></div>
+        <div class="svc-desc"><p>Короткий, но прицельный сеанс. Подходит, когда времени мало, а напряжение уже накопилось. Фокус на конкретной зоне — шея, плечи, поясница — или общий тонус.</p><p>Хорошее начало знакомства с практикой.</p></div>
+        <p class="includes-title">Что входит</p>
+        <ul class="includes-list">
+          <li>Короткий устный запрос перед началом</li>
+          <li>Работа с целевой зоной напряжения</li>
+          <li>Шведский массаж, миофасциальный релиз</li>
+        </ul>
+        <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
+      </div>
+    </div>
+
+    <div id="warmup50" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Формат 02</p>
+        <h2 class="svc-title">Aesthetic<br>50 мин</h2>
+        <div class="svc-badges"><span class="badge">50 минут</span><span class="badge">Расширенный</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">130</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img src="warmup.jpg" alt="Warm-Up 50" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
+        <div class="svc-desc"><p>Полноценная работа без спешки. Достаточно времени, чтобы охватить несколько зон и дать телу по-настоящему расслабиться.</p><p>Подходит для регулярных сеансов поддержки — снятие усталости, восстановление тонуса.</p></div>
+        <p class="includes-title">Что входит</p>
+        <ul class="includes-list">
+          <li>Беседа и уточнение запроса</li>
+          <li>Работа с несколькими зонами напряжения</li>
+          <li>Шведский массаж, миофасциальный релиз, триггерные точки</li>
+          <li>Краткие рекомендации после сеанса</li>
+        </ul>
+        <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
+      </div>
+    </div>
+
+    <div id="bodypractice" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Формат 03</p>
+        <h2 class="svc-title">Телесная<br>практика</h2>
+        <div class="svc-badges"><span class="badge">75 минут</span><span class="badge">Холистический</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">170</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="bodypractice.jpg" alt="Телесная практика" /></div>
+        <div class="svc-desc"><p>Основной формат. Плавная, глубокая практика, которая начинается с диагностики и выстраивается под ваше состояние здесь и сейчас.</p><p>Помимо мануальных техник — элементы соматики, работа с дыханием. <strong>Не просто массаж — разговор с телом.</strong></p></div>
+        <p class="includes-title">Что входит</p>
+        <ul class="includes-list">
+          <li>Беседа, сбор запроса и анамнеза</li>
+          <li>Визуальная диагностика</li>
+          <li>Мануальное мышечное тестирование</li>
+          <li>Шведский массаж, миофасциальный релиз, глубокотканная техника</li>
+          <li>Лимфодренаж, триггерные точки, скульптурирующий массаж</li>
+          <li>Элементы соматики и телесно-ориентированной терапии</li>
+          <li>Рекомендации и упражнения для закрепления эффекта</li>
+        </ul>
+        <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
+      </div>
+    </div>
+
+    <div id="kinesio" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Формат 04</p>
+        <h2 class="svc-title">Кинезио-<br>массаж</h2>
+        <div class="svc-badges"><span class="badge">75 минут</span><span class="badge">Аналитика</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">190</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="diag1.jpg" alt="Кинезиомассаж" /></div>
+        <div class="svc-desc"><p>Самый аналитический формат. Расширенная диагностика: детальное мышечное тестирование, работа с Анатомическими поездами, выявление скрытых компенсаций.</p><p>Подходит при хронической боли, постуральных нарушениях или когда стандартный массаж уже не помогает. <strong>Работаем с причиной, а не симптомом.</strong></p></div>
+        <p class="includes-title">Что входит</p>
+        <ul class="includes-list">
+          <li>Расширенная беседа и сбор анамнеза</li>
+          <li>Визуальная постуральная диагностика</li>
+          <li>Детальное мануальное мышечное тестирование</li>
+          <li>Работа по теории Анатомических поездов</li>
+          <li>Глубокотканный массаж, триггерные точки, миофасциальный релиз</li>
+          <li>Индивидуальный план упражнений</li>
+        </ul>
+        <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="contra-section">
+    <div class="contra-inner">
+      <p class="section-tag">Важно знать</p>
+      <h2 class="section-title">Противопоказания</h2>
+      <div class="contra-grid reveal">
+        <div class="contra-block">
+          <h3 class="contra-block-title">Не работаем при</h3>
+          <ul class="contra-list">
+            <li>Повышенная температура тела</li>
+            <li>Острые воспалительные процессы и обострения суставов</li>
+            <li>Серьёзные системные заболевания</li>
+            <li>Инфекционные заболевания в острой фазе</li>
+            <li>Первый и последний триместр беременности</li>
+          </ul>
+        </div>
+        <div class="contra-block">
+          <h3 class="contra-block-title">С осторожностью</h3>
+          <ul class="contra-list">
+            <li>Менструация — предупредите заранее</li>
+            <li>Беременность — только с разрешения врача</li>
+            <li>Приём обезболивающих и других препаратов — сообщите до сеанса</li>
+          </ul>
+          <p class="contra-note">Массаж не заменяет медицинскую диагностику и лечение.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Maugli Bodywork</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="services.html">Форматы</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+    <span class="footer-copy">Тбилиси, Грузия</span>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); obs.unobserve(x.target); } }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Burger menu
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("open");
+      mobileMenu.classList.toggle("open");
+      document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        burger.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+  </script>
+</body>
+</html>
