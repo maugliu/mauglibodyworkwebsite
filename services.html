@@ -9,7 +9,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    --price-bg: #5C7A62;   /* шалфейный зелёный */
+    :root {
+      --bg: #F2EDE5;
+      --bg-warm: #E8E0D4;
+      --text: #1C1915;
+      --text-muted: #7A6E63;
+      --accent: #C4694A;
+      --accent2: #C4694A;
+      --accent2-light: #E8C4B4;
+      --line: #D0C6B8;
+      --white: #FDFAF6;
+      --price-bg: #5C7A62;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 18px; }
     body { background: var(--bg); color: var(--text); font-family: 'Geologica', sans-serif; font-weight: 300; line-height: 1.6; }
@@ -215,7 +226,7 @@
   <div class="page-header">
     <p class="breadcrumb"><a href="index.html">Главная</a> · Форматы</p>
     <h1 class="page-title">Форматы<br>и цены</h1>
-    <p class="page-sub">Четыре формата — от короткой разминки до глубокого кинезиологического сеанса. Каждый подбирается под запрос.</p>
+    <p class="page-sub">Четыре формата — от консультации и диагностики до глубокого кинезиологического сеанса. Каждый подбирается под запрос.</p>
   </div>
 
   <section class="services-section">
@@ -223,18 +234,19 @@
     <div id="warmup25" class="service-block reveal">
       <div class="service-meta">
         <p class="svc-tag">Формат 01</p>
-        <h2 class="svc-title">Разминка<br>25 мин</h2>
-        <div class="svc-badges"><span class="badge">25 минут</span><span class="badge">Экспресс</span></div>
+        <h2 class="svc-title">Консуль-<br>тация</h2>
+        <div class="svc-badges"><span class="badge">25 минут</span><span class="badge">Диагностика</span></div>
         <div class="svc-price-block"><span class="svc-price-big">70</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="warmup.jpg" alt="Warm-Up" /></div>
-        <div class="svc-desc"><p>Короткий, но прицельный сеанс. Подходит, когда времени мало, а напряжение уже накопилось. Фокус на конкретной зоне — шея, плечи, поясница — или общий тонус.</p><p>Хорошее начало знакомства с практикой.</p></div>
+        <div class="svc-photo"><img src="warmup.jpg" alt="Консультация" /></div>
+        <div class="svc-desc"><p>Хочешь узнать своё тело лучше — или ещё не решился на полноценную практику? Это твой вход.</p><p>Мы проведём диагностику: беседа, визуальный анализ, мышечное тестирование. По ходу я пролечу то, что найду — быстро и точечно. Ты уйдёшь с пониманием, что происходит в теле и что с этим делать.</p></div>
         <p class="includes-title">Что входит</p>
         <ul class="includes-list">
-          <li>Короткий устный запрос перед началом</li>
-          <li>Работа с целевой зоной напряжения</li>
-          <li>Шведский массаж, миофасциальный релиз</li>
+          <li>Беседа, сбор запроса и анамнеза</li>
+          <li>Визуальная диагностика и мышечное тестирование</li>
+          <li>Точечная работа по результатам диагностики</li>
+          <li>Рекомендации — что делать дальше</li>
         </ul>
         <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
       </div>
@@ -243,19 +255,18 @@
     <div id="warmup50" class="service-block reveal">
       <div class="service-meta">
         <p class="svc-tag">Формат 02</p>
-        <h2 class="svc-title">Aesthetic<br>50 мин</h2>
-        <div class="svc-badges"><span class="badge">50 минут</span><span class="badge">Расширенный</span></div>
+        <h2 class="svc-title">Разминка<br>45 мин</h2>
+        <div class="svc-badges"><span class="badge">45 минут</span><span class="badge">Расширенный</span></div>
         <div class="svc-price-block"><span class="svc-price-big">130</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img src="warmup.jpg" alt="Warm-Up 50" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
-        <div class="svc-desc"><p>Полноценная работа без спешки. Достаточно времени, чтобы охватить несколько зон и дать телу по-настоящему расслабиться.</p><p>Подходит для регулярных сеансов поддержки — снятие усталости, восстановление тонуса.</p></div>
+        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img src="warmup.jpg" alt="Разминка 45" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
+        <div class="svc-desc"><p>Короткий, но прицельный сеанс. Подходит, когда времени мало, а напряжение уже накопилось. Фокус на конкретной зоне — шея, плечи, поясница — или общий тонус.</p><p>Подходит для регулярных сеансов поддержки — снятие усталости, восстановление тонуса.</p></div>
         <p class="includes-title">Что входит</p>
         <ul class="includes-list">
-          <li>Беседа и уточнение запроса</li>
-          <li>Работа с несколькими зонами напряжения</li>
-          <li>Шведский массаж, миофасциальный релиз, триггерные точки</li>
-          <li>Краткие рекомендации после сеанса</li>
+          <li>Короткий устный запрос перед началом</li>
+          <li>Работа с целевой зоной напряжения</li>
+          <li>Шведский массаж, миофасциальный релиз</li>
         </ul>
         <a href="https://t.me/mirror_focus_massage_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
       </div>
@@ -270,7 +281,7 @@
       </div>
       <div>
         <div class="svc-photo"><img src="bodypractice.jpg" alt="Телесная практика" /></div>
-        <div class="svc-desc"><p>Основной формат. Плавная, глубокая практика, которая начинается с диагностики и выстраивается под ваше состояние здесь и сейчас.</p><p>Помимо мануальных техник — элементы соматики, работа с дыханием. <strong>Не просто массаж — разговор с телом.</strong></p></div>
+        <div class="svc-desc"><p>Плавная, глубокая практика, которая начинается с диагностики и выстраивается под ваше состояние здесь и сейчас.</p><p>Помимо мануальных техник — элементы соматики, работа с дыханием. <strong>Не просто массаж — разговор с телом.</strong></p></div>
         <p class="includes-title">Что входит</p>
         <ul class="includes-list">
           <li>Беседа, сбор запроса и анамнеза</li>
@@ -294,7 +305,7 @@
       </div>
       <div>
         <div class="svc-photo"><img src="diag1.jpg" alt="Кинезиомассаж" /></div>
-        <div class="svc-desc"><p>Самый аналитический формат. Расширенная диагностика: детальное мышечное тестирование, работа с Анатомическими поездами, выявление скрытых компенсаций.</p><p>Подходит при хронической боли, постуральных нарушениях или когда стандартный массаж уже не помогает. <strong>Работаем с причиной, а не симптомом.</strong></p></div>
+        <div class="svc-desc"><p>Полноценная работа без спешки. Самый аналитический формат — расширенная диагностика: детальное мышечное тестирование, работа с Анатомическими поездами, выявление скрытых компенсаций.</p><p>Подходит при хронической боли, постуральных нарушениях или когда стандартный массаж уже не помогает. <strong>Работаем с причиной, а не симптомом.</strong></p></div>
         <p class="includes-title">Что входит</p>
         <ul class="includes-list">
           <li>Расширенная беседа и сбор анамнеза</li>
