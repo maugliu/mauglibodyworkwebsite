@@ -341,10 +341,23 @@
 
     /* ─────────────── SERVICES ─────────────── */
     .services {
-      background: var(--bg-2);
+      position: relative;
+      overflow: hidden;
       padding: 6rem 3rem;
     }
-    .svc-inner { max-width: 1280px; margin: 0 auto; }
+    .services-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .services-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 25%;
+      display: block;
+    }
+    .services-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(26,21,16,0.82);
+    }
+    .svc-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
     .svc-hd {
       display: flex; justify-content: space-between; align-items: flex-end;
       margin-bottom: 3rem;
@@ -352,18 +365,18 @@
     .svc-ttl {
       font-family: 'Unbounded', sans-serif;
       font-weight: 700; font-size: clamp(2rem, 3.8vw, 3.5rem);
-      line-height: 1.05; letter-spacing: -0.025em; color: var(--text);
+      line-height: 1.05; letter-spacing: -0.025em; color: var(--white);
     }
 
     .svc-grid {
       display: grid; grid-template-columns: repeat(4,1fr);
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,0.12);
     }
     .svc-lnk { display: block; text-decoration: none; color: inherit; }
     .svc-card {
-      background: var(--bg-2);
+      background: rgba(255,255,255,0.05);
       padding: 2.2rem 2rem;
-      border-right: 1px solid var(--line);
+      border-right: 1px solid rgba(255,255,255,0.12);
       display: flex; flex-direction: column;
       transition: background 0.2s;
       position: relative;
@@ -376,19 +389,19 @@
       transform: scaleX(0); transform-origin: left;
       transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
     }
-    .svc-lnk:hover .svc-card { background: var(--white); }
+    .svc-lnk:hover .svc-card { background: rgba(196,105,74,0.15); }
     .svc-lnk:hover .svc-card::after { transform: scaleX(1); }
     .svc-lnk:hover .svc-more { opacity: 1; transform: translateX(0); }
 
-    .svc-n { font-family: 'Unbounded', sans-serif; font-size: 0.52rem; font-weight: 600; letter-spacing: 0.14em; color: var(--line); margin-bottom: 1.5rem; }
-    .svc-name { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1rem; color: var(--text); line-height: 1.25; flex-grow: 1; }
-    .svc-dur { font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem; }
+    .svc-n { font-family: 'Unbounded', sans-serif; font-size: 0.52rem; font-weight: 600; letter-spacing: 0.14em; color: rgba(255,255,255,0.25); margin-bottom: 1.5rem; }
+    .svc-name { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1rem; color: var(--white); line-height: 1.25; flex-grow: 1; }
+    .svc-dur { font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.4rem; margin-bottom: 1.5rem; }
     .svc-price {
       font-family: 'Unbounded', sans-serif;
       font-weight: 700; font-size: 1.9rem;
       color: var(--accent); line-height: 1;
     }
-    .svc-gel { font-family: 'Geologica', sans-serif; font-weight: 300; font-size: 0.7rem; color: var(--muted); margin-left: 0.2rem; }
+    .svc-gel { font-family: 'Geologica', sans-serif; font-weight: 300; font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-left: 0.2rem; }
     .svc-more {
       margin-top: 1rem; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--accent); opacity: 0; transform: translateX(-6px);
@@ -564,7 +577,7 @@
       <p class="hero-trust">6+ лет практики · эффект уже после 1–2 сеансов</p>
     </div>
     <div class="hero-right">
-      <img src="hero.jpg" alt="Maugli Bodywork — сеанс" />
+      <img src="mbw_photo_001.jpg" alt="Maugli Bodywork — сеанс" />
     </div>
   </section>
 
@@ -624,7 +637,7 @@
   <!-- PHILOSOPHY / SPLIT -->
   <section class="split">
     <div class="split-img">
-      <img src="diag2.jpg" alt="Диагностика — Maugli Bodywork" />
+      <img src="mbw_photo_002.jpg" alt="Диагностика — Maugli Bodywork" />
     </div>
     <div class="split-body">
       <p class="s-tag">Подход</p>
@@ -664,6 +677,7 @@
 
   <!-- SERVICES -->
   <section class="services">
+    <div class="services-bg"><img src="mbw_photo_005.jpg" alt="" /></div>
     <div class="svc-inner">
       <div class="svc-hd reveal">
         <h2 class="svc-ttl">Форматы<br>и цены</h2>
@@ -683,7 +697,7 @@
             <span class="svc-n">02</span>
             <p class="svc-name">Разминка</p>
             <p class="svc-dur">45 минут</p>
-            <p class="svc-price">130<span class="svc-gel">GEL</span></p>
+            <p class="svc-price">110<span class="svc-gel">GEL</span></p>
             <p class="svc-more">Подробнее →</p>
           </div>
         </a>
@@ -716,7 +730,7 @@
     </div>
     <div class="how-grid">
       <div class="how-card reveal">
-        <div class="how-img"><img src="diag2.jpg" alt="Диагностика" /></div>
+        <div class="how-img"><img src="mbw_photo_002.jpg" alt="Диагностика" /></div>
         <div class="how-body">
           <p class="how-n">01 — Диагностика</p>
           <h3 class="how-ttl2">Слушаем тело</h3>
@@ -724,7 +738,7 @@
         </div>
       </div>
       <div class="how-card reveal d1">
-        <div class="how-img"><img src="diag1.jpg" alt="Работа" /></div>
+        <div class="how-img"><img src="mbw_photo_003.jpg" alt="Работа" /></div>
         <div class="how-body">
           <p class="how-n">02 — Работа</p>
           <h3 class="how-ttl2">Идём вглубь</h3>
@@ -732,7 +746,7 @@
         </div>
       </div>
       <div class="how-card reveal d2">
-        <div class="how-img"><img src="bodypractice.jpg" alt="Завершение" /></div>
+        <div class="how-img"><img src="mbw_photo_004.jpg" alt="Завершение" /></div>
         <div class="how-body">
           <p class="how-n">03 — Рекомендации</p>
           <h3 class="how-ttl2">Закрепляем эффект</h3>
@@ -744,7 +758,7 @@
 
   <!-- CTA -->
   <section class="cta">
-    <div class="cta-bg"><img src="cta_hands.jpg" alt="" /></div>
+    <div class="cta-bg"><img src="mbw_photo_006.jpg" alt="" /></div>
     <div class="cta-inner">
       <p class="cta-tag">Записаться</p>
       <h2 class="cta-h">Готов познакомиться<br>с <span class="acc">собственным</span><br>телом?</h2>
