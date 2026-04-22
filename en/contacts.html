@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacts — Maugli Bodywork</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F2EDE5; --bg-warm: #E8E0D4; --text: #1C1915; --text-muted: #7A6E63;
+      --accent: #1C1915; --accent2: #C4694A; --accent2-light: #E8C4B4;
+      --line: #D0C6B8; --white: #FDFAF6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Geologica', sans-serif; font-weight: 300; line-height: 1.6; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3.5rem; background: rgba(242,237,229,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav-logo { font-family: 'Unbounded', sans-serif; font-size: 0.82rem; font-weight: 400; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-book { font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.6rem 1.4rem; text-decoration: none; }
+    .nav-book:hover { background: #a8553a; }
+
+    .contacts-hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+
+    .contacts-left {
+      padding: 9rem 3.5rem 5rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      border-right: 1px solid var(--line);
+    }
+    .breadcrumb { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .breadcrumb::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .page-title { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 300; color: var(--accent); line-height: 1.1; margin-bottom: 1.5rem; }
+    .page-title span { color: var(--accent2); }
+    .page-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; max-width: 380px; margin-bottom: 3rem; }
+
+    .contact-items { display: flex; flex-direction: column; }
+    .contact-item { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; border-top: 1px solid var(--line); text-decoration: none; color: var(--text); transition: background 0.2s; }
+    .contact-item:last-child { border-bottom: 1px solid var(--line); }
+    .contact-item:hover .contact-arrow { transform: translate(4px,-4px); color: var(--accent2); }
+    .contact-label { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .contact-value { font-family: 'Unbounded', sans-serif; font-size: 0.95rem; font-weight: 300; color: var(--accent); }
+    .contact-arrow { color: var(--text-muted); transition: transform 0.25s ease, color 0.2s; font-size: 1.1rem; }
+
+    .contacts-right {
+      background: var(--accent);
+      padding: 9rem 3.5rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .contacts-right::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(196,105,74,0.18) 0%, transparent 60%); pointer-events: none; }
+    .booking-tag { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .booking-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .booking-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--white); line-height: 1.3; margin-bottom: 1rem; }
+    .booking-sub { font-size: 0.88rem; color: rgba(253,250,246,0.55); line-height: 1.7; margin-bottom: 3rem; max-width: 340px; }
+    .booking-steps { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+    .bstep { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .bstep-num { font-family: 'Unbounded', sans-serif; font-size: 1.2rem; font-weight: 300; color: rgba(253,250,246,0.2); line-height: 1; flex-shrink: 0; width: 1.8rem; }
+    .bstep-text { font-size: 0.87rem; color: rgba(253,250,246,0.6); line-height: 1.65; padding-top: 0.1rem; }
+    .bstep-text strong { color: var(--white); font-weight: 400; }
+    .btn-book { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--white); padding: 0.9rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .btn-book:hover { background: var(--accent2-light); transform: translateY(-1px); }
+
+    .location-section { padding: 5rem 3.5rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; border-top: 1px solid var(--line); }
+    .loc-tag { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
+    .loc-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent2); }
+    .loc-title { font-family: 'Unbounded', sans-serif; font-size: 1.2rem; font-weight: 300; color: var(--accent); margin-bottom: 0.8rem; }
+    .loc-text { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
+
+    footer { background: var(--accent); padding: 2.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Unbounded', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--bg-warm); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(232,224,212,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bg-warm); }
+    .footer-copy { font-size: 0.82rem; color: rgba(232,224,212,0.28); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    .anim { opacity:0; animation: fadeUp 0.7s forwards; }
+    .d1{animation-delay:0.2s} .d2{animation-delay:0.35s} .d3{animation-delay:0.5s} .d4{animation-delay:0.65s}
+    .reveal { opacity:0; transform:translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .contacts-hero { grid-template-columns: 1fr; min-height: auto; }
+      .contacts-left { padding: 7rem 1.5rem 4rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .contacts-right { padding: 4rem 1.5rem; }
+      .location-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ── MOBILE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      html { font-size: 17px; }
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 0.78rem; }
+      .nav-book { font-size: 0.78rem; padding: 0.55rem 1rem; }
+
+      /* hero */
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5.5rem 1.4rem 3rem; }
+      .hero-right { height: 60vw; }
+      .hero-title { font-size: clamp(1.7rem, 7vw, 2.6rem); }
+      .hero-sub { font-size: 1rem; }
+      .btn-primary, .btn-ghost { font-size: 0.82rem; }
+
+      /* strip */
+      .strip { padding: 0.9rem 1.2rem; gap: 1.4rem; }
+      .strip-num { font-size: 1.1rem; }
+      .strip-label { font-size: 0.75rem; }
+
+      /* philosophy */
+      .philosophy { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+      .phil-quote { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+      .phil-text { font-size: 1rem; }
+
+      /* services grid */
+      .services-preview { padding: 3.5rem 1.4rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .svc-name { font-size: 0.9rem; }
+      .svc-price { font-size: 1.4rem; }
+      .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+      /* how */
+      .how { padding: 3.5rem 1.4rem; }
+      .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .how-title { font-size: 1rem; }
+      .how-text { font-size: 1rem; }
+
+      /* cta */
+      .cta-inner { padding: 3.5rem 1.4rem; }
+      .cta-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+
+      /* service blocks */
+      .service-block { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
+      .service-meta { position: static; }
+      .svc-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+      .svc-desc { font-size: 1rem; }
+      .includes-list li { font-size: 0.95rem; }
+      .book-btn { font-size: 0.85rem; }
+
+      /* about */
+      .about-hero { grid-template-columns: 1fr; }
+      .about-hero-left { height: 65vw; }
+      .about-hero-right { padding: 2.5rem 1.4rem 3.5rem; }
+      .page-title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+      .hero-pullquote { font-size: 0.95rem; }
+      .story { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 1.4rem; }
+      .story-left { position: static; }
+      .story-text { font-size: 1rem; }
+      .approach { padding: 3.5rem 1.4rem; }
+      .approach-grid { grid-template-columns: 1fr; gap: 1px; }
+      .approach-title { font-size: 1rem; }
+      .approach-text { font-size: 1rem; }
+      .approach-photo-strip { padding: 0 1.4rem 3.5rem; }
+      .edu { padding: 3.5rem 1.4rem; }
+      .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .edu-cert { font-size: 0.95rem; }
+      .edu-desc { font-size: 0.95rem; }
+
+      /* contacts */
+      .contacts-hero { grid-template-columns: 1fr; min-height: auto; }
+      .contacts-left { padding: 6rem 1.4rem 3.5rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .contacts-right { padding: 3.5rem 1.4rem; }
+      .contact-value { font-size: 1rem; }
+      .booking-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+      .bstep-text { font-size: 0.95rem; }
+      .location-section { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+
+      /* footer */
+      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.4rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+
+    /* BURGER */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--accent); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Unbounded', sans-serif; font-size: 1.1rem; font-weight: 300; color: var(--accent); text-decoration: none; letter-spacing: 0.05em; }
+    .mobile-menu .mob-book { color: var(--white); background: var(--accent2); padding: 0.8rem 2rem; margin-top: 1rem; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .burger { display: flex; }
+    }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      font-family: "Unbounded", sans-serif;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      border-radius: 3px;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+    .lang-sep { font-size: 0.6rem; color: var(--line); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">Maugli Bodywork</a>
+    <ul class="nav-links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contacts.html" class="active">Contacts</a></li>
+    </ul>
+    <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Book</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contacts.html">Contacts</a>
+    <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-book">Book</a>
+  </div>
+
+  <div class="contacts-hero">
+    <div class="contacts-left">
+      <div>
+        <p class="breadcrumb anim d1"><a href="index.html">Home</a> · Contacts</p>
+        <h1 class="page-title anim d2">Get in touch<br>or <span>leave a request</span></h1>
+        <p class="page-desc anim d3">Message me on Telegram or Instagram, or leave a request via the bot — I'll get back to you and find a suitable time.</p>
+      </div>
+      <div class="contact-items anim d4">
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="contact-item">
+          <div><p class="contact-label">Telegram</p><p class="contact-value">@mauglibodywork</p></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://instagram.com/mauglibodywork" target="_blank" class="contact-item">
+          <div><p class="contact-label">Instagram</p><p class="contact-value">@mauglibodywork</p></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="contact-item">
+          <div><p class="contact-label">Book via bot</p><p class="contact-value">@mirror_focus_bot</p></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contacts-right">
+      <p class="booking-tag">Как записаться</p>
+      <h2 class="booking-title">How to book</h2>
+      <p class="booking-sub">Booking works through a Telegram bot. Leave a request — I'll check availability and confirm the time.</p>
+      <div class="booking-steps">
+        <div class="bstep"><span class="bstep-num">1</span><p class="bstep-text"><strong>Выберите формат</strong> — Разминка, Aesthetic, Телесная практика или Кинезиомассаж.</p></div>
+        <div class="bstep"><span class="bstep-num">2</span><p class="bstep-text"><strong>Leave a request</strong> via the Telegram bot or message me directly — let me know your preferred time.</p></div>
+        <div class="bstep"><span class="bstep-num">3</span><p class="bstep-text"><strong>I'll confirm the slot</strong> and send the address and details before the session.</p></div>
+      </div>
+      <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="btn-book">Leave a request →</a>
+    </div>
+  </div>
+
+  <section class="location-section">
+    <div class="reveal">
+      <p class="loc-tag">Location</p>
+      <h3 class="loc-title">Tbilisi, Georgia</h3>
+      <p class="loc-text">Based in Tbilisi. The exact address and directions are sent after booking.</p>
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <p class="loc-tag">Working hours</p>
+      <h3 class="loc-title">By appointment</h3>
+      <p class="loc-text">I work by appointment only. If you can't find a suitable time, message me on Telegram and we'll find a slot.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Maugli Bodywork</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
+    </ul>
+    <span class="footer-copy">Tbilisi, Georgia</span>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); obs.unobserve(x.target); } }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Burger menu
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("open");
+      mobileMenu.classList.toggle("open");
+      document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        burger.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+  </script>
+</body>
+</html>

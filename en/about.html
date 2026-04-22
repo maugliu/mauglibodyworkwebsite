@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Maugli Bodywork</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F2EDE5; --bg-warm: #E8E0D4; --text: #1C1915; --text-muted: #7A6E63;
+      --accent: #1C1915; --accent2: #C4694A; --accent2-light: #E8C4B4;
+      --line: #D0C6B8; --white: #FDFAF6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Geologica', sans-serif; font-weight: 300; line-height: 1.6; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3.5rem; background: rgba(242,237,229,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav-logo { font-family: 'Unbounded', sans-serif; font-size: 0.82rem; font-weight: 400; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-book { font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.6rem 1.4rem; text-decoration: none; }
+    .nav-book:hover { background: #a8553a; }
+
+    /* HERO с фото */
+    .about-hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .about-hero-left {
+      position: relative; overflow: hidden;
+    }
+    .about-hero-left img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .about-hero-left::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(28,25,21,0.35) 100%); }
+
+    .about-hero-right {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 8rem 3.5rem 5rem;
+      background: var(--bg);
+    }
+    .breadcrumb { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .breadcrumb::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .page-title { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--accent); line-height: 1.15; margin-bottom: 1.5rem; }
+    .page-title span { color: var(--accent2); }
+    .hero-role { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .hero-pullquote { font-size: 1rem; color: var(--text-muted); line-height: 1.75; max-width: 420px; border-left: 2px solid var(--accent2); padding-left: 1.2rem; }
+
+    /* STORY */
+    .story { padding: 7rem 3.5rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start; }
+    .section-tag { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 300; color: var(--accent); line-height: 1.2; }
+    .story-left { position: sticky; top: 7rem; }
+    .story-text { font-size: 1.05rem; color: var(--text-muted); line-height: 1.85; }
+    .story-text p + p { margin-top: 1.3rem; }
+    .story-text strong { color: var(--text); font-weight: 400; }
+
+    /* APPROACH */
+    .approach { background: var(--bg-warm); padding: 6rem 3.5rem; }
+    .approach-inner { max-width: 1200px; margin: 0 auto; }
+    .approach-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); margin-top: 3.5rem; }
+    .approach-card { background: var(--bg-warm); padding: 2.5rem 2rem; transition: background 0.25s; }
+    .approach-card:hover { background: var(--white); }
+    .approach-num { font-family: 'Unbounded', sans-serif; font-size: 0.6rem; color: var(--accent2); letter-spacing: 0.15em; margin-bottom: 1.2rem; }
+    .approach-title { font-family: 'Unbounded', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--accent); margin-bottom: 0.8rem; line-height: 1.3; }
+    .approach-text { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* APPROACH PHOTO */
+    .approach-photo-strip { max-width: 1200px; margin: 0 auto; padding: 0 3.5rem 6rem; }
+    .approach-photo-strip img { width: 100%; aspect-ratio: 21/9; object-fit: cover; object-position: center 40%; display: block; }
+
+    /* EDU */
+    .edu { padding: 6rem 0 6rem 3.5rem; }
+    .edu-header { padding-right: 3.5rem; margin-bottom: 3rem; }
+    /* horizontal scroll */
+    .edu-scroll {
+      display: flex; gap: 1.5rem;
+      overflow-x: auto; padding-bottom: 1.5rem; padding-right: 3.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line) transparent;
+    }
+    .edu-scroll::-webkit-scrollbar { height: 4px; }
+    .edu-scroll::-webkit-scrollbar-track { background: transparent; }
+    .edu-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+    .cert-card {
+      flex-shrink: 0; width: 300px;
+      scroll-snap-align: start;
+      border: 1px solid var(--line);
+      background: var(--white);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .cert-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(28,21,16,0.1); }
+    .cert-img {
+      width: 100%; aspect-ratio: 4/3;
+      overflow: hidden; position: relative;
+      background: var(--bg-2);
+    }
+    .cert-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block; transition: transform 0.5s;
+    }
+    .cert-card:hover .cert-img img { transform: scale(1.04); }
+    .cert-body { padding: 1.5rem; }
+    .cert-year {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.55rem; font-weight: 600;
+      letter-spacing: 0.15em; color: var(--accent);
+      margin-bottom: 0.7rem; display: block;
+    }
+    .cert-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.82rem; font-weight: 300;
+      color: var(--text); line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+    .cert-school { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+    .cert-hours {
+      display: inline-block; margin-top: 1rem;
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border: 1px solid var(--line);
+      color: var(--muted); border-radius: 20px;
+    }
+
+    /* CTA */
+    .cta { position: relative; overflow: hidden; min-height: 420px; display: flex; align-items: center; }
+    .cta-bg { position: absolute; inset: 0; }
+    .cta-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+    .cta-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(28,25,21,0.9) 40%, rgba(28,25,21,0.2) 100%); }
+    .cta-inner { position: relative; z-index: 2; padding: 5rem 3.5rem; max-width: 540px; }
+    .cta-tag { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .cta-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .cta-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.2rem, 2.2vw, 1.9rem); font-weight: 300; color: var(--white); line-height: 1.35; margin-bottom: 2rem; }
+    .btn-light { font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--white); padding: 0.85rem 2.2rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; }
+    .btn-light:hover { background: var(--accent2-light); transform: translateY(-1px); }
+
+    footer { background: var(--accent); padding: 2.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Unbounded', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--bg-warm); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(232,224,212,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bg-warm); }
+    .footer-copy { font-size: 0.82rem; color: rgba(232,224,212,0.28); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    .anim { opacity:0; animation: fadeUp 0.7s forwards; }
+    .d1{animation-delay:0.2s} .d2{animation-delay:0.4s} .d3{animation-delay:0.55s}
+    .reveal { opacity:0; transform:translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .about-hero { grid-template-columns: 1fr; min-height: auto; }
+      .about-hero-left { height: 60vw; }
+      .about-hero-right { padding: 3rem 1.5rem 4rem; }
+      .story { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      .story-left { position: static; }
+      .approach { padding: 4rem 1.5rem; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .approach-photo-strip { padding: 0 1.5rem 4rem; }
+      .edu { padding: 4rem 1.5rem; }
+      .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .edu-badge { text-align: left; }
+      .cta-inner { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ── MOBILE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      html { font-size: 17px; }
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 0.78rem; }
+      .nav-book { font-size: 0.78rem; padding: 0.55rem 1rem; }
+
+      /* hero */
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5.5rem 1.4rem 3rem; }
+      .hero-right { height: 60vw; }
+      .hero-title { font-size: clamp(1.7rem, 7vw, 2.6rem); }
+      .hero-sub { font-size: 1rem; }
+      .btn-primary, .btn-ghost { font-size: 0.82rem; }
+
+      /* strip */
+      .strip { padding: 0.9rem 1.2rem; gap: 1.4rem; }
+      .strip-num { font-size: 1.1rem; }
+      .strip-label { font-size: 0.75rem; }
+
+      /* philosophy */
+      .philosophy { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+      .phil-quote { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+      .phil-text { font-size: 1rem; }
+
+      /* services grid */
+      .services-preview { padding: 3.5rem 1.4rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .svc-name { font-size: 0.9rem; }
+      .svc-price { font-size: 1.4rem; }
+      .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+      /* how */
+      .how { padding: 3.5rem 1.4rem; }
+      .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .how-title { font-size: 1rem; }
+      .how-text { font-size: 1rem; }
+
+      /* cta */
+      .cta-inner { padding: 3.5rem 1.4rem; }
+      .cta-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+
+      /* service blocks */
+      .service-block { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
+      .service-meta { position: static; }
+      .svc-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+      .svc-desc { font-size: 1rem; }
+      .includes-list li { font-size: 0.95rem; }
+      .book-btn { font-size: 0.85rem; }
+
+      /* about */
+      .about-hero { grid-template-columns: 1fr; }
+      .about-hero-left { height: 65vw; }
+      .about-hero-right { padding: 2.5rem 1.4rem 3.5rem; }
+      .page-title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+      .hero-pullquote { font-size: 0.95rem; }
+      .story { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 1.4rem; }
+      .story-left { position: static; }
+      .story-text { font-size: 1rem; }
+      .approach { padding: 3.5rem 1.4rem; }
+      .approach-grid { grid-template-columns: 1fr; gap: 1px; }
+      .approach-title { font-size: 1rem; }
+      .approach-text { font-size: 1rem; }
+      .approach-photo-strip { padding: 0 1.4rem 3.5rem; }
+      .edu { padding: 3.5rem 1.4rem; }
+      .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .edu-cert { font-size: 0.95rem; }
+      .edu-desc { font-size: 0.95rem; }
+
+      /* contacts */
+      .contacts-hero { grid-template-columns: 1fr; min-height: auto; }
+      .contacts-left { padding: 6rem 1.4rem 3.5rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .contacts-right { padding: 3.5rem 1.4rem; }
+      .contact-value { font-size: 1rem; }
+      .booking-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+      .bstep-text { font-size: 0.95rem; }
+      .location-section { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+
+      /* footer */
+      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.4rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+
+    /* BURGER */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--accent); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Unbounded', sans-serif; font-size: 1.1rem; font-weight: 300; color: var(--accent); text-decoration: none; letter-spacing: 0.05em; }
+    .mobile-menu .mob-book { color: var(--white); background: var(--accent2); padding: 0.8rem 2rem; margin-top: 1rem; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .burger { display: flex; }
+    }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      font-family: "Unbounded", sans-serif;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      border-radius: 3px;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+    .lang-sep { font-size: 0.6rem; color: var(--line); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">Maugli Bodywork</a>
+    <ul class="nav-links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
+    </ul>
+    <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Book</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contacts.html">Contacts</a>
+    <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-book">Book</a>
+  </div>
+
+  <div class="about-hero">
+    <div class="about-hero-left">
+      <img src="portrait.jpg" alt="Иван Маугли" />
+    </div>
+    <div class="about-hero-right">
+      <p class="breadcrumb anim d1"><a href="index.html">Home</a> · About</p>
+      <h1 class="page-title anim d2">Ivan<br><span>Maugli</span></h1>
+      <p class="hero-role anim d2">Massage Therapist · Kinesiologist · Body Practitioner</p>
+      <p class="hero-pullquote anim d3">"The body knows itself better than any doctor or pill — if you learn to listen."</p>
+    </div>
+  </div>
+
+  <section class="story">
+    <div class="story-left reveal">
+      <p class="section-tag">My Story</p>
+      <h2 class="section-title">A path through my own pain</h2>
+    </div>
+    <div class="reveal">
+      <div class="story-text">
+        <p>From the age of 19 I lived with a bad back — I know first-hand what it means to search for answers for years. I tried almost everything, from conventional medicine to alternative practices.</p>
+        <p>But over time I realised: <strong>the body knows itself better than any doctor or pill</strong> — if you learn to listen.</p>
+        <p>I began my training through touch. Gradually, I restored my connection with my own body. When I added anatomy and muscle testing — the pieces fell into place. Step by step, my condition improved dramatically.</p>
+        <p>The positive feedback from early clients motivated me to keep sharing my experience, knowledge and hands. That's what I continue doing today — <strong>with the same energy as at the start</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="edu">
+    <div class="edu-header">
+      <p class="section-tag reveal">Education</p>
+      <h2 class="section-title reveal">Certificates</h2>
+    </div>
+    <div class="edu-scroll reveal">
+
+      <div class="cert-card">
+        <div class="cert-img"><img src="massage_certificate02.png" alt="Vector Massage" /></div>
+        <div class="cert-body">
+          <span class="cert-year">2020</span>
+          <h3 class="cert-title">Vector Massage</h3>
+          <p class="cert-school">Классический европейский массаж, холистический массаж, основы кинезиологического массажа</p>
+          <span class="cert-hours">72 hrs · Moscow</span>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-img"><img src="massage_certificate05.png" alt="Vector Massage II" /></div>
+        <div class="cert-body">
+          <span class="cert-year">2021</span>
+          <h3 class="cert-title">Vector Massage II</h3>
+          <p class="cert-school">Рептильные техники, дыхательные техники в массаже, анатомия для массажистов и кинезиологов</p>
+          <span class="cert-hours">72 hrs · Moscow</span>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-img"><img src="massage_certificate01.png" alt="Кинезиология" /></div>
+        <div class="cert-body">
+          <span class="cert-year">2020</span>
+          <h3 class="cert-title">Кинезиология. Таз и нижние конечности</h3>
+          <p class="cert-school">Мануальное-мышечное тестирование. Работа мышц таза и ног</p>
+          <span class="cert-hours">32 + 48 hrs practice · Moscow</span>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-img"><img src="massage_certificate04.png" alt="Кинезиология плечевой пояс" /></div>
+        <div class="cert-body">
+          <span class="cert-year">2020</span>
+          <h3 class="cert-title">Кинезиология. Плечевой пояс</h3>
+          <p class="cert-school">Телесно-ориентированное консультирование, работа мышц плечевого пояса</p>
+          <span class="cert-hours">24 + 48 hrs practice · Moscow</span>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-img"><img src="massage_certificate03.png" alt="Послеродовое восстановление" /></div>
+        <div class="cert-body">
+          <span class="cert-year">2022</span>
+          <h3 class="cert-title">Послеродовое восстановление</h3>
+          <p class="cert-school">Школа доктора Крутова · NL-School</p>
+          <span class="cert-hours">16 hours</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-bg"><img src="cta_hands.jpg" alt="" /></div>
+    <div class="cta-inner">
+      <p class="cta-tag">Book</p>
+      <h2 class="cta-title">Let's meet in a session</h2>
+      <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="btn-light">Book a Time</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Maugli Bodywork</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
+    </ul>
+    <span class="footer-copy">Tbilisi, Georgia</span>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); obs.unobserve(x.target); } }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Burger menu
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("open");
+      mobileMenu.classList.toggle("open");
+      document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        burger.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+  </script>
+</body>
+</html>

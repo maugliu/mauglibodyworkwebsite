@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Maugli Bodywork</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F2EDE5;
+      --bg-warm: #E8E0D4;
+      --text: #1C1915;
+      --text-muted: #7A6E63;
+      --accent: #C4694A;
+      --accent2: #C4694A;
+      --accent2-light: #E8C4B4;
+      --line: #D0C6B8;
+      --white: #FDFAF6;
+      --price-bg: #4A7A9B;
+      --btn-bg: #C4694A;
+      --btn-hover: #a8553a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Geologica', sans-serif; font-weight: 300; line-height: 1.6; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3.5rem; background: rgba(242,237,229,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav-logo { font-family: 'Unbounded', sans-serif; font-size: 0.82rem; font-weight: 400; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-book { font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.6rem 1.4rem; text-decoration: none; }
+    .nav-book:hover { background: #a8553a; }
+
+    .page-header { padding: 9rem 3.5rem 5rem; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+    .page-header::after { content: 'FORMATS'; position: absolute; right: -1rem; bottom: -2rem; font-family: 'Unbounded', sans-serif; font-size: 10rem; font-weight: 300; color: rgba(28,25,21,0.04); line-height: 1; pointer-events: none; }
+    .breadcrumb { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .breadcrumb::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .page-title { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 300; color: var(--accent); line-height: 1.1; }
+    .page-sub { margin-top: 1.5rem; font-size: 1.05rem; color: var(--text-muted); max-width: 480px; line-height: 1.7; }
+
+    .services-section { max-width: 1200px; margin: 0 auto; padding: 5rem 3.5rem; }
+    .service-block { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding: 4.5rem 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .service-block:first-child { padding-top: 0; }
+
+    .service-meta { position: sticky; top: 7rem; }
+    .svc-tag { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
+    .svc-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent2); }
+    .svc-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--accent); line-height: 1.2; margin-bottom: 1.2rem; }
+    .svc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); border-radius: 20px; }
+    .svc-price-block { background: var(--accent2); border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
+    .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: var(--white); line-height: 1; }
+    .svc-price-cur { font-size: 0.75rem; color: rgba(253,250,246,0.7); }
+
+    .svc-photo { width: 100%; aspect-ratio: 16/9; overflow: hidden; margin-bottom: 2rem; }
+    .svc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .svc-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.82; margin-bottom: 2rem; }
+    .svc-desc p + p { margin-top: 1rem; }
+    .svc-desc strong { color: var(--text); font-weight: 400; }
+    .includes-title { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .includes-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--text); }
+    .includes-list li::before { content: '→'; color: var(--accent2); flex-shrink: 0; }
+    .book-btn { display: inline-block; margin-top: 2rem; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--price-bg); border-radius: 6px; padding: 0.85rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .book-btn:hover { background: #3a6a6a; transform: translateY(-1px); }
+
+    .contra-section { background: var(--bg-warm); padding: 5rem 3.5rem; }
+    .contra-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 300; color: var(--accent); margin-bottom: 3rem; line-height: 1.2; }
+    .contra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .contra-block { background: var(--white); border: 1px solid var(--line); padding: 2.2rem; }
+    .contra-block-title { font-family: 'Unbounded', sans-serif; font-size: 0.85rem; font-weight: 300; color: var(--accent); margin-bottom: 1.5rem; }
+    .contra-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .contra-list li { font-size: 0.87rem; color: var(--text-muted); padding-left: 1.1rem; position: relative; line-height: 1.5; }
+    .contra-list li::before { content: '–'; position: absolute; left: 0; color: var(--line); }
+    .contra-note { margin-top: 1.8rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+
+    footer { background: var(--accent); padding: 2.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Unbounded', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--bg-warm); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(232,224,212,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bg-warm); }
+    .footer-copy { font-size: 0.82rem; color: rgba(232,224,212,0.28); }
+
+    .reveal { opacity:0; transform:translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .services-section { padding: 3rem 1.5rem; }
+      .service-block { grid-template-columns: 1fr; gap: 2rem; }
+      .service-meta { position: static; }
+      .contra-section { padding: 4rem 1.5rem; }
+      .contra-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ── MOBILE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      html { font-size: 17px; }
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 0.78rem; }
+      .nav-book { font-size: 0.78rem; padding: 0.55rem 1rem; }
+
+      /* hero */
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5.5rem 1.4rem 3rem; }
+      .hero-right { height: 60vw; }
+      .hero-title { font-size: clamp(1.7rem, 7vw, 2.6rem); }
+      .hero-sub { font-size: 1rem; }
+      .btn-primary, .btn-ghost { font-size: 0.82rem; }
+
+      /* strip */
+      .strip { padding: 0.9rem 1.2rem; gap: 1.4rem; }
+      .strip-num { font-size: 1.1rem; }
+      .strip-label { font-size: 0.75rem; }
+
+      /* philosophy */
+      .philosophy { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+      .phil-quote { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+      .phil-text { font-size: 1rem; }
+
+      /* services grid */
+      .services-preview { padding: 3.5rem 1.4rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .svc-name { font-size: 0.9rem; }
+      .svc-price { font-size: 1.4rem; }
+      .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+      /* how */
+      .how { padding: 3.5rem 1.4rem; }
+      .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .how-title { font-size: 1rem; }
+      .how-text { font-size: 1rem; }
+
+      /* cta */
+      .cta-inner { padding: 3.5rem 1.4rem; }
+      .cta-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+
+      /* service blocks */
+      .service-block { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
+      .service-meta { position: static; }
+      .svc-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+      .svc-desc { font-size: 1rem; }
+      .includes-list li { font-size: 0.95rem; }
+      .book-btn { font-size: 0.85rem; }
+
+      /* about */
+      .about-hero { grid-template-columns: 1fr; }
+      .about-hero-left { height: 65vw; }
+      .about-hero-right { padding: 2.5rem 1.4rem 3.5rem; }
+      .page-title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+      .hero-pullquote { font-size: 0.95rem; }
+      .story { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 1.4rem; }
+      .story-left { position: static; }
+      .story-text { font-size: 1rem; }
+      .approach { padding: 3.5rem 1.4rem; }
+      .approach-grid { grid-template-columns: 1fr; gap: 1px; }
+      .approach-title { font-size: 1rem; }
+      .approach-text { font-size: 1rem; }
+      .approach-photo-strip { padding: 0 1.4rem 3.5rem; }
+      .edu { padding: 3.5rem 1.4rem; }
+      .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .edu-cert { font-size: 0.95rem; }
+      .edu-desc { font-size: 0.95rem; }
+
+      /* contacts */
+      .contacts-hero { grid-template-columns: 1fr; min-height: auto; }
+      .contacts-left { padding: 6rem 1.4rem 3.5rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .contacts-right { padding: 3.5rem 1.4rem; }
+      .contact-value { font-size: 1rem; }
+      .booking-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+      .bstep-text { font-size: 0.95rem; }
+      .location-section { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 1.4rem; }
+
+      /* footer */
+      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.4rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+
+    /* BURGER */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--accent); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Unbounded', sans-serif; font-size: 1.1rem; font-weight: 300; color: var(--accent); text-decoration: none; letter-spacing: 0.05em; }
+    .mobile-menu .mob-book { color: var(--white); background: var(--accent2); padding: 0.8rem 2rem; margin-top: 1rem; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .burger { display: flex; }
+    }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      font-family: "Unbounded", sans-serif;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      border-radius: 3px;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+    .lang-sep { font-size: 0.6rem; color: var(--line); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">Maugli Bodywork</a>
+    <ul class="nav-links">
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
+    </ul>
+    <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Book</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contacts.html">Contacts</a>
+    <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-book">Book</a>
+  </div>
+
+  <div class="page-header">
+    <p class="breadcrumb"><a href="index.html">Home</a> · Services</p>
+    <h1 class="page-title">Services<br>и цены</h1>
+    <p class="page-sub">Five formats — from an intro assessment to deep kinesiology work. Each tailored to your needs.</p>
+  </div>
+
+  <section class="services-section">
+
+    <div id="warmup25" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Format 01</p>
+        <h2 class="svc-title">Intro<br>Session</h2>
+        <div class="svc-badges"><span class="badge">25 min</span><span class="badge">Assessment</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">70</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="consultation.jpg" alt="Консультация" /></div>
+        <div class="svc-desc"><p>Want to understand your body better — or not quite ready for a full session? This is your entry point.</p><p>We run a full assessment: a conversation, visual analysis, muscle testing. Along the way I work on what I find — quickly and precisely. You leave knowing what's happening in your body and what to do about it.</p></div>
+        <p class="includes-title">What's included</p>
+        <ul class="includes-list">
+          <li>Conversation and history intake</li>
+          <li>Visual assessment and muscle testing</li>
+          <li>Targeted work based on findings</li>
+          <li>Recommendations — what to do next</li>
+        </ul>
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Book</a>
+      </div>
+    </div>
+
+    <div id="warmup50" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Format 02</p>
+        <h2 class="svc-title">Warmup<br>45 min</h2>
+        <div class="svc-badges"><span class="badge">45 min</span><span class="badge">Extended</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">110</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img src="warmup.jpg" alt="Разминка 45" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
+        <div class="svc-desc"><p>Short but precise. Perfect when time is limited and tension has built up. Focused on a specific area — neck, shoulders, lower back — or general tone.</p><p>Great for regular maintenance — relieving fatigue, restoring muscle tone.</p></div>
+        <p class="includes-title">What's included</p>
+        <ul class="includes-list">
+          <li>Brief intake before the session</li>
+          <li>Work on the target tension zone</li>
+          <li>Swedish massage, myofascial release, глубокотканный массаж</li>
+        </ul>
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Book</a>
+      </div>
+    </div>
+
+    <div id="bodypractice" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Format 03</p>
+        <h2 class="svc-title">Body&shy;<br>work</h2>
+        <div class="svc-badges"><span class="badge">75 min</span><span class="badge">Holistic</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">170</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="bodypractice_svc.jpg" alt="Телесная практика" /></div>
+        <div class="svc-desc"><p>A fluid, deep practice that starts with assessment and is built around your current state.</p><p>Beyond manual techniques — somatic elements, breathwork. <strong>Not just a massage — a conversation with the body.</strong></p></div>
+        <p class="includes-title">What's included</p>
+        <ul class="includes-list">
+          <li>Conversation and history intake</li>
+          <li>Active and passive breathing practices</li>
+          <li>Holistic массаж</li>
+          <li>Swedish massage</li>
+          <li>Lymphatic drainage</li>
+          <li>Somatic and body-oriented therapy elements</li>
+          <li>Recommendations to reinforce the effect</li>
+        </ul>
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Book</a>
+      </div>
+    </div>
+
+    <div id="kinesio" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Format 04</p>
+        <h2 class="svc-title">Kinesio-<br>massage</h2>
+        <div class="svc-badges"><span class="badge">75 min</span><span class="badge">Analytical</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">190</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="kinesio.jpg" alt="Кинезиомассаж" /></div>
+        <div class="svc-desc"><p>Thorough, unhurried work. The most analytical format — extended diagnostics: detailed muscle testing, Anatomy Trains work, uncovering hidden compensations.</p><p>For chronic pain, postural issues, or when standard massage no longer helps. <strong>We work with the cause, not the symptom.</strong></p></div>
+        <p class="includes-title">What's included</p>
+        <ul class="includes-list">
+          <li>Extended intake and history</li>
+          <li>Visual postural assessment</li>
+          <li>Detailed manual muscle testing</li>
+          <li>Anatomy Trains-based work</li>
+          <li>Deep tissue massage, trigger points, myofascial release</li>
+          <li>Personalised exercise plan</li>
+        </ul>
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Book</a>
+      </div>
+    </div>
+
+    <div id="postnatal" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Format 05</p>
+        <h2 class="svc-title">Postpartum<br>Bodywork</h2>
+        <div class="svc-badges"><span class="badge">2 sessions × 1.5 hrs</span><span class="badge">Special</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">500</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="postnatal.jpg" alt="Восстановление после родов" /></div>
+        <div class="svc-desc"><p>A woman's body goes through one of the most profound experiences it is capable of. It has everything it needs to recover on its own — but the right support accelerates that process and helps avoid long-term issues.</p><p>I work with those who have just given birth and those who have been living with the aftermath for years — lower back pain, pelvic instability, the feeling that something is off.</p></div>
+        <p class="includes-title">What's included</p>
+        <ul class="includes-list">
+          <li>Conversation and history intake</li>
+          <li>Kinesiological correction of pelvic muscles and ligaments</li>
+          <li>Visceral massage</li>
+          <li>Postural restoration after pregnancy</li>
+          <li>Recommendations and exercises to consolidate results</li>
+        </ul>
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Book</a>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="contra-section">
+    <div class="contra-inner">
+      <p class="section-tag">Important</p>
+      <h2 class="section-title">Contraindications</h2>
+      <div class="contra-grid reveal">
+        <div class="contra-block">
+          <h3 class="contra-block-title">We don't work when</h3>
+          <ul class="contra-list">
+            <li>Elevated body temperature</li>
+            <li>Acute inflammation or joint flare-ups</li>
+            <li>Serious systemic conditions</li>
+            <li>Infectious diseases in acute phase</li>
+            <li>First and last month of pregnancy</li>
+          </ul>
+        </div>
+        <div class="contra-block">
+          <h3 class="contra-block-title">With caution</h3>
+          <ul class="contra-list">
+            <li>Menstruation — please let me know in advance</li>
+            <li>Pregnancy — only with doctor's approval</li>
+            <li>Pain medication or other drugs — inform before the session</li>
+          </ul>
+          <p class="contra-note">Massage does not replace medical diagnosis or treatment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Maugli Bodywork</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
+    </ul>
+    <span class="footer-copy">Tbilisi, Georgia</span>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); obs.unobserve(x.target); } }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Burger menu
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("open");
+      mobileMenu.classList.toggle("open");
+      document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        burger.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+  </script>
+</body>
+</html>
