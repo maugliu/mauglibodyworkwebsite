@@ -534,6 +534,24 @@
       footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.4rem; }
       .f-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
     }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      font-family: "Unbounded", sans-serif;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      border-radius: 3px;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+    .lang-sep { font-size: 0.6rem; color: var(--line); }
   </style>
 </head>
 <body>
@@ -556,6 +574,7 @@
     <a href="about.html">Обо мне</a>
     <a href="contacts.html">Контакты</a>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-cta">Записаться</a>
+    <div style="display:flex;gap:1rem;margin-top:0.5rem"><a href="#" style="font-family:'Unbounded',sans-serif;font-size:0.9rem;color:var(--accent);text-decoration:none;font-weight:600">RU</a><span style="color:var(--line)">/</span><a href="en/index.html" style="font-family:'Unbounded',sans-serif;font-size:0.9rem;color:var(--text-muted);text-decoration:none">EN</a></div>
   </div>
 
   <!-- HERO -->

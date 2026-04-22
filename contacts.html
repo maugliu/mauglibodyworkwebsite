@@ -195,6 +195,24 @@
       .nav-book { display: none; }
       .burger { display: flex; }
     }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      font-family: "Unbounded", sans-serif;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      border-radius: 3px;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+    .lang-sep { font-size: 0.6rem; color: var(--line); }
   </style>
 </head>
 <body>

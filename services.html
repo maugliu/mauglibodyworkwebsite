@@ -203,6 +203,24 @@
       .nav-book { display: none; }
       .burger { display: flex; }
     }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      font-family: "Unbounded", sans-serif;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      border-radius: 3px;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+    .lang-sep { font-size: 0.6rem; color: var(--line); }
   </style>
 </head>
 <body>
@@ -316,6 +334,28 @@
           <li>Работа по теории Анатомических поездов</li>
           <li>Глубокотканный массаж, триггерные точки, миофасциальный релиз</li>
           <li>Индивидуальный план упражнений</li>
+        </ul>
+        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
+      </div>
+    </div>
+
+    <div id="postnatal" class="service-block reveal">
+      <div class="service-meta">
+        <p class="svc-tag">Формат 05</p>
+        <h2 class="svc-title">Восстановление<br>после родов</h2>
+        <div class="svc-badges"><span class="badge">2 встречи × 1,5 часа</span><span class="badge">Специальный</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">500</span><span class="svc-price-cur">GEL</span></div>
+      </div>
+      <div>
+        <div class="svc-photo"><img src="postnatal.jpg" alt="Восстановление после родов" /></div>
+        <div class="svc-desc"><p>Тело женщины проходит через одно из самых серьёзных испытаний, на которые оно способно. У него есть всё необходимое, чтобы справиться самому — но правильная поддержка ускоряет этот путь и помогает избежать долгосрочных последствий.</p><p>Работаю и с теми, кто только что родил, и с теми, кто годами живёт с последствиями — болью в пояснице, нестабильностью таза, ощущением «что-то не так».</p></div>
+        <p class="includes-title">Что входит</p>
+        <ul class="includes-list">
+          <li>Беседа, сбор запроса и анамнеза</li>
+          <li>Кинезиологическая коррекция мышц и связок малого таза</li>
+          <li>Висцеральный массаж</li>
+          <li>Работа с постуральными нарушениями после беременности</li>
+          <li>Рекомендации и упражнения для закрепления результата</li>
         </ul>
         <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
       </div>
