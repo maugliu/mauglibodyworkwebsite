@@ -20,6 +20,8 @@
       --line: #D0C6B8;
       --white: #FDFAF6;
       --price-bg: #4A7A9B;
+      --btn-bg: #C4694A;
+      --btn-hover: #a8553a;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 18px; }
@@ -50,8 +52,8 @@
     .svc-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent2); }
     .svc-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--accent); line-height: 1.2; margin-bottom: 1.2rem; }
     .svc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); }
-    .svc-price-block { background: var(--price-bg); padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
+    .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); border-radius: 20px; }
+    .svc-price-block { background: var(--accent2); border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
     .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: var(--white); line-height: 1; }
     .svc-price-cur { font-size: 0.75rem; color: rgba(253,250,246,0.7); }
 
@@ -64,8 +66,8 @@
     .includes-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
     .includes-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--text); }
     .includes-list li::before { content: '→'; color: var(--accent2); flex-shrink: 0; }
-    .book-btn { display: inline-block; margin-top: 2rem; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--accent2); padding: 0.85rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
-    .book-btn:hover { background: #a8553a; transform: translateY(-1px); }
+    .book-btn { display: inline-block; margin-top: 2rem; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--price-bg); border-radius: 6px; padding: 0.85rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .book-btn:hover { background: #3a6a6a; transform: translateY(-1px); }
 
     .contra-section { background: var(--bg-warm); padding: 5rem 3.5rem; }
     .contra-inner { max-width: 1200px; margin: 0 auto; }
