@@ -290,6 +290,10 @@
     .lang-btn:hover { color: var(--text); }
     .lang-btn.active { color: var(--accent); border-color: var(--accent); }
     .lang-sep { font-size: 0.6rem; color: var(--line); }
+    .mob-lang { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
+    .mob-lang .active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); pointer-events: none; }
+    .mob-lang .inactive { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
+    .mob-lang .sep { color: var(--line); }
   </style>
 </head>
 <body>
@@ -301,7 +305,8 @@
       <li><a href="contacts.html">Contacts</a></li>
     </ul>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Book</a>
-    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="lang-switch"><span class="lang-btn active">EN</span><span class="lang-sep">/</span><a href="../about.html" class="lang-btn">RU</a></div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
@@ -310,11 +315,12 @@
     <a href="about.html">About</a>
     <a href="contacts.html">Contacts</a>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-book">Book</a>
+    <div class="mob-lang"><span class="active">EN</span><span class="sep"> / </span><a href="../about.html" class="inactive">RU</a></div>
   </div>
 
   <div class="about-hero">
     <div class="about-hero-left">
-      <img src="portrait.jpg" alt="Иван Маугли" />
+      <img src="portrait.jpg" alt="Ivan Maugli" />
     </div>
     <div class="about-hero-right">
       <p class="breadcrumb anim d1"><a href="index.html">Home</a> · About</p>
@@ -351,7 +357,7 @@
         <div class="cert-body">
           <span class="cert-year">2020</span>
           <h3 class="cert-title">Vector Massage</h3>
-          <p class="cert-school">Классический европейский массаж, холистический массаж, основы кинезиологического массажа</p>
+          <p class="cert-school">Classic European massage, holistic massage, basics of kinesiological massage</p>
           <span class="cert-hours">72 hrs · Moscow</span>
         </div>
       </div>
@@ -361,37 +367,37 @@
         <div class="cert-body">
           <span class="cert-year">2021</span>
           <h3 class="cert-title">Vector Massage II</h3>
-          <p class="cert-school">Рептильные техники, дыхательные техники в массаже, анатомия для массажистов и кинезиологов</p>
+          <p class="cert-school">Reptilian techniques, breathing techniques in massage, anatomy for massage therapists and kinesiologists</p>
           <span class="cert-hours">72 hrs · Moscow</span>
         </div>
       </div>
 
       <div class="cert-card">
-        <div class="cert-img"><img src="massage_certificate01.png" alt="Кинезиология" /></div>
+        <div class="cert-img"><img src="massage_certificate01.png" alt="Kinesiology" /></div>
         <div class="cert-body">
           <span class="cert-year">2020</span>
-          <h3 class="cert-title">Кинезиология. Таз и нижние конечности</h3>
-          <p class="cert-school">Мануальное-мышечное тестирование. Работа мышц таза и ног</p>
+          <h3 class="cert-title">Kinesiology. Pelvis & Lower Extremities</h3>
+          <p class="cert-school">Manual muscle testing. Pelvic and leg muscle work</p>
           <span class="cert-hours">32 + 48 hrs practice · Moscow</span>
         </div>
       </div>
 
       <div class="cert-card">
-        <div class="cert-img"><img src="massage_certificate04.png" alt="Кинезиология плечевой пояс" /></div>
+        <div class="cert-img"><img src="massage_certificate04.png" alt="Kinesiology shoulder girdle" /></div>
         <div class="cert-body">
           <span class="cert-year">2020</span>
-          <h3 class="cert-title">Кинезиология. Плечевой пояс</h3>
-          <p class="cert-school">Телесно-ориентированное консультирование, работа мышц плечевого пояса</p>
+          <h3 class="cert-title">Kinesiology. Shoulder Girdle</h3>
+          <p class="cert-school">Body-oriented consulting, shoulder girdle muscle work</p>
           <span class="cert-hours">24 + 48 hrs practice · Moscow</span>
         </div>
       </div>
 
       <div class="cert-card">
-        <div class="cert-img"><img src="massage_certificate03.png" alt="Послеродовое восстановление" /></div>
+        <div class="cert-img"><img src="massage_certificate03.png" alt="Postpartum Recovery" /></div>
         <div class="cert-body">
           <span class="cert-year">2022</span>
-          <h3 class="cert-title">Послеродовое восстановление</h3>
-          <p class="cert-school">Школа доктора Крутова · NL-School</p>
+          <h3 class="cert-title">Postpartum Recovery</h3>
+          <p class="cert-school">Dr. Krutov School · NL-School</p>
           <span class="cert-hours">16 hours</span>
         </div>
       </div>

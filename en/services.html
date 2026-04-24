@@ -221,6 +221,10 @@
     .lang-btn:hover { color: var(--text); }
     .lang-btn.active { color: var(--accent); border-color: var(--accent); }
     .lang-sep { font-size: 0.6rem; color: var(--line); }
+    .mob-lang { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
+    .mob-lang .active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); pointer-events: none; }
+    .mob-lang .inactive { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
+    .mob-lang .sep { color: var(--line); }
   </style>
 </head>
 <body>
@@ -232,7 +236,8 @@
       <li><a href="contacts.html">Contacts</a></li>
     </ul>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Book</a>
-    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="lang-switch"><span class="lang-btn active">EN</span><span class="lang-sep">/</span><a href="../services.html" class="lang-btn">RU</a></div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
@@ -241,11 +246,12 @@
     <a href="about.html">About</a>
     <a href="contacts.html">Contacts</a>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-book">Book</a>
+    <div class="mob-lang"><span class="active">EN</span><span class="sep"> / </span><a href="../services.html" class="inactive">RU</a></div>
   </div>
 
   <div class="page-header">
     <p class="breadcrumb"><a href="index.html">Home</a> · Services</p>
-    <h1 class="page-title">Services<br>и цены</h1>
+    <h1 class="page-title">Services<br>& Pricing</h1>
     <p class="page-sub">Five formats — from an intro assessment to deep kinesiology work. Each tailored to your needs.</p>
   </div>
 
@@ -259,7 +265,7 @@
         <div class="svc-price-block"><span class="svc-price-big">70</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="consultation.jpg" alt="Консультация" /></div>
+        <div class="svc-photo"><img src="consultation.jpg" alt="Intro Session" /></div>
         <div class="svc-desc"><p>Want to understand your body better — or not quite ready for a full session? This is your entry point.</p><p>We run a full assessment: a conversation, visual analysis, muscle testing. Along the way I work on what I find — quickly and precisely. You leave knowing what's happening in your body and what to do about it.</p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
@@ -280,13 +286,13 @@
         <div class="svc-price-block"><span class="svc-price-big">110</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img src="warmup.jpg" alt="Разминка 45" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
+        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img src="warmup.jpg" alt="Warmup 45" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
         <div class="svc-desc"><p>Short but precise. Perfect when time is limited and tension has built up. Focused on a specific area — neck, shoulders, lower back — or general tone.</p><p>Great for regular maintenance — relieving fatigue, restoring muscle tone.</p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
           <li>Brief intake before the session</li>
           <li>Work on the target tension zone</li>
-          <li>Swedish massage, myofascial release, глубокотканный массаж</li>
+          <li>Swedish massage, myofascial release, deep tissue</li>
         </ul>
         <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Book</a>
       </div>
@@ -300,13 +306,13 @@
         <div class="svc-price-block"><span class="svc-price-big">170</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="bodypractice_svc.jpg" alt="Телесная практика" /></div>
+        <div class="svc-photo"><img src="bodypractice_svc.jpg" alt="Bodywork" /></div>
         <div class="svc-desc"><p>A fluid, deep practice that starts with assessment and is built around your current state.</p><p>Beyond manual techniques — somatic elements, breathwork. <strong>Not just a massage — a conversation with the body.</strong></p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
           <li>Conversation and history intake</li>
           <li>Active and passive breathing practices</li>
-          <li>Holistic массаж</li>
+          <li>Holistic massage</li>
           <li>Swedish massage</li>
           <li>Lymphatic drainage</li>
           <li>Somatic and body-oriented therapy elements</li>
@@ -324,7 +330,7 @@
         <div class="svc-price-block"><span class="svc-price-big">190</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="kinesio.jpg" alt="Кинезиомассаж" /></div>
+        <div class="svc-photo"><img src="kinesio.jpg" alt="Kinesio-massage" /></div>
         <div class="svc-desc"><p>Thorough, unhurried work. The most analytical format — extended diagnostics: detailed muscle testing, Anatomy Trains work, uncovering hidden compensations.</p><p>For chronic pain, postural issues, or when standard massage no longer helps. <strong>We work with the cause, not the symptom.</strong></p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
@@ -347,7 +353,7 @@
         <div class="svc-price-block"><span class="svc-price-big">500</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="postnatal.jpg" alt="Восстановление после родов" /></div>
+        <div class="svc-photo"><img src="postnatal.jpg" alt="Postpartum Bodywork" /></div>
         <div class="svc-desc"><p>A woman's body goes through one of the most profound experiences it is capable of. It has everything it needs to recover on its own — but the right support accelerates that process and helps avoid long-term issues.</p><p>I work with those who have just given birth and those who have been living with the aftermath for years — lower back pain, pelvic instability, the feeling that something is off.</p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">

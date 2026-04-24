@@ -213,6 +213,10 @@
     .lang-btn:hover { color: var(--text); }
     .lang-btn.active { color: var(--accent); border-color: var(--accent); }
     .lang-sep { font-size: 0.6rem; color: var(--line); }
+    .mob-lang { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
+    .mob-lang .active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); pointer-events: none; }
+    .mob-lang .inactive { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
+    .mob-lang .sep { color: var(--line); }
   </style>
 </head>
 <body>
@@ -224,7 +228,8 @@
       <li><a href="contacts.html" class="active">Contacts</a></li>
     </ul>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Book</a>
-    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="lang-switch"><span class="lang-btn active">EN</span><span class="lang-sep">/</span><a href="../contacts.html" class="lang-btn">RU</a></div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
@@ -233,6 +238,7 @@
     <a href="about.html">About</a>
     <a href="contacts.html">Contacts</a>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-book">Book</a>
+    <div class="mob-lang"><span class="active">EN</span><span class="sep"> / </span><a href="../contacts.html" class="inactive">RU</a></div>
   </div>
 
   <div class="contacts-hero">
@@ -259,11 +265,11 @@
     </div>
 
     <div class="contacts-right">
-      <p class="booking-tag">Как записаться</p>
+      <p class="booking-tag">How to book</p>
       <h2 class="booking-title">How to book</h2>
       <p class="booking-sub">Booking works through a Telegram bot. Leave a request — I'll check availability and confirm the time.</p>
       <div class="booking-steps">
-        <div class="bstep"><span class="bstep-num">1</span><p class="bstep-text"><strong>Выберите формат</strong> — Разминка, Aesthetic, Телесная практика или Кинезиомассаж.</p></div>
+        <div class="bstep"><span class="bstep-num">1</span><p class="bstep-text"><strong>Choose a format</strong> — Intro Session, Warmup, Bodywork or Kinesio-massage.</p></div>
         <div class="bstep"><span class="bstep-num">2</span><p class="bstep-text"><strong>Leave a request</strong> via the Telegram bot or message me directly — let me know your preferred time.</p></div>
         <div class="bstep"><span class="bstep-num">3</span><p class="bstep-text"><strong>I'll confirm the slot</strong> and send the address and details before the session.</p></div>
       </div>
