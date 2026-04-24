@@ -221,6 +221,10 @@
     .lang-btn:hover { color: var(--text); }
     .lang-btn.active { color: var(--accent); border-color: var(--accent); }
     .lang-sep { font-size: 0.6rem; color: var(--line); }
+    .mob-lang { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
+    .mob-lang .active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); pointer-events: none; }
+    .mob-lang .inactive { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
+    .mob-lang .sep { color: var(--line); }
   </style>
 </head>
 <body>
@@ -232,6 +236,7 @@
       <li><a href="contacts.html">Контакты</a></li>
     </ul>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Записаться</a>
+    <div class="lang-switch"><span class="lang-btn active">RU</span><span class="lang-sep">/</span><a href="en/services.html" class="lang-btn">EN</a></div>
     <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
   </nav>
 
@@ -241,6 +246,7 @@
     <a href="about.html">Обо мне</a>
     <a href="contacts.html">Контакты</a>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="mob-book">Записаться</a>
+    <div class="mob-lang"><span class="active">RU</span><span class="sep"> / </span><a href="en/services.html" class="inactive">EN</a></div>
   </div>
 
   <div class="page-header">
