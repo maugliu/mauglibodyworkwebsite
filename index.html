@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maugli Bodywork — Телесная практика в Тбилиси</title>
+  <meta name="description" content="Телесная практика и кинезиомассаж в Тбилиси. Работаю с причиной боли и напряжения — через диагностику, мышечное тестирование и телесные техники. Иван Маугли Устиченко." />
+  <meta name="theme-color" content="#F4EFE7" />
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="hero.jpg" as="image" />
+    <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&family=Geologica:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -650,6 +654,215 @@
     .mob-lang .ml-active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); }
     .mob-lang .ml-sep { color: var(--line); font-size: 0.8rem; }
     .mob-lang .ml-other { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
+
+    /* ── PERFORMANCE & UX IMPROVEMENTS ── */
+
+    /* Parallax hero */
+    .hero-right { will-change: transform; }
+
+    /* Hover lift on service cards */
+    .svc-lnk:hover .svc-card { transform: translateY(-3px); }
+    .svc-card { transition: background 0.2s, transform 0.25s ease, box-shadow 0.25s ease; }
+    .svc-lnk:hover .svc-card { box-shadow: 0 12px 32px rgba(28,21,14,0.12); }
+
+    /* Hover lift on how cards */
+    .how-card { transition: box-shadow 0.3s ease; }
+    .how-card:hover { box-shadow: 0 8px 24px rgba(28,21,14,0.1); }
+
+    /* Marquee pause on hover */
+    .marquee-inner:hover { animation-play-state: paused; }
+
+    /* Stagger for fw-cards */
+    .fw-card:nth-child(1) { transition-delay: 0.05s; }
+    .fw-card:nth-child(2) { transition-delay: 0.1s; }
+    .fw-card:nth-child(3) { transition-delay: 0.15s; }
+    .fw-card:nth-child(4) { transition-delay: 0.2s; }
+    .fw-card:nth-child(5) { transition-delay: 0.25s; }
+    .fw-card:nth-child(6) { transition-delay: 0.3s; }
+
+    /* Stagger for rw-cards */
+    .rw-card { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease, background 0.25s; }
+    .rw-card.visible { opacity: 1; transform: none; }
+    .rw-card:nth-child(1) { transition-delay: 0.05s; }
+    .rw-card:nth-child(2) { transition-delay: 0.12s; }
+    .rw-card:nth-child(3) { transition-delay: 0.19s; }
+    .rw-card:nth-child(4) { transition-delay: 0.26s; }
+    .rw-card:nth-child(5) { transition-delay: 0.33s; }
+    .rw-card:nth-child(6) { transition-delay: 0.4s; }
+    .rw-card:nth-child(7) { transition-delay: 0.47s; }
+    .rw-card:nth-child(8) { transition-delay: 0.54s; }
+    .rw-card:nth-child(9) { transition-delay: 0.61s; }
+
+    /* Scroll indicator on hero */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      z-index: 3; opacity: 1; transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .scroll-hint.hidden { opacity: 0; }
+    .scroll-hint-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(250,246,245,0.5), transparent);
+      animation: scrollPulse 1.6s ease-in-out infinite;
+    }
+    .scroll-hint-label {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(250,246,245,0.45);
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    /* Smooth bubble reveal */
+    .msg-bubble { opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .msg-bubble.visible { opacity: 1; transform: none; }
+
+    /* Inline review background blend */
+    .review-inline { position: relative; }
+
+    /* ── GRAIN TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    /* ── COLORED ACCENT SHADOWS ── */
+    /* Service cards on home */
+    .svc-lnk:hover .svc-card {
+      box-shadow: 0 16px 40px -8px rgba(196,105,74,0.25), 0 4px 12px rgba(28,21,14,0.06) !important;
+    }
+    /* How cards on home */
+    .how-card:hover {
+      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.18), 0 2px 8px rgba(28,21,14,0.04) !important;
+    }
+    /* CTA buttons */
+    .btn-accent:hover, .nav-cta:hover {
+      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.45);
+    }
+    .btn-light:hover {
+      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.35);
+    }
+    /* Cert cards */
+    .cert-card:hover {
+      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.2) !important;
+    }
+    /* Service blocks */
+    .book-btn:hover {
+      box-shadow: 0 6px 20px -4px rgba(74,122,155,0.45);
+    }
+
+    /* ── PREMIUM EFFECTS ── */
+
+    /* Loader (page first paint) */
+    .page-loader {
+      position: fixed; inset: 0; z-index: 10000;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
+    }
+    .page-loader.loaded { opacity: 0; visibility: hidden; }
+    .page-loader-logo {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      opacity: 0;
+      animation: loaderPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes loaderPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Magnetic buttons */
+    .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.3s;
+      will-change: transform;
+    }
+
+    /* Splitting word reveal — for hero h1 */
+    .split-text { display: inline-block; overflow: hidden; }
+    .split-text .word {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .split-text.revealed .word { transform: translateY(0); }
+    .split-text .word:nth-child(1) { transition-delay: 0.05s; }
+    .split-text .word:nth-child(2) { transition-delay: 0.15s; }
+    .split-text .word:nth-child(3) { transition-delay: 0.25s; }
+    .split-text .word:nth-child(4) { transition-delay: 0.35s; }
+    .split-text .word:nth-child(5) { transition-delay: 0.45s; }
+    .split-text .word:nth-child(6) { transition-delay: 0.55s; }
+    .split-text .word:nth-child(7) { transition-delay: 0.65s; }
+
+    /* Glow spotlight on review cards in wall */
+    .reviews-wall { position: relative; overflow: hidden; }
+    .rw-grid {
+      position: relative;
+    }
+    .rw-spotlight {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,105,74,0.18) 0%, transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    .rw-grid:hover .rw-spotlight { opacity: 1; }
+    .rw-card { position: relative; z-index: 1; }
+
+    /* View Transitions API — page transitions */
+    @view-transition {
+      navigation: auto;
+    }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.4s;
+    }
+
+    /* Scroll-driven hero parallax (CSS native, fallback to JS) */
+    @supports (animation-timeline: scroll()) {
+      .hero-right img {
+        animation: heroDrift linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 100vh;
+      }
+      @keyframes heroDrift {
+        from { transform: translateY(0) scale(1); }
+        to { transform: translateY(80px) scale(1.05); }
+      }
+    }
+
+    /* Smoother focus state */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* Reduced motion respect */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee-inner { animation: none !important; }
+      .split-text .word { transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -678,7 +891,7 @@
   <section class="hero">
     <div class="hero-left">
       <p class="hero-tag">Телесная практика · Тбилиси</p>
-      <h1 class="hero-h1">
+      <h1 class="hero-h1" data-split>
         Тело знает.<br>
         Нужно лишь<br>
         <span class="hi">научиться слушать</span>
@@ -693,9 +906,13 @@
       <p class="hero-trust">6+ лет практики · эффект после 1–2 сеансов</p>
     </div>
     <div class="hero-right">
-      <img src="hero.jpg" alt="Maugli Bodywork — сеанс" />
+      <img src="hero.jpg" alt="Maugli Bodywork — сеанс" fetchpriority="high" width="900" height="1200" />
     </div>
-  </section>
+    <div class="scroll-hint" id="scrollHint">
+    <span class="scroll-hint-label">скролл</span>
+    <div class="scroll-hint-line"></div>
+  </div>
+</section>
 
   <!-- MARQUEE -->
   <div class="marquee-wrap" aria-hidden="true">
@@ -765,7 +982,7 @@
   <!-- PHILOSOPHY / SPLIT -->
   <section class="split">
     <div class="split-img">
-      <img src="diag2.jpg" alt="Диагностика — Maugli Bodywork" />
+      <img loading="lazy" decoding="async" src="diag2.jpg" alt="Диагностика — Maugli Bodywork" />
     </div>
     <div class="split-body">
       <p class="s-tag">Подход</p>
@@ -817,7 +1034,7 @@
 
   <!-- SERVICES -->
   <section class="services">
-    <div class="services-bg"><img src="approach.jpg" alt="" /></div>
+    <div class="services-bg"><img loading="lazy" decoding="async" src="approach.jpg" alt="" /></div>
     <div class="svc-inner">
       <div class="svc-hd reveal">
         <h2 class="svc-ttl">Форматы<br>и цены</h2>
@@ -870,7 +1087,7 @@
     </div>
     <div class="how-grid">
       <div class="how-card reveal">
-        <div class="how-img"><img src="diag2.jpg" alt="Диагностика" /></div>
+        <div class="how-img"><img loading="lazy" decoding="async" src="diag2.jpg" alt="Диагностика" /></div>
         <div class="how-body">
           <p class="how-n">01 — Диагностика</p>
           <h3 class="how-ttl2">Слушаем тело</h3>
@@ -878,7 +1095,7 @@
         </div>
       </div>
       <div class="how-card reveal d1">
-        <div class="how-img"><img src="approach.jpg" alt="Работа" /></div>
+        <div class="how-img"><img loading="lazy" decoding="async" src="approach.jpg" alt="Работа" /></div>
         <div class="how-body">
           <p class="how-n">02 — Работа</p>
           <h3 class="how-ttl2">Идём вглубь</h3>
@@ -886,7 +1103,7 @@
         </div>
       </div>
       <div class="how-card reveal d2">
-        <div class="how-img"><img src="bodypractice.jpg" alt="Завершение" /></div>
+        <div class="how-img"><img loading="lazy" decoding="async" src="bodypractice.jpg" alt="Завершение" /></div>
         <div class="how-body">
           <p class="how-n">03 — Рекомендации</p>
           <h3 class="how-ttl2">Закрепляем эффект</h3>
@@ -910,7 +1127,7 @@
 
   <!-- CTA -->
   <section class="cta">
-    <div class="cta-bg"><img src="cta_hands.jpg" alt="" /></div>
+    <div class="cta-bg"><img loading="lazy" decoding="async" src="cta_hands.jpg" alt="" /></div>
     <div class="cta-inner">
       <p class="cta-tag">Записаться</p>
       <h2 class="cta-h">Готов познакомиться<br>с <span class="acc">собственным</span><br>телом?</h2>
@@ -987,30 +1204,180 @@
     <span class="f-copy">Тбилиси, Грузия</span>
   </footer>
 
-  <script>
-    // Nav
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
 
-    // Burger
-    const burger = document.getElementById('burger');
-    const mobMenu = document.getElementById('mobMenu');
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      mobMenu.classList.toggle('open');
-      document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+      // Nav scroll
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+      }, { passive: true });
+
+      // Burger
+      const burger = document.getElementById('burger');
+      const mobMenu = document.getElementById('mobMenu');
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('open');
+        mobMenu.classList.toggle('open');
+        document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+      });
+      mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      }));
+
+      // Hero parallax
+      const heroRight = document.querySelector('.hero-right img');
+      if (heroRight) {
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY;
+          if (y < window.innerHeight) {
+            heroRight.style.transform = `translateY(${y * 0.2}px)`;
+          }
+        }, { passive: true });
+      }
+
+      // Scroll hint fade
+      const scrollHint = document.getElementById('scrollHint');
+      if (scrollHint) {
+        window.addEventListener('scroll', () => {
+          scrollHint.classList.toggle('hidden', window.scrollY > 80);
+        }, { passive: true });
+      }
+
+      // IntersectionObserver for all reveal elements incl rw-cards and msg-bubbles
+      const obs = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      }), { threshold: 0.07 });
+
+      document.querySelectorAll('.reveal, .rw-card, .msg-bubble').forEach(el => obs.observe(el));
+
+    
+      // ── MAGNETIC BUTTONS ──
+      const magneticButtons = document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn');
+      magneticButtons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      });
+
+      // ── TEXT SPLITTING (words) ──
+      document.querySelectorAll('[data-split]').forEach(el => {
+        const html = el.innerHTML;
+        // Wrap each word in a span, preserving <br> and <span class="hi"> etc.
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        const wrapWords = (node) => {
+          if (node.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            const words = node.textContent.split(/(\s+)/);
+            words.forEach(w => {
+              if (w.trim()) {
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.textContent = w;
+                frag.appendChild(span);
+              } else if (w) {
+                frag.appendChild(document.createTextNode(w));
+              }
+            });
+            return frag;
+          }
+          if (node.nodeType === 1) {
+            const newEl = node.cloneNode(false);
+            Array.from(node.childNodes).forEach(child => {
+              newEl.appendChild(wrapWords(child));
+            });
+            return newEl;
+          }
+          return node.cloneNode(false);
+        };
+        const result = wrapWords(wrapper);
+        el.innerHTML = '';
+        el.classList.add('split-text');
+        Array.from(result.childNodes).forEach(c => el.appendChild(c));
+        // Trigger reveal after a tick
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => el.classList.add('revealed'));
+        });
+      });
+
+      // ── REVIEW WALL SPOTLIGHT ──
+      const rwGrid = document.querySelector('.rw-grid');
+      if (rwGrid) {
+        const spotlight = document.createElement('div');
+        spotlight.className = 'rw-spotlight';
+        rwGrid.appendChild(spotlight);
+        rwGrid.addEventListener('mousemove', (e) => {
+          const rect = rwGrid.getBoundingClientRect();
+          spotlight.style.left = (e.clientX - rect.left) + 'px';
+          spotlight.style.top = (e.clientY - rect.top) + 'px';
+        });
+      }
+
+      // ── MARQUEE REACTS TO SCROLL ──
+      const marqueeInner = document.querySelector('.marquee-inner');
+      if (marqueeInner) {
+        let lastY = window.scrollY;
+        let speedFactor = 1;
+        let baseDuration = 22; // seconds
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY;
+          const delta = y - lastY;
+          lastY = y;
+          // boost speed based on scroll velocity, decay to 1
+          speedFactor = Math.min(3, Math.max(0.5, 1 + Math.abs(delta) / 30));
+          marqueeInner.style.animationDuration = (baseDuration / speedFactor) + 's';
+          // briefly reverse direction on scroll up
+          if (delta < -8) {
+            marqueeInner.style.animationDirection = 'reverse';
+          } else if (delta > 8) {
+            marqueeInner.style.animationDirection = 'normal';
+          }
+          // decay back to normal speed
+          clearTimeout(window.__marqueeTimer);
+          window.__marqueeTimer = setTimeout(() => {
+            marqueeInner.style.animationDuration = baseDuration + 's';
+          }, 200);
+        }, { passive: true });
+      }
+
+      // ── PAGE LOADER FADE ──
+      const loader = document.getElementById('pageLoader');
+      if (loader) {
+        window.addEventListener('load', () => {
+          setTimeout(() => loader.classList.add('loaded'), 100);
+        });
+        // safety: hide after 1.5s anyway
+        setTimeout(() => loader && loader.classList.add('loaded'), 1500);
+      }
+
+      // ── LENIS SMOOTH SCROLL ──
+      if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          smoothTouch: false,
+        });
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+
     });
-    mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      burger.classList.remove('open');
-      mobMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    }));
-
-    // Reveal on scroll
-    const obs = new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    }), { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
 </body>
 </html>
