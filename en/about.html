@@ -410,16 +410,7 @@
     }
 
     /* Scroll-driven hero parallax (CSS native, fallback to JS) */
-    @supports (animation-timeline: scroll()) {
-      .hero-right img {
-        animation: heroDrift linear both;
-        animation-timeline: scroll(root);
-        animation-range: 0 100vh;
-      }
-      @keyframes heroDrift {
-        from { transform: translateY(0) scale(1); }
-        to { transform: translateY(80px) scale(1.05); }
-      }
+    /* scroll-driven parallax handled by Lenis */
     }
 
     /* Smoother focus state */
@@ -441,6 +432,7 @@
   </style>
 </head>
 <body>
+  <div class="page-loader" id="pageLoader"><span class="page-loader-logo">Maugli Bodywork</span></div>
   <nav>
     <a href="index.html" class="nav-logo">Maugli Bodywork</a>
     <ul class="nav-links">
@@ -695,16 +687,35 @@
       // ── LENIS SMOOTH SCROLL ──
       if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const lenis = new Lenis({
-          duration: 1.1,
+          duration: 0.9,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true,
           smoothTouch: false,
+          normalizeWheel: false,
+          infinite: false,
+        });
+        // Emit scroll events so native scroll listeners still work
+        lenis.on('scroll', ({ scroll }) => {
+          window.dispatchEvent(new CustomEvent('lenis-scroll', { detail: { scroll } }));
         });
         function raf(time) {
           lenis.raf(time);
           requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Patch parallax and nav to work with Lenis scroll
+        lenis.on('scroll', ({ scroll }) => {
+          // Nav
+          document.getElementById('nav')?.classList.toggle('scrolled', scroll > 40);
+          // Scroll hint
+          document.getElementById('scrollHint')?.classList.toggle('hidden', scroll > 80);
+          // Hero parallax
+          const heroImg = document.querySelector('.hero-right img');
+          if (heroImg && scroll < window.innerHeight) {
+            heroImg.style.transform = `translateY(${scroll * 0.18}px)`;
+          }
+        });
       }
 
     });

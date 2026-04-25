@@ -698,16 +698,7 @@
     }
 
     /* Scroll-driven hero parallax (CSS native, fallback to JS) */
-    @supports (animation-timeline: scroll()) {
-      .hero-right img {
-        animation: heroDrift linear both;
-        animation-timeline: scroll(root);
-        animation-range: 0 100vh;
-      }
-      @keyframes heroDrift {
-        from { transform: translateY(0) scale(1); }
-        to { transform: translateY(80px) scale(1.05); }
-      }
+    /* scroll-driven parallax handled by Lenis */
     }
 
     /* Smoother focus state */
@@ -730,6 +721,7 @@
 </head>
 <body>
 
+  <div class="page-loader" id="pageLoader"><span class="page-loader-logo">Maugli Bodywork</span></div>
   <!-- NAV -->
   <nav id="nav">
     <a href="index.html" class="nav-logo">Maugli Bodywork</a>
