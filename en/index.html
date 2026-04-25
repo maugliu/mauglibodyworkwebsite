@@ -718,6 +718,18 @@
       .split-text .word { transform: none !important; }
     }
   </style>
+  <script>
+    // Hide loader immediately — runs synchronously before defer scripts
+    document.addEventListener('DOMContentLoaded', function() {
+      var l = document.getElementById('pageLoader');
+      if (l) setTimeout(function(){ l.classList.add('loaded'); }, 350);
+    });
+    // Absolute fallback
+    window.addEventListener('load', function() {
+      var l = document.getElementById('pageLoader');
+      if (l) l.classList.add('loaded');
+    });
+  </script>
 </head>
 <body>
 
