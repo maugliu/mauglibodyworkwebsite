@@ -835,16 +835,7 @@
     }
 
     /* Scroll-driven hero parallax (CSS native, fallback to JS) */
-    @supports (animation-timeline: scroll()) {
-      .hero-right img {
-        animation: heroDrift linear both;
-        animation-timeline: scroll(root);
-        animation-range: 0 100vh;
-      }
-      @keyframes heroDrift {
-        from { transform: translateY(0) scale(1); }
-        to { transform: translateY(80px) scale(1.05); }
-      }
+    /* scroll-driven parallax handled by Lenis */
     }
 
     /* Smoother focus state */
@@ -867,6 +858,7 @@
 </head>
 <body>
 
+  <div class="page-loader" id="pageLoader"><span class="page-loader-logo">Maugli Bodywork</span></div>
   <!-- NAV -->
   <nav id="nav">
     <a href="index.html" class="nav-logo">Maugli Bodywork</a>
@@ -1226,71 +1218,7 @@
         mobMenu.classList.remove('open');
         document.body.style.overflow = '';
       }));
-
-      // Hero parallax
-      const heroRight = document.querySelector('.hero-right img');
-      if (heroRight) {
-        window.addEventListener('scroll', () => {
-          const y = window.scrollY;
-          if (y < window.innerHeight) {
-            heroRight.style.transform = `translateY(${y * 0.2}px)`;
-          }
-        }, { passive: true });
-      }
-
-      // Scroll hint fade
-      const scrollHint = document.getElementById('scrollHint');
-      if (scrollHint) {
-        window.addEventListener('scroll', () => {
-          scrollHint.classList.toggle('hidden', window.scrollY > 80);
-        }, { passive: true });
-      }
-
-      // IntersectionObserver for all reveal elements incl rw-cards and msg-bubbles
-      const obs = new IntersectionObserver(entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
-        }
-      }), { threshold: 0.07 });
-
-      document.querySelectorAll('.reveal, .rw-card, .msg-bubble').forEach(el => obs.observe(el));
-
-    
-      // ── MAGNETIC BUTTONS ──
-      const magneticButtons = document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn');
-      magneticButtons.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          btn.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
-        });
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = '';
-        });
-      });
-
-      // ── TEXT SPLITTING (words) ──
-      document.querySelectorAll('[data-split]').forEach(el => {
-        const html = el.innerHTML;
-        // Wrap each word in a span, preserving <br> and <span class="hi"> etc.
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = html;
-        const wrapWords = (node) => {
-          if (node.nodeType === 3) {
-            const frag = document.createDocumentFragment();
-            const words = node.textContent.split(/(\s+)/);
-            words.forEach(w => {
-              if (w.trim()) {
-                const span = document.createElement('span');
-                span.className = 'word';
-                span.textContent = w;
-                frag.appendChild(span);
-              } else if (w) {
-                frag.appendChild(document.createTextNode(w));
-              }
-            });
+      // Hero parallax handled by Lenis scroll listener
             return frag;
           }
           if (node.nodeType === 1) {
@@ -1365,16 +1293,35 @@
       // ── LENIS SMOOTH SCROLL ──
       if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const lenis = new Lenis({
-          duration: 1.1,
+          duration: 0.9,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true,
           smoothTouch: false,
+          normalizeWheel: false,
+          infinite: false,
+        });
+        // Emit scroll events so native scroll listeners still work
+        lenis.on('scroll', ({ scroll }) => {
+          window.dispatchEvent(new CustomEvent('lenis-scroll', { detail: { scroll } }));
         });
         function raf(time) {
           lenis.raf(time);
           requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Patch parallax and nav to work with Lenis scroll
+        lenis.on('scroll', ({ scroll }) => {
+          // Nav
+          document.getElementById('nav')?.classList.toggle('scrolled', scroll > 40);
+          // Scroll hint
+          document.getElementById('scrollHint')?.classList.toggle('hidden', scroll > 80);
+          // Hero parallax
+          const heroImg = document.querySelector('.hero-right img');
+          if (heroImg && scroll < window.innerHeight) {
+            heroImg.style.transform = `translateY(${scroll * 0.18}px)`;
+          }
+        });
       }
 
     });
