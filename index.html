@@ -762,27 +762,7 @@
 
     /* ── PREMIUM EFFECTS ── */
 
-    /* Loader (page first paint) */
-    .page-loader {
-      position: fixed; inset: 0; z-index: 10000;
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      pointer-events: none;
-      transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
-    }
-    .page-loader.loaded { opacity: 0; visibility: hidden; }
-    .page-loader-logo {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 1rem; font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text);
-      opacity: 0;
-      animation: loaderPulse 1.4s ease-in-out infinite;
-    }
-    @keyframes loaderPulse {
-      0%, 100% { opacity: 0.3; transform: scale(0.98); }
-      50% { opacity: 1; transform: scale(1); }
-    }
+    
 
     /* Magnetic buttons */
     .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
@@ -790,21 +770,7 @@
       will-change: transform;
     }
 
-    /* Splitting word reveal — for hero h1 */
-    .split-text { display: inline-block; overflow: hidden; }
-    .split-text .word {
-      display: inline-block;
-      transform: translateY(110%);
-      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .split-text.revealed .word { transform: translateY(0); }
-    .split-text .word:nth-child(1) { transition-delay: 0.05s; }
-    .split-text .word:nth-child(2) { transition-delay: 0.15s; }
-    .split-text .word:nth-child(3) { transition-delay: 0.25s; }
-    .split-text .word:nth-child(4) { transition-delay: 0.35s; }
-    .split-text .word:nth-child(5) { transition-delay: 0.45s; }
-    .split-text .word:nth-child(6) { transition-delay: 0.55s; }
-    .split-text .word:nth-child(7) { transition-delay: 0.65s; }
+    /* split text removed */
 
     /* Glow spotlight on review cards in wall */
     .reviews-wall { position: relative; overflow: hidden; }
@@ -855,23 +821,9 @@
       .split-text .word { transform: none !important; }
     }
   </style>
-  <script>
-    // Hide loader immediately — runs synchronously before defer scripts
-    document.addEventListener('DOMContentLoaded', function() {
-      var l = document.getElementById('pageLoader');
-      if (l) setTimeout(function(){ l.classList.add('loaded'); }, 350);
-    });
-    // Absolute fallback
-    window.addEventListener('load', function() {
-      var l = document.getElementById('pageLoader');
-      if (l) l.classList.add('loaded');
-    });
-  </script>
 </head>
 <body>
-
-  <div class="page-loader" id="pageLoader"><span class="page-loader-logo">Maugli Bodywork</span></div>
-  <!-- NAV -->
+<!-- NAV -->
   <nav id="nav">
     <a href="index.html" class="nav-logo">Maugli Bodywork</a>
     <ul class="nav-links">
@@ -895,7 +847,7 @@
   <section class="hero">
     <div class="hero-left">
       <p class="hero-tag">Телесная практика · Тбилиси</p>
-      <h1 class="hero-h1" data-split>
+      <h1 class="hero-h1">
         Тело знает.<br>
         Нужно лишь<br>
         <span class="hi">научиться слушать</span>
@@ -1291,8 +1243,6 @@
           }, 200);
         }, { passive: true });
       }
-
-      // loader handled by inline script in <head>
 
       // ── LENIS SMOOTH SCROLL ──
       if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
