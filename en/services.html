@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bodywork, kinesio-massage, warmup and postpartum recovery in Tbilisi. Formats and pricing by Ivan Maugli." />
+  <meta name="theme-color" content="#F4EFE7" />
   <title>Services — Maugli Bodywork</title>
   <link rel="icon" href="../favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -225,6 +228,147 @@
     .mob-lang .active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); pointer-events: none; }
     .mob-lang .inactive { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
     .mob-lang .sep { color: var(--line); }
+
+    /* ── GRAIN TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    /* ── COLORED ACCENT SHADOWS ── */
+    /* Service cards on home */
+    .svc-lnk:hover .svc-card {
+      box-shadow: 0 16px 40px -8px rgba(196,105,74,0.25), 0 4px 12px rgba(28,21,14,0.06) !important;
+    }
+    /* How cards on home */
+    .how-card:hover {
+      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.18), 0 2px 8px rgba(28,21,14,0.04) !important;
+    }
+    /* CTA buttons */
+    .btn-accent:hover, .nav-cta:hover {
+      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.45);
+    }
+    .btn-light:hover {
+      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.35);
+    }
+    /* Cert cards */
+    .cert-card:hover {
+      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.2) !important;
+    }
+    /* Service blocks */
+    .book-btn:hover {
+      box-shadow: 0 6px 20px -4px rgba(74,122,155,0.45);
+    }
+
+    /* ── PREMIUM EFFECTS ── */
+
+    /* Loader (page first paint) */
+    .page-loader {
+      position: fixed; inset: 0; z-index: 10000;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
+    }
+    .page-loader.loaded { opacity: 0; visibility: hidden; }
+    .page-loader-logo {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      opacity: 0;
+      animation: loaderPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes loaderPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Magnetic buttons */
+    .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.3s;
+      will-change: transform;
+    }
+
+    /* Splitting word reveal — for hero h1 */
+    .split-text { display: inline-block; overflow: hidden; }
+    .split-text .word {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .split-text.revealed .word { transform: translateY(0); }
+    .split-text .word:nth-child(1) { transition-delay: 0.05s; }
+    .split-text .word:nth-child(2) { transition-delay: 0.15s; }
+    .split-text .word:nth-child(3) { transition-delay: 0.25s; }
+    .split-text .word:nth-child(4) { transition-delay: 0.35s; }
+    .split-text .word:nth-child(5) { transition-delay: 0.45s; }
+    .split-text .word:nth-child(6) { transition-delay: 0.55s; }
+    .split-text .word:nth-child(7) { transition-delay: 0.65s; }
+
+    /* Glow spotlight on review cards in wall */
+    .reviews-wall { position: relative; overflow: hidden; }
+    .rw-grid {
+      position: relative;
+    }
+    .rw-spotlight {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,105,74,0.18) 0%, transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    .rw-grid:hover .rw-spotlight { opacity: 1; }
+    .rw-card { position: relative; z-index: 1; }
+
+    /* View Transitions API — page transitions */
+    @view-transition {
+      navigation: auto;
+    }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.4s;
+    }
+
+    /* Scroll-driven hero parallax (CSS native, fallback to JS) */
+    @supports (animation-timeline: scroll()) {
+      .hero-right img {
+        animation: heroDrift linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 100vh;
+      }
+      @keyframes heroDrift {
+        from { transform: translateY(0) scale(1); }
+        to { transform: translateY(80px) scale(1.05); }
+      }
+    }
+
+    /* Smoother focus state */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* Reduced motion respect */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee-inner { animation: none !important; }
+      .split-text .word { transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -264,7 +408,7 @@
         <div class="svc-price-block"><span class="svc-price-big">70</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="../consultation.jpg" alt="Intro Session" /></div>
+        <div class="svc-photo"><img loading="lazy" decoding="async" src="../consultation.jpg" alt="Intro Session" /></div>
         <div class="svc-desc"><p>Want to understand your body better — or not quite ready for a full session? This is your entry point.</p><p>We run a full assessment: a conversation, visual analysis, muscle testing. Along the way I work on what I find — quickly and precisely. You leave knowing what's happening in your body and what to do about it.</p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
@@ -285,7 +429,7 @@
         <div class="svc-price-block"><span class="svc-price-big">110</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img src="../warmup.jpg" alt="Warmup 45" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
+        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img loading="lazy" decoding="async" src="../warmup.jpg" alt="Warmup 45" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
         <div class="svc-desc"><p>Short but precise. Perfect when time is limited and tension has built up. Focused on a specific area — neck, shoulders, lower back — or general tone.</p><p>Great for regular maintenance — relieving fatigue, restoring muscle tone.</p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
@@ -305,7 +449,7 @@
         <div class="svc-price-block"><span class="svc-price-big">170</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="../bodypractice_svc.jpg" alt="Bodywork" /></div>
+        <div class="svc-photo"><img loading="lazy" decoding="async" src="../bodypractice_svc.jpg" alt="Bodywork" /></div>
         <div class="svc-desc"><p>A fluid, deep practice that starts with assessment and is built around your current state.</p><p>Beyond manual techniques — somatic elements, breathwork. <strong>Not just a massage — a conversation with the body.</strong></p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
@@ -329,7 +473,7 @@
         <div class="svc-price-block"><span class="svc-price-big">190</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="../kinesio.jpg" alt="Kinesio-massage" /></div>
+        <div class="svc-photo"><img loading="lazy" decoding="async" src="../kinesio.jpg" alt="Kinesio-massage" /></div>
         <div class="svc-desc"><p>Thorough, unhurried work. The most analytical format — extended diagnostics: detailed muscle testing, Anatomy Trains work, uncovering hidden compensations.</p><p>For chronic pain, postural issues, or when standard massage no longer helps. <strong>We work with the cause, not the symptom.</strong></p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
@@ -352,7 +496,7 @@
         <div class="svc-price-block"><span class="svc-price-big">500</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img src="../postnatal.jpg" alt="Postpartum Bodywork" /></div>
+        <div class="svc-photo"><img loading="lazy" decoding="async" src="../postnatal.jpg" alt="Postpartum Bodywork" /></div>
         <div class="svc-desc"><p>A woman's body goes through one of the most profound experiences it is capable of. It has everything it needs to recover on its own — but the right support accelerates that process and helps avoid long-term issues.</p><p>I work with those who have just given birth and those who have been living with the aftermath for years — lower back pain, pelvic instability, the feeling that something is off.</p></div>
         <p class="includes-title">What's included</p>
         <ul class="includes-list">
@@ -425,6 +569,127 @@
         mobileMenu.classList.remove("open");
         document.body.style.overflow = "";
       });
+    
+      // ── MAGNETIC BUTTONS ──
+      const magneticButtons = document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn');
+      magneticButtons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      });
+
+      // ── TEXT SPLITTING (words) ──
+      document.querySelectorAll('[data-split]').forEach(el => {
+        const html = el.innerHTML;
+        // Wrap each word in a span, preserving <br> and <span class="hi"> etc.
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        const wrapWords = (node) => {
+          if (node.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            const words = node.textContent.split(/(\s+)/);
+            words.forEach(w => {
+              if (w.trim()) {
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.textContent = w;
+                frag.appendChild(span);
+              } else if (w) {
+                frag.appendChild(document.createTextNode(w));
+              }
+            });
+            return frag;
+          }
+          if (node.nodeType === 1) {
+            const newEl = node.cloneNode(false);
+            Array.from(node.childNodes).forEach(child => {
+              newEl.appendChild(wrapWords(child));
+            });
+            return newEl;
+          }
+          return node.cloneNode(false);
+        };
+        const result = wrapWords(wrapper);
+        el.innerHTML = '';
+        el.classList.add('split-text');
+        Array.from(result.childNodes).forEach(c => el.appendChild(c));
+        // Trigger reveal after a tick
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => el.classList.add('revealed'));
+        });
+      });
+
+      // ── REVIEW WALL SPOTLIGHT ──
+      const rwGrid = document.querySelector('.rw-grid');
+      if (rwGrid) {
+        const spotlight = document.createElement('div');
+        spotlight.className = 'rw-spotlight';
+        rwGrid.appendChild(spotlight);
+        rwGrid.addEventListener('mousemove', (e) => {
+          const rect = rwGrid.getBoundingClientRect();
+          spotlight.style.left = (e.clientX - rect.left) + 'px';
+          spotlight.style.top = (e.clientY - rect.top) + 'px';
+        });
+      }
+
+      // ── MARQUEE REACTS TO SCROLL ──
+      const marqueeInner = document.querySelector('.marquee-inner');
+      if (marqueeInner) {
+        let lastY = window.scrollY;
+        let speedFactor = 1;
+        let baseDuration = 22; // seconds
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY;
+          const delta = y - lastY;
+          lastY = y;
+          // boost speed based on scroll velocity, decay to 1
+          speedFactor = Math.min(3, Math.max(0.5, 1 + Math.abs(delta) / 30));
+          marqueeInner.style.animationDuration = (baseDuration / speedFactor) + 's';
+          // briefly reverse direction on scroll up
+          if (delta < -8) {
+            marqueeInner.style.animationDirection = 'reverse';
+          } else if (delta > 8) {
+            marqueeInner.style.animationDirection = 'normal';
+          }
+          // decay back to normal speed
+          clearTimeout(window.__marqueeTimer);
+          window.__marqueeTimer = setTimeout(() => {
+            marqueeInner.style.animationDuration = baseDuration + 's';
+          }, 200);
+        }, { passive: true });
+      }
+
+      // ── PAGE LOADER FADE ──
+      const loader = document.getElementById('pageLoader');
+      if (loader) {
+        window.addEventListener('load', () => {
+          setTimeout(() => loader.classList.add('loaded'), 100);
+        });
+        // safety: hide after 1.5s anyway
+        setTimeout(() => loader && loader.classList.add('loaded'), 1500);
+      }
+
+      // ── LENIS SMOOTH SCROLL ──
+      if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          smoothTouch: false,
+        });
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+
     });
   </script>
 </body>

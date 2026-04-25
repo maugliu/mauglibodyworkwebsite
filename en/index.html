@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Body practice and kinesio-massage in Tbilisi. I work with the root cause of pain through diagnostics and body techniques. Ivan Maugli." />
+  <meta name="theme-color" content="#F4EFE7" />
   <title>Maugli Bodywork — Body Practice in Tbilisi</title>
   <link rel="icon" href="../favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&family=Geologica:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -582,6 +585,147 @@
     .mob-lang .ml-active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); }
     .mob-lang .ml-sep { color: var(--line); font-size: 0.8rem; }
     .mob-lang .ml-other { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
+
+    /* ── GRAIN TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    /* ── COLORED ACCENT SHADOWS ── */
+    /* Service cards on home */
+    .svc-lnk:hover .svc-card {
+      box-shadow: 0 16px 40px -8px rgba(196,105,74,0.25), 0 4px 12px rgba(28,21,14,0.06) !important;
+    }
+    /* How cards on home */
+    .how-card:hover {
+      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.18), 0 2px 8px rgba(28,21,14,0.04) !important;
+    }
+    /* CTA buttons */
+    .btn-accent:hover, .nav-cta:hover {
+      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.45);
+    }
+    .btn-light:hover {
+      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.35);
+    }
+    /* Cert cards */
+    .cert-card:hover {
+      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.2) !important;
+    }
+    /* Service blocks */
+    .book-btn:hover {
+      box-shadow: 0 6px 20px -4px rgba(74,122,155,0.45);
+    }
+
+    /* ── PREMIUM EFFECTS ── */
+
+    /* Loader (page first paint) */
+    .page-loader {
+      position: fixed; inset: 0; z-index: 10000;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
+    }
+    .page-loader.loaded { opacity: 0; visibility: hidden; }
+    .page-loader-logo {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      opacity: 0;
+      animation: loaderPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes loaderPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Magnetic buttons */
+    .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.3s;
+      will-change: transform;
+    }
+
+    /* Splitting word reveal — for hero h1 */
+    .split-text { display: inline-block; overflow: hidden; }
+    .split-text .word {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .split-text.revealed .word { transform: translateY(0); }
+    .split-text .word:nth-child(1) { transition-delay: 0.05s; }
+    .split-text .word:nth-child(2) { transition-delay: 0.15s; }
+    .split-text .word:nth-child(3) { transition-delay: 0.25s; }
+    .split-text .word:nth-child(4) { transition-delay: 0.35s; }
+    .split-text .word:nth-child(5) { transition-delay: 0.45s; }
+    .split-text .word:nth-child(6) { transition-delay: 0.55s; }
+    .split-text .word:nth-child(7) { transition-delay: 0.65s; }
+
+    /* Glow spotlight on review cards in wall */
+    .reviews-wall { position: relative; overflow: hidden; }
+    .rw-grid {
+      position: relative;
+    }
+    .rw-spotlight {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,105,74,0.18) 0%, transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    .rw-grid:hover .rw-spotlight { opacity: 1; }
+    .rw-card { position: relative; z-index: 1; }
+
+    /* View Transitions API — page transitions */
+    @view-transition {
+      navigation: auto;
+    }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.4s;
+    }
+
+    /* Scroll-driven hero parallax (CSS native, fallback to JS) */
+    @supports (animation-timeline: scroll()) {
+      .hero-right img {
+        animation: heroDrift linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 100vh;
+      }
+      @keyframes heroDrift {
+        from { transform: translateY(0) scale(1); }
+        to { transform: translateY(80px) scale(1.05); }
+      }
+    }
+
+    /* Smoother focus state */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* Reduced motion respect */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee-inner { animation: none !important; }
+      .split-text .word { transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -610,7 +754,7 @@
   <section class="hero">
     <div class="hero-left">
       <p class="hero-tag">Body Practice · Tbilisi</p>
-      <h1 class="hero-h1">
+      <h1 class="hero-h1" data-split>
         The body knows.<br>
         You just need to<br>
         <span class="hi">learn to listen</span>
@@ -625,7 +769,7 @@
       <p class="hero-trust">6+ years of practice · results after just 1–2 sessions</p>
     </div>
     <div class="hero-right">
-      <img src="../hero.jpg" alt="Maugli Bodywork — session" />
+      <img loading="lazy" decoding="async" src="../hero.jpg" alt="Maugli Bodywork — session" />
     </div>
   </section>
 
@@ -697,7 +841,7 @@
   <!-- PHILOSOPHY / SPLIT -->
   <section class="split">
     <div class="split-img">
-      <img src="../diag2.jpg" alt="Assessment — Maugli Bodywork" />
+      <img loading="lazy" decoding="async" src="../diag2.jpg" alt="Assessment — Maugli Bodywork" />
     </div>
     <div class="split-body">
       <p class="s-tag">Approach</p>
@@ -749,7 +893,7 @@
 
   <!-- SERVICES -->
   <section class="services">
-    <div class="services-bg"><img src="../approach.jpg" alt="" /></div>
+    <div class="services-bg"><img loading="lazy" decoding="async" src="../approach.jpg" alt="" /></div>
     <div class="svc-inner">
       <div class="svc-hd reveal">
         <h2 class="svc-ttl">Services<br>& Pricing</h2>
@@ -802,7 +946,7 @@
     </div>
     <div class="how-grid">
       <div class="how-card reveal">
-        <div class="how-img"><img src="../diag2.jpg" alt="Assessment" /></div>
+        <div class="how-img"><img loading="lazy" decoding="async" src="../diag2.jpg" alt="Assessment" /></div>
         <div class="how-body">
           <p class="how-n">01 — Assessment</p>
           <h3 class="how-ttl2">Listening to the body</h3>
@@ -810,7 +954,7 @@
         </div>
       </div>
       <div class="how-card reveal d1">
-        <div class="how-img"><img src="../approach.jpg" alt="Work" /></div>
+        <div class="how-img"><img loading="lazy" decoding="async" src="../approach.jpg" alt="Work" /></div>
         <div class="how-body">
           <p class="how-n">02 — The Work</p>
           <h3 class="how-ttl2">Going deeper</h3>
@@ -818,7 +962,7 @@
         </div>
       </div>
       <div class="how-card reveal d2">
-        <div class="how-img"><img src="../bodypractice.jpg" alt="Completion" /></div>
+        <div class="how-img"><img loading="lazy" decoding="async" src="../bodypractice.jpg" alt="Completion" /></div>
         <div class="how-body">
           <p class="how-n">03 — Follow-up</p>
           <h3 class="how-ttl2">Reinforcing the result</h3>
@@ -842,7 +986,7 @@
 
   <!-- CTA -->
   <section class="cta">
-    <div class="cta-bg"><img src="../cta_hands.jpg" alt="" /></div>
+    <div class="cta-bg"><img loading="lazy" decoding="async" src="../cta_hands.jpg" alt="" /></div>
     <div class="cta-inner">
       <p class="cta-tag">Book</p>
       <h2 class="cta-h">Ready to get to know<br>your <span class="acc">own</span><br>body?</h2>
@@ -919,7 +1063,8 @@
     <span class="f-copy">Tbilisi, Georgia</span>
   </footer>
 
-  <script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
     // Nav
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
