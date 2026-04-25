@@ -1283,11 +1283,8 @@
       // ── PAGE LOADER FADE ──
       const loader = document.getElementById('pageLoader');
       if (loader) {
-        window.addEventListener('load', () => {
-          setTimeout(() => loader.classList.add('loaded'), 100);
-        });
-        // safety: hide after 1.5s anyway
-        setTimeout(() => loader && loader.classList.add('loaded'), 1500);
+        // Hide immediately on DOMContentLoaded — don't wait for images/scripts
+        setTimeout(() => loader.classList.add('loaded'), 400);
       }
 
       // ── LENIS SMOOTH SCROLL ──
