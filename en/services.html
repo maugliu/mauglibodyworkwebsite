@@ -9,7 +9,6 @@
   <link rel="icon" href="../favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -360,6 +359,9 @@
       .marquee-inner { animation: none !important; }
       .split-text .word { transform: none !important; }
     }
+
+    /* ── PARALLAX ── */
+    .parallax-img { will-change: transform; transition: none; }
   </style>
 </head>
 <body>
@@ -675,9 +677,7 @@
           infinite: false,
         });
         // Emit scroll events so native scroll listeners still work
-        lenis.on('scroll', ({ scroll }) => {
-          window.dispatchEvent(new CustomEvent('lenis-scroll', { detail: { scroll } }));
-        });
+        
         function raf(time) {
           lenis.raf(time);
           requestAnimationFrame(raf);
@@ -685,17 +685,7 @@
         requestAnimationFrame(raf);
 
         // Patch parallax and nav to work with Lenis scroll
-        lenis.on('scroll', ({ scroll }) => {
-          // Nav
-          document.getElementById('nav')?.classList.toggle('scrolled', scroll > 40);
-          // Scroll hint
-          document.getElementById('scrollHint')?.classList.toggle('hidden', scroll > 80);
-          // Hero parallax
-          const heroImg = document.querySelector('.hero-right img');
-          if (heroImg && scroll < window.innerHeight) {
-            heroImg.style.transform = `translateY(${scroll * 0.18}px)`;
-          }
-        });
+        
       }
 
     });
