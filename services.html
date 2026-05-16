@@ -98,9 +98,9 @@
     .svc-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--accent); line-height: 1.2; margin-bottom: 1.2rem; }
     .svc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); border-radius: 20px; }
-    .svc-price-block { background: var(--accent2); border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
-    .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: var(--white); line-height: 1; }
-    .svc-price-cur { font-size: 0.75rem; color: rgba(253,250,246,0.7); }
+    .svc-price-block { background: #5C7A62; border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
+    .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: #fff; line-height: 1; }
+    .svc-price-cur { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
 
     .svc-photo { width: 100%; aspect-ratio: 16/9; overflow: hidden; margin-bottom: 2rem; }
     .svc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
@@ -383,12 +383,48 @@
 
     /* ── PARALLAX ── */
     .parallax-img { will-change: transform; transition: none; }
+
+    .nav.scrolled .burger span { background: rgba(240,232,222,0.9); }
+    .nav.scrolled .logo { color: rgba(240,232,222,0.95); }
+    .nav.scrolled .nav-links a { color: rgba(240,232,222,0.7); }
+    .nav.scrolled .nav-links a:hover { color: var(--accent); }
+    .nav.scrolled .nav-cta { opacity: 0.9; }
+    .nav.scrolled .lang-btn { color: rgba(240,232,222,0.55); }
+    .nav.scrolled .lang-btn.active { color: var(--accent); }
+    .nav.scrolled .theme-toggle { border-color: rgba(240,232,222,0.25); color: rgba(240,232,222,0.7); }
+
+    /* ── PROMO BANNER ── */
+    .promo-banner {
+      display: none;
+      background: #5C7A62;
+      color: #fff;
+      padding: 0.9rem 3rem;
+      text-align: center;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      position: sticky; top: 0; z-index: 99;
+    }
+    .promo-banner strong { font-weight: 500; }
+    .promo-active .promo-banner { display: block; }
+
+    /* Promo price override */
+    .promo-active .promo-price .svc-price-big { text-decoration: line-through; opacity: 0.55; font-size: 1.4rem; }
+    .promo-price-new {
+      display: none;
+      font-size: 2.2rem; font-weight: 700;
+      color: #fff; letter-spacing: -0.02em;
+      margin-left: 0.6rem;
+    }
+    .promo-active .promo-price .promo-price-new { display: inline; }
+    @media (max-width: 860px) {
+      .promo-banner { padding: 0.8rem 1.4rem; font-size: 0.8rem; }
+    }
   </style>
   <script>
     // Apply theme before paint to avoid flash
     (function() {
       var saved = localStorage.getItem('theme');
-      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      if (saved !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
     })();
   </script>
 </head>
@@ -423,47 +459,27 @@
   <div class="page-header">
     <p class="breadcrumb"><a href="index.html">Главная</a> · Форматы</p>
     <h1 class="page-title">Форматы<br>и цены</h1>
-    <p class="page-sub">Четыре формата — от консультации и диагностики до глубокого кинезиологического сеанса. Каждый подбирается под запрос.</p>
+    <p class="page-sub">Четыре формата — от короткого экспресс-сеанса до глубокой кинезиологической практики. Каждый подбирается под запрос.</p>
   </div>
 
   <section class="services-section">
 
-    <div id="warmup25" class="service-block reveal">
+    <div id="express" class="service-block reveal">
       <div class="service-meta">
         <p class="svc-tag">Формат 01</p>
-        <h2 class="svc-title">Консуль-<br>тация</h2>
-        <div class="svc-badges"><span class="badge">25 минут</span><span class="badge">Диагностика</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">70</span><span class="svc-price-cur">GEL</span></div>
+        <h2 class="svc-title">Экспресс</h2>
+        <div class="svc-badges"><span class="badge">45 минут</span><span class="badge">Вход</span></div>
+        <div class="svc-price-block"><span class="svc-price-big">110</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="consultation.jpg" alt="Консультация" /></div>
-        <div class="svc-desc"><p>Хочешь узнать своё тело лучше — или ещё не решился на полноценную практику? Это твой вход.</p><p>Мы проведём диагностику: беседа, визуальный анализ, мышечное тестирование. По ходу я пролечу то, что найду — быстро и точечно. Ты уйдёшь с пониманием, что происходит в теле и что с этим делать.</p></div>
+        <div class="svc-photo"><img loading="lazy" decoding="async" src="warmup.jpg" alt="Экспресс" /></div>
+        <div class="svc-desc"><p>Короткий, но прицельный сеанс. Подходит, когда времени мало, а напряжение уже накопилось — или когда ещё не решился на полноценную практику и хочешь узнать своё тело лучше.</p><p>Начнём с диагностики: беседа, визуальный анализ, мышечное тестирование. По ходу я пролечу то, что найду — быстро и точечно. Фокус на конкретной зоне — шея, плечи, поясница — или общий тонус. Ты уйдёшь с пониманием, что происходит в теле и что с этим делать.</p><p>Подходит и для первого визита, и для регулярных сеансов поддержки.</p></div>
         <p class="includes-title">Что входит</p>
         <ul class="includes-list">
           <li>Беседа, сбор запроса и анамнеза</li>
           <li>Визуальная диагностика и мышечное тестирование</li>
-          <li>Точечная работа по результатам диагностики</li>
+          <li>Точечная работа: шведский массаж, миофасциальный релиз, глубокотканный массаж</li>
           <li>Рекомендации — что делать дальше</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
-      </div>
-    </div>
-
-    <div id="warmup50" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Формат 02</p>
-        <h2 class="svc-title">Разминка<br>45 мин</h2>
-        <div class="svc-badges"><span class="badge">45 минут</span><span class="badge">Расширенный</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">110</span><span class="svc-price-cur">GEL</span></div>
-      </div>
-      <div>
-        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img loading="lazy" decoding="async" src="warmup.jpg" alt="Разминка 45" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
-        <div class="svc-desc"><p>Короткий, но прицельный сеанс. Подходит, когда времени мало, а напряжение уже накопилось. Фокус на конкретной зоне — шея, плечи, поясница — или общий тонус.</p><p>Подходит для регулярных сеансов поддержки — снятие усталости, восстановление тонуса.</p></div>
-        <p class="includes-title">Что входит</p>
-        <ul class="includes-list">
-          <li>Короткий устный запрос перед началом</li>
-          <li>Работа с целевой зоной напряжения</li>
-          <li>Шведский массаж, миофасциальный релиз, глубокотканный массаж</li>
         </ul>
         <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="book-btn">Записаться</a>
       </div>
@@ -471,10 +487,10 @@
 
     <div id="bodypractice" class="service-block reveal">
       <div class="service-meta">
-        <p class="svc-tag">Формат 03</p>
+        <p class="svc-tag">Формат 02</p>
         <h2 class="svc-title">Телесная<br>практика</h2>
         <div class="svc-badges"><span class="badge">75 минут</span><span class="badge">Холистический</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">170</span><span class="svc-price-cur">GEL</span></div>
+        <div class="svc-price-block promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
         <div class="svc-photo"><img loading="lazy" decoding="async" src="bodypractice_svc.jpg" alt="Телесная практика" /></div>
@@ -495,10 +511,10 @@
 
     <div id="kinesio" class="service-block reveal">
       <div class="service-meta">
-        <p class="svc-tag">Формат 04</p>
+        <p class="svc-tag">Формат 03</p>
         <h2 class="svc-title">Кинезио-<br>массаж</h2>
         <div class="svc-badges"><span class="badge">75 минут</span><span class="badge">Аналитика</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">190</span><span class="svc-price-cur">GEL</span></div>
+        <div class="svc-price-block promo-price"><span class="svc-price-big">190</span><span class="promo-price-new">162</span><span class="svc-price-cur">GEL</span></div>
       </div>
       <div>
         <div class="svc-photo"><img loading="lazy" decoding="async" src="kinesio.jpg" alt="Кинезиомассаж" /></div>
@@ -518,7 +534,7 @@
 
     <div id="postnatal" class="service-block reveal">
       <div class="service-meta">
-        <p class="svc-tag">Формат 05</p>
+        <p class="svc-tag">Формат 04</p>
         <h2 class="svc-title">Восстановление<br>после родов</h2>
         <div class="svc-badges"><span class="badge">2 встречи × 1,5 часа</span><span class="badge">Специальный</span></div>
         <div class="svc-price-block"><span class="svc-price-big">500</span><span class="svc-price-cur">GEL</span></div>
@@ -651,6 +667,13 @@
           }
         });
       }
+      // ── PROMO ──
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('promo') === 'first') {
+        document.body.classList.add('promo-active');
+      }
+
+    
 
     
 

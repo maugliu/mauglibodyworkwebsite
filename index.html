@@ -92,10 +92,10 @@
       transition: background 0.35s, border-color 0.35s;
       border-bottom: 1px solid transparent;
     }
-    nav.scrolled {
-      background: rgba(244,239,231,0.96);
+    nav.scrolled, .nav.scrolled {
+      background: rgba(28, 22, 16, 0.75);
       backdrop-filter: blur(16px);
-      border-color: var(--line);
+      border-color: rgba(255,255,255,0.08);
     }
     .nav-logo {
       font-family: 'Unbounded', sans-serif;
@@ -419,7 +419,7 @@
     }
 
     .svc-grid {
-      display: grid; grid-template-columns: repeat(4,1fr);
+      display: grid; grid-template-columns: repeat(3,1fr);
     }
     .svc-lnk { display: block; text-decoration: none; color: inherit; }
     .svc-card {
@@ -869,12 +869,21 @@
       .marquee-inner { animation: none !important; }
       .split-text .word { transform: none !important; }
     }
+
+    .nav.scrolled .burger span { background: rgba(240,232,222,0.9); }
+    .nav.scrolled .logo { color: rgba(240,232,222,0.95); }
+    .nav.scrolled .nav-links a { color: rgba(240,232,222,0.7); }
+    .nav.scrolled .nav-links a:hover { color: var(--accent); }
+    .nav.scrolled .nav-cta { opacity: 0.9; }
+    .nav.scrolled .lang-btn { color: rgba(240,232,222,0.55); }
+    .nav.scrolled .lang-btn.active { color: var(--accent); }
+    .nav.scrolled .theme-toggle { border-color: rgba(240,232,222,0.25); color: rgba(240,232,222,0.7); }
   </style>
   <script>
     // Apply theme before paint to avoid flash
     (function() {
       var saved = localStorage.getItem('theme');
-      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      if (saved !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
     })();
   </script>
 </head>
@@ -1062,19 +1071,10 @@
         <h2 class="svc-ttl">Форматы<br>и цены</h2>
       </div>
       <div class="svc-grid reveal">
-        <a href="services.html#warmup25" class="svc-lnk">
+        <a href="services.html#express" class="svc-lnk">
           <div class="svc-card">
             <span class="svc-n">01</span>
-            <p class="svc-name">Консультация</p>
-            <p class="svc-dur">25 минут</p>
-            <p class="svc-price">70<span class="svc-gel">GEL</span></p>
-            <p class="svc-more">Подробнее →</p>
-          </div>
-        </a>
-        <a href="services.html#warmup50" class="svc-lnk">
-          <div class="svc-card">
-            <span class="svc-n">02</span>
-            <p class="svc-name">Разминка</p>
+            <p class="svc-name">Экспресс</p>
             <p class="svc-dur">45 минут</p>
             <p class="svc-price">110<span class="svc-gel">GEL</span></p>
             <p class="svc-more">Подробнее →</p>
@@ -1082,7 +1082,7 @@
         </a>
         <a href="services.html#bodypractice" class="svc-lnk">
           <div class="svc-card">
-            <span class="svc-n">03</span>
+            <span class="svc-n">02</span>
             <p class="svc-name">Телесная практика</p>
             <p class="svc-dur">75 минут</p>
             <p class="svc-price">170<span class="svc-gel">GEL</span></p>
@@ -1091,7 +1091,7 @@
         </a>
         <a href="services.html#kinesio" class="svc-lnk">
           <div class="svc-card">
-            <span class="svc-n">04</span>
+            <span class="svc-n">03</span>
             <p class="svc-name">Кинезио&shy;массаж</p>
             <p class="svc-dur">75 минут</p>
             <p class="svc-price">190<span class="svc-gel">GEL</span></p>
