@@ -84,35 +84,48 @@
     }
 
     /* ─────────────── NAV ─────────────── */
-    nav {
+    /* ── NAV (unified) ── */
+    nav, .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       height: 64px;
       display: flex; align-items: center;
       padding: 0 3rem;
-      transition: background 0.35s, border-color 0.35s;
-      border-bottom: 1px solid transparent;
+      background: rgba(21, 17, 13, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.3s, border-color 0.3s;
     }
     nav.scrolled, .nav.scrolled {
-      background: rgba(28, 22, 16, 0.75);
-      backdrop-filter: blur(16px);
-      border-color: rgba(255,255,255,0.08);
+      background: rgba(14, 11, 8, 0.88);
+      border-color: rgba(255,255,255,0.1);
     }
-    .nav-logo {
+    [data-theme="dark"] nav, [data-theme="dark"] .nav {
+      background: rgba(14, 11, 8, 0.75);
+    }
+    [data-theme="dark"] nav.scrolled, [data-theme="dark"] .nav.scrolled {
+      background: rgba(8, 6, 5, 0.92);
+    }
+    /* Light mode: keep nav dark for contrast */
+    .nav-logo, .logo {
       font-family: 'Unbounded', sans-serif;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.03em;
-      color: var(--text); text-decoration: none;
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #F0E8DE; text-decoration: none;
       margin-right: auto;
     }
     .nav-links {
-      display: flex; gap: 2.5rem; list-style: none; margin-right: 2.5rem;
+      display: flex; gap: 2.2rem; list-style: none; margin-right: 2rem; align-items: center;
     }
     .nav-links a {
-      font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none;
+      font-family: 'Geologica', sans-serif;
+      font-size: 0.9rem; font-weight: 300;
+      letter-spacing: 0.01em;
+      color: rgba(240,232,222,0.65); text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover, .nav-links a.current { color: #F0E8DE; }
+    .nav-links a.current { color: var(--accent); }
     .nav-cta {
       font-family: 'Unbounded', sans-serif;
       font-size: 0.62rem; font-weight: 600;
@@ -120,9 +133,48 @@
       color: var(--white); background: var(--accent);
       padding: 0.55rem 1.3rem; text-decoration: none;
       transition: background 0.2s;
-      border-radius: 2px;
+      border-radius: 2px; margin-right: 1rem;
     }
-    .nav-cta:hover { background: var(--accent-h); }
+    .nav-cta:hover { background: #a8553a; }
+    /* Lang switch in nav */
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.4rem; margin-left: 0.8rem;
+    }
+    .lang-btn {
+      font-family: 'Geologica', sans-serif;
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(240,232,222,0.5); text-decoration: none;
+      padding: 0.2rem 0.4rem;
+      border: 1px solid transparent; border-radius: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lang-btn:hover { color: #F0E8DE; }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); pointer-events: none; font-weight: 500; }
+    .lang-sep { font-size: 0.7rem; color: rgba(255,255,255,0.2); margin: 0 0.1rem; }
+    /* Theme toggle in nav */
+    .theme-toggle {
+      background: none; border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 50%; width: 34px; height: 34px;
+      cursor: pointer; padding: 0; margin-left: 0.6rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: rgba(240,232,222,0.65); transition: all 0.25s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle svg { width: 15px; height: 15px; }
+    .theme-toggle .moon { display: none; }
+    .theme-toggle .sun { display: block; }
+    [data-theme="dark"] .theme-toggle .moon { display: block; }
+    [data-theme="dark"] .theme-toggle .sun { display: none; }
+    /* Burger */
+    .burger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 4px; cursor: pointer; margin-left: auto;
+    }
+    .burger span { display: block; width: 22px; height: 1.5px; background: rgba(240,232,222,0.85); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     /* burger */
     .burger {
@@ -871,13 +923,9 @@
     }
 
     .nav.scrolled .burger span { background: rgba(240,232,222,0.9); }
-    .nav.scrolled .logo { color: rgba(240,232,222,0.95); }
     .nav.scrolled .nav-links a { color: rgba(240,232,222,0.7); }
     .nav.scrolled .nav-links a:hover { color: var(--accent); }
-    .nav.scrolled .nav-cta { opacity: 0.9; }
-    .nav.scrolled .lang-btn { color: rgba(240,232,222,0.55); }
     .nav.scrolled .lang-btn.active { color: var(--accent); }
-    .nav.scrolled .theme-toggle { border-color: rgba(240,232,222,0.25); color: rgba(240,232,222,0.7); }
   </style>
   <script>
     // Apply theme before paint to avoid flash
