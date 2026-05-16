@@ -332,18 +332,17 @@
       margin-left: 1.5rem;
     }
     .lang-btn {
-      font-family: "Unbounded", sans-serif;
-      font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none;
-      padding: 0.3rem 0.5rem;
-      border: 1px solid transparent;
+      font-family: 'Geologica', sans-serif;
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--muted); text-decoration: none;
+      padding: 0.2rem 0.4rem;
+      border: 1px solid transparent; border-radius: 3px;
       transition: color 0.2s, border-color 0.2s;
-      border-radius: 3px;
     }
     .lang-btn:hover { color: var(--text); }
-    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
-    .lang-sep { font-size: 0.6rem; color: var(--line); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); pointer-events: none; font-weight: 500; }
+    .lang-sep { font-size: 0.7rem; color: var(--line); margin: 0 0.1rem; }
     .mob-lang { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
     .mob-lang .active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); pointer-events: none; }
     .mob-lang .inactive { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
@@ -388,27 +387,7 @@
 
     /* ── PREMIUM EFFECTS ── */
 
-    /* Loader (page first paint) */
-    .page-loader {
-      position: fixed; inset: 0; z-index: 10000;
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      pointer-events: none;
-      transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
-    }
-    .page-loader.loaded { opacity: 0; visibility: hidden; }
-    .page-loader-logo {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 1rem; font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text);
-      opacity: 0;
-      animation: loaderPulse 1.4s ease-in-out infinite;
-    }
-    @keyframes loaderPulse {
-      0%, 100% { opacity: 0.3; transform: scale(0.98); }
-      50% { opacity: 1; transform: scale(1); }
-    }
+    
 
     /* Magnetic buttons */
     .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
@@ -492,15 +471,13 @@
   </script>
 </head>
 <body>
-  <div class="page-loader" id="pageLoader"><span class="page-loader-logo">Maugli Bodywork</span></div>
   <nav>
     <a href="index.html" class="nav-logo">Maugli Bodywork</a>
     <ul class="nav-links">
       <li><a href="services.html">Форматы</a></li>
       <li><a href="about.html" class="active">Обо мне</a></li>
-      <li><a href="journal/index.html">Журнал</a>
-        <a href="journal/index.html">Журнал</a>
-    <a href="journal/index.html">Журнал</a>
+      <li><a href="journal/index.html">Журнал</a></li>
+      <li>
         <a href="contacts.html">Контакты</a></li>
     </ul>
     <a href="https://t.me/maugli_bodywork_bot?start=zapic" target="_blank" class="nav-book">Записаться</a>
