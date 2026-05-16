@@ -461,12 +461,21 @@
 
     /* ── PARALLAX ── */
     .parallax-img { will-change: transform; transition: none; }
+
+    .nav.scrolled .burger span { background: rgba(240,232,222,0.9); }
+    .nav.scrolled .logo { color: rgba(240,232,222,0.95); }
+    .nav.scrolled .nav-links a { color: rgba(240,232,222,0.7); }
+    .nav.scrolled .nav-links a:hover { color: var(--accent); }
+    .nav.scrolled .nav-cta { opacity: 0.9; }
+    .nav.scrolled .lang-btn { color: rgba(240,232,222,0.55); }
+    .nav.scrolled .lang-btn.active { color: var(--accent); }
+    .nav.scrolled .theme-toggle { border-color: rgba(240,232,222,0.25); color: rgba(240,232,222,0.7); }
   </style>
   <script>
     // Apply theme before paint to avoid flash
     (function() {
       var saved = localStorage.getItem('theme');
-      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      if (saved !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
     })();
   </script>
 </head>
