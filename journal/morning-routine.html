@@ -51,8 +51,7 @@
       display: flex; justify-content: space-between; align-items: center;
       z-index: 100; transition: background 0.3s, backdrop-filter 0.3s, padding 0.3s;
     }
-    .nav.scrolled { background: rgba(244,239,231,0.85); backdrop-filter: blur(12px); padding: 1rem 3rem; }
-    [data-theme="dark"] .nav.scrolled { background: rgba(21,17,13,0.85); }
+    /* .nav.scrolled removed — nav always stays dark */
     .logo { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
     .nav-links { display: flex; gap: 2rem; align-items: center; }
     .nav-links a { font-size: 0.83rem; transition: color 0.2s; }
@@ -372,8 +371,8 @@
 
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
-      const nav = document.getElementById('nav');
-      if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+      // const nav = document.getElementById('nav');
+      // if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
       const burger = document.getElementById('burger');
       const mobMenu = document.getElementById('mobMenu');
       if (burger && mobMenu) {
