@@ -9,7 +9,9 @@
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" /></noscript>
   <style>
 
 
@@ -24,6 +26,9 @@
       --accent: #C4694A;
       --line: #D8CFC4;
       --white: #FAF6F0;
+      --bg-warm: #FAF6F0;
+      --accent2: #C4694A;
+      --text-muted: #2C2620;
     }
     [data-theme="dark"] {
       --bg: #15110D;
@@ -35,12 +40,28 @@
       --accent: #D77A5B;
       --line: #2A241E;
       --white: #F0E8DE;
+      --bg-warm: #1E1A14;
+      --accent2: #D77A5B;
+      --text-muted: #D8CFC4;
     }
     [data-theme="dark"] body::before { opacity: 0.06; mix-blend-mode: screen; }
     [data-theme="dark"] .rw-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
     [data-theme="dark"] .rw-card:hover { background: rgba(255,255,255,0.06); }
     [data-theme="dark"] .reviews-wall { background: var(--bg-dark); }
     [data-theme="dark"] .mob-menu, [data-theme="dark"] .mobile-menu { background: var(--bg); }
+    /* Contrast fixes for dark mode */
+    [data-theme="dark"] .contra-section { background: var(--bg-dark); }
+    [data-theme="dark"] .contra-block { background: var(--bg-2); border-color: var(--line); color: var(--text); }
+    [data-theme="dark"] .contra-block-title { color: var(--accent); }
+    [data-theme="dark"] .contra-list li { color: var(--text-soft); }
+    [data-theme="dark"] .contra-list li::before { color: var(--accent); }
+    [data-theme="dark"] .contra-note { color: var(--text-soft); }
+    [data-theme="dark"] footer { background: var(--bg-dark); color: var(--text); }
+    [data-theme="dark"] .footer-logo { color: var(--text-soft); }
+    [data-theme="dark"] .footer-links a { color: var(--muted); }
+    [data-theme="dark"] .footer-links a:hover { color: var(--text); }
+    [data-theme="dark"] .footer-copy { color: var(--muted); }
+    [data-theme="dark"] .page-header::after { color: rgba(255,255,255,0.06); }
 
     /* Theme toggle button */
     .theme-toggle {
