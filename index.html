@@ -165,6 +165,28 @@
     .theme-toggle .sun { display: block; }
     [data-theme="dark"] .theme-toggle .moon { display: block; }
     [data-theme="dark"] .theme-toggle .sun { display: none; }
+    /* Light mode nav override */
+    :root:not([data-theme="dark"]) nav,
+    :root:not([data-theme="dark"]) .nav {
+      background: rgba(244, 239, 231, 0.82);
+      border-bottom: 1px solid rgba(28,22,16,0.08);
+    }
+    :root:not([data-theme="dark"]) nav.scrolled,
+    :root:not([data-theme="dark"]) .nav.scrolled {
+      background: rgba(244, 239, 231, 0.95);
+      border-color: rgba(28,22,16,0.1);
+    }
+    :root:not([data-theme="dark"]) .nav-logo,
+    :root:not([data-theme="dark"]) .logo { color: #1A1510; }
+    :root:not([data-theme="dark"]) .nav-links a { color: rgba(28,22,16,0.6); }
+    :root:not([data-theme="dark"]) .nav-links a:hover { color: #1A1510; }
+    :root:not([data-theme="dark"]) .lang-btn { color: rgba(28,22,16,0.45); }
+    :root:not([data-theme="dark"]) .lang-sep { color: rgba(28,22,16,0.2); }
+    :root:not([data-theme="dark"]) .burger span { background: rgba(28,22,16,0.85); }
+    :root:not([data-theme="dark"]) .theme-toggle {
+      border-color: rgba(28,22,16,0.18);
+      color: rgba(28,22,16,0.65);
+    }
     /* Burger */
     .burger {
       display: none; flex-direction: column; gap: 5px;
@@ -470,7 +492,7 @@
     }
 
     .svc-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
+      display: grid; grid-template-columns: repeat(4,1fr);
     }
     .svc-lnk { display: block; text-decoration: none; color: inherit; }
     .svc-card {
@@ -1142,6 +1164,15 @@
             <p class="svc-name">Кинезио&shy;массаж</p>
             <p class="svc-dur">75 минут</p>
             <p class="svc-price">190<span class="svc-gel">GEL</span></p>
+            <p class="svc-more">Подробнее →</p>
+          </div>
+        </a>
+        <a href="services.html#postnatal" class="svc-lnk">
+          <div class="svc-card">
+            <span class="svc-n">04</span>
+            <p class="svc-name">Восстановление после родов</p>
+            <p class="svc-dur">2 × 90 минут</p>
+            <p class="svc-price">500<span class="svc-gel">GEL</span></p>
             <p class="svc-more">Подробнее →</p>
           </div>
         </a>
