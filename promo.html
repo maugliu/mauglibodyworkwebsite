@@ -6,7 +6,10 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#F4EFE7" />
   <title>Специальное предложение — Maugli Bodywork</title>
-  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" />
@@ -171,6 +174,78 @@
       line-height: 1.6; max-width: 500px;
     }
 
+    /* ── ФОРМА ── */
+    .promo-form-wrap {
+      margin-top: 3rem;
+    }
+    .promo-form-label {
+      display: block;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.7rem;
+    }
+    .promo-form-row {
+      display: flex; gap: 0; max-width: 480px;
+    }
+    .promo-input {
+      flex: 1;
+      font-family: 'Geologica', sans-serif;
+      font-size: 1rem; font-weight: 300;
+      background: var(--bg-2); color: var(--text);
+      border: 1px solid var(--line); border-right: none;
+      padding: 0.9rem 1.2rem;
+      outline: none; transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .promo-input:focus { border-color: var(--sage); }
+    .promo-input::placeholder { color: var(--muted); }
+    .btn-promo-submit {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: var(--sage); color: #fff;
+      border: none; padding: 0.9rem 1.6rem;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.2s, box-shadow 0.3s;
+    }
+    .btn-promo-submit:hover { background: #4a6850; box-shadow: 0 8px 24px -4px rgba(92,122,98,0.4); }
+    .btn-promo-submit:disabled { background: var(--muted); cursor: not-allowed; box-shadow: none; }
+    .promo-form-note {
+      margin-top: 0.8rem;
+      font-size: 0.75rem; color: var(--muted); line-height: 1.6;
+    }
+    .promo-form-error {
+      display: none; margin-top: 1rem;
+      font-size: 0.85rem; color: var(--accent); line-height: 1.6;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .promo-success {
+      display: none; margin-top: 3rem;
+      border-left: 3px solid var(--sage);
+      padding: 1.6rem 2rem;
+      background: var(--bg-2);
+      max-width: 540px;
+    }
+    .promo-success-title {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700; font-size: 1.1rem;
+      color: var(--sage); margin-bottom: 0.6rem;
+    }
+    .promo-success-text {
+      font-size: 0.92rem; color: var(--text-soft);
+      line-height: 1.7; margin-bottom: 1.4rem;
+    }
+    .btn-tg {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      background: var(--sage); color: #fff;
+      padding: 0.9rem 1.8rem; text-decoration: none;
+      transition: background 0.2s, box-shadow 0.3s;
+    }
+    .btn-tg:hover { background: #4a6850; box-shadow: 0 8px 24px -4px rgba(92,122,98,0.4); }
+
     @media (max-width: 860px) {
       .nav { padding: 1.2rem 1.4rem; }
       .promo-wrap { padding: 1.5rem 1.4rem 4rem; }
@@ -245,9 +320,35 @@
       </div>
     </div>
 
-    <div class="promo-cta">
-      <a href="services.html?promo=first" class="btn-promo">Посмотреть форматы со скидкой →</a>
-      <p class="promo-fine">Промо-цены действуют 14 дней с момента сканирования кода. Запись через Telegram-бот по ссылке на странице форматов.</p>
+    <!-- ФОРМА СБОРА ЛИДА -->
+    <div class="promo-form-wrap" id="formWrap">
+      <label class="promo-form-label" for="promoName">Как тебя зовут?</label>
+      <div class="promo-form-row">
+        <input
+          type="text" id="promoName" class="promo-input"
+          placeholder="Имя" autocomplete="given-name" required maxlength="80"
+        />
+        <button type="button" class="btn-promo-submit" id="promoSubmit">
+          Активировать скидку
+        </button>
+      </div>
+      <p class="promo-form-note">Скидка фиксируется за тобой на 14 дней — после того как напишешь боту.</p>
+      <p class="promo-form-error" id="promoError">
+        Что-то пошло не так. Можешь активировать скидку напрямую в боте:<br>
+        <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" style="color:var(--sage)">t.me/maugli_bodywork_bot</a>
+      </p>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="promo-success" id="promoSuccess">
+      <p class="promo-success-title" id="successTitle">Готово!</p>
+      <p class="promo-success-text">
+        Остался один шаг — активируй скидку в Telegram.<br>
+        Бот закрепит за тобой −15% на 14 дней.
+      </p>
+      <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="btn-tg">
+        Активировать в Telegram →
+      </a>
     </div>
 
   </main>
@@ -256,6 +357,50 @@
     (function() {
       if (localStorage.getItem('theme') !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
     })();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const input   = document.getElementById('promoName');
+      const btn     = document.getElementById('promoSubmit');
+      const formWrap = document.getElementById('formWrap');
+      const success = document.getElementById('promoSuccess');
+      const errEl   = document.getElementById('promoError');
+      const titleEl = document.getElementById('successTitle');
+
+      btn.addEventListener('click', async function() {
+        const name = input.value.trim();
+        if (!name) { input.focus(); return; }
+
+        btn.disabled = true;
+        btn.textContent = '…';
+        errEl.style.display = 'none';
+
+        try {
+          const res = await fetch('/api/promo-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+          });
+
+          if (!res.ok) throw new Error('server error');
+
+          // Успех
+          titleEl.textContent = 'Готово, ' + name + '!';
+          formWrap.style.display = 'none';
+          success.style.display = 'block';
+
+        } catch (e) {
+          // Ошибка — показываем fallback с прямой ссылкой на бота
+          btn.disabled = false;
+          btn.textContent = 'Активировать скидку';
+          errEl.style.display = 'block';
+        }
+      });
+
+      // Enter в поле = клик на кнопку
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') btn.click();
+      });
+    });
   </script>
 </body>
 </html>
