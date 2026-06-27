@@ -261,6 +261,23 @@
     }
     .btn-tg:hover { background: #4a6850; box-shadow: 0 8px 24px -4px rgba(92,122,98,0.4); }
 
+    /* ── LANG SWITCH ── */
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .lang-btn {
+      font-family: 'Geologica', sans-serif;
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(240,232,222,0.5); text-decoration: none;
+      padding: 0.2rem 0.4rem;
+      border: 1px solid transparent; border-radius: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lang-btn:hover { color: #F0E8DE; }
+    .lang-btn.active { color: #D77A5B; border-color: #D77A5B; pointer-events: none; }
+    .lang-sep { font-size: 0.7rem; color: rgba(255,255,255,0.18); margin: 0 0.1rem; }
+
     @media (max-width: 860px) {
       .nav { padding: 1.2rem 1.4rem; }
       .promo-wrap { padding: 1.5rem 1.4rem 4rem; }
@@ -278,6 +295,11 @@
 
   <nav class="nav">
     <a href="index.html" class="logo">Maugli Bodywork</a>
+    <div class="lang-switch">
+      <span class="lang-btn active">RU</span>
+      <span class="lang-sep">/</span>
+      <a href="en/promo.html" class="lang-btn">EN</a>
+    </div>
   </nav>
 
   <main class="promo-wrap">
