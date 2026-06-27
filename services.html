@@ -6,7 +6,10 @@
   <meta name="description" content="Телесная практика, кинезиомассаж, разминка и послеродовое восстановление в Тбилиси. Цены и описание форматов работы Ивана Маугли." />
   <meta name="theme-color" content="#F4EFE7" />
   <title>Форматы — Maugli Bodywork</title>
-  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" />
@@ -119,7 +122,7 @@
     .svc-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--accent); line-height: 1.2; margin-bottom: 1.2rem; }
     .svc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); border-radius: 20px; }
-    .svc-price-block { background: #C4694A; border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
+    .svc-price-block { background: #5C7A62; border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
     .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: #fff; line-height: 1; }
     .svc-price-cur { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
 
@@ -436,6 +439,98 @@
     @media (max-width: 860px) {
       .promo-banner { padding: 0.8rem 1.4rem; font-size: 0.8rem; }
     }
+
+    /* ── PROMO BLOCK (услуги со скидкой) ── */
+    .svc-promo-block {
+      display: none;
+      background: #5C7A62;
+      padding: 3.5rem 3.5rem;
+    }
+    .promo-active .svc-promo-block { display: block; }
+    .svc-promo-inner { max-width: 1200px; margin: 0 auto; }
+    .svc-promo-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.35rem 0.9rem; border-radius: 2px;
+      margin-bottom: 1.2rem;
+    }
+    .svc-promo-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700; color: #fff;
+      margin-bottom: 0.7rem; line-height: 1.2;
+    }
+    .svc-promo-text {
+      font-size: 0.95rem; color: rgba(255,255,255,0.82);
+      max-width: 560px; line-height: 1.75; margin-bottom: 2rem;
+    }
+    .svc-form-label {
+      display: block; font-size: 0.7rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 0.7rem;
+    }
+    .svc-form-row { display: flex; max-width: 480px; }
+    .svc-form-input {
+      flex: 1;
+      font-family: 'Geologica', sans-serif;
+      font-size: 1rem; font-weight: 300;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35); border-right: none;
+      padding: 0.9rem 1.2rem;
+      outline: none; transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .svc-form-input::placeholder { color: rgba(255,255,255,0.4); }
+    .svc-form-input:focus { border-color: rgba(255,255,255,0.75); }
+    .svc-form-btn {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: #fff; color: #5C7A62;
+      border: none; padding: 0.9rem 1.6rem;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.2s, box-shadow 0.3s;
+    }
+    .svc-form-btn:hover { background: #f0ebe3; box-shadow: 0 8px 24px -4px rgba(0,0,0,0.15); }
+    .svc-form-btn:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
+    .svc-form-note {
+      margin-top: 0.8rem;
+      font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.6;
+    }
+    .svc-form-error {
+      display: none; margin-top: 1rem;
+      font-size: 0.85rem; color: rgba(255,200,180,1); line-height: 1.6;
+    }
+    .svc-form-error a { color: #fff; }
+    .svc-success { display: none; }
+    .svc-success-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;
+    }
+    .svc-success-text {
+      font-size: 0.92rem; color: rgba(255,255,255,0.8);
+      margin-bottom: 1.4rem; line-height: 1.7;
+    }
+    .svc-tg-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      background: #fff; color: #5C7A62;
+      padding: 0.9rem 1.8rem; text-decoration: none;
+      transition: background 0.2s, box-shadow 0.3s;
+    }
+    .svc-tg-btn:hover { background: #f0ebe3; box-shadow: 0 8px 24px -4px rgba(0,0,0,0.15); }
+    @media (max-width: 768px) {
+      .svc-promo-block { padding: 2.5rem 1.4rem; }
+      .svc-form-row { flex-direction: column; }
+      .svc-form-input { border-right: 1px solid rgba(255,255,255,0.35); border-bottom: none; }
+    }
   </style>
   <script>
     // Apply theme before paint to avoid flash
@@ -477,6 +572,33 @@
     <p class="breadcrumb"><a href="index.html">Главная</a> · Форматы</p>
     <h1 class="page-title">Форматы<br>и цены</h1>
     <p class="page-sub">Четыре формата — от короткого экспресс-сеанса до глубокой кинезиологической практики. Каждый подбирается под запрос.</p>
+  </div>
+
+  <!-- PROMO BLOCK — виден только при ?promo=first -->
+  <div class="svc-promo-block">
+    <div class="svc-promo-inner">
+      <span class="svc-promo-badge">Специальное предложение</span>
+      <h2 class="svc-promo-title">−15% на первый сеанс</h2>
+      <p class="svc-promo-text">Скидка применяется к Телесной практике и Кинезиомассажу — цены уже пересчитаны ниже. Зафиксируй её на 14 дней: введи имя и активируй в боте.</p>
+
+      <div id="svcFormWrap">
+        <label class="svc-form-label" for="svcName">Как тебя зовут?</label>
+        <div class="svc-form-row">
+          <input type="text" id="svcName" class="svc-form-input" placeholder="Имя" autocomplete="given-name" maxlength="80" />
+          <button type="button" class="svc-form-btn" id="svcSubmit">Активировать скидку</button>
+        </div>
+        <p class="svc-form-note">Скидка фиксируется за тобой на 14 дней — после того как напишешь боту.</p>
+        <p class="svc-form-error" id="svcError">
+          Что-то пошло не так. <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank">Активировать напрямую →</a>
+        </p>
+      </div>
+
+      <div class="svc-success" id="svcSuccess">
+        <p class="svc-success-title" id="svcSuccessTitle">Готово!</p>
+        <p class="svc-success-text">Остался один шаг — активируй скидку в Telegram. Бот закрепит за тобой −15% на 14 дней.</p>
+        <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="svc-tg-btn">Активировать в Telegram →</a>
+      </div>
+    </div>
   </div>
 
   <section class="services-section">
@@ -688,6 +810,38 @@
       const params = new URLSearchParams(window.location.search);
       if (params.get('promo') === 'first') {
         document.body.classList.add('promo-active');
+
+        const svcInput  = document.getElementById('svcName');
+        const svcBtn    = document.getElementById('svcSubmit');
+        const svcWrap   = document.getElementById('svcFormWrap');
+        const svcSucc   = document.getElementById('svcSuccess');
+        const svcErr    = document.getElementById('svcError');
+        const svcTitle  = document.getElementById('svcSuccessTitle');
+
+        if (svcBtn) {
+          svcBtn.addEventListener('click', async () => {
+            const name = svcInput.value.trim();
+            if (!name) { svcInput.focus(); return; }
+            svcBtn.disabled = true; svcBtn.textContent = '…';
+            svcErr.style.display = 'none';
+            try {
+              const res = await fetch('/api/promo-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+              });
+              if (!res.ok) throw new Error('server error');
+              svcTitle.textContent = 'Готово, ' + name + '!';
+              svcWrap.style.display = 'none';
+              svcSucc.style.display = 'block';
+            } catch {
+              svcBtn.disabled = false;
+              svcBtn.textContent = 'Активировать скидку';
+              svcErr.style.display = 'block';
+            }
+          });
+          svcInput.addEventListener('keydown', e => { if (e.key === 'Enter') svcBtn.click(); });
+        }
       }
 
     
