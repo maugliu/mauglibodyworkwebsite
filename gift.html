@@ -168,6 +168,19 @@
       .btn-gift { justify-content: center; }
     }
 
+    @media print {
+      @page { size: landscape; margin: 0; }
+      body { background: #fff; }
+      body::before { display: none; }
+      .nav, .gift-eyebrow, .gift-hint, .envelope-wrap, .gift-actions { display: none !important; }
+      .gift-stage { min-height: auto; padding: 0; }
+      .cert-wrap {
+        opacity: 1 !important; transform: none !important;
+        position: static !important; pointer-events: auto !important;
+        width: 100% !important;
+      }
+      .cert-canvas { box-shadow: none; border-radius: 0; }
+    }
   </style>
   <script>
     (function() {
@@ -214,9 +227,9 @@
         </svg>
       </div>
       <div class="gift-actions">
-        <a href="gift-certificate-MB-2026-001.pdf" id="pdfLink" class="btn-gift primary" target="_blank" rel="noopener">
+        <button type="button" class="btn-gift primary" onclick="window.print()">
           Скачать PDF
-        </a>
+        </button>
         <a href="https://t.me/maugli_bodywork_bot?start=gift" id="bookLink" class="btn-gift ghost" target="_blank" rel="noopener">
           Записаться
         </a>
@@ -231,7 +244,6 @@
       service: 'express-session',
       validUntil: '15.09.2026',
       number: '№: MB-2026-001',
-      pdf: 'gift-certificate-MB-2026-001.pdf',
       bookLink: 'https://t.me/maugli_bodywork_bot?start=gift'
     };
   </script>
@@ -242,7 +254,6 @@
       document.querySelector('#fieldService tspan').textContent = CERT.service;
       document.querySelector('#fieldUntil tspan').textContent = CERT.validUntil;
       document.querySelector('#fieldNumber tspan').textContent = CERT.number;
-      document.getElementById('pdfLink').href = CERT.pdf;
       document.getElementById('bookLink').href = CERT.bookLink;
 
       var envelope = document.getElementById('envelopeWrap');
