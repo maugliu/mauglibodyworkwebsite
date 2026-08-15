@@ -168,9 +168,6 @@
       .btn-gift { justify-content: center; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .envelope-wrap, .cert-wrap { transition: none !important; }
-    }
   </style>
   <script>
     (function() {
@@ -250,13 +247,6 @@
 
       var envelope = document.getElementById('envelopeWrap');
       var cert = document.getElementById('certWrap');
-      var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (reduced) {
-        envelope.classList.add('is-hidden');
-        cert.classList.add('is-visible');
-        return;
-      }
 
       envelope.addEventListener('click', function open() {
         envelope.classList.add('is-hidden');
