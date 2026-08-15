@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#15110D" />
+  <title>Подарочный сертификат — Maugli Bodywork</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" /></noscript>
+  <style>
+    :root {
+      --bg: #F4EFE7; --bg-2: #FAF6F0; --bg-dark: #1A1510;
+      --text: #1A1510; --text-soft: #2C2620; --muted: #8A7D72;
+      --accent: #C4694A; --line: #D8CFC4; --white: #FAF6F0;
+      --sage: #5C7A62;
+    }
+    [data-theme="dark"] {
+      --bg: #15110D; --bg-2: #1E1A14; --bg-dark: #0B0908;
+      --text: #F0E8DE; --text-soft: #D8CFC4; --muted: #8A7D72;
+      --accent: #D77A5B; --line: #2A241E; --white: #F0E8DE;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Geologica', sans-serif; font-weight: 300;
+      line-height: 1.6; min-height: 100vh;
+      transition: background 0.4s ease, color 0.3s ease;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      pointer-events: none; z-index: 999; opacity: 0.035;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+    [data-theme="dark"] body::before { opacity: 0.06; mix-blend-mode: screen; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.4rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(21,17,13,0.72); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .logo {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em;
+      color: #F0E8DE;
+    }
+
+    /* ── STAGE ── */
+    .gift-stage {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 8rem 1.4rem 4rem;
+      text-align: center;
+    }
+
+    .gift-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.8rem;
+    }
+    .gift-hint {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+      letter-spacing: -0.01em;
+      margin-bottom: 3rem;
+      max-width: 480px;
+    }
+    .gift-hint .accent { color: var(--accent); }
+
+    /* ── ENVELOPE ── */
+    .envelope-wrap {
+      width: min(420px, 82vw);
+      cursor: pointer;
+      transition: opacity 0.5s cubic-bezier(.2,.8,.2,1), transform 0.5s cubic-bezier(.2,.8,.2,1);
+    }
+    .envelope-wrap.is-hidden {
+      opacity: 0; transform: scale(0.92);
+      pointer-events: none;
+      position: absolute;
+    }
+    .envelope {
+      position: relative; width: 100%; aspect-ratio: 3 / 2;
+      transition: transform 0.25s ease;
+    }
+    .envelope-wrap:hover .envelope { transform: translateY(-4px); }
+    .envelope svg { width: 100%; height: 100%; display: block; }
+    .envelope-tap {
+      margin-top: 1.6rem;
+      font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── CERTIFICATE ── */
+    .cert-wrap {
+      width: min(760px, 94vw);
+      opacity: 0; transform: scale(0.94);
+      pointer-events: none;
+      position: absolute;
+      transition: opacity 0.7s cubic-bezier(.2,.8,.2,1), transform 0.7s cubic-bezier(.2,.8,.2,1);
+    }
+    .cert-wrap.is-visible {
+      opacity: 1; transform: scale(1);
+      pointer-events: auto;
+      position: relative;
+    }
+    .cert-img {
+      width: 100%; height: auto; display: block;
+      border-radius: 4px;
+      box-shadow: 0 24px 60px -12px rgba(0,0,0,0.45);
+    }
+
+    .gift-actions {
+      margin-top: 2.6rem;
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center;
+    }
+    .btn-gift {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 1rem 1.9rem;
+      transition: background 0.2s, box-shadow 0.3s, color 0.2s;
+    }
+    .btn-gift.primary {
+      background: var(--sage); color: #fff;
+    }
+    .btn-gift.primary:hover {
+      background: #4a6850;
+      box-shadow: 0 8px 24px -4px rgba(92,122,98,0.4);
+    }
+    .btn-gift.ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .btn-gift.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 640px) {
+      .nav { padding: 1.2rem 1.4rem; }
+      .gift-stage { padding: 7rem 1.2rem 3rem; }
+      .gift-actions { flex-direction: column; width: 100%; max-width: 320px; }
+      .btn-gift { justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .envelope-wrap, .cert-wrap { transition: none !important; }
+    }
+  </style>
+  <script>
+    (function() {
+      if (localStorage.getItem('theme') !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">Maugli Bodywork</a>
+  </nav>
+
+  <main class="gift-stage">
+    <p class="gift-eyebrow">Подарочный сертификат</p>
+    <h1 class="gift-hint">Кто-то приготовил тебе <span class="accent">подарок</span></h1>
+
+    <div class="envelope-wrap" id="envelopeWrap">
+      <div class="envelope">
+        <svg viewBox="0 0 400 267" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="392" height="259" rx="6" fill="#1E1A14" stroke="#5C7A62" stroke-width="1.5"/>
+          <path d="M8 12 L200 160 L392 12" fill="none" stroke="#5C7A62" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M8 12 L8 255 L392 255 L392 12" fill="none" stroke="#5C7A62" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="200" cy="133" r="16" fill="none" stroke="#D77A5B" stroke-width="1.5"/>
+          <path d="M192 133 L198 139 L210 125" fill="none" stroke="#D77A5B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="envelope-tap">нажми, чтобы открыть</p>
+    </div>
+
+    <!-- ══ ДАННЫЕ ЭТОГО СЕРТИФИКАТА — под новый сертификат скопировать файл и поменять src/href ниже ══ -->
+    <div class="cert-wrap" id="certWrap">
+      <img
+        class="cert-img"
+        src="gift-certificate-MB-2026-001.webp"
+        alt="Подарочный сертификат Maugli Bodywork №MB-2026-001"
+        width="2152" height="1360"
+      />
+      <div class="gift-actions">
+        <a href="gift-certificate-MB-2026-001.pdf" class="btn-gift primary" target="_blank" rel="noopener">
+          Скачать PDF
+        </a>
+        <a href="https://t.me/maugli_bodywork_bot?start=gift" class="btn-gift ghost" target="_blank" rel="noopener">
+          Записаться
+        </a>
+      </div>
+    </div>
+    <!-- ═══════════════════════════════════════════════════════════════════════════════════════════ -->
+  </main>
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+      var envelope = document.getElementById('envelopeWrap');
+      var cert = document.getElementById('certWrap');
+      var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduced) {
+        envelope.classList.add('is-hidden');
+        cert.classList.add('is-visible');
+        return;
+      }
+
+      envelope.addEventListener('click', function open() {
+        envelope.classList.add('is-hidden');
+        cert.classList.add('is-visible');
+        envelope.removeEventListener('click', open);
+      });
+    });
+  </script>
+</body>
+</html>
