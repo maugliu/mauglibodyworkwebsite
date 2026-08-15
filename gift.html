@@ -12,9 +12,9 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700&family=Geologica:wght@300;400&family=Caveat:wght@600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700&family=Geologica:wght@300;400&family=Caveat:wght@600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700&family=Geologica:wght@300;400&family=Caveat:wght@600;700&display=swap" /></noscript>
   <style>
     :root {
       --bg: #F4EFE7; --bg-2: #FAF6F0; --bg-dark: #1A1510;
@@ -117,10 +117,22 @@
       pointer-events: auto;
       position: relative;
     }
-    .cert-img {
-      width: 100%; height: auto; display: block;
-      border-radius: 4px;
+    .cert-canvas {
+      position: relative; width: 100%; line-height: 0;
+      border-radius: 4px; overflow: hidden;
       box-shadow: 0 24px 60px -12px rgba(0,0,0,0.45);
+    }
+    .cert-bg { width: 100%; height: auto; display: block; }
+    .cert-overlay {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+    .cert-overlay .field-name,
+    .cert-overlay .field-service,
+    .cert-overlay .field-until {
+      font-family: 'Caveat', cursive; font-weight: 600;
+    }
+    .cert-overlay .field-number {
+      font-family: 'Unbounded', sans-serif; font-weight: 500;
     }
 
     .gift-actions {
@@ -189,28 +201,53 @@
       <p class="envelope-tap">нажми, чтобы открыть</p>
     </div>
 
-    <!-- ══ ДАННЫЕ ЭТОГО СЕРТИФИКАТА — под новый сертификат скопировать файл и поменять src/href ниже ══ -->
     <div class="cert-wrap" id="certWrap">
-      <img
-        class="cert-img"
-        src="gift-certificate-MB-2026-001.webp"
-        alt="Подарочный сертификат Maugli Bodywork №MB-2026-001"
-        width="2152" height="1360"
-      />
+      <div class="cert-canvas">
+        <img
+          class="cert-bg"
+          src="gift-cert-bg.webp"
+          alt="Подарочный сертификат Maugli Bodywork"
+          width="2152" height="1360"
+        />
+        <svg class="cert-overlay" viewBox="0 0 1076 680" xmlns="http://www.w3.org/2000/svg">
+          <text class="field-name" id="fieldName" fill="#C4694A" font-size="27" letter-spacing="0.1em"><tspan x="540.002" y="289.315"></tspan></text>
+          <text class="field-service" id="fieldService" fill="#C4694A" font-size="27" letter-spacing="0.1em"><tspan x="493.061" y="353.315"></tspan></text>
+          <text class="field-until" id="fieldUntil" fill="#C4694A" font-size="24"><tspan x="541.125" y="418.224"></tspan></text>
+          <text class="field-number" id="fieldNumber" fill="white" font-size="20" transform="translate(29 640) rotate(-90)"><tspan x="0.353516" y="20"></tspan></text>
+        </svg>
+      </div>
       <div class="gift-actions">
-        <a href="gift-certificate-MB-2026-001.pdf" class="btn-gift primary" target="_blank" rel="noopener">
+        <a href="gift-certificate-MB-2026-001.pdf" id="pdfLink" class="btn-gift primary" target="_blank" rel="noopener">
           Скачать PDF
         </a>
-        <a href="https://t.me/maugli_bodywork_bot?start=gift" class="btn-gift ghost" target="_blank" rel="noopener">
+        <a href="https://t.me/maugli_bodywork_bot?start=gift" id="bookLink" class="btn-gift ghost" target="_blank" rel="noopener">
           Записаться
         </a>
       </div>
     </div>
-    <!-- ═══════════════════════════════════════════════════════════════════════════════════════════ -->
   </main>
 
+  <!-- ══ ДАННЫЕ ЭТОГО СЕРТИФИКАТА — под нового получателя менять только это ══ -->
+  <script>
+    var CERT = {
+      name: 'Ivan Ivanov',
+      service: 'express-session',
+      validUntil: '15.09.2026',
+      number: '№: MB-2026-001',
+      pdf: 'gift-certificate-MB-2026-001.pdf',
+      bookLink: 'https://t.me/maugli_bodywork_bot?start=gift'
+    };
+  </script>
+  <!-- ══════════════════════════════════════════════════════════════════ -->
   <script defer>
     document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('#fieldName tspan').textContent = CERT.name;
+      document.querySelector('#fieldService tspan').textContent = CERT.service;
+      document.querySelector('#fieldUntil tspan').textContent = CERT.validUntil;
+      document.querySelector('#fieldNumber tspan').textContent = CERT.number;
+      document.getElementById('pdfLink').href = CERT.pdf;
+      document.getElementById('bookLink').href = CERT.bookLink;
+
       var envelope = document.getElementById('envelopeWrap');
       var cert = document.getElementById('certWrap');
       var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
