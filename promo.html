@@ -387,7 +387,7 @@
         Остался один шаг — активируй скидку в Telegram.<br>
         Бот закрепит за тобой −15% на 14 дней.
       </p>
-      <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="btn-tg">
+      <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="btn-tg" id="tgActivateLink">
         Активировать в Telegram →
       </a>
     </div>
@@ -406,6 +406,7 @@
       const success = document.getElementById('promoSuccess');
       const errEl   = document.getElementById('promoError');
       const titleEl = document.getElementById('successTitle');
+      const tgLink  = document.getElementById('tgActivateLink');
 
       btn.addEventListener('click', async function() {
         const name = input.value.trim();
@@ -423,8 +424,13 @@
           });
 
           if (!res.ok) throw new Error('server error');
+          const data = await res.json();
 
-          // Успех
+          // Успех — передаём id заявки в ссылку на бота, чтобы он привязал
+          // активацию именно к этой заявке, а не к "последней незанятой"
+          if (data && data.leadId) {
+            tgLink.href = 'https://t.me/maugli_bodywork_bot?start=promo_first_' + data.leadId;
+          }
           titleEl.textContent = 'Готово, ' + name + '!';
           formWrap.style.display = 'none';
           success.style.display = 'block';

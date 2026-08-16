@@ -288,7 +288,7 @@
         One more step — activate your discount in Telegram.<br>
         The bot will lock in your −15% for 14 days.
       </p>
-      <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="btn-tg">
+      <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="btn-tg" id="tgActivateLink">
         Activate in Telegram →
       </a>
     </div>
@@ -303,6 +303,7 @@
       const success  = document.getElementById('promoSuccess');
       const errEl    = document.getElementById('promoError');
       const titleEl  = document.getElementById('successTitle');
+      const tgLink   = document.getElementById('tgActivateLink');
 
       btn.addEventListener('click', async function() {
         const name = input.value.trim();
@@ -319,6 +320,10 @@
             body: JSON.stringify({ name })
           });
           if (!res.ok) throw new Error('server error');
+          const data = await res.json();
+          if (data && data.leadId) {
+            tgLink.href = 'https://t.me/maugli_bodywork_bot?start=promo_first_' + data.leadId;
+          }
 
           titleEl.textContent = 'Done, ' + name + '!';
           formWrap.style.display = 'none';
