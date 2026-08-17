@@ -168,19 +168,6 @@
       .btn-gift { justify-content: center; }
     }
 
-    @media print {
-      @page { size: landscape; margin: 0; }
-      body { background: #fff; }
-      body::before { display: none; }
-      .nav, .gift-eyebrow, .gift-hint, .envelope-wrap, .gift-actions { display: none !important; }
-      .gift-stage { min-height: auto; padding: 0; }
-      .cert-wrap {
-        opacity: 1 !important; transform: none !important;
-        position: static !important; pointer-events: auto !important;
-        width: 100% !important;
-      }
-      .cert-canvas { box-shadow: none; border-radius: 0; }
-    }
   </style>
   <script>
     (function() {
@@ -220,15 +207,15 @@
           width="2152" height="1360"
         />
         <svg class="cert-overlay" viewBox="0 0 1076 680" xmlns="http://www.w3.org/2000/svg">
-          <text class="field-name" id="fieldName" fill="#A8431E" font-size="31" letter-spacing="0"><tspan x="540.002" y="292"></tspan></text>
-          <text class="field-service" id="fieldService" fill="#A8431E" font-size="31" letter-spacing="0"><tspan x="493.061" y="356"></tspan></text>
-          <text class="field-until" id="fieldUntil" fill="#A8431E" font-size="28" letter-spacing="0"><tspan x="541.125" y="420"></tspan></text>
-          <text class="field-number" id="fieldNumber" fill="#1A1510" font-size="20" transform="translate(29 640) rotate(-90)"><tspan x="0.353516" y="20"></tspan></text>
+          <text class="field-name" id="fieldName" fill="#A8431E" font-family="'PT Mono', monospace" font-size="31" letter-spacing="0"><tspan x="540.002" y="292"></tspan></text>
+          <text class="field-service" id="fieldService" fill="#A8431E" font-family="'PT Mono', monospace" font-size="31" letter-spacing="0"><tspan x="493.061" y="356"></tspan></text>
+          <text class="field-until" id="fieldUntil" fill="#A8431E" font-family="'PT Mono', monospace" font-size="28" letter-spacing="0"><tspan x="541.125" y="420"></tspan></text>
+          <text class="field-number" id="fieldNumber" fill="#1A1510" font-family="'Unbounded', sans-serif" font-weight="500" font-size="20" transform="translate(29 640) rotate(-90)"><tspan x="0.353516" y="20"></tspan></text>
         </svg>
       </div>
       <div class="gift-actions">
-        <button type="button" class="btn-gift primary" onclick="window.print()">
-          Скачать PDF
+        <button type="button" class="btn-gift primary" id="downloadBtn" onclick="downloadCertificate()">
+          Скачать сертификат
         </button>
         <a href="https://t.me/maugli_bodywork_bot" id="bookLink" class="btn-gift ghost" target="_blank" rel="noopener">
           Записаться
@@ -265,6 +252,71 @@
         envelope.removeEventListener('click', open);
       });
     });
+
+    // Печать (window.print) на iOS/Android ненадёжна — вместо этого рисуем
+    // сертификат на canvas и скачиваем как PNG. Работает одинаково на всех платформах.
+    async function downloadCertificate() {
+      var btn = document.getElementById('downloadBtn');
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Готовим…';
+
+      try {
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+        var bgImg = document.querySelector('.cert-bg');
+        var overlay = document.querySelector('.cert-overlay');
+        var W = 2152, H = 1360;
+
+        var resp = await fetch(bgImg.src);
+        var blob = await resp.blob();
+        var bgDataUrl = await new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () { resolve(reader.result); };
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+
+        var svgString =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 1076 680">' +
+          '<image href="' + bgDataUrl + '" x="0" y="0" width="1076" height="680"/>' +
+          overlay.innerHTML +
+          '</svg>';
+
+        var svgUrl = URL.createObjectURL(new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' }));
+        var img = new Image();
+        await new Promise(function (resolve, reject) {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = svgUrl;
+        });
+
+        var canvas = document.createElement('canvas');
+        canvas.width = W; canvas.height = H;
+        canvas.getContext('2d').drawImage(img, 0, 0, W, H);
+        URL.revokeObjectURL(svgUrl);
+
+        var pngBlob = await new Promise(function (resolve, reject) {
+          canvas.toBlob(function (b) { b ? resolve(b) : reject(new Error('toBlob returned null')); }, 'image/png');
+        });
+
+        var url = URL.createObjectURL(pngBlob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'maugli-gift-certificate.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+        btn.disabled = false;
+        btn.textContent = originalText;
+      } catch (err) {
+        console.error('Certificate download failed:', err);
+        btn.disabled = false;
+        btn.textContent = originalText;
+        alert('Не получилось сохранить файл. Попробуйте сделать скриншот сертификата.');
+      }
+    }
   </script>
 </body>
 </html>
