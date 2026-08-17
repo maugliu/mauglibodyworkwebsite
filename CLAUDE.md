@@ -64,7 +64,7 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
 - Nav всегда тёмный (многократно проверено)
 - Grain overlay на всех страницах
 - Цены: фон #5C7A62 (sage), белый шрифт
-- Anchor links: #express, #bodypractice, #kinesio, #postnatal
+- Anchor links: #intro, #warmup, #kinesiofocus, #bodypractice, #kinesio, #postnatal (обновлено 17.08.2026 — было #express/#bodypractice/#kinesio/#postnatal, сетка форматов расширена с 4 до 6)
 - data-theme на <html>, не на body
 
 УДАЛЕНО, НЕ ВОЗВРАЩАТЬ:
