@@ -20,14 +20,11 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   services.html              ← ⚠ pending: вернуть фон #5C7A62 на блок цен
   contacts.html
   promo.html                 ← noindex, не в меню
-  feedback.html              ← пост журнала №03
-  mirror-focus.html          ← пост журнала №04
-  morning-routine.html       ← пост журнала №02
-  presura.html               ← пост журнала №01
+  gift.html                  ← noindex, не в меню
   en/                        ← EN-версия, пути к фото через ../
     index.html, about.html, services.html, contacts.html, promo.html
-    journal/index.html       ← заглушка «Coming soon»
-  journal/                   ← список постов RU
+    journal/                 ← посты EN (feedback, mirror-focus, morning-routine, presura)
+  journal/                   ← список + посты RU (feedback, mirror-focus, morning-routine, presura)
     index.html
 
 ФОТО (в корне репо):
@@ -99,7 +96,7 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
 - Новые фото для сайта → в корень репо, именование: mbw_photo_NNN.jpg
 - Все страницы самодостаточны (CSS в <style>, JS в defer-скрипте внизу)
 - EN страницы: пути к фото через ../ (на уровень выше)
-- Посты журнала лежат в корне репо, не в папке journal/
+- Посты журнала лежат в папке journal/ (и en/journal/ для EN)
 </rules>
 
 <workflow>
