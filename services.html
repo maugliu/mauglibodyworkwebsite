@@ -125,10 +125,15 @@
     .svc-filter-chip:hover { border-color: var(--accent); color: var(--text); }
     .svc-filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    .svc-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    /* Сетка всегда делится на симметричные ряды (3×3 / 2×2×2), никогда 4+2 */
+    .svc-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 900px) {
+      .svc-cards { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
 
-    .svc-card { position: relative; border-radius: 10px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); }
+    .svc-card { position: relative; border-radius: 10px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); transition: border-color 0.2s; }
     .svc-card.is-filtered-out { display: none; }
+    .svc-card.is-active { border-color: var(--accent); }
 
     .svc-card-summary { display: block; width: 100%; text-align: left; background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
     .svc-card-photo { position: relative; height: 150px; overflow: hidden; }
@@ -139,48 +144,54 @@
     .svc-card-title { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1.02rem; color: var(--text); line-height: 1.25; margin-bottom: 0.5rem; }
     .svc-card-meta { font-size: 0.82rem; color: var(--text-muted); }
 
-    .svc-card-panel {
-      position: absolute; inset: 0; z-index: 5; background: var(--bg-2);
-      display: flex; flex-direction: column;
-      transform: translateY(101%);
-      transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+    /* ── ОБЩИЙ БЛОК ОПИСАНИЯ ──
+       Один элемент на всю страницу: на десктопе — нижний сектор под сеткой,
+       на мобиле JS переносит его прямо под нужный ряд карточек (см. скрипт внизу) */
+    .svc-detail {
+      grid-column: 1 / -1;
+      background: var(--bg-2); border: 1px solid var(--accent); border-radius: 10px;
+      position: relative; margin-top: 1.5rem;
+      animation: svcDetailIn 0.3s cubic-bezier(.2,.8,.2,1);
     }
-    .svc-card.is-open .svc-card-panel,
-    .svc-card:focus-within .svc-card-panel { transform: translateY(0); }
-    @media (hover: hover) and (pointer: fine) {
-      .svc-card:hover .svc-card-panel { transform: translateY(0); }
-    }
-    .svc-card-close {
-      position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2;
-      width: 28px; height: 28px; border-radius: 50%;
+    .svc-detail[hidden] { display: none; }
+    @keyframes svcDetailIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .svc-detail-close {
+      position: absolute; top: 0.8rem; right: 0.8rem; z-index: 2;
+      width: 30px; height: 30px; border-radius: 50%;
       border: 1px solid var(--line); background: var(--bg); color: var(--text);
       font-size: 0.9rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
-    .svc-card-panel-scroll { flex: 1; overflow-y: auto; padding: 1.1rem 1.1rem 0.6rem; }
-    .svc-card-panel-photo { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem; display: block; }
-    .svc-card-panel-title { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1.05rem; color: var(--text); margin-bottom: 0.3rem; }
-    .svc-card-panel-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; }
-    .svc-card-panel-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
-    .svc-card-panel-desc + .svc-card-panel-desc { margin-top: 0.6rem; }
-    .svc-card-panel-condition { font-size: 0.86rem; color: var(--text); line-height: 1.6; margin-top: 0.6rem; }
-    .svc-card-panel-condition strong { color: var(--accent); font-weight: 400; }
-
-    .svc-card-cta {
-      flex-shrink: 0; display: block; width: 100%; text-align: center;
-      padding: 0.9rem; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+    .svc-detail-inner { padding: 1.6rem; }
+    .svc-detail-content { padding-right: 2.5rem; }
+    .svc-detail-title { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1.25rem; color: var(--text); margin-bottom: 0.9rem; }
+    .svc-detail-stats { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .svc-detail-stat {
+      display: flex; flex-direction: column; gap: 0.15rem;
+      padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 6px; min-width: 80px;
+    }
+    .svc-detail-stat strong { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 0.95rem; color: var(--text); }
+    .svc-detail-stat small { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+    .svc-detail-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.6rem; }
+    .svc-detail-condition { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
+    .svc-detail-condition:empty { display: none; }
+    .svc-detail-condition strong { color: var(--accent); font-weight: 400; }
+    .svc-detail-cta {
+      display: block; width: 100%; text-align: center;
+      padding: 1rem; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
       color: var(--white); background: #4A7A9B; text-decoration: none; transition: background 0.2s;
     }
-    .svc-card-cta:hover { background: #3a5a7a; }
+    .svc-detail-cta:hover { background: #3a5a7a; }
 
-    /* Промо-цены (?promo=first) внутри компактной карточки — сама механика не менялась,
-       только компенсируем размер шрифта под маленькую строку меты */
+    /* Промо-цены (?promo=first) — механика не менялась, только компенсация размера */
     .promo-active .svc-card .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
+    .promo-active .svc-detail .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
 
     @media (max-width: 560px) {
-      .svc-cards { grid-template-columns: repeat(2, minmax(160px, 1fr)); gap: 12px; }
       .svc-card-photo { height: 130px; }
       .svc-card-title { font-size: 0.9rem; }
       .svc-card-meta { font-size: 0.74rem; }
+      .svc-detail-inner { padding: 1.2rem; }
+      .svc-detail-content { padding-right: 0; }
     }
 
     .contra-section { background: var(--bg-warm); padding: 5rem 3.5rem; }
@@ -645,7 +656,10 @@
 
     <div class="svc-cards">
 
-      <div id="intro" class="svc-card" data-cat="entry">
+      <div id="intro" class="svc-card" data-cat="entry"
+           data-name="Знакомство" data-cat-label="Вход" data-duration="25 минут" data-price="100 GEL"
+           data-desc="Вводный формат: диагностика, мышечный тест и рекомендации."
+           data-condition="Только по предоплате. Стоимость полностью зачитывается в счёт первой полной сессии (Телесная практика или Кинезио · Комплекс) при записи в течение 14 дней.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="consultation.webp" alt="Знакомство" /></div>
           <div class="svc-card-body">
@@ -654,21 +668,12 @@
             <p class="svc-card-meta">25 минут · 100 GEL</p>
           </div>
         </button>
-        <div class="svc-card-panel">
-          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
-          <div class="svc-card-panel-scroll">
-            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="consultation.webp" alt="" />
-            <h3 class="svc-card-panel-title">Знакомство</h3>
-            <p class="svc-card-panel-meta">25 минут · 100 GEL</p>
-            <p class="svc-card-panel-desc">Хотите лучше понимать своё тело — или пока не готовы к полной сессии? Это ваша точка входа.</p>
-            <p class="svc-card-panel-desc">Разговор, визуальная диагностика, мышечный тест, локальная коррекция и рекомендации.</p>
-            <p class="svc-card-panel-condition"><strong>Условие:</strong> только по предоплате. Стоимость полностью зачитывается в счёт первой полной сессии (Телесная практика или Кинезио · Комплекс) при записи в течение 14 дней.</p>
-          </div>
-          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
-        </div>
       </div>
 
-      <div id="warmup" class="svc-card" data-cat="bodywork">
+      <div id="warmup" class="svc-card" data-cat="bodywork"
+           data-name="Разминка" data-cat-label="Телесная работа" data-duration="25 минут" data-price="90 GEL"
+           data-desc="Короткий экспресс для поддержания между сессиями."
+           data-condition="Не первый визит — доступна после Знакомства или полного формата. Можно добавить к Телесной практике или Кинезио · Комплексу как +25 минут за +50 GEL.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="warmup.webp" alt="Разминка" /></div>
           <div class="svc-card-body">
@@ -677,21 +682,11 @@
             <p class="svc-card-meta">25 минут · 90 GEL</p>
           </div>
         </button>
-        <div class="svc-card-panel">
-          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
-          <div class="svc-card-panel-scroll">
-            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="warmup.webp" alt="" />
-            <h3 class="svc-card-panel-title">Разминка</h3>
-            <p class="svc-card-panel-meta">25 минут · 90 GEL</p>
-            <p class="svc-card-panel-desc">Коротко и точно. Когда времени мало, а напряжение уже накопилось.</p>
-            <p class="svc-card-panel-desc">Работа по конкретным зонам или общий тонус — шведский массаж, миофасциальный релиз, глубокие ткани.</p>
-            <p class="svc-card-panel-condition"><strong>Условие:</strong> не первый визит — доступна после Знакомства или полного формата. Можно добавить к Телесной практике или Кинезио · Комплексу как +25 минут за +50 GEL.</p>
-          </div>
-          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
-        </div>
       </div>
 
-      <div id="kinesiofocus" class="svc-card" data-cat="kinesio">
+      <div id="kinesiofocus" class="svc-card" data-cat="kinesio"
+           data-name="Кинезио · Фокус" data-cat-label="Кинезио" data-duration="50 минут" data-price="140 GEL"
+           data-desc="Точечная кинезио-работа по одной зоне — с причиной, а не симптомом.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="diag3.webp" alt="Кинезио · Фокус" /></div>
           <div class="svc-card-body">
@@ -700,20 +695,12 @@
             <p class="svc-card-meta">50 минут · 140 GEL</p>
           </div>
         </button>
-        <div class="svc-card-panel">
-          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
-          <div class="svc-card-panel-scroll">
-            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="diag3.webp" alt="" />
-            <h3 class="svc-card-panel-title">Кинезио · Фокус</h3>
-            <p class="svc-card-panel-meta">50 минут · 140 GEL</p>
-            <p class="svc-card-panel-desc">Аналитический кинезио-подход на одной зоне.</p>
-            <p class="svc-card-panel-desc">Оценка осанки и мышечный тест, затем точечная работа там, где болит и тянет — с причиной, а не симптомом.</p>
-          </div>
-          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
-        </div>
       </div>
 
-      <div id="bodypractice" class="svc-card" data-cat="bodywork">
+      <div id="bodypractice" class="svc-card" data-cat="bodywork"
+           data-name="Телесная практика" data-cat-label="Телесная работа" data-duration="80 минут"
+           data-price="170 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt;145&lt;/span&gt;&lt;/span&gt; GEL"
+           data-desc="Глубокая телесная сессия — работа с причиной, не просто массаж.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="bodypractice.webp" alt="Телесная практика" /></div>
           <div class="svc-card-body">
@@ -722,20 +709,12 @@
             <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
           </div>
         </button>
-        <div class="svc-card-panel">
-          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
-          <div class="svc-card-panel-scroll">
-            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="bodypractice.webp" alt="" />
-            <h3 class="svc-card-panel-title">Телесная практика</h3>
-            <p class="svc-card-panel-meta">80 минут · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
-            <p class="svc-card-panel-desc">Плавная, глубокая практика: начинается с диагностики и выстраивается под ваше состояние. Не просто массаж — разговор с телом.</p>
-            <p class="svc-card-panel-desc">Дыхательные практики, холистический массаж, лимфодренаж, соматика.</p>
-          </div>
-          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
-        </div>
       </div>
 
-      <div id="kinesio" class="svc-card" data-cat="kinesio">
+      <div id="kinesio" class="svc-card" data-cat="kinesio"
+           data-name="Кинезио · Комплекс" data-cat-label="Кинезио" data-duration="80 минут"
+           data-price="200 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt;170&lt;/span&gt;&lt;/span&gt; GEL"
+           data-desc="Полный аналитический формат для всего тела.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Кинезио · Комплекс" /></div>
           <div class="svc-card-body">
@@ -744,20 +723,11 @@
             <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
           </div>
         </button>
-        <div class="svc-card-panel">
-          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
-          <div class="svc-card-panel-scroll">
-            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="kinesio.webp" alt="" />
-            <h3 class="svc-card-panel-title">Кинезио · Комплекс</h3>
-            <p class="svc-card-panel-meta">80 минут · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
-            <p class="svc-card-panel-desc">Тщательная, неспешная работа — самый аналитический формат, с расширенной диагностикой.</p>
-            <p class="svc-card-panel-desc">Работаем с причиной, а не симптомом: оценка осанки, мышечное тестирование, «Анатомические поезда», персональные упражнения.</p>
-          </div>
-          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
-        </div>
       </div>
 
-      <div id="postnatal" class="svc-card" data-cat="recovery">
+      <div id="postnatal" class="svc-card" data-cat="recovery"
+           data-name="Восстановление после родов" data-cat-label="Восстановление" data-duration="2×90 минут" data-price="500 GEL"
+           data-desc="Мягкое восстановление тела после родов.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="postnatal.webp" alt="Восстановление после родов" /></div>
           <div class="svc-card-body">
@@ -766,18 +736,25 @@
             <p class="svc-card-meta">2×90 минут · 500 GEL</p>
           </div>
         </button>
-        <div class="svc-card-panel">
-          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
-          <div class="svc-card-panel-scroll">
-            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="postnatal.webp" alt="" />
-            <h3 class="svc-card-panel-title">Восстановление после родов</h3>
-            <p class="svc-card-panel-meta">2×90 минут · 500 GEL</p>
-            <p class="svc-card-panel-desc">Восстановление после родов: кинезиологическая коррекция, висцеральный массаж, восстановление осанки.</p>
-          </div>
-          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
-        </div>
       </div>
 
+    </div>
+
+    <div class="svc-detail" id="svcDetail" hidden>
+      <button type="button" class="svc-detail-close" aria-label="Закрыть">✕</button>
+      <div class="svc-detail-inner">
+        <div class="svc-detail-content">
+          <h3 class="svc-detail-title" id="svcDetailTitle"></h3>
+          <div class="svc-detail-stats">
+            <span class="svc-detail-stat"><strong id="svcDetailDur"></strong><small>время</small></span>
+            <span class="svc-detail-stat"><strong id="svcDetailPrice"></strong><small>цена</small></span>
+            <span class="svc-detail-stat"><strong id="svcDetailCat"></strong><small>формат</small></span>
+          </div>
+          <p class="svc-detail-desc" id="svcDetailDesc"></p>
+          <p class="svc-detail-condition" id="svcDetailCondition"></p>
+        </div>
+      </div>
+      <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-detail-cta">Записаться</a>
     </div>
   </section>
 
@@ -938,22 +915,71 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // ── SERVICE CARDS: раскрытие панели ──
-      document.querySelectorAll('.svc-card').forEach(card => {
-        const summary = card.querySelector('.svc-card-summary');
-        const closeBtn = card.querySelector('.svc-card-close');
-        const open = () => { card.classList.add('is-open'); summary.setAttribute('aria-expanded', 'true'); };
-        const close = () => { card.classList.remove('is-open'); summary.setAttribute('aria-expanded', 'false'); summary.blur(); };
-        summary.addEventListener('click', () => {
-          card.classList.contains('is-open') ? close() : open();
-        });
-        closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
-        card.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-      });
+      const cards  = Array.from(document.querySelectorAll('.svc-card'));
+      const grid   = document.querySelector('.svc-cards');
+      const detail = document.getElementById('svcDetail');
+      const chips  = document.querySelectorAll('.svc-filter-chip');
+      const isDesktop = () => matchMedia('(min-width: 901px)').matches;
+      let activeCard = null;
 
-      // ── ФИЛЬТРЫ ПО КАТЕГОРИЯМ ──
-      const chips = document.querySelectorAll('.svc-filter-chip');
-      const cards = document.querySelectorAll('.svc-card');
+      function fillDetail(card) {
+        document.getElementById('svcDetailTitle').textContent = card.dataset.name;
+        document.getElementById('svcDetailDur').textContent = card.dataset.duration;
+        const priceEl = document.getElementById('svcDetailPrice');
+        if (card.dataset.priceHtml) priceEl.innerHTML = card.dataset.priceHtml;
+        else priceEl.textContent = card.dataset.price;
+        document.getElementById('svcDetailCat').textContent = card.dataset.catLabel;
+        document.getElementById('svcDetailDesc').textContent = card.dataset.desc;
+        document.getElementById('svcDetailCondition').innerHTML =
+          card.dataset.condition ? '<strong>Условие:</strong> ' + card.dataset.condition : '';
+      }
+
+      // Десктоп — фиксированный нижний сектор под всей сеткой.
+      // Мобиль/планшет — встраивается сразу под ряд с выбранной карточкой (сетка сейчас в 2 колонки).
+      function placeDetail(card) {
+        if (isDesktop()) {
+          grid.insertAdjacentElement('afterend', detail);
+          return;
+        }
+        const visible = cards.filter(c => !c.classList.contains('is-filtered-out'));
+        const idx = visible.indexOf(card);
+        const rowEndIdx = idx - (idx % 2) + 1;
+        const anchor = visible[Math.min(rowEndIdx, visible.length - 1)];
+        anchor.insertAdjacentElement('afterend', detail);
+      }
+
+      function openCard(card) {
+        activeCard = card;
+        fillDetail(card);
+        placeDetail(card);
+        detail.hidden = false;
+        cards.forEach(c => {
+          const isActive = c === card;
+          c.classList.toggle('is-active', isActive);
+          c.querySelector('.svc-card-summary').setAttribute('aria-expanded', String(isActive));
+        });
+        requestAnimationFrame(() => detail.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      }
+
+      function closeDetail() {
+        detail.hidden = true;
+        activeCard = null;
+        cards.forEach(c => {
+          c.classList.remove('is-active');
+          c.querySelector('.svc-card-summary').setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      cards.forEach(card => {
+        card.querySelector('.svc-card-summary').addEventListener('click', () => {
+          activeCard === card ? closeDetail() : openCard(card);
+        });
+      });
+      detail.querySelector('.svc-detail-close').addEventListener('click', closeDetail);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && activeCard) closeDetail(); });
+      window.addEventListener('resize', () => { if (activeCard) placeDetail(activeCard); });
+
+      // ── ФИЛЬТРЫ ПО КАТЕГОРИЯМ ── (со сброса открытой карточки — так честнее для "провалиться во всю страницу")
       chips.forEach(chip => {
         chip.addEventListener('click', () => {
           chips.forEach(c => c.classList.remove('active'));
@@ -963,8 +989,15 @@
             const match = filter === 'all' || card.dataset.cat === filter;
             card.classList.toggle('is-filtered-out', !match);
           });
+          closeDetail();
         });
       });
+
+      // ── DEEP LINK С ГЛАВНОЙ ── (index.html#anchor → сразу открыть описание нужной карточки)
+      if (location.hash) {
+        const target = document.getElementById(location.hash.slice(1));
+        if (target && target.classList.contains('svc-card')) openCard(target);
+      }
     });
   </script>
 </body>
