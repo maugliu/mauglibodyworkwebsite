@@ -114,30 +114,75 @@
     .page-sub { margin-top: 1.5rem; font-size: 1.05rem; color: var(--text-muted); max-width: 480px; line-height: 1.7; }
 
     .services-section { max-width: 1200px; margin: 0 auto; padding: 5rem 3.5rem; }
-    .service-block { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding: 4.5rem 0; border-bottom: 1px solid var(--line); align-items: start; }
-    .service-block:first-child { padding-top: 0; }
 
-    .service-meta { position: sticky; top: 7rem; }
-    .svc-tag { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
-    .svc-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent2); }
-    .svc-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--accent); line-height: 1.2; margin-bottom: 1.2rem; }
-    .svc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); border-radius: 20px; }
-    .svc-price-block { background: #5C7A62; border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
-    .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: #fff; line-height: 1; }
-    .svc-price-cur { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
+    /* ── SERVICE CARDS ── */
+    .svc-filters { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .svc-filter-chip {
+      font-family: 'Geologica', sans-serif; font-size: 0.78rem; letter-spacing: 0.03em;
+      padding: 0.55rem 1.2rem; border-radius: 999px; border: 1px solid var(--line);
+      background: transparent; color: var(--text-muted); cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .svc-filter-chip:hover { border-color: var(--accent); color: var(--text); }
+    .svc-filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    .svc-photo { width: 100%; aspect-ratio: 16/9; overflow: hidden; margin-bottom: 2rem; }
-    .svc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; will-change: transform; transition: none; }
-    .svc-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.82; margin-bottom: 2rem; }
-    .svc-desc p + p { margin-top: 1rem; }
-    .svc-desc strong { color: var(--text); font-weight: 400; }
-    .includes-title { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
-    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-    .includes-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--text); }
-    .includes-list li::before { content: '→'; color: var(--accent2); flex-shrink: 0; }
-    .book-btn { display: inline-block; margin-top: 2rem; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: #4A7A9B; border-radius: 6px; padding: 0.85rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
-    .book-btn:hover { background: #3a5a7a; transform: translateY(-1px); }
+    .svc-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+
+    .svc-card { position: relative; border-radius: 10px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); }
+    .svc-card.is-filtered-out { display: none; }
+
+    .svc-card-summary { display: block; width: 100%; text-align: left; background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
+    .svc-card-photo { position: relative; height: 150px; overflow: hidden; }
+    .svc-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .svc-card-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 65%); }
+    .svc-card-body { padding: 0.9rem 1.1rem 1.15rem; }
+    .svc-card-cat { font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; }
+    .svc-card-title { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1.02rem; color: var(--text); line-height: 1.25; margin-bottom: 0.5rem; }
+    .svc-card-meta { font-size: 0.82rem; color: var(--text-muted); }
+
+    .svc-card-panel {
+      position: absolute; inset: 0; z-index: 5; background: var(--bg-2);
+      display: flex; flex-direction: column;
+      transform: translateY(101%);
+      transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+    }
+    .svc-card.is-open .svc-card-panel,
+    .svc-card:focus-within .svc-card-panel { transform: translateY(0); }
+    @media (hover: hover) and (pointer: fine) {
+      .svc-card:hover .svc-card-panel { transform: translateY(0); }
+    }
+    .svc-card-close {
+      position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2;
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--bg); color: var(--text);
+      font-size: 0.9rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .svc-card-panel-scroll { flex: 1; overflow-y: auto; padding: 1.1rem 1.1rem 0.6rem; }
+    .svc-card-panel-photo { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem; display: block; }
+    .svc-card-panel-title { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1.05rem; color: var(--text); margin-bottom: 0.3rem; }
+    .svc-card-panel-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+    .svc-card-panel-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .svc-card-panel-desc + .svc-card-panel-desc { margin-top: 0.6rem; }
+    .svc-card-panel-condition { font-size: 0.86rem; color: var(--text); line-height: 1.6; margin-top: 0.6rem; }
+    .svc-card-panel-condition strong { color: var(--accent); font-weight: 400; }
+
+    .svc-card-cta {
+      flex-shrink: 0; display: block; width: 100%; text-align: center;
+      padding: 0.9rem; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--white); background: #4A7A9B; text-decoration: none; transition: background 0.2s;
+    }
+    .svc-card-cta:hover { background: #3a5a7a; }
+
+    /* Promo prices (?promo=first) inside the compact card — mechanic itself untouched,
+       just compensating font size for the small meta line */
+    .promo-active .svc-card .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
+
+    @media (max-width: 560px) {
+      .svc-cards { grid-template-columns: repeat(2, minmax(160px, 1fr)); gap: 12px; }
+      .svc-card-photo { height: 130px; }
+      .svc-card-title { font-size: 0.9rem; }
+      .svc-card-meta { font-size: 0.74rem; }
+    }
 
     .contra-section { background: var(--bg-warm); padding: 5rem 3.5rem; }
     .contra-inner { max-width: 1200px; margin: 0 auto; }
@@ -166,8 +211,6 @@
       nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .services-section { padding: 3rem 1.5rem; }
-      .service-block { grid-template-columns: 1fr; gap: 2rem; }
-      .service-meta { position: static; }
       .contra-section { padding: 4rem 1.5rem; }
       .contra-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
@@ -216,14 +259,6 @@
       /* cta */
       .cta-inner { padding: 3.5rem 1.4rem; }
       .cta-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
-
-      /* service blocks */
-      .service-block { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
-      .service-meta { position: static; }
-      .svc-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
-      .svc-desc { font-size: 1rem; }
-      .includes-list li { font-size: 0.95rem; }
-      .book-btn { font-size: 0.85rem; }
 
       /* about */
       .about-hero { grid-template-columns: 1fr; }
@@ -327,17 +362,14 @@
     .cert-card:hover {
       box-shadow: 0 12px 32px -6px rgba(196,105,74,0.2) !important;
     }
-    /* Service blocks */
-    .book-btn:hover {
+    .svc-card-cta:hover {
       box-shadow: 0 6px 20px -4px rgba(74,122,155,0.45);
     }
 
     /* ── PREMIUM EFFECTS ── */
 
-    
-
     /* Magnetic buttons */
-    .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
+    .btn-accent, .btn-light, .btn-cta, .nav-cta {
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.3s;
       will-change: transform;
     }
@@ -547,137 +579,150 @@
 
   <section class="services-section">
 
-    <div id="intro" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Format 01</p>
-        <h2 class="svc-title">Intro<br>Session</h2>
-        <div class="svc-badges"><span class="badge">25 min</span><span class="badge">Entry</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">100</span><span class="svc-price-cur">GEL</span></div>
-      </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="../consultation.webp" alt="Intro Session" /></div>
-        <div class="svc-desc"><p>Want to understand your body better — or not quite ready for a full session? This is your entry point.</p><p>A conversation, visual assessment, manual muscle testing, local correction and recommendations.</p><p><strong>Condition:</strong> prepaid only. The fee is fully credited toward your first full session (Bodywork or Kinesio · Full) when booked within 14 days.</p></div>
-        <p class="includes-title">What's included</p>
-        <ul class="includes-list">
-          <li>Conversation and history intake</li>
-          <li>Visual assessment and muscle testing</li>
-          <li>Local correction</li>
-          <li>Recommendations — what to do next</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Book</a>
-      </div>
+    <div class="svc-filters" role="tablist" aria-label="Filter by category">
+      <button type="button" class="svc-filter-chip active" data-filter="all">All</button>
+      <button type="button" class="svc-filter-chip" data-filter="entry">Entry</button>
+      <button type="button" class="svc-filter-chip" data-filter="bodywork">Bodywork</button>
+      <button type="button" class="svc-filter-chip" data-filter="kinesio">Kinesio</button>
+      <button type="button" class="svc-filter-chip" data-filter="recovery">Recovery</button>
     </div>
 
-    <div id="warmup" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Format 02</p>
-        <h2 class="svc-title">Warm-up</h2>
-        <div class="svc-badges"><span class="badge">25 min</span><span class="badge">Express</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">90</span><span class="svc-price-cur">GEL</span></div>
-      </div>
-      <div>
-        <div class="svc-photo" style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;"><img loading="lazy" decoding="async" src="../warmup.webp" alt="Warm-up" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" /></div>
-        <div class="svc-desc"><p>Short and precise. When time is limited and tension has built up.</p><p>Focused work on specific areas or overall tone — Swedish massage, myofascial release, deep tissue.</p><p><strong>Condition:</strong> not a first visit — available after an Intro Session or a full format. Can be added to Bodywork or Kinesio · Full as +25 min for +50 GEL.</p></div>
-        <p class="includes-title">What's included</p>
-        <ul class="includes-list">
-          <li>Targeted work: Swedish massage, myofascial release, deep tissue</li>
-          <li>Focus on a specific area or overall tone</li>
-          <li>Recommendations — what to do next</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Book</a>
-      </div>
-    </div>
+    <div class="svc-cards">
 
-    <div id="kinesiofocus" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Format 03</p>
-        <h2 class="svc-title">Kinesio ·<br>Focus</h2>
-        <div class="svc-badges"><span class="badge">50 min</span><span class="badge">Targeted</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">140</span><span class="svc-price-cur">GEL</span></div>
+      <div id="intro" class="svc-card" data-cat="entry">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../consultation.webp" alt="Intro Session" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Entry</p>
+            <h3 class="svc-card-title">Intro Session</h3>
+            <p class="svc-card-meta">25 min · 100 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Close">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="../consultation.webp" alt="" />
+            <h3 class="svc-card-panel-title">Intro Session</h3>
+            <p class="svc-card-panel-meta">25 min · 100 GEL</p>
+            <p class="svc-card-panel-desc">Want to understand your body better — or not quite ready for a full session? This is your entry point.</p>
+            <p class="svc-card-panel-desc">A conversation, visual assessment, manual muscle testing, local correction and recommendations.</p>
+            <p class="svc-card-panel-condition"><strong>Condition:</strong> prepaid only. The fee is fully credited toward your first full session (Bodywork or Kinesio · Full) when booked within 14 days.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Book</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="../kinesio.webp" alt="Kinesio · Focus" /></div>
-        <div class="svc-desc"><p>The analytical kinesio approach, focused on a single area.</p><p>Postural assessment and muscle testing, then targeted work where it hurts and pulls. <strong>The cause, not the symptom.</strong></p></div>
-        <p class="includes-title">What's included</p>
-        <ul class="includes-list">
-          <li>Visual postural assessment</li>
-          <li>Manual muscle testing</li>
-          <li>Targeted work on the problem area</li>
-          <li>Recommendations — what to do next</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Book</a>
-      </div>
-    </div>
 
-    <div id="bodypractice" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Format 04</p>
-        <h2 class="svc-title">Body&shy;<br>work</h2>
-        <div class="svc-badges"><span class="badge">80 min</span><span class="badge">Holistic</span></div>
-        <div class="svc-price-block promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span><span class="svc-price-cur">GEL</span></div>
+      <div id="warmup" class="svc-card" data-cat="bodywork">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../warmup.webp" alt="Warm-up" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Bodywork</p>
+            <h3 class="svc-card-title">Warm-up</h3>
+            <p class="svc-card-meta">25 min · 90 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Close">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="../warmup.webp" alt="" />
+            <h3 class="svc-card-panel-title">Warm-up</h3>
+            <p class="svc-card-panel-meta">25 min · 90 GEL</p>
+            <p class="svc-card-panel-desc">Short and precise. When time is limited and tension has built up.</p>
+            <p class="svc-card-panel-desc">Focused work on specific areas or overall tone — Swedish massage, myofascial release, deep tissue.</p>
+            <p class="svc-card-panel-condition"><strong>Condition:</strong> not a first visit — available after an Intro Session or a full format. Can be added to Bodywork or Kinesio · Full as +25 min for +50 GEL.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Book</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="../bodypractice_svc.webp" alt="Bodywork" /></div>
-        <div class="svc-desc"><p>A fluid, deep practice that starts with assessment and is built around your current state.</p><p>Beyond manual techniques — somatic elements, breathwork. <strong>Not just a massage — a conversation with the body.</strong></p></div>
-        <p class="includes-title">What's included</p>
-        <ul class="includes-list">
-          <li>Conversation and history intake</li>
-          <li>Active and passive breathing practices</li>
-          <li>Holistic massage</li>
-          <li>Swedish massage</li>
-          <li>Lymphatic drainage</li>
-          <li>Somatic and body-oriented therapy elements</li>
-          <li>Recommendations to reinforce the effect</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Book</a>
-      </div>
-    </div>
 
-    <div id="kinesio" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Format 05</p>
-        <h2 class="svc-title">Kinesio ·<br>Full</h2>
-        <div class="svc-badges"><span class="badge">80 min</span><span class="badge">Analytical</span></div>
-        <div class="svc-price-block promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span><span class="svc-price-cur">GEL</span></div>
+      <div id="kinesiofocus" class="svc-card" data-cat="kinesio">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../diag3.webp" alt="Kinesio · Focus" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Kinesio</p>
+            <h3 class="svc-card-title">Kinesio · Focus</h3>
+            <p class="svc-card-meta">50 min · 140 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Close">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="../diag3.webp" alt="" />
+            <h3 class="svc-card-panel-title">Kinesio · Focus</h3>
+            <p class="svc-card-panel-meta">50 min · 140 GEL</p>
+            <p class="svc-card-panel-desc">The analytical kinesio approach, focused on a single area.</p>
+            <p class="svc-card-panel-desc">Postural assessment and muscle testing, then targeted work where it hurts and pulls — the cause, not the symptom.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Book</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="../kinesio.webp" alt="Kinesio · Full" /></div>
-        <div class="svc-desc"><p>Thorough, unhurried work. The most analytical format — extended diagnostics: detailed muscle testing, Anatomy Trains work, uncovering hidden compensations.</p><p>For chronic pain, postural issues, or when standard massage no longer helps. <strong>We work with the cause, not the symptom.</strong></p></div>
-        <p class="includes-title">What's included</p>
-        <ul class="includes-list">
-          <li>Extended intake and history</li>
-          <li>Visual postural assessment</li>
-          <li>Detailed manual muscle testing</li>
-          <li>Anatomy Trains-based work</li>
-          <li>Deep tissue massage, trigger points, myofascial release</li>
-          <li>Personalised exercise plan</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Book</a>
-      </div>
-    </div>
 
-    <div id="postnatal" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Format 06</p>
-        <h2 class="svc-title">Postpartum<br>Bodywork</h2>
-        <div class="svc-badges"><span class="badge">2 sessions × 1.5 hrs</span><span class="badge">Special</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">500</span><span class="svc-price-cur">GEL</span></div>
+      <div id="bodypractice" class="svc-card" data-cat="bodywork">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../bodypractice.webp" alt="Bodywork" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Bodywork</p>
+            <h3 class="svc-card-title">Bodywork</h3>
+            <p class="svc-card-meta">80 min · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Close">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="../bodypractice.webp" alt="" />
+            <h3 class="svc-card-panel-title">Bodywork</h3>
+            <p class="svc-card-panel-meta">80 min · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
+            <p class="svc-card-panel-desc">A fluid, deep practice that starts with assessment and is built around your current state. Not just a massage — a conversation with the body.</p>
+            <p class="svc-card-panel-desc">Breathwork, holistic massage, lymphatic drainage, somatic therapy.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Book</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="../postnatal.webp" alt="Postpartum Bodywork" /></div>
-        <div class="svc-desc"><p>A woman's body goes through one of the most profound experiences it is capable of. It has everything it needs to recover on its own — but the right support accelerates that process and helps avoid long-term issues.</p><p>I work with those who have just given birth and those who have been living with the aftermath for years — lower back pain, pelvic instability, the feeling that something is off.</p></div>
-        <p class="includes-title">What's included</p>
-        <ul class="includes-list">
-          <li>Conversation and history intake</li>
-          <li>Kinesiological correction of pelvic muscles and ligaments</li>
-          <li>Visceral massage</li>
-          <li>Postural restoration after pregnancy</li>
-          <li>Recommendations and exercises to consolidate results</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Book</a>
-      </div>
-    </div>
 
+      <div id="kinesio" class="svc-card" data-cat="kinesio">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../kinesio.webp" alt="Kinesio · Full" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Kinesio</p>
+            <h3 class="svc-card-title">Kinesio · Full</h3>
+            <p class="svc-card-meta">80 min · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Close">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="../kinesio.webp" alt="" />
+            <h3 class="svc-card-panel-title">Kinesio · Full</h3>
+            <p class="svc-card-panel-meta">80 min · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
+            <p class="svc-card-panel-desc">Thorough, unhurried work — the most analytical format, with extended diagnostics.</p>
+            <p class="svc-card-panel-desc">We work with the cause, not the symptom: postural assessment, muscle testing, Anatomy Trains, personalized exercises.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Book</a>
+        </div>
+      </div>
+
+      <div id="postnatal" class="svc-card" data-cat="recovery">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../postnatal.webp" alt="Postpartum Bodywork" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Recovery</p>
+            <h3 class="svc-card-title">Postpartum Bodywork</h3>
+            <p class="svc-card-meta">2×90 min · 500 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Close">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="../postnatal.webp" alt="" />
+            <h3 class="svc-card-panel-title">Postpartum Bodywork</h3>
+            <p class="svc-card-panel-meta">2×90 min · 500 GEL</p>
+            <p class="svc-card-panel-desc">Recovery after childbirth: kinesiological correction, visceral massage, postural restoration.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Book</a>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <section class="contra-section">
@@ -754,7 +799,7 @@
       document.querySelectorAll('.reveal, .rw-card, .msg-bubble').forEach(el => obs.observe(el));
 
       // ── MAGNETIC BUTTONS ──
-      document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn').forEach(btn => {
+      document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta').forEach(btn => {
         btn.addEventListener('mousemove', e => {
           const r = btn.getBoundingClientRect();
           const x = (e.clientX - r.left - r.width / 2) * 0.25;
@@ -833,6 +878,37 @@
 
 
 
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ── SERVICE CARDS: panel toggle ──
+      document.querySelectorAll('.svc-card').forEach(card => {
+        const summary = card.querySelector('.svc-card-summary');
+        const closeBtn = card.querySelector('.svc-card-close');
+        const open = () => { card.classList.add('is-open'); summary.setAttribute('aria-expanded', 'true'); };
+        const close = () => { card.classList.remove('is-open'); summary.setAttribute('aria-expanded', 'false'); summary.blur(); };
+        summary.addEventListener('click', () => {
+          card.classList.contains('is-open') ? close() : open();
+        });
+        closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+        card.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      });
+
+      // ── CATEGORY FILTERS ──
+      const chips = document.querySelectorAll('.svc-filter-chip');
+      const cards = document.querySelectorAll('.svc-card');
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const filter = chip.dataset.filter;
+          cards.forEach(card => {
+            const match = filter === 'all' || card.dataset.cat === filter;
+            card.classList.toggle('is-filtered-out', !match);
+          });
+        });
+      });
     });
   </script>
 </body>

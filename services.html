@@ -113,30 +113,75 @@
     .page-sub { margin-top: 1.5rem; font-size: 1.05rem; color: var(--text-muted); max-width: 480px; line-height: 1.7; }
 
     .services-section { max-width: 1200px; margin: 0 auto; padding: 5rem 3.5rem; }
-    .service-block { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding: 4.5rem 0; border-bottom: 1px solid var(--line); align-items: start; }
-    .service-block:first-child { padding-top: 0; }
 
-    .service-meta { position: sticky; top: 7rem; }
-    .svc-tag { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
-    .svc-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent2); }
-    .svc-title { font-family: 'Unbounded', sans-serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--accent); line-height: 1.2; margin-bottom: 1.2rem; }
-    .svc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .badge { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--line); color: var(--text-muted); border-radius: 20px; }
-    .svc-price-block { background: #5C7A62; border-radius: 8px; padding: 1.2rem 1.8rem; display: inline-flex; align-items: baseline; gap: 0.4rem; }
-    .svc-price-big { font-family: 'Unbounded', sans-serif; font-size: 2.2rem; font-weight: 300; color: #fff; line-height: 1; }
-    .svc-price-cur { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
+    /* ── SERVICE CARDS ── */
+    .svc-filters { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .svc-filter-chip {
+      font-family: 'Geologica', sans-serif; font-size: 0.78rem; letter-spacing: 0.03em;
+      padding: 0.55rem 1.2rem; border-radius: 999px; border: 1px solid var(--line);
+      background: transparent; color: var(--text-muted); cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .svc-filter-chip:hover { border-color: var(--accent); color: var(--text); }
+    .svc-filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    .svc-photo { width: 100%; aspect-ratio: 16/9; overflow: hidden; margin-bottom: 2rem; }
-    .svc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; will-change: transform; transition: none; }
-    .svc-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.82; margin-bottom: 2rem; }
-    .svc-desc p + p { margin-top: 1rem; }
-    .svc-desc strong { color: var(--text); font-weight: 400; }
-    .includes-title { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
-    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-    .includes-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--text); }
-    .includes-list li::before { content: '→'; color: var(--accent2); flex-shrink: 0; }
-    .book-btn { display: inline-block; margin-top: 2rem; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: #4A7A9B; border-radius: 6px; padding: 0.85rem 2rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
-    .book-btn:hover { background: #3a5a7a; transform: translateY(-1px); }
+    .svc-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+
+    .svc-card { position: relative; border-radius: 10px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); }
+    .svc-card.is-filtered-out { display: none; }
+
+    .svc-card-summary { display: block; width: 100%; text-align: left; background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
+    .svc-card-photo { position: relative; height: 150px; overflow: hidden; }
+    .svc-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .svc-card-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 65%); }
+    .svc-card-body { padding: 0.9rem 1.1rem 1.15rem; }
+    .svc-card-cat { font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; }
+    .svc-card-title { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1.02rem; color: var(--text); line-height: 1.25; margin-bottom: 0.5rem; }
+    .svc-card-meta { font-size: 0.82rem; color: var(--text-muted); }
+
+    .svc-card-panel {
+      position: absolute; inset: 0; z-index: 5; background: var(--bg-2);
+      display: flex; flex-direction: column;
+      transform: translateY(101%);
+      transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+    }
+    .svc-card.is-open .svc-card-panel,
+    .svc-card:focus-within .svc-card-panel { transform: translateY(0); }
+    @media (hover: hover) and (pointer: fine) {
+      .svc-card:hover .svc-card-panel { transform: translateY(0); }
+    }
+    .svc-card-close {
+      position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2;
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--bg); color: var(--text);
+      font-size: 0.9rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .svc-card-panel-scroll { flex: 1; overflow-y: auto; padding: 1.1rem 1.1rem 0.6rem; }
+    .svc-card-panel-photo { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem; display: block; }
+    .svc-card-panel-title { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1.05rem; color: var(--text); margin-bottom: 0.3rem; }
+    .svc-card-panel-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+    .svc-card-panel-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .svc-card-panel-desc + .svc-card-panel-desc { margin-top: 0.6rem; }
+    .svc-card-panel-condition { font-size: 0.86rem; color: var(--text); line-height: 1.6; margin-top: 0.6rem; }
+    .svc-card-panel-condition strong { color: var(--accent); font-weight: 400; }
+
+    .svc-card-cta {
+      flex-shrink: 0; display: block; width: 100%; text-align: center;
+      padding: 0.9rem; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--white); background: #4A7A9B; text-decoration: none; transition: background 0.2s;
+    }
+    .svc-card-cta:hover { background: #3a5a7a; }
+
+    /* Промо-цены (?promo=first) внутри компактной карточки — сама механика не менялась,
+       только компенсируем размер шрифта под маленькую строку меты */
+    .promo-active .svc-card .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
+
+    @media (max-width: 560px) {
+      .svc-cards { grid-template-columns: repeat(2, minmax(160px, 1fr)); gap: 12px; }
+      .svc-card-photo { height: 130px; }
+      .svc-card-title { font-size: 0.9rem; }
+      .svc-card-meta { font-size: 0.74rem; }
+    }
 
     .contra-section { background: var(--bg-warm); padding: 5rem 3.5rem; }
     .contra-inner { max-width: 1200px; margin: 0 auto; }
@@ -165,8 +210,6 @@
       nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .services-section { padding: 3rem 1.5rem; }
-      .service-block { grid-template-columns: 1fr; gap: 2rem; }
-      .service-meta { position: static; }
       .contra-section { padding: 4rem 1.5rem; }
       .contra-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
@@ -215,14 +258,6 @@
       /* cta */
       .cta-inner { padding: 3.5rem 1.4rem; }
       .cta-title { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
-
-      /* service blocks */
-      .service-block { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
-      .service-meta { position: static; }
-      .svc-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
-      .svc-desc { font-size: 1rem; }
-      .includes-list li { font-size: 0.95rem; }
-      .book-btn { font-size: 0.85rem; }
 
       /* about */
       .about-hero { grid-template-columns: 1fr; }
@@ -326,17 +361,14 @@
     .cert-card:hover {
       box-shadow: 0 12px 32px -6px rgba(196,105,74,0.2) !important;
     }
-    /* Service blocks */
-    .book-btn:hover {
+    .svc-card-cta:hover {
       box-shadow: 0 6px 20px -4px rgba(74,122,155,0.45);
     }
 
     /* ── PREMIUM EFFECTS ── */
 
-    
-
     /* Magnetic buttons */
-    .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
+    .btn-accent, .btn-light, .btn-cta, .nav-cta {
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.3s;
       will-change: transform;
     }
@@ -603,137 +635,150 @@
 
   <section class="services-section">
 
-    <div id="intro" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Формат 01</p>
-        <h2 class="svc-title">Знакомство</h2>
-        <div class="svc-badges"><span class="badge">25 минут</span><span class="badge">Вход</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">100</span><span class="svc-price-cur">GEL</span></div>
-      </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="consultation.webp" alt="Знакомство" /></div>
-        <div class="svc-desc"><p>Хотите лучше понимать своё тело — или пока не готовы к полной сессии? Это ваша точка входа.</p><p>Разговор, визуальная диагностика, мышечный тест, локальная коррекция и рекомендации.</p><p><strong>Условие:</strong> только по предоплате. Стоимость полностью зачитывается в счёт первой полной сессии (Телесная практика или Кинезио · Комплекс) при записи в течение 14 дней.</p></div>
-        <p class="includes-title">Что входит</p>
-        <ul class="includes-list">
-          <li>Разговор, сбор запроса и анамнеза</li>
-          <li>Визуальная диагностика и мышечное тестирование</li>
-          <li>Локальная коррекция</li>
-          <li>Рекомендации — что делать дальше</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Записаться</a>
-      </div>
+    <div class="svc-filters" role="tablist" aria-label="Фильтр по категориям">
+      <button type="button" class="svc-filter-chip active" data-filter="all">Все</button>
+      <button type="button" class="svc-filter-chip" data-filter="entry">Вход</button>
+      <button type="button" class="svc-filter-chip" data-filter="bodywork">Телесная работа</button>
+      <button type="button" class="svc-filter-chip" data-filter="kinesio">Кинезио</button>
+      <button type="button" class="svc-filter-chip" data-filter="recovery">Восстановление</button>
     </div>
 
-    <div id="warmup" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Формат 02</p>
-        <h2 class="svc-title">Разминка</h2>
-        <div class="svc-badges"><span class="badge">25 минут</span><span class="badge">Экспресс</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">90</span><span class="svc-price-cur">GEL</span></div>
-      </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="warmup.webp" alt="Разминка" /></div>
-        <div class="svc-desc"><p>Коротко и точно. Когда времени мало, а напряжение уже накопилось.</p><p>Работа по конкретным зонам или общий тонус — шведский массаж, миофасциальный релиз, глубокие ткани.</p><p><strong>Условие:</strong> не первый визит — доступна после Знакомства или полного формата. Можно добавить к Телесной практике или Кинезио · Комплексу как +25 минут за +50 GEL.</p></div>
-        <p class="includes-title">Что входит</p>
-        <ul class="includes-list">
-          <li>Точечная работа: шведский массаж, миофасциальный релиз, глубокотканный массаж</li>
-          <li>Фокус на конкретной зоне или общий тонус</li>
-          <li>Рекомендации — что делать дальше</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Записаться</a>
-      </div>
-    </div>
+    <div class="svc-cards">
 
-    <div id="kinesiofocus" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Формат 03</p>
-        <h2 class="svc-title">Кинезио ·<br>Фокус</h2>
-        <div class="svc-badges"><span class="badge">50 минут</span><span class="badge">Точечно</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">140</span><span class="svc-price-cur">GEL</span></div>
+      <div id="intro" class="svc-card" data-cat="entry">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="consultation.webp" alt="Знакомство" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Вход</p>
+            <h3 class="svc-card-title">Знакомство</h3>
+            <p class="svc-card-meta">25 минут · 100 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="consultation.webp" alt="" />
+            <h3 class="svc-card-panel-title">Знакомство</h3>
+            <p class="svc-card-panel-meta">25 минут · 100 GEL</p>
+            <p class="svc-card-panel-desc">Хотите лучше понимать своё тело — или пока не готовы к полной сессии? Это ваша точка входа.</p>
+            <p class="svc-card-panel-desc">Разговор, визуальная диагностика, мышечный тест, локальная коррекция и рекомендации.</p>
+            <p class="svc-card-panel-condition"><strong>Условие:</strong> только по предоплате. Стоимость полностью зачитывается в счёт первой полной сессии (Телесная практика или Кинезио · Комплекс) при записи в течение 14 дней.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Кинезио · Фокус" /></div>
-        <div class="svc-desc"><p>Аналитический кинезио-подход на одной зоне.</p><p>Оценка осанки и мышечный тест, затем точечная работа там, где болит и тянет. <strong>С причиной, а не симптомом.</strong></p></div>
-        <p class="includes-title">Что входит</p>
-        <ul class="includes-list">
-          <li>Визуальная постуральная диагностика</li>
-          <li>Мануальное мышечное тестирование</li>
-          <li>Точечная работа с проблемной зоной</li>
-          <li>Рекомендации — что делать дальше</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Записаться</a>
-      </div>
-    </div>
 
-    <div id="bodypractice" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Формат 04</p>
-        <h2 class="svc-title">Телесная<br>практика</h2>
-        <div class="svc-badges"><span class="badge">80 минут</span><span class="badge">Холистический</span></div>
-        <div class="svc-price-block promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span><span class="svc-price-cur">GEL</span></div>
+      <div id="warmup" class="svc-card" data-cat="bodywork">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="warmup.webp" alt="Разминка" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Телесная работа</p>
+            <h3 class="svc-card-title">Разминка</h3>
+            <p class="svc-card-meta">25 минут · 90 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="warmup.webp" alt="" />
+            <h3 class="svc-card-panel-title">Разминка</h3>
+            <p class="svc-card-panel-meta">25 минут · 90 GEL</p>
+            <p class="svc-card-panel-desc">Коротко и точно. Когда времени мало, а напряжение уже накопилось.</p>
+            <p class="svc-card-panel-desc">Работа по конкретным зонам или общий тонус — шведский массаж, миофасциальный релиз, глубокие ткани.</p>
+            <p class="svc-card-panel-condition"><strong>Условие:</strong> не первый визит — доступна после Знакомства или полного формата. Можно добавить к Телесной практике или Кинезио · Комплексу как +25 минут за +50 GEL.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="bodypractice_svc.webp" alt="Телесная практика" /></div>
-        <div class="svc-desc"><p>Плавная, глубокая практика, которая начинается с диагностики и выстраивается под ваше состояние здесь и сейчас.</p><p>Помимо мануальных техник — элементы соматики, работа с дыханием. <strong>Не просто массаж — разговор с телом.</strong></p></div>
-        <p class="includes-title">Что входит</p>
-        <ul class="includes-list">
-          <li>Беседа, сбор запроса и анамнеза</li>
-          <li>Практики активного и пассивного дыхания</li>
-          <li>Холистический массаж</li>
-          <li>Шведский массаж</li>
-          <li>Лимфодренаж</li>
-          <li>Элементы соматики и телесно-ориентированной терапии</li>
-          <li>Рекомендации для закрепления эффекта</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Записаться</a>
-      </div>
-    </div>
 
-    <div id="kinesio" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Формат 05</p>
-        <h2 class="svc-title">Кинезио ·<br>Комплекс</h2>
-        <div class="svc-badges"><span class="badge">80 минут</span><span class="badge">Аналитика</span></div>
-        <div class="svc-price-block promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span><span class="svc-price-cur">GEL</span></div>
+      <div id="kinesiofocus" class="svc-card" data-cat="kinesio">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="diag3.webp" alt="Кинезио · Фокус" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Кинезио</p>
+            <h3 class="svc-card-title">Кинезио · Фокус</h3>
+            <p class="svc-card-meta">50 минут · 140 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="diag3.webp" alt="" />
+            <h3 class="svc-card-panel-title">Кинезио · Фокус</h3>
+            <p class="svc-card-panel-meta">50 минут · 140 GEL</p>
+            <p class="svc-card-panel-desc">Аналитический кинезио-подход на одной зоне.</p>
+            <p class="svc-card-panel-desc">Оценка осанки и мышечный тест, затем точечная работа там, где болит и тянет — с причиной, а не симптомом.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Кинезио · Комплекс" /></div>
-        <div class="svc-desc"><p>Тщательная, неспешная работа — самый аналитический формат, с расширенной диагностикой: детальное мышечное тестирование, работа с Анатомическими поездами, выявление скрытых компенсаций.</p><p>Подходит при хронической боли, нарушениях осанки или когда стандартный массаж уже не помогает. <strong>Работаем с причиной, а не симптомом.</strong></p></div>
-        <p class="includes-title">Что входит</p>
-        <ul class="includes-list">
-          <li>Расширенная беседа и сбор анамнеза</li>
-          <li>Визуальная постуральная диагностика</li>
-          <li>Детальное мануальное мышечное тестирование</li>
-          <li>Работа по теории Анатомических поездов</li>
-          <li>Глубокотканный массаж, триггерные точки, миофасциальный релиз</li>
-          <li>Индивидуальный план упражнений</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Записаться</a>
-      </div>
-    </div>
 
-    <div id="postnatal" class="service-block reveal">
-      <div class="service-meta">
-        <p class="svc-tag">Формат 06</p>
-        <h2 class="svc-title">Восстановление<br>после родов</h2>
-        <div class="svc-badges"><span class="badge">2 встречи × 1,5 часа</span><span class="badge">Специальный</span></div>
-        <div class="svc-price-block"><span class="svc-price-big">500</span><span class="svc-price-cur">GEL</span></div>
+      <div id="bodypractice" class="svc-card" data-cat="bodywork">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="bodypractice.webp" alt="Телесная практика" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Телесная работа</p>
+            <h3 class="svc-card-title">Телесная практика</h3>
+            <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="bodypractice.webp" alt="" />
+            <h3 class="svc-card-panel-title">Телесная практика</h3>
+            <p class="svc-card-panel-meta">80 минут · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
+            <p class="svc-card-panel-desc">Плавная, глубокая практика: начинается с диагностики и выстраивается под ваше состояние. Не просто массаж — разговор с телом.</p>
+            <p class="svc-card-panel-desc">Дыхательные практики, холистический массаж, лимфодренаж, соматика.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
+        </div>
       </div>
-      <div>
-        <div class="svc-photo"><img loading="lazy" decoding="async" src="postnatal.webp" alt="Восстановление после родов" /></div>
-        <div class="svc-desc"><p>Тело женщины проходит через одно из самых серьёзных испытаний, на которые оно способно. У него есть всё необходимое, чтобы справиться самому — но правильная поддержка ускоряет этот путь и помогает избежать долгосрочных последствий.</p><p>Работаю и с теми, кто только что родил, и с теми, кто годами живёт с последствиями — болью в пояснице, нестабильностью таза, ощущением «что-то не так».</p></div>
-        <p class="includes-title">Что входит</p>
-        <ul class="includes-list">
-          <li>Беседа, сбор запроса и анамнеза</li>
-          <li>Кинезиологическая коррекция мышц и связок малого таза</li>
-          <li>Висцеральный массаж</li>
-          <li>Работа с постуральными нарушениями после беременности</li>
-          <li>Рекомендации и упражнения для закрепления результата</li>
-        </ul>
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="book-btn">Записаться</a>
-      </div>
-    </div>
 
+      <div id="kinesio" class="svc-card" data-cat="kinesio">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Кинезио · Комплекс" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Кинезио</p>
+            <h3 class="svc-card-title">Кинезио · Комплекс</h3>
+            <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="kinesio.webp" alt="" />
+            <h3 class="svc-card-panel-title">Кинезио · Комплекс</h3>
+            <p class="svc-card-panel-meta">80 минут · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
+            <p class="svc-card-panel-desc">Тщательная, неспешная работа — самый аналитический формат, с расширенной диагностикой.</p>
+            <p class="svc-card-panel-desc">Работаем с причиной, а не симптомом: оценка осанки, мышечное тестирование, «Анатомические поезда», персональные упражнения.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
+        </div>
+      </div>
+
+      <div id="postnatal" class="svc-card" data-cat="recovery">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="postnatal.webp" alt="Восстановление после родов" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Восстановление</p>
+            <h3 class="svc-card-title">Восстановление после родов</h3>
+            <p class="svc-card-meta">2×90 минут · 500 GEL</p>
+          </div>
+        </button>
+        <div class="svc-card-panel">
+          <button type="button" class="svc-card-close" aria-label="Закрыть">✕</button>
+          <div class="svc-card-panel-scroll">
+            <img class="svc-card-panel-photo" loading="lazy" decoding="async" src="postnatal.webp" alt="" />
+            <h3 class="svc-card-panel-title">Восстановление после родов</h3>
+            <p class="svc-card-panel-meta">2×90 минут · 500 GEL</p>
+            <p class="svc-card-panel-desc">Восстановление после родов: кинезиологическая коррекция, висцеральный массаж, восстановление осанки.</p>
+          </div>
+          <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener" class="svc-card-cta">Записаться</a>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <section class="contra-section">
@@ -810,7 +855,7 @@
       document.querySelectorAll('.reveal, .rw-card, .msg-bubble').forEach(el => obs.observe(el));
 
       // ── MAGNETIC BUTTONS ──
-      document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn').forEach(btn => {
+      document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta').forEach(btn => {
         btn.addEventListener('mousemove', e => {
           const r = btn.getBoundingClientRect();
           const x = (e.clientX - r.left - r.width / 2) * 0.25;
@@ -889,6 +934,37 @@
 
     
 
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ── SERVICE CARDS: раскрытие панели ──
+      document.querySelectorAll('.svc-card').forEach(card => {
+        const summary = card.querySelector('.svc-card-summary');
+        const closeBtn = card.querySelector('.svc-card-close');
+        const open = () => { card.classList.add('is-open'); summary.setAttribute('aria-expanded', 'true'); };
+        const close = () => { card.classList.remove('is-open'); summary.setAttribute('aria-expanded', 'false'); summary.blur(); };
+        summary.addEventListener('click', () => {
+          card.classList.contains('is-open') ? close() : open();
+        });
+        closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+        card.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      });
+
+      // ── ФИЛЬТРЫ ПО КАТЕГОРИЯМ ──
+      const chips = document.querySelectorAll('.svc-filter-chip');
+      const cards = document.querySelectorAll('.svc-card');
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const filter = chip.dataset.filter;
+          cards.forEach(card => {
+            const match = filter === 'all' || card.dataset.cat === filter;
+            card.classList.toggle('is-filtered-out', !match);
+          });
+        });
+      });
     });
   </script>
 </body>
