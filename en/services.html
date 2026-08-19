@@ -860,11 +860,11 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cards  = Array.from(document.querySelectorAll('.svc-card'));
-      const grid   = document.querySelector('.svc-cards');
       const detail = document.getElementById('svcDetail');
       const chips  = document.querySelectorAll('.svc-filter-chip');
-      const isDesktop = () => matchMedia('(min-width: 901px)').matches;
+      const currentCols = () => matchMedia('(min-width: 901px)').matches ? 3 : 2;
       let activeCard = null;
+      let lastWidth = window.innerWidth;
 
       function fillDetail(card) {
         document.getElementById('svcDetailTitle').textContent = card.dataset.name;
@@ -878,16 +878,12 @@
           card.dataset.condition ? '<strong>Condition:</strong> ' + card.dataset.condition : '';
       }
 
-      // Desktop — fixed bottom sector under the whole grid.
-      // Mobile/tablet — embedded right under the row with the selected card (grid is 2 columns there).
+      // Embedded right under the row with the selected card — same on desktop (3 cols) and mobile (2)
       function placeDetail(card) {
-        if (isDesktop()) {
-          grid.insertAdjacentElement('afterend', detail);
-          return;
-        }
+        const cols = currentCols();
         const visible = cards.filter(c => !c.classList.contains('is-filtered-out'));
         const idx = visible.indexOf(card);
-        const rowEndIdx = idx - (idx % 2) + 1;
+        const rowEndIdx = idx - (idx % cols) + (cols - 1);
         const anchor = visible[Math.min(rowEndIdx, visible.length - 1)];
         anchor.insertAdjacentElement('afterend', detail);
       }
@@ -902,7 +898,6 @@
           c.classList.toggle('is-active', isActive);
           c.querySelector('.svc-card-summary').setAttribute('aria-expanded', String(isActive));
         });
-        requestAnimationFrame(() => detail.scrollIntoView({ behavior: 'smooth', block: 'start' }));
       }
 
       function closeDetail() {
@@ -921,7 +916,14 @@
       });
       detail.querySelector('.svc-detail-close').addEventListener('click', closeDetail);
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && activeCard) closeDetail(); });
-      window.addEventListener('resize', () => { if (activeCard) placeDetail(activeCard); });
+      // Mobile browsers also fire resize when the toolbar height changes on scroll,
+      // not just on real width/column changes — that was causing the flicker.
+      // Only reposition when the width actually changed.
+      window.addEventListener('resize', () => {
+        if (window.innerWidth === lastWidth) return;
+        lastWidth = window.innerWidth;
+        if (activeCard) placeDetail(activeCard);
+      });
 
       // ── CATEGORY FILTERS ── (closes any open card so filtering feels like starting fresh)
       chips.forEach(chip => {

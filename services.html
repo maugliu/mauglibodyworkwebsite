@@ -145,8 +145,8 @@
     .svc-card-meta { font-size: 0.82rem; color: var(--text-muted); }
 
     /* ── ОБЩИЙ БЛОК ОПИСАНИЯ ──
-       Один элемент на всю страницу: на десктопе — нижний сектор под сеткой,
-       на мобиле JS переносит его прямо под нужный ряд карточек (см. скрипт внизу) */
+       Один элемент на всю страницу — JS переносит его прямо под ряд с выбранной
+       карточкой, одинаково на десктопе и мобиле (см. скрипт внизу) */
     .svc-detail {
       grid-column: 1 / -1;
       background: var(--bg-2); border: 1px solid var(--accent); border-radius: 10px;
@@ -916,11 +916,11 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cards  = Array.from(document.querySelectorAll('.svc-card'));
-      const grid   = document.querySelector('.svc-cards');
       const detail = document.getElementById('svcDetail');
       const chips  = document.querySelectorAll('.svc-filter-chip');
-      const isDesktop = () => matchMedia('(min-width: 901px)').matches;
+      const currentCols = () => matchMedia('(min-width: 901px)').matches ? 3 : 2;
       let activeCard = null;
+      let lastWidth = window.innerWidth;
 
       function fillDetail(card) {
         document.getElementById('svcDetailTitle').textContent = card.dataset.name;
@@ -934,16 +934,12 @@
           card.dataset.condition ? '<strong>Условие:</strong> ' + card.dataset.condition : '';
       }
 
-      // Десктоп — фиксированный нижний сектор под всей сеткой.
-      // Мобиль/планшет — встраивается сразу под ряд с выбранной карточкой (сетка сейчас в 2 колонки).
+      // Встраивается сразу под ряд с выбранной карточкой — одинаково на десктопе (3 колонки) и мобиле (2)
       function placeDetail(card) {
-        if (isDesktop()) {
-          grid.insertAdjacentElement('afterend', detail);
-          return;
-        }
+        const cols = currentCols();
         const visible = cards.filter(c => !c.classList.contains('is-filtered-out'));
         const idx = visible.indexOf(card);
-        const rowEndIdx = idx - (idx % 2) + 1;
+        const rowEndIdx = idx - (idx % cols) + (cols - 1);
         const anchor = visible[Math.min(rowEndIdx, visible.length - 1)];
         anchor.insertAdjacentElement('afterend', detail);
       }
@@ -958,7 +954,6 @@
           c.classList.toggle('is-active', isActive);
           c.querySelector('.svc-card-summary').setAttribute('aria-expanded', String(isActive));
         });
-        requestAnimationFrame(() => detail.scrollIntoView({ behavior: 'smooth', block: 'start' }));
       }
 
       function closeDetail() {
@@ -977,7 +972,14 @@
       });
       detail.querySelector('.svc-detail-close').addEventListener('click', closeDetail);
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && activeCard) closeDetail(); });
-      window.addEventListener('resize', () => { if (activeCard) placeDetail(activeCard); });
+      // На мобильных браузерах resize срабатывает и от смены высоты (тулбар при скролле),
+      // а не только от смены ширины/колонок — из-за этого блок мигал при каждом скролле.
+      // Пересчитываем позицию только если реально изменилась ширина.
+      window.addEventListener('resize', () => {
+        if (window.innerWidth === lastWidth) return;
+        lastWidth = window.innerWidth;
+        if (activeCard) placeDetail(activeCard);
+      });
 
       // ── ФИЛЬТРЫ ПО КАТЕГОРИЯМ ── (со сброса открытой карточки — так честнее для "провалиться во всю страницу")
       chips.forEach(chip => {
