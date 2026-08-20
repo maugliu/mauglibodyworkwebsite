@@ -115,6 +115,13 @@
 
     .services-section { max-width: 1200px; margin: 0 auto; padding: 5rem 3.5rem; }
 
+    /* ── LIVE SLOTS ── */
+    .live-slots { margin-bottom: 2rem; padding: 1.2rem 1.4rem; border: 1px solid var(--sage); border-radius: 10px; background: rgba(92,122,98,0.08); }
+    .live-slots-title { font-size: 0.82rem; letter-spacing: 0.02em; color: var(--text); margin-bottom: 0.8rem; }
+    .live-slots-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .live-slot { font-family: 'Geologica', sans-serif; font-size: 0.82rem; padding: 0.55rem 1rem; border-radius: 999px; background: var(--sage); color: #fff; text-decoration: none; transition: background 0.2s; }
+    .live-slot:hover { background: #4a6850; }
+
     /* ── SERVICE CARDS ── */
     .svc-filters { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
     .svc-filter-chip {
@@ -590,6 +597,11 @@
 
   <section class="services-section">
 
+    <div class="live-slots" id="liveSlots" hidden>
+      <p class="live-slots-title">✨ Nearest open slots — book instantly</p>
+      <div class="live-slots-list" id="liveSlotsList"></div>
+    </div>
+
     <div class="svc-filters" role="tablist" aria-label="Filter by category">
       <button type="button" class="svc-filter-chip active" data-filter="all">All</button>
       <button type="button" class="svc-filter-chip" data-filter="entry">Entry</button>
@@ -943,6 +955,28 @@
       if (location.hash) {
         const target = document.getElementById(location.hash.slice(1));
         if (target && target.classList.contains('svc-card')) openCard(target);
+      }
+
+      // ── LIVE SLOTS FOR DIRECT BOOKING ──
+      // The API returns a short format key (exp/body/kinesio/post), not ready-made text —
+      // translated here so this EN page doesn't show Russian
+      const SLOT_SERVICE_LABELS = {
+        exp: 'Express (45 min)', body: 'Bodywork (75 min)',
+        kinesio: 'Kinesio massage (75 min)', post: 'Postpartum recovery',
+      };
+      const liveSlots = document.getElementById('liveSlots');
+      if (liveSlots) {
+        fetch('https://mauglibodywork.com/api/slots')
+          .then(r => r.ok ? r.json() : null)
+          .then(data => {
+            if (!data || !data.slots || !data.slots.length) return;
+            document.getElementById('liveSlotsList').innerHTML = data.slots.map(s => {
+              const label = s.service ? (SLOT_SERVICE_LABELS[s.service] || s.service) : '';
+              return `<a class="live-slot" href="https://t.me/maugli_bodywork_bot?start=slot_${s.id}" target="_blank" rel="noopener">${s.display}${label ? ' · ' + label : ''}</a>`;
+            }).join('');
+            liveSlots.hidden = false;
+          })
+          .catch(() => {});
       }
     });
   </script>
