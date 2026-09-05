@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Bodywork, kinesio-massage, warmup and postpartum recovery in Tbilisi. Formats and pricing by Ivan Maugli." />
+  <meta name="description" content="Bodywork, kinesio-massage, kinesio taping and postpartum recovery in Tbilisi. Formats and pricing by Ivan Maugli." />
   <meta name="theme-color" content="#F4EFE7" />
   <title>Services — Maugli Bodywork</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -146,6 +146,7 @@
     .svc-card-summary { display: block; width: 100%; text-align: left; background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
     .svc-card-photo { position: relative; height: 150px; overflow: hidden; }
     .svc-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .svc-card-photo img.pos-taping { object-position: center 40%; }
     .svc-card-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 65%); }
     .svc-card-body { padding: 0.9rem 1.1rem 1.15rem; }
     .svc-card-cat { font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; }
@@ -189,10 +190,6 @@
       color: var(--white); background: #4A7A9B; text-decoration: none; transition: background 0.2s;
     }
     .svc-detail-cta:hover { background: #3a5a7a; }
-
-    /* Promo prices (?promo=first) — mechanic untouched, just size compensation */
-    .promo-active .svc-card .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
-    .promo-active .svc-detail .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
 
     @media (max-width: 560px) {
       .svc-card-photo { height: 130px; }
@@ -472,9 +469,12 @@
     }
     .promo-banner strong { font-weight: 500; }
     .promo-active .promo-banner { display: block; }
-    .promo-active .promo-price .svc-price-big { text-decoration: line-through; opacity: 0.55; font-size: 1.4rem; }
-    .promo-price-new { display: none; font-size: 2.2rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; margin-left: 0.6rem; }
-    .promo-active .promo-price .promo-price-new { display: inline; }
+    /* Promo prices (?promo=first) — "170 -> 145 GEL": both prices at the host line's size,
+       colours from variables so it reads in both dark and light themes */
+    .promo-price { white-space: nowrap; }
+    .promo-price-new { display: none; }
+    .promo-active .promo-price .svc-price-big { text-decoration: line-through; opacity: 0.5; font-size: inherit; }
+    .promo-active .promo-price .promo-price-new { display: inline; font-weight: 600; color: var(--text); }
     @media (max-width: 860px) { .promo-banner { padding: 0.8rem 1.4rem; font-size: 0.8rem; } }
 
     /* ── PROMO BLOCK ── */
@@ -541,8 +541,8 @@
     <ul class="nav-links">
       <li><a href="services.html" class="active">Services</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="journal/index.html">Journal</a>
-        <a href="contacts.html">Contacts</a></li>
+      <li><a href="journal/index.html">Journal</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
     </ul>
     <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="nav-book">Book</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -605,17 +605,18 @@
     <div class="svc-filters" role="tablist" aria-label="Filter by category">
       <button type="button" class="svc-filter-chip active" data-filter="all">All</button>
       <button type="button" class="svc-filter-chip" data-filter="entry">Entry</button>
-      <button type="button" class="svc-filter-chip" data-filter="bodywork">Bodywork</button>
+      <button type="button" class="svc-filter-chip" data-filter="relax">Relax</button>
       <button type="button" class="svc-filter-chip" data-filter="kinesio">Kinesio</button>
-      <button type="button" class="svc-filter-chip" data-filter="recovery">Recovery</button>
+      <button type="button" class="svc-filter-chip" data-filter="postnatal">Postpartum</button>
     </div>
 
     <div class="svc-cards">
 
       <div id="intro" class="svc-card" data-cat="entry"
            data-name="Intro Session" data-cat-label="Entry" data-duration="25 min" data-price="100 GEL"
-           data-desc="An entry format: assessment, muscle testing and guidance."
-           data-condition="Prepaid only. The fee is fully credited toward your first full session (Bodywork or Kinesio · Full) when booked within 14 days.">
+           data-desc="Assessment: muscle testing, local corrections and guidance."
+           data-longdesc="Want to understand your body better — or not sure yet about a full session? This is your entry point. During the assessment I&#39;ll show you which areas of your body need attention, and explain what can be done about it — both in my sessions and through your own work at home."
+           data-condition="The fee is fully credited toward your first full session (Bodywork or Kinesio · Full) when you book within 14 days. Prepaid only. Kinesio taping can be added — 30 GEL per zone.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../consultation.webp" alt="Intro Session" /></div>
           <div class="svc-card-body">
@@ -626,23 +627,11 @@
         </button>
       </div>
 
-      <div id="warmup" class="svc-card" data-cat="bodywork"
-           data-name="Warm-up" data-cat-label="Bodywork" data-duration="25 min" data-price="90 GEL"
-           data-desc="A short express to maintain between sessions."
-           data-condition="Not a first visit — available after an Intro Session or a full format. Can be added to Bodywork or Kinesio · Full as +25 min for +50 GEL.">
-        <button type="button" class="svc-card-summary" aria-expanded="false">
-          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../warmup.webp" alt="Warm-up" /></div>
-          <div class="svc-card-body">
-            <p class="svc-card-cat">Bodywork</p>
-            <h3 class="svc-card-title">Warm-up</h3>
-            <p class="svc-card-meta">25 min · 90 GEL</p>
-          </div>
-        </button>
-      </div>
-
       <div id="kinesiofocus" class="svc-card" data-cat="kinesio"
            data-name="Kinesio · Focus" data-cat-label="Kinesio" data-duration="50 min" data-price="140 GEL"
-           data-desc="Targeted kinesio work on a single area — the cause, not the symptom.">
+           data-desc="Recovery and targeted work."
+           data-longdesc="An analytical kinesio approach for preparing for physical load and recovering from it — hikes, training, competitions. Work on a specific request or overall tone — trigger-point massage, myofascial release, breathwork."
+           data-condition="Kinesio taping can be added — 30 GEL per zone.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../diag3.webp" alt="Kinesio · Focus" /></div>
           <div class="svc-card-body">
@@ -653,41 +642,61 @@
         </button>
       </div>
 
-      <div id="bodypractice" class="svc-card" data-cat="bodywork"
-           data-name="Bodywork" data-cat-label="Bodywork" data-duration="80 min"
-           data-price="170 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt;145&lt;/span&gt;&lt;/span&gt; GEL"
-           data-desc="A deep body session — working with the cause, not just a massage.">
+      <div id="bodypractice" class="svc-card" data-cat="relax"
+           data-name="Bodywork" data-cat-label="Relax" data-duration="80 min"
+           data-price="170 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt; → 145&lt;/span&gt;&lt;/span&gt; GEL"
+           data-desc="A meditative practice for deep relaxation."
+           data-longdesc="A flowing practice built around your state. When the causes of tension sit deeper than the muscles, the body needs an especially gentle, attentive approach to calm the nervous system. Breathwork, holistic and Swedish massage, somatics."
+           data-condition="Can be extended by +25 minutes (Warm-up) — 50 GEL.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../bodypractice.webp" alt="Bodywork" /></div>
           <div class="svc-card-body">
-            <p class="svc-card-cat">Bodywork</p>
+            <p class="svc-card-cat">Relax</p>
             <h3 class="svc-card-title">Bodywork</h3>
-            <p class="svc-card-meta">80 min · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
+            <p class="svc-card-meta">80 min · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new"> → 145</span></span> GEL</p>
           </div>
         </button>
       </div>
 
       <div id="kinesio" class="svc-card" data-cat="kinesio"
            data-name="Kinesio · Full" data-cat-label="Kinesio" data-duration="80 min"
-           data-price="200 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt;170&lt;/span&gt;&lt;/span&gt; GEL"
-           data-desc="The full analytical format for the whole body.">
+           data-price="200 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt; → 170&lt;/span&gt;&lt;/span&gt; GEL"
+           data-desc="The full analytical format."
+           data-longdesc="The format with extended diagnostics. We work with the cause, not the symptom — for those who are serious and want results that last. It relieves pain and discomfort, improves posture and frees up movement. Everything I know and can do, so you feel better."
+           data-condition="Can be extended by +25 minutes (Warm-up) — 50 GEL. Kinesio taping can be added — 30 GEL per zone.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../kinesio.webp" alt="Kinesio · Full" /></div>
           <div class="svc-card-body">
             <p class="svc-card-cat">Kinesio</p>
             <h3 class="svc-card-title">Kinesio · Full</h3>
-            <p class="svc-card-meta">80 min · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
+            <p class="svc-card-meta">80 min · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new"> → 170</span></span> GEL</p>
           </div>
         </button>
       </div>
 
-      <div id="postnatal" class="svc-card" data-cat="recovery"
-           data-name="Postpartum Bodywork" data-cat-label="Recovery" data-duration="2×90 min" data-price="500 GEL"
-           data-desc="Gentle body recovery after childbirth.">
+      <div id="taping" class="svc-card" data-cat="entry kinesio"
+           data-name="Kinesio Taping" data-cat-label="Kinesio" data-duration="per zone" data-price="30 GEL / zone"
+           data-desc="Targeted taping of muscles and joints, guided by a muscle test."
+           data-longdesc="Taping guided by a muscle test — placed precisely where it&#39;s needed, not by guesswork. It speeds up recovery, locks in the results of the bodywork, prepares the body for training and competitions, reinforces weak spots, and helps you recover faster after injuries."
+           data-condition="Priced per zone — 30 GEL per zone. If the visit is for taping only, an assessment (muscle test) is +50 GEL. Available as an add-on to the Intro Session and to any kinesio format.">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img class="pos-taping" loading="lazy" decoding="async" src="../taping.webp" alt="Kinesio Taping" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Kinesio</p>
+            <h3 class="svc-card-title">Kinesio Taping</h3>
+            <p class="svc-card-meta">per zone · from 30 GEL</p>
+          </div>
+        </button>
+      </div>
+
+      <div id="postnatal" class="svc-card" data-cat="postnatal"
+           data-name="Postpartum Bodywork" data-cat-label="Postpartum" data-duration="2×90 min" data-price="500 GEL"
+           data-desc="Gentle body recovery after childbirth."
+           data-longdesc="A dedicated set of techniques to prevent and resolve the possible after-effects and limitations that follow childbirth. It works well both right after birth and over the long term — even if something still troubles you a long time later. Kinesiological correction, visceral massage, postural restoration.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="../postnatal.webp" alt="Postpartum Bodywork" /></div>
           <div class="svc-card-body">
-            <p class="svc-card-cat">Recovery</p>
+            <p class="svc-card-cat">Postpartum</p>
             <h3 class="svc-card-title">Postpartum Bodywork</h3>
             <p class="svc-card-meta">2×90 min · 500 GEL</p>
           </div>
@@ -748,8 +757,8 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="journal/index.html">Journal</a>
-        <a href="contacts.html">Contacts</a></li>
+      <li><a href="journal/index.html">Journal</a></li>
+      <li><a href="contacts.html">Contacts</a></li>
     </ul>
     <span class="footer-copy">Tbilisi, Georgia</span>
   </footer>
@@ -885,7 +894,8 @@
         if (card.dataset.priceHtml) priceEl.innerHTML = card.dataset.priceHtml;
         else priceEl.textContent = card.dataset.price;
         document.getElementById('svcDetailCat').textContent = card.dataset.catLabel;
-        document.getElementById('svcDetailDesc').textContent = card.dataset.desc;
+        // The panel shows the long text; data-desc stays short for the card and the teaser
+        document.getElementById('svcDetailDesc').textContent = card.dataset.longdesc || card.dataset.desc;
         document.getElementById('svcDetailCondition').innerHTML =
           card.dataset.condition ? '<strong>Condition:</strong> ' + card.dataset.condition : '';
       }
@@ -944,7 +954,7 @@
           chip.classList.add('active');
           const filter = chip.dataset.filter;
           cards.forEach(card => {
-            const match = filter === 'all' || card.dataset.cat === filter;
+            const match = filter === 'all' || card.dataset.cat.split(' ').includes(filter);
             card.classList.toggle('is-filtered-out', !match);
           });
           closeDetail();
@@ -958,22 +968,16 @@
       }
 
       // ── LIVE SLOTS FOR DIRECT BOOKING ──
-      // The API returns a short format key (exp/body/kinesio/post), not ready-made text —
-      // translated here so this EN page doesn't show Russian
-      const SLOT_SERVICE_LABELS = {
-        exp: 'Express (45 min)', body: 'Bodywork (75 min)',
-        kinesio: 'Kinesio massage (75 min)', post: 'Postpartum recovery',
-      };
+      // Slots are purely time-based and not tied to practice formats — we show the time only
       const liveSlots = document.getElementById('liveSlots');
       if (liveSlots) {
         fetch('https://mauglibodywork.com/api/slots')
           .then(r => r.ok ? r.json() : null)
           .then(data => {
             if (!data || !data.slots || !data.slots.length) return;
-            document.getElementById('liveSlotsList').innerHTML = data.slots.map(s => {
-              const label = s.service ? (SLOT_SERVICE_LABELS[s.service] || s.service) : '';
-              return `<a class="live-slot" href="https://t.me/maugli_bodywork_bot?start=slot_${s.id}" target="_blank" rel="noopener">${s.display}${label ? ' · ' + label : ''}</a>`;
-            }).join('');
+            document.getElementById('liveSlotsList').innerHTML = data.slots.map(s =>
+              `<a class="live-slot" href="https://t.me/maugli_bodywork_bot?start=slot_${s.id}" target="_blank" rel="noopener">${s.display}</a>`
+            ).join('');
             liveSlots.hidden = false;
           })
           .catch(() => {});

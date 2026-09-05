@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Телесная практика, кинезиомассаж, разминка и послеродовое восстановление в Тбилиси. Цены и описание форматов работы Ивана Маугли." />
+  <meta name="description" content="Телесная практика, кинезиомассаж, кинезиотейпирование и послеродовое восстановление в Тбилиси. Цены и описание форматов работы Ивана Маугли." />
   <meta name="theme-color" content="#F4EFE7" />
   <title>Форматы — Maugli Bodywork</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -145,6 +145,7 @@
     .svc-card-summary { display: block; width: 100%; text-align: left; background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
     .svc-card-photo { position: relative; height: 150px; overflow: hidden; }
     .svc-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .svc-card-photo img.pos-taping { object-position: center 40%; }
     .svc-card-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 65%); }
     .svc-card-body { padding: 0.9rem 1.1rem 1.15rem; }
     .svc-card-cat { font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; }
@@ -188,10 +189,6 @@
       color: var(--white); background: #4A7A9B; text-decoration: none; transition: background 0.2s;
     }
     .svc-detail-cta:hover { background: #3a5a7a; }
-
-    /* Промо-цены (?promo=first) — механика не менялась, только компенсация размера */
-    .promo-active .svc-card .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
-    .promo-active .svc-detail .promo-price .svc-price-big { font-size: inherit; opacity: 0.6; }
 
     @media (max-width: 560px) {
       .svc-card-photo { height: 130px; }
@@ -477,15 +474,12 @@
     .promo-banner strong { font-weight: 500; }
     .promo-active .promo-banner { display: block; }
 
-    /* Promo price override */
-    .promo-active .promo-price .svc-price-big { text-decoration: line-through; opacity: 0.55; font-size: 1.4rem; }
-    .promo-price-new {
-      display: none;
-      font-size: 2.2rem; font-weight: 700;
-      color: #fff; letter-spacing: -0.02em;
-      margin-left: 0.6rem;
-    }
-    .promo-active .promo-price .promo-price-new { display: inline; }
+    /* Промо-цены (?promo=first) — «170 → 145 GEL»: обе цены кеглем строки-носителя,
+       цвет из переменных, поэтому читается и в тёмной, и в светлой теме */
+    .promo-price { white-space: nowrap; }
+    .promo-price-new { display: none; }
+    .promo-active .promo-price .svc-price-big { text-decoration: line-through; opacity: 0.5; font-size: inherit; }
+    .promo-active .promo-price .promo-price-new { display: inline; font-weight: 600; color: var(--text); }
     @media (max-width: 860px) {
       .promo-banner { padding: 0.8rem 1.4rem; font-size: 0.8rem; }
     }
@@ -661,17 +655,18 @@
     <div class="svc-filters" role="tablist" aria-label="Фильтр по категориям">
       <button type="button" class="svc-filter-chip active" data-filter="all">Все</button>
       <button type="button" class="svc-filter-chip" data-filter="entry">Вход</button>
-      <button type="button" class="svc-filter-chip" data-filter="bodywork">Телесная работа</button>
+      <button type="button" class="svc-filter-chip" data-filter="relax">Релакс</button>
       <button type="button" class="svc-filter-chip" data-filter="kinesio">Кинезио</button>
-      <button type="button" class="svc-filter-chip" data-filter="recovery">Восстановление</button>
+      <button type="button" class="svc-filter-chip" data-filter="postnatal">Послеродовое</button>
     </div>
 
     <div class="svc-cards">
 
       <div id="intro" class="svc-card" data-cat="entry"
            data-name="Знакомство" data-cat-label="Вход" data-duration="25 минут" data-price="100 GEL"
-           data-desc="Вводный формат: диагностика, мышечный тест и рекомендации."
-           data-condition="Только по предоплате. Стоимость полностью зачитывается в счёт первой полной сессии (Телесная практика или Кинезио · Комплекс) при записи в течение 14 дней.">
+           data-desc="Диагностика: мышечный тест, локальные коррекции и рекомендации."
+           data-longdesc="Хотите узнать больше о своём теле — или пока не уверены про полную сессию? Это ваша точка входа. В ходе диагностики я покажу, какие места в вашем теле требуют внимания. И расскажу, что можно с этим сделать в рамках моих практик и вашей самостоятельной работы."
+           data-condition="Стоимость полностью зачитывается в счёт первой полной сессии (Телесная практика или Кинезио · Комплекс) при записи в течение 14 дней. Только по предоплате. Можно добавить кинезиотейпирование — 30 GEL за зону.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="consultation.webp" alt="Знакомство" /></div>
           <div class="svc-card-body">
@@ -682,23 +677,11 @@
         </button>
       </div>
 
-      <div id="warmup" class="svc-card" data-cat="bodywork"
-           data-name="Разминка" data-cat-label="Телесная работа" data-duration="25 минут" data-price="90 GEL"
-           data-desc="Короткий экспресс для поддержания между сессиями."
-           data-condition="Не первый визит — доступна после Знакомства или полного формата. Можно добавить к Телесной практике или Кинезио · Комплексу как +25 минут за +50 GEL.">
-        <button type="button" class="svc-card-summary" aria-expanded="false">
-          <div class="svc-card-photo"><img loading="lazy" decoding="async" src="warmup.webp" alt="Разминка" /></div>
-          <div class="svc-card-body">
-            <p class="svc-card-cat">Телесная работа</p>
-            <h3 class="svc-card-title">Разминка</h3>
-            <p class="svc-card-meta">25 минут · 90 GEL</p>
-          </div>
-        </button>
-      </div>
-
       <div id="kinesiofocus" class="svc-card" data-cat="kinesio"
            data-name="Кинезио · Фокус" data-cat-label="Кинезио" data-duration="50 минут" data-price="140 GEL"
-           data-desc="Точечная кинезио-работа по одной зоне — с причиной, а не симптомом.">
+           data-desc="Восстановление и прицельная работа."
+           data-longdesc="Аналитический кинезио-подход для подготовки к нагрузкам и восстановления после них — хайки, тренировки, турниры. Работа с конкретным запросом или общий тонус — массаж триггерных точек, миофасциальный релиз, работа с дыханием."
+           data-condition="Можно добавить кинезиотейпирование — 30 GEL за зону.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="diag3.webp" alt="Кинезио · Фокус" /></div>
           <div class="svc-card-body">
@@ -709,41 +692,61 @@
         </button>
       </div>
 
-      <div id="bodypractice" class="svc-card" data-cat="bodywork"
-           data-name="Телесная практика" data-cat-label="Телесная работа" data-duration="80 минут"
-           data-price="170 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt;145&lt;/span&gt;&lt;/span&gt; GEL"
-           data-desc="Глубокая телесная сессия — работа с причиной, не просто массаж.">
+      <div id="bodypractice" class="svc-card" data-cat="relax"
+           data-name="Телесная практика" data-cat-label="Релакс" data-duration="80 минут"
+           data-price="170 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt; → 145&lt;/span&gt;&lt;/span&gt; GEL"
+           data-desc="Медитативная практика для глубокой релаксации."
+           data-longdesc="Плавная практика, которая выстраивается вокруг вашего состояния. Когда причины напряжения находятся глубже, чем просто в мышцах — к телу нужен особый чуткий и внимательный подход для глубокого успокоения нервной системы. Дыхательные практики, холистический и шведский массаж, соматика."
+           data-condition="Можно продлить на +25 минут (Разминка) — 50 GEL.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="bodypractice.webp" alt="Телесная практика" /></div>
           <div class="svc-card-body">
-            <p class="svc-card-cat">Телесная работа</p>
+            <p class="svc-card-cat">Релакс</p>
             <h3 class="svc-card-title">Телесная практика</h3>
-            <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new">145</span></span> GEL</p>
+            <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">170</span><span class="promo-price-new"> → 145</span></span> GEL</p>
           </div>
         </button>
       </div>
 
       <div id="kinesio" class="svc-card" data-cat="kinesio"
            data-name="Кинезио · Комплекс" data-cat-label="Кинезио" data-duration="80 минут"
-           data-price="200 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt;170&lt;/span&gt;&lt;/span&gt; GEL"
-           data-desc="Полный аналитический формат для всего тела.">
+           data-price="200 GEL" data-price-html="&lt;span class=&quot;promo-price&quot;&gt;&lt;span class=&quot;svc-price-big&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;promo-price-new&quot;&gt; → 170&lt;/span&gt;&lt;/span&gt; GEL"
+           data-desc="Полный аналитический формат."
+           data-longdesc="Формат с расширенной диагностикой. Работаем с причиной, а не симптомом. Для тех, кто настроен серьёзно и хочет, чтобы результаты от работы оставались надолго. Поможет снять боль и дискомфорт, улучшить осанку и освободить движение. Всё, что я знаю и умею — для того, чтобы вы чувствовали себя лучше."
+           data-condition="Можно продлить на +25 минут (Разминка) — 50 GEL. Можно добавить кинезиотейпирование — 30 GEL за зону.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Кинезио · Комплекс" /></div>
           <div class="svc-card-body">
             <p class="svc-card-cat">Кинезио</p>
             <h3 class="svc-card-title">Кинезио · Комплекс</h3>
-            <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new">170</span></span> GEL</p>
+            <p class="svc-card-meta">80 минут · <span class="promo-price"><span class="svc-price-big">200</span><span class="promo-price-new"> → 170</span></span> GEL</p>
           </div>
         </button>
       </div>
 
-      <div id="postnatal" class="svc-card" data-cat="recovery"
-           data-name="Восстановление после родов" data-cat-label="Восстановление" data-duration="2×90 минут" data-price="500 GEL"
-           data-desc="Мягкое восстановление тела после родов.">
+      <div id="taping" class="svc-card" data-cat="entry kinesio"
+           data-name="Кинезиотейпирование" data-cat-label="Кинезио" data-duration="по зонам" data-price="30 GEL / зона"
+           data-desc="Прицельное тейпирование мышц и суставов по результатам мышечного теста."
+           data-longdesc="Тейпирование по результатам мышечного теста — прицельно на те мышцы, которым это нужно, а не «на глаз». Ускоряет восстановление, закрепляет результат массажной работы, готовит тело к тренировкам и соревнованиям, усиливает слабые места и помогает быстрее восстановиться после травм."
+           data-condition="Цена по зонам — 30 GEL за зону. Если визит только ради тейпирования, диагностика (мышечный тест) — +50 GEL. Доступно как дополнение к Знакомству и к любому кинезио-формату.">
+        <button type="button" class="svc-card-summary" aria-expanded="false">
+          <div class="svc-card-photo"><img class="pos-taping" loading="lazy" decoding="async" src="taping.webp" alt="Кинезиотейпирование" /></div>
+          <div class="svc-card-body">
+            <p class="svc-card-cat">Кинезио</p>
+            <h3 class="svc-card-title">Кинезиотейпирование</h3>
+            <p class="svc-card-meta">по зонам · от 30 GEL</p>
+          </div>
+        </button>
+      </div>
+
+      <div id="postnatal" class="svc-card" data-cat="postnatal"
+           data-name="Восстановление после родов" data-cat-label="Послеродовое" data-duration="2×90 минут" data-price="500 GEL"
+           data-desc="Мягкое восстановление тела после родов."
+           data-longdesc="Специальный набор техник для профилактики и устранения возможных негативных последствий и ограничений после родов. Хорошо работает как сразу после рождения, так и на отдалённой перспективе — даже если что-то беспокоит спустя длительное время. Кинезиологическая коррекция, висцеральный массаж, восстановление осанки.">
         <button type="button" class="svc-card-summary" aria-expanded="false">
           <div class="svc-card-photo"><img loading="lazy" decoding="async" src="postnatal.webp" alt="Восстановление после родов" /></div>
           <div class="svc-card-body">
-            <p class="svc-card-cat">Восстановление</p>
+            <p class="svc-card-cat">Послеродовое</p>
             <h3 class="svc-card-title">Восстановление после родов</h3>
             <p class="svc-card-meta">2×90 минут · 500 GEL</p>
           </div>
@@ -941,7 +944,8 @@
         if (card.dataset.priceHtml) priceEl.innerHTML = card.dataset.priceHtml;
         else priceEl.textContent = card.dataset.price;
         document.getElementById('svcDetailCat').textContent = card.dataset.catLabel;
-        document.getElementById('svcDetailDesc').textContent = card.dataset.desc;
+        // В панели — развёрнутый текст; data-desc остаётся коротким для карточки и тизера
+        document.getElementById('svcDetailDesc').textContent = card.dataset.longdesc || card.dataset.desc;
         document.getElementById('svcDetailCondition').innerHTML =
           card.dataset.condition ? '<strong>Условие:</strong> ' + card.dataset.condition : '';
       }
@@ -1000,7 +1004,7 @@
           chip.classList.add('active');
           const filter = chip.dataset.filter;
           cards.forEach(card => {
-            const match = filter === 'all' || card.dataset.cat === filter;
+            const match = filter === 'all' || card.dataset.cat.split(' ').includes(filter);
             card.classList.toggle('is-filtered-out', !match);
           });
           closeDetail();
@@ -1014,22 +1018,16 @@
       }
 
       // ── СВОБОДНЫЕ ОКНА ДЛЯ ПРЯМОЙ ЗАПИСИ ──
-      // API отдаёт короткий ключ формата (exp/body/kinesio/post), не готовый текст —
-      // перевод здесь, чтобы EN-версия страницы не показывала русский текст
-      const SLOT_SERVICE_LABELS = {
-        exp: 'Экспресс (45 мин)', body: 'Телесная практика (75 мин)',
-        kinesio: 'Кинезиомассаж (75 мин)', post: 'Восстановление после родов',
-      };
+      // Слоты чисто временные и с форматами практик не связаны — показываем только время
       const liveSlots = document.getElementById('liveSlots');
       if (liveSlots) {
         fetch('https://mauglibodywork.com/api/slots')
           .then(r => r.ok ? r.json() : null)
           .then(data => {
             if (!data || !data.slots || !data.slots.length) return;
-            document.getElementById('liveSlotsList').innerHTML = data.slots.map(s => {
-              const label = s.service ? (SLOT_SERVICE_LABELS[s.service] || s.service) : '';
-              return `<a class="live-slot" href="https://t.me/maugli_bodywork_bot?start=slot_${s.id}" target="_blank" rel="noopener">${s.display}${label ? ' · ' + label : ''}</a>`;
-            }).join('');
+            document.getElementById('liveSlotsList').innerHTML = data.slots.map(s =>
+              `<a class="live-slot" href="https://t.me/maugli_bodywork_bot?start=slot_${s.id}" target="_blank" rel="noopener">${s.display}</a>`
+            ).join('');
             liveSlots.hidden = false;
           })
           .catch(() => {});

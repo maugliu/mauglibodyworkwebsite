@@ -17,22 +17,24 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
 КОРЕНЬ РЕПО (все файлы сайта здесь):
   index.html                 ← главная RU
   about.html
-  services.html              ← ⚠ pending: вернуть фон #5C7A62 на блок цен
+  services.html              ← форматы и цены
   contacts.html
   promo.html                 ← noindex, не в меню
   gift.html                  ← noindex, не в меню
+  staya_promo.html           ← noindex, не в меню
+  admin.html                 ← noindex, панель лидов, токен-авторизация
   en/                        ← EN-версия, пути к фото через ../
     index.html, about.html, services.html, contacts.html, promo.html
     journal/                 ← посты EN (feedback, mirror-focus, morning-routine, presura)
   journal/                   ← список + посты RU (feedback, mirror-focus, morning-routine, presura)
     index.html
 
-ФОТО (в корне репо):
-  hero.jpg, hero_mobile.jpg, approach.jpg, bodypractice.jpg
-  bodypractice_svc.jpg, consultation.jpg, cta_hands.jpg
-  diag1.jpg, diag2.jpg, diag3.jpg, kinesio.jpg
-  portrait.jpg, postnatal.jpg, warmup.jpg
-  massage_certificate01-05.png
+ФОТО (в корне репо, всё в .webp):
+  hero, hero_mobile, approach, bodypractice, bodypractice_svc, consultation,
+  cta_hands, diag1, diag2, diag3, kinesio, portrait, postnatal, taping,
+  gift-cert-bg
+  massage_certificate01-05.webp
+  Не используются нигде: bodypractice_svc, diag1, "Gen 4 Turbo Gentle Movement.mp4"
 </file_structure>
 
 <design_tokens>
@@ -60,12 +62,29 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
 <decisions>
 НЕЛЬЗЯ МЕНЯТЬ:
 - Шрифты только Unbounded + Geologica
-- Тёмная тема = DEFAULT, антифликер-скрипт в head
+- Тёмная тема = DEFAULT, антифликер-скрипт в head. Светлая = отсутствие атрибута
+  data-theme (не data-theme="light"), тёмная = data-theme="dark" на <html>
 - Nav всегда тёмный (многократно проверено)
 - Grain overlay на всех страницах
-- Цены: фон #5C7A62 (sage), белый шрифт
-- Anchor links: #intro, #warmup, #kinesiofocus, #bodypractice, #kinesio, #postnatal (обновлено 17.08.2026 — было #express/#bodypractice/#kinesio/#postnatal, сетка форматов расширена с 4 до 6)
-- data-theme на <html>, не на body
+- Промо/QR-механика (.promo-active, ?promo=first, промо-блок, зачёркнутые цены)
+  — Маугли ведёт её сам, без отдельного запроса не трогать
+- Цвета в промо-ценах брать из переменных (var(--text) / var(--muted)),
+  не хардкодить #fff — иначе цена пропадает в светлой теме
+
+СЕТКА ФОРМАТОВ (обновлено 05.09.2026, 6 карточек):
+  #intro         Знакомство / Intro Session        25 мин    100 GEL   Вход
+  #kinesiofocus  Кинезио · Фокус / Kinesio·Focus   50 мин    140 GEL   Кинезио
+  #bodypractice  Телесная практика / Bodywork      80 мин    170 GEL   Релакс
+  #kinesio       Кинезио · Комплекс / Kinesio·Full 80 мин    200 GEL   Кинезио
+  #taping        Кинезиотейпирование / Taping      по зонам  30 GEL/зона  Кинезио
+  #postnatal     Восстановление после родов        2×90 мин  500 GEL   Послеродовое
+
+ФИЛЬТРЫ (05.09.2026): all / entry / relax / kinesio / postnatal.
+  data-cat многозначный, через пробел (у #taping — "entry kinesio"),
+  матчинг в JS: card.dataset.cat.split(' ').includes(filter)
+
+ТЕКСТЫ КАРТОЧЕК: data-desc — короткий (карточка + тизер на главной),
+  data-longdesc — развёрнутый (детальная панель), фолбэк longdesc || desc
 
 УДАЛЕНО, НЕ ВОЗВРАЩАТЬ:
 - Lenis smooth scroll (конфликт с мобильным)
@@ -73,20 +92,55 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
 - Text Splitting / wrapWords JS (ломал DOM)
 - Page loader div (вешал страницу)
 - Светлый nav при скролле (элементы сливались с фоном)
+- Карточка и тизер «Разминка» (#warmup) и файл warmup.webp — удалены 05.09.2026,
+  механика осталась текстом в условиях #bodypractice и #kinesio: +25 мин / 50 GEL
+- SLOT_SERVICE_LABELS — слоты чисто временные, привязки к форматам нет
 </decisions>
 
 <pending_tasks>
-КРИТИЧНЫЕ:
-1. services.html — вернуть фон #5C7A62 на блок цен (white text) — ПЕРВЫЙ ПРИОРИТЕТ
-2. hero_mobile.jpg — проверить что лежит в корне репо; для EN путь: ../hero_mobile.jpg
-3. Изображения services: проверить наличие consultation.jpg, bodypractice_svc.jpg, kinesio.jpg, postnatal.jpg
+Актуально на 05.09.2026. Закрыто ранее: фон #5C7A62, hero_mobile, фото форматов,
+контакты «Экспресс», конвертация в WebP.
 
-ЖЕЛАТЕЛЬНЫЕ:
-4. contacts.html — заменить «Консультация 25 мин» на «Экспресс 45 мин» в тексте шагов
-5. Конвертация фото в WebP (squoosh.app) → заменить src во всех img
-6. Dikidi API — онлайн-запись через Cloudflare Worker (API ключ acb5e75f..., base URL уточнить)
-7. EN журнал — переводы постов (начинать с presura + mirror-focus)
-8. Видео в hero — 5-7 сек loop MP4, fallback на hero.jpg (обсуждалось, не реализовано)
+БЕЗОПАСНОСТЬ (из аудита 04.09.2026):
+1. GitHub PAT лежит открытым текстом в .git/config (remote URL) — отозвать и
+   перейти на SSH. В историю коммитов не попал.
+2. CLAUDE.md публично отдаётся с сайта (mauglibodywork.com/CLAUDE.md, 200),
+   репозиторий public. Внутри — префикс ключа Dikidi. Перенести в .claude/
+   или закрыть через _redirects.
+3. admin.html шлёт токен в query string (admin.html:437) — перенести в
+   заголовок Authorization. Сам эндпоинт защищён, без токена отдаёт 401.
+
+SEO (из аудита 04.09.2026):
+4. sitemap.xml отсутствует (404). robots.txt — дефолтная заглушка Cloudflare
+   без директивы Sitemap.
+5. Ни canonical, ни hreflang ни на одной из 23 страниц. Cloudflare Pages при
+   этом редиректит /page.html → /page (307), то есть доступны обе формы URL.
+6. Schema.org нет вообще — нужен LocalBusiness + Service + Person.
+7. Open Graph и Twitter Card отсутствуют везде. Критично: воронка идёт через
+   Telegram, ссылка разворачивается без превью.
+8. en/journal/index.html = «Coming soon», не ссылается ни на один из четырёх
+   существующих EN-постов — они недостижимы для краулера.
+
+ПРОИЗВОДИТЕЛЬНОСТЬ:
+9. Картинки в исходном разрешении с камеры (portrait 6469×4313 / 1.67 MB,
+   4480×6720 у нескольких). index.html тянет 4.63 MB, about.html 4.59 MB.
+10. Cloudflare отдаёт .webp с cache-control: max-age=0 — нужен файл _headers
+    с max-age=31536000, immutable.
+11. У 48 из 50 <img> нет width/height → layout shift.
+
+ПРОЧЕЕ:
+12. Промо-форма на services.html игнорирует leadId из ответа API — ссылка на
+    бота остаётся статической ?start=promo_first, в отличие от promo.html:453.
+13. Бот: перевести бронирование на чисто временные слоты (30/60/90 мин),
+    убрать привязку к форматам. Сайт уже показывает только время.
+14. Бот (src/index.js:379): «Instagram: @mauglibodywork» устарел →
+    @maugli.bodywork; «Telegram (бот): @mauglibodywork» → @maugli_bodywork_bot.
+15. contacts.html:466 — подпись @mirror_focus_bot при ссылке на
+    @maugli_bodywork_bot.
+16. contacts.html:478 / en/contacts.html:478 — в шагах записи перечислена
+    «Разминка» / «Warm-up», формата больше нет.
+17. promo.html:329, en/promo.html:230, staya_promo.html:239 — ссылки на
+    services.html#warmup, якоря больше нет.
 </pending_tasks>
 
 <rules>
@@ -134,4 +188,5 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
     "fix: hero_mobile path in EN pages"
 - Никогда не делать git push --force
 - Никогда не менять ветку без явной команды
+- Перед каждым коммитом обновлять CLAUDE.md свежими данными и решениями из задания
 </git>

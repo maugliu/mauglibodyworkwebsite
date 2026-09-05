@@ -504,6 +504,7 @@
     .svc-teaser:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(28,21,14,0.35); border-color: var(--accent); }
     .svc-teaser-photo { position: relative; height: 150px; overflow: hidden; }
     .svc-teaser-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .svc-teaser-photo img.pos-taping { object-position: center 40%; }
     .svc-teaser-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 65%); }
     .svc-teaser-body { padding: 0.9rem 1.1rem 1.15rem; }
     .svc-teaser-name { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1rem; color: var(--white); line-height: 1.25; margin-bottom: 0.5rem; }
@@ -1121,15 +1122,7 @@
           <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="consultation.webp" alt="Знакомство" /></div>
           <div class="svc-teaser-body">
             <p class="svc-teaser-name">Знакомство</p>
-            <p class="svc-teaser-line">Вводный формат: диагностика, мышечный тест и рекомендации.</p>
-            <p class="svc-teaser-more">Подробнее →</p>
-          </div>
-        </a>
-        <a href="services.html#warmup" class="svc-teaser">
-          <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="warmup.webp" alt="Разминка" /></div>
-          <div class="svc-teaser-body">
-            <p class="svc-teaser-name">Разминка</p>
-            <p class="svc-teaser-line">Короткий экспресс для поддержания между сессиями.</p>
+            <p class="svc-teaser-line">Диагностика: мышечный тест, локальные коррекции и рекомендации.</p>
             <p class="svc-teaser-more">Подробнее →</p>
           </div>
         </a>
@@ -1137,7 +1130,7 @@
           <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="diag3.webp" alt="Кинезио · Фокус" /></div>
           <div class="svc-teaser-body">
             <p class="svc-teaser-name">Кинезио · Фокус</p>
-            <p class="svc-teaser-line">Точечная кинезио-работа по одной зоне.</p>
+            <p class="svc-teaser-line">Восстановление и прицельная работа.</p>
             <p class="svc-teaser-more">Подробнее →</p>
           </div>
         </a>
@@ -1145,7 +1138,7 @@
           <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="bodypractice.webp" alt="Телесная практика" /></div>
           <div class="svc-teaser-body">
             <p class="svc-teaser-name">Телесная практика</p>
-            <p class="svc-teaser-line">Глубокая телесная сессия — работа с причиной.</p>
+            <p class="svc-teaser-line">Медитативная практика для глубокой релаксации.</p>
             <p class="svc-teaser-more">Подробнее →</p>
           </div>
         </a>
@@ -1153,7 +1146,15 @@
           <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Кинезио · Комплекс" /></div>
           <div class="svc-teaser-body">
             <p class="svc-teaser-name">Кинезио · Комплекс</p>
-            <p class="svc-teaser-line">Полный аналитический формат для всего тела.</p>
+            <p class="svc-teaser-line">Полный аналитический формат.</p>
+            <p class="svc-teaser-more">Подробнее →</p>
+          </div>
+        </a>
+        <a href="services.html#taping" class="svc-teaser">
+          <div class="svc-teaser-photo"><img class="pos-taping" loading="lazy" decoding="async" src="taping.webp" alt="Кинезиотейпирование" /></div>
+          <div class="svc-teaser-body">
+            <p class="svc-teaser-name">Кинезиотейпирование</p>
+            <p class="svc-teaser-line">Прицельное тейпирование мышц и суставов.</p>
             <p class="svc-teaser-more">Подробнее →</p>
           </div>
         </a>
