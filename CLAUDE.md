@@ -23,6 +23,10 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   gift.html                  ← noindex, не в меню
   staya_promo.html           ← noindex, не в меню
   admin.html                 ← noindex, панель лидов, токен-авторизация
+  webinar-tejp.html          ← noindex, только по прямой ссылке, не в меню и не в sitemap
+  slides/
+    webinar-tejp.pdf         ← кнопка «Скачать PDF» на странице вебинара
+    webinar-tejp/            ← s-01…28.jpg, 1500×844
   en/                        ← EN-версия, пути к фото через ../
     index.html, about.html, services.html, contacts.html, promo.html
     journal/                 ← посты EN (feedback, mirror-focus, morning-routine, presura)
@@ -95,6 +99,14 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
 - Карточка и тизер «Разминка» (#warmup) и файл warmup.webp — удалены 05.09.2026,
   механика осталась текстом в условиях #bodypractice и #kinesio: +25 мин / 50 GEL
 - SLOT_SERVICE_LABELS — слоты чисто временные, привязки к форматам нет
+
+СТРАНИЦА ВЕБИНАРА (добавлена 10.09.2026):
+- webinar-tejp.html — самодостаточная, вне общего дизайна сайта: системные шрифты,
+  prefers-color-scheme вместо data-theme, без grain и без общего nav. Так и задумано,
+  под токены сайта не подгонять без отдельного запроса.
+- Пути в её JS жёстко зашиты: src() собирает slides/webinar-tejp/s-NN.jpg,
+  кнопка PDF ведёт на slides/webinar-tejp.pdf. Файлы не переименовывать.
+- В навигацию не добавлять, в sitemap не включать — доступ только по прямой ссылке.
 </decisions>
 
 <pending_tasks>

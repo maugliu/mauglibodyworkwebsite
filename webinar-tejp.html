@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Тейп и прикосновение — вебинар | Maugli Bodywork</title>
+<meta name="description" content="Вебинар о кинезиотейпировании: история метода, техники, показания, что говорят исследования и наблюдения из практики. 28 слайдов.">
+<link rel="canonical" href="https://mauglibodywork.com/webinar-tejp">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Тейп и прикосновение — вебинар">
+<meta property="og:description" content="Как работает кинезиотейпирование и почему это разговор о теле, а не о ленте.">
+<meta property="og:url" content="https://mauglibodywork.com/webinar-tejp">
+<meta property="og:image" content="https://mauglibodywork.com/slides/webinar-tejp/s-01.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PresentationDigitalDocument",
+  "name": "Тейп и прикосновение",
+  "description": "Вебинар о кинезиотейпировании: метод, техники, доказательная база и наблюдения из практики.",
+  "inLanguage": "ru",
+  "author": { "@type": "Person", "name": "Иван Устиченко" },
+  "publisher": { "@type": "Organization", "name": "Maugli Bodywork" }
+}
+</script>
+
+<style>
+:root{
+  --bg:#ffffff;
+  --fg:#2b2320;
+  --muted:#7a6e68;
+  --accent:#5C7A62;
+  --surface:#f6f4ef;
+  --line:#e5e1da;
+  --radius:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1c1614;
+    --fg:#f0ece7;
+    --muted:#a89d96;
+    --surface:#282020;
+    --line:#3a2f2c;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 20px 64px}
+header{margin-bottom:28px}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:0 0 10px}
+.lead{color:var(--muted);margin:0;max-width:60ch}
+
+/* просмотрщик */
+.viewer{position:relative;margin-top:26px}
+.stage{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  aspect-ratio:16/9;
+}
+.stage img{
+  width:100%;height:100%;object-fit:contain;display:block;
+  user-select:none;-webkit-user-drag:none;
+}
+.nav{
+  position:absolute;top:0;bottom:0;width:22%;
+  border:0;background:transparent;cursor:pointer;
+  color:transparent;padding:0;
+}
+.nav:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+.nav.prev{left:0}
+.nav.next{right:0}
+
+.bar{
+  display:flex;align-items:center;gap:12px;
+  margin-top:14px;flex-wrap:wrap;
+}
+.btn{
+  appearance:none;border:1px solid var(--line);background:var(--bg);
+  color:var(--fg);border-radius:8px;padding:9px 16px;font-size:15px;
+  cursor:pointer;line-height:1;
+}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn[disabled]{opacity:.35;cursor:default}
+.btn[disabled]:hover{border-color:var(--line);color:var(--fg)}
+.count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:15px}
+.caption{
+  flex:1 1 100%;color:var(--muted);font-size:15px;margin:2px 0 0;
+}
+.spacer{flex:1}
+.dl{
+  color:var(--accent);text-decoration:none;font-size:15px;
+  border-bottom:1px solid transparent;
+}
+.dl:hover{border-bottom-color:var(--accent)}
+
+/* сетка */
+.grid{display:none;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:22px}
+.grid.on{display:grid}
+.grid button{
+  padding:0;border:1px solid var(--line);background:var(--surface);
+  border-radius:8px;overflow:hidden;cursor:pointer;line-height:0;
+}
+.grid button:hover{border-color:var(--accent)}
+.grid img{width:100%;height:auto;display:block}
+.viewer.hidden{display:none}
+
+@media (max-width:600px){
+  .wrap{padding:20px 14px 48px}
+  .bar{gap:8px}
+  .btn{padding:8px 12px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Тейп и прикосновение</h1>
+  <p class="lead">Как работает кинезиотейпирование и почему это разговор о теле, а не о ленте. Материалы вебинара — 28 слайдов.</p>
+</header>
+
+<div class="viewer" id="viewer">
+  <div class="stage">
+    <img id="slide" src="slides/webinar-tejp/s-01.jpg" alt="">
+    <button class="nav prev" id="prev" aria-label="Предыдущий слайд">Назад</button>
+    <button class="nav next" id="next" aria-label="Следующий слайд">Вперёд</button>
+  </div>
+  <div class="bar">
+    <button class="btn" id="bPrev">← Назад</button>
+    <button class="btn" id="bNext">Вперёд →</button>
+    <span class="count"><span id="cur">1</span> / 28</span>
+    <span class="spacer"></span>
+    <button class="btn" id="bGrid">Все слайды</button>
+    <a class="dl" href="slides/webinar-tejp.pdf" download>Скачать PDF</a>
+    <p class="caption" id="cap"></p>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+</div>
+
+<script>
+(function(){
+  var TITLES = [
+    "Тейп и прикосновение — титульный слайд",
+    "Программа: четыре блока и три показа руками",
+    "Кожа — не оболочка, а орган восприятия",
+    "Рука работает, пока лежит на теле",
+    "Откуда взялся метод: Кензо Касэ, 1970-е",
+    "Формы нарезки: I, Y, X, веер, бублик",
+    "Шесть техник по классической школе",
+    "Классические показания по зонам тела",
+    "Прежде чем наклеить: противопоказания и четыре правила",
+    "Показ 1: базовая мышечная аппликация",
+    "Тело отвечает на трёх уровнях сразу",
+    "Уровень 1, механический: что лента делает с тканями",
+    "Уровень 2, нейросенсорный: что считывает нервная система",
+    "Уровень 3, контекстуальный: что человек знает про себя",
+    "Что из этого следует для рук",
+    "Показ 2: веерная нарезка и работа с отёком",
+    "Карта данных: где твёрдо, где зыбко, где пусто",
+    "Почему исследований мало, а качество среднее",
+    "Что такое доказательный подход на самом деле",
+    "Про плацебо — спокойно",
+    "Показ 3: до и после, что меняется сразу",
+    "Что такое наблюдение практика",
+    "Наблюдение 1: плечо, боль длиной в три года",
+    "Наблюдение 2: отклик там, где ленты нет",
+    "Наблюдение 3: то, что видно глазом",
+    "Что я из этого вынес",
+    "Две двери: мастер-класс и курс",
+    "Вопросы"
+  ];
+  var N = TITLES.length, i = 0;
+  var img = document.getElementById('slide'),
+      cur = document.getElementById('cur'),
+      cap = document.getElementById('cap'),
+      grid = document.getElementById('grid'),
+      viewer = document.getElementById('viewer');
+
+  function pad(n){ return (n<10?'0':'') + n; }
+  function src(n){ return 'slides/webinar-tejp/s-' + pad(n+1) + '.jpg'; }
+
+  function render(){
+    img.src = src(i);
+    img.alt = TITLES[i];
+    cur.textContent = i + 1;
+    cap.textContent = TITLES[i];
+    ['prev','bPrev'].forEach(function(id){ document.getElementById(id).disabled = (i===0); });
+    ['next','bNext'].forEach(function(id){ document.getElementById(id).disabled = (i===N-1); });
+    // предзагрузка соседнего
+    if(i+1 < N){ var p = new Image(); p.src = src(i+1); }
+  }
+  function go(d){ var t = i + d; if(t>=0 && t<N){ i = t; render(); } }
+
+  ['prev','bPrev'].forEach(function(id){
+    document.getElementById(id).addEventListener('click', function(){ go(-1); });
+  });
+  ['next','bNext'].forEach(function(id){
+    document.getElementById(id).addEventListener('click', function(){ go(1); });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft')  go(-1);
+    if(e.key === 'ArrowRight' || e.key === ' ') go(1);
+  });
+
+  // свайп
+  var x0 = null;
+  img.parentNode.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  img.parentNode.addEventListener('touchend', function(e){
+    if(x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
+    x0 = null;
+  }, {passive:true});
+
+  // сетка всех слайдов
+  var built = false;
+  document.getElementById('bGrid').addEventListener('click', function(){
+    if(!built){
+      for(var k=0;k<N;k++){
+        (function(k){
+          var b = document.createElement('button');
+          b.setAttribute('aria-label','Слайд ' + (k+1) + ': ' + TITLES[k]);
+          var im = document.createElement('img');
+          im.src = src(k); im.alt = TITLES[k]; im.loading = 'lazy';
+          b.appendChild(im);
+          b.addEventListener('click', function(){
+            i = k; render();
+            grid.classList.remove('on');
+            viewer.classList.remove('hidden');
+            window.scrollTo({top:0, behavior:'smooth'});
+          });
+          grid.appendChild(b);
+        })(k);
+      }
+      built = true;
+    }
+    var on = grid.classList.toggle('on');
+    viewer.classList.toggle('hidden', on);
+    this.textContent = on ? 'Вернуться к показу' : 'Все слайды';
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
