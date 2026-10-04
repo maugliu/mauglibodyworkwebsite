@@ -215,6 +215,11 @@
     .promo-success-title { color: var(--text) !important; text-transform: uppercase; }
     .promo-input:focus { border-color: var(--amber) !important; }
     .lang-btn.active { color: #F2A93B !important; border-color: #F2A93B !important; }
+    .promo-badge, .fam-badge { font-size: 12px !important; }
+    .pfmt-tag, .ffmt-tag { font-size: 11.5px !important; }
+    :root:not([data-theme="dark"]) :is(a, button, input):focus-visible { outline-color: #7A4706; }
+    .lang-btn { color: rgba(240,232,222,.72) !important; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; } }
     a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #F2A93B; outline-offset: 3px; }
   </style>
   <script>

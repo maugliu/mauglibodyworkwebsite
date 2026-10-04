@@ -58,7 +58,7 @@
     body {
       background: var(--bg); color: var(--text);
       font-family: var(--font-text); font-weight: 400; font-size: 1.0625rem; line-height: 1.6;
-      overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+      overflow-x: clip; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; }
@@ -78,7 +78,7 @@
     /* ── ТИПОГРАФИКА ── */
     .h1, .h2 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 0.92; text-wrap: balance; }
     .h1 { font-size: clamp(3rem, 6vw, 5.6rem); margin-bottom: 1.4rem; }
-    .h2 { font-size: clamp(2.2rem, 4.2vw, 3.8rem); margin-bottom: 1.5rem; }
+    .h2 { font-size: clamp(2.4rem, 4.6vw, 4.2rem); margin-bottom: 1.5rem; }
     .label { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
     .lead { font-size: 1.125rem; line-height: 1.6; color: var(--text-soft); max-width: 36em; }
 
@@ -91,11 +91,11 @@
       padding: 1.05rem 1.7rem; border-radius: 3px; border: 0; cursor: pointer;
       transition: transform 160ms var(--ease-out), background-color 200ms ease;
     }
-    .btn:hover { background: var(--accent-h); }
+    @media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--accent-h); } }
     .btn:active { transform: scale(0.97); }
     .btn-note { display: block; margin-top: .6rem; font-size: 13px; color: var(--muted); }
     .link { font-size: 1rem; color: var(--text); text-decoration: none; border-bottom: 1.5px solid var(--accent); padding-bottom: 2px; transition: color 200ms ease; }
-    .link:hover { color: var(--accent-ink); }
+    @media (hover: hover) and (pointer: fine) { .link:hover { color: var(--accent-ink); } }
 
     /* ── NAV ── всегда тёмный */
     nav {
@@ -104,16 +104,16 @@
       background: rgba(12, 12, 11, 0.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(241, 236, 226, 0.08); color: #F1ECE2;
     }
-    .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: #F1ECE2; margin-right: auto; white-space: nowrap; }
+    .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: #F1ECE2; margin-right: auto; white-space: nowrap; }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 1.8rem; list-style: none; }
     .nav-links a { font-size: 15px; color: rgba(241, 236, 226, 0.72); text-decoration: none; white-space: nowrap; transition: color 200ms ease; }
-    .nav-links a:hover { color: #F1ECE2; }
+    @media (hover: hover) and (pointer: fine) { .nav-links a:hover { color: #F1ECE2; } }
     .nav-links a[aria-current] { color: var(--accent); }
     .nav-tools { display: flex; align-items: center; gap: .9rem; }
     nav .btn { font-size: 14px; padding: .7rem 1.05rem; }
     .theme-toggle { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; background: none; border: 1px solid rgba(241, 236, 226, 0.2); color: rgba(241, 236, 226, 0.8); transition: border-color 200ms ease, color 200ms ease; }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    @media (hover: hover) and (pointer: fine) { .theme-toggle:hover { border-color: var(--accent); color: var(--accent); } }
     .theme-toggle svg { width: 16px; height: 16px; }
     .theme-toggle .moon { display: none; }
     [data-theme="dark"] .theme-toggle .moon { display: block; }
@@ -121,7 +121,7 @@
     .lang { display: flex; align-items: center; gap: .15rem; font-size: 14px; }
     .lang a, .lang span { padding: .55rem .45rem; text-decoration: none; border-radius: 3px; }
     .lang a { color: rgba(241, 236, 226, 0.72); }
-    .lang a:hover { color: #F1ECE2; }
+    @media (hover: hover) and (pointer: fine) { .lang a:hover { color: #F1ECE2; } }
     .lang .on { color: var(--accent); }
     .burger { display: none; width: 44px; height: 44px; margin-right: -10px; background: none; border: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
     .burger span { display: block; width: 22px; height: 2px; background: #F1ECE2; transition: transform 250ms var(--ease-out), opacity 200ms ease; }
@@ -130,7 +130,7 @@
     .burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
     .mob-menu { display: none; position: fixed; inset: 64px 0 0; z-index: 190; background: #0C0C0B; color: #F1ECE2; flex-direction: column; justify-content: center; gap: 1.6rem; padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom)); }
     .mob-menu.open { display: flex; }
-    .mob-menu a:not(.btn) { font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; line-height: 1; text-transform: uppercase; text-decoration: none; color: #F1ECE2; }
+    .mob-menu > a:not(.btn) { font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; line-height: 1; text-transform: uppercase; text-decoration: none; color: #F1ECE2; }
     .mob-menu a[aria-current] { color: var(--accent); }
     .mob-menu .btn { align-self: flex-start; margin-top: 1rem; }
     .mob-tools { display: flex; align-items: center; gap: 1rem; margin-top: .5rem; }
@@ -141,14 +141,14 @@
     .page-hd { padding: calc(64px + 4.5rem) 0 3rem; }
     .crumbs { position: static; height: auto; display: block; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; margin-bottom: 1.6rem; font-size: 14px; color: var(--muted); }
     .crumbs a { color: var(--muted); text-decoration: none; }
-    .crumbs a:hover { color: var(--text); }
+    @media (hover: hover) and (pointer: fine) { .crumbs a:hover { color: var(--text); } }
     .hint { position: relative; margin-top: 1.6rem; padding-left: 1.3rem; color: var(--text-soft); max-width: 44em; }
     .hint::before { content: ''; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
     .hint a { color: var(--text); text-decoration: none; border-bottom: 1.5px solid var(--accent); }
 
 
     .flap {
-      display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; line-height: 1;
+      display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1;
       letter-spacing: .02em; color: #F1ECE2; padding: .3rem .45rem; border-radius: 3px; font-variant-numeric: tabular-nums;
       background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)) center / 100% 1px no-repeat, var(--flap);
     }
@@ -156,7 +156,7 @@
     .visible .flap { animation: flip 420ms var(--ease-out) both; }
     .visible > :nth-child(2) .flap, .visible > :nth-child(2).flap { animation-delay: 80ms; }
     .visible > :nth-child(3) .flap { animation-delay: 160ms; }
-    @keyframes flip { from { transform: perspective(300px) rotateX(85deg); filter: brightness(1.8); } to { transform: none; filter: none; } }
+    @keyframes flip { from { transform: perspective(300px) rotateX(85deg); opacity: .6; } to { transform: none; opacity: 1; } }
     .sec { padding: 6.5rem 0; }
     .bubble {
       position: relative; max-width: 26rem; background: var(--surface); color: var(--text);
@@ -191,7 +191,7 @@
     .pr-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 82%; }
     .pr-list { list-style: none; display: flex; flex-direction: column; gap: 2.4rem; margin-top: 2.2rem; }
     .pr { display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: start; }
-    .pr .flap { font-size: 1.15rem; }
+    .pr .flap { font-size: 1.25rem; }
     .pr h3 { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.5rem; line-height: 1; margin-bottom: .55rem; }
     .pr p { color: var(--text-soft); }
     .pr-list.visible .pr:nth-child(2) .flap { animation-delay: 90ms; }
@@ -210,7 +210,7 @@
     .cert-img img { width: 100%; height: 100%; object-fit: contain; }
     .cert-body { padding: 1.2rem 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
     .cert-year { align-self: flex-start; font-size: 1.05rem; }
-    .cert h3 { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.3rem; line-height: 1.02; }
+    .cert h3 { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.25rem; line-height: 1.02; }
     .cert-what { color: var(--text-soft); font-size: 15px; line-height: 1.5; flex: 1; }
     .cert-hours { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
@@ -238,13 +238,13 @@
     /* ── FOOTER ── */
     footer { background: #0C0C0B; color: #F1ECE2; padding: 3.5rem 0 calc(2.5rem + env(safe-area-inset-bottom)); }
     .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
-    .f-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: .04em; text-transform: uppercase; }
+    .f-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; }
     .f-logo span { color: var(--accent); }
     .f-place { margin-top: .6rem; color: #A9A397; font-size: 15px; }
     .f-col h3 { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #A9A397; margin-bottom: .8rem; }
     .f-col ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
     .f-col a { display: inline-block; padding: .3rem 0; color: #F1ECE2; text-decoration: none; font-size: 15px; }
-    .f-col a:hover { color: var(--accent); }
+    @media (hover: hover) and (pointer: fine) { .f-col a:hover { color: var(--accent); } }
     .f-copy { margin-top: 2.5rem; padding-top: 1.4rem; border-top: 1px solid rgba(241,236,226,.1); font-size: 13px; color: #A9A397; }
 
     /* ── ЛИПКАЯ КНОПКА (мобайл) ── */
@@ -252,10 +252,43 @@
     .sticky-cta .btn { width: 100%; }
     .sticky-cta.show { transform: none; }
 
-    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out); }
     .reveal.visible { opacity: 1; transform: none; }
     @view-transition { navigation: auto; }
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }
+
+    /* ── ПОЛИРОВКА (этап 6): доступность, тач, движение ── */
+    html { scroll-padding-top: 80px; }
+    body { overflow-x: clip; }
+    [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    :root:not([data-theme="dark"]) :is(a, button, summary, input, [tabindex]):focus-visible { outline-color: var(--accent-ink); }
+    .svc-card-summary:focus-visible { outline-offset: -3px; }
+    .skip { position: absolute; left: 1rem; top: -200px; z-index: 300; padding: .8rem 1.1rem; background: var(--accent); color: var(--on-accent); font: 600 15px var(--font-text); border-radius: 3px; text-decoration: none; }
+    .skip:focus { top: 1rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    button, .btn, summary, .live-slot { touch-action: manipulation; }
+    .btn, .live-slot, .svc-filter-chip { -webkit-user-select: none; user-select: none; }
+    :is(.theme-toggle, .burger, .rw-more, .channel, .svc-filter-chip, .svc-detail-close) { transition: transform 160ms var(--ease-out), color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+    :is(.theme-toggle, .burger, .rw-more, .channel, .svc-filter-chip, .svc-detail-close):active { transform: scale(.97); }
+    .svc-card { transition: border-color 200ms ease, transform 160ms var(--ease-out); }
+    .svc-card:has(.svc-card-summary:active) { transform: scale(.99); }
+    :is(.link, .need-to a, .crumbs a, .rw-more) { position: relative; }
+    :is(.link, .need-to a, .crumbs a, .rw-more)::after { content: ''; position: absolute; inset: -12px -4px; }
+    .f-col a { padding: .65rem 0; }
+    .faq-list details[open] .ans { animation: ans-in 200ms var(--ease-out); }
+    @keyframes ans-in { from { opacity: 0; transform: translateY(-4px); } }
+    .mob-menu { overscroll-behavior: contain; }
+    .mob-menu.open { transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out); }
+    @starting-style { .mob-menu.open { opacity: 0; transform: translateY(-8px); } }
+    nav#nav { view-transition-name: site-nav; }
+    .sticky-cta { view-transition-name: sticky-cta; transition-duration: 160ms; }
+    .sticky-cta.show { transition-duration: 240ms; }
+    .cert-row { overscroll-behavior-x: contain; }
+    .services-section { overflow-anchor: none; }
+    .svc-card.pop { animation: svc-in 220ms var(--ease-out) both; }
+    @keyframes svc-in { from { opacity: 0; transform: translateY(6px); } }
+    .svc-card-summary :is(.svc-card-photo, .svc-card-cat, .svc-card-title, .svc-card-fit) { display: block; }
+    @media (max-width: 860px) { html { scroll-padding-bottom: 90px; } }
 
 
     @media (max-width: 1100px) {
@@ -276,12 +309,18 @@
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; }
-      .reveal { opacity: 1; transform: none; }
+      *, *::before, *::after { animation-delay: 0ms !important; transition-delay: 0ms !important; }
+      .reveal { transform: none !important; transition: opacity 200ms ease !important; }
+      .flap, .hero-left > *, .hero-right img, .svc-card.pop, .faq-list details[open] .ans { animation: rm-fade 200ms ease both !important; }
+      .mk { background-size: 100% .26em; transition: none !important; }
+      .burger span, .sticky-cta, .mob-menu.open { transition-property: opacity !important; }
+      ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+      @keyframes rm-fade { from { opacity: 0; } to { opacity: 1; } }
     }
   </style>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <nav id="nav" aria-label="Main navigation">
     <a href="index.html" class="nav-logo">Maugli <span>Bodywork</span></a>
     <ul class="nav-links">
@@ -292,7 +331,7 @@
     </ul>
     <div class="nav-tools">
       <a href="https://t.me/maugli_bodywork_bot?start=src_en_nav" target="_blank" rel="noopener" class="btn">Book</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <button class="theme-toggle" type="button" aria-label="Dark theme">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -301,14 +340,14 @@
     <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobMenu"><span></span><span></span><span></span></button>
   </nav>
 
-  <div class="mob-menu" id="mobMenu">
+  <div class="mob-menu" id="mobMenu" role="navigation" aria-label="Mobile menu">
     <a href="services.html">Services</a>
     <a href="about.html" aria-current="page">About</a>
     <a href="journal/index.html">Journal</a>
     <a href="contacts.html">Booking & contacts</a>
     <a href="https://t.me/maugli_bodywork_bot?start=src_en_nav" target="_blank" rel="noopener" class="btn">Book</a>
     <div class="mob-tools">
-      <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <button class="theme-toggle" type="button" aria-label="Dark theme">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -316,7 +355,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main">
     <section class="wrap a-hero">
       <div class="a-photo"><img src="../portrait.webp" alt="Ivan Maugli in the treatment room" width="6469" height="4313" fetchpriority="high" class="photo-warm" /></div>
       <div>
@@ -382,7 +421,7 @@
           <h2 class="h2">Certificates</h2>
           <p class="label">Massage · kinesiology · postpartum recovery</p>
         </div>
-        <div class="cert-row reveal" tabindex="0" aria-label="Certificates, scroll sideways">
+        <div class="cert-row reveal" tabindex="0" role="region" aria-label="Certificates, scroll sideways">
           <article class="cert">
             <div class="cert-img"><img loading="lazy" decoding="async" src="../massage_certificate02.webp" alt="Certificate: Vector Massage" /></div>
             <div class="cert-body">
@@ -509,11 +548,16 @@
         burger.classList.toggle('open', open);
         mobMenu.classList.toggle('open', open);
         burger.setAttribute('aria-expanded', open);
-        document.body.style.overflow = open ? 'hidden' : '';
+        document.documentElement.style.overflow = open ? 'hidden' : '';
+        // фон под меню недоступен для Tab и скринридеров, фокус — в меню
+        document.querySelectorAll('main, footer, .sticky-cta').forEach(el => { el.inert = open; });
+        if (open) mobMenu.querySelector('a').focus();
       };
       burger.addEventListener('click', () => setMenu(!mobMenu.classList.contains('open')));
       mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && mobMenu.classList.contains('open')) { setMenu(false); burger.focus(); }
+      });
 
       // ── ТЕМА ──
       const toggleTheme = () => {
@@ -521,7 +565,11 @@
         if (dark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
         else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
       };
-      document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', toggleTheme));
+      // кнопка темы сообщает состояние: нажата = тёмная
+      const syncTheme = () => document.querySelectorAll('.theme-toggle').forEach(b =>
+        b.setAttribute('aria-pressed', String(document.documentElement.getAttribute('data-theme') === 'dark')));
+      syncTheme();
+      document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', () => { toggleTheme(); syncTheme(); }));
 
       // ── ПОЯВЛЕНИЕ ──
       const obs = new IntersectionObserver(entries => entries.forEach(e => {
@@ -533,7 +581,8 @@
       const sticky = document.getElementById('stickyCta');
       const inView = new Set();
       const update = () => {
-        const show = inView.size === 0 && window.scrollY > 200;
+        const typing = document.activeElement && document.activeElement.matches('input, textarea');
+        const show = (inView.size === 0 && window.scrollY > 200 && !typing) || sticky.contains(document.activeElement);
         sticky.classList.toggle('show', show);
         sticky.setAttribute('aria-hidden', String(!show));
         sticky.querySelector('a').tabIndex = show ? 0 : -1;
@@ -544,6 +593,8 @@
       });
       document.querySelectorAll('main .js-cta').forEach(c => ctaObs.observe(c));
       window.addEventListener('scroll', update, { passive: true });
+      document.addEventListener('focusin', update);
+      document.addEventListener('focusout', () => setTimeout(update));
 
     });
   </script>

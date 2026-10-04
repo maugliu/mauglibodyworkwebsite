@@ -62,7 +62,7 @@
     body {
       background: var(--bg); color: var(--text);
       font-family: var(--font-text); font-weight: 400; font-size: 1.0625rem; line-height: 1.6;
-      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      overflow-x: clip; -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: transparent;
     }
     img { display: block; max-width: 100%; }
@@ -109,7 +109,7 @@
       padding: 1.05rem 1.7rem; border-radius: 3px; border: 0; cursor: pointer;
       transition: transform 160ms var(--ease-out), background-color 200ms ease;
     }
-    .btn:hover { background: var(--accent-h); }
+    @media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--accent-h); } }
     .btn:active { transform: scale(0.97); }
     .btn-note { display: block; margin-top: .6rem; font-size: 13px; color: var(--muted); }
     .link {
@@ -117,7 +117,7 @@
       border-bottom: 1.5px solid var(--accent); padding-bottom: 2px;
       transition: color 200ms ease;
     }
-    .link:hover { color: var(--accent-ink); }
+    @media (hover: hover) and (pointer: fine) { .link:hover { color: var(--accent-ink); } }
 
     /* ── NAV ── всегда тёмный */
     nav {
@@ -129,7 +129,7 @@
       color: #F1ECE2;
     }
     .nav-logo {
-      font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: .04em;
+      font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: .04em;
       text-transform: uppercase; text-decoration: none; color: #F1ECE2; margin-right: auto; white-space: nowrap;
     }
     .nav-logo span { color: var(--accent); }
@@ -138,7 +138,7 @@
       font-size: 15px; color: rgba(241, 236, 226, 0.72); text-decoration: none; white-space: nowrap;
       transition: color 200ms ease;
     }
-    .nav-links a:hover { color: #F1ECE2; }
+    @media (hover: hover) and (pointer: fine) { .nav-links a:hover { color: #F1ECE2; } }
     .nav-tools { display: flex; align-items: center; gap: .9rem; }
     nav .btn { font-size: 14px; padding: .7rem 1.05rem; }
     .theme-toggle {
@@ -147,7 +147,7 @@
       background: none; border: 1px solid rgba(241, 236, 226, 0.2); color: rgba(241, 236, 226, 0.8);
       transition: border-color 200ms ease, color 200ms ease;
     }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    @media (hover: hover) and (pointer: fine) { .theme-toggle:hover { border-color: var(--accent); color: var(--accent); } }
     .theme-toggle svg { width: 16px; height: 16px; }
     .theme-toggle .moon { display: none; }
     [data-theme="dark"] .theme-toggle .moon { display: block; }
@@ -155,7 +155,7 @@
     .lang { display: flex; align-items: center; gap: .15rem; font-size: 14px; }
     .lang a, .lang span { padding: .55rem .45rem; text-decoration: none; border-radius: 3px; }
     .lang a { color: rgba(241, 236, 226, 0.72); }
-    .lang a:hover { color: #F1ECE2; }
+    @media (hover: hover) and (pointer: fine) { .lang a:hover { color: #F1ECE2; } }
     .lang .on { color: var(--accent); }
     .burger {
       display: none; width: 44px; height: 44px; margin-right: -10px;
@@ -171,7 +171,7 @@
       flex-direction: column; justify-content: center; gap: 1.6rem; padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom));
     }
     .mob-menu.open { display: flex; }
-    .mob-menu a:not(.btn) {
+    .mob-menu > a:not(.btn) {
       font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; line-height: 1;
       text-transform: uppercase; text-decoration: none; color: #F1ECE2;
     }
@@ -223,7 +223,7 @@
     }
     .trust li { display: flex; align-items: center; gap: .8rem; }
     .flap {
-      display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; line-height: 1;
+      display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1;
       letter-spacing: .02em; color: #F1ECE2; padding: .3rem .45rem; border-radius: 3px;
       background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)) center / 100% 1px no-repeat, var(--flap);
       font-variant-numeric: tabular-nums;
@@ -233,7 +233,7 @@
     .visible .flap { animation: flip 420ms var(--ease-out) both; }
     .visible li:nth-child(2) .flap { animation-delay: 70ms; }
     .visible li:nth-child(3) .flap { animation-delay: 140ms; }
-    @keyframes flip { from { transform: perspective(300px) rotateX(85deg); filter: brightness(1.8); } to { transform: none; filter: none; } }
+    @keyframes flip { from { transform: perspective(300px) rotateX(85deg); opacity: .6; } to { transform: none; opacity: 1; } }
 
     /* ── ПУЗЫРИ-ОТЗЫВЫ (переписка) ── */
     .bubble {
@@ -256,7 +256,7 @@
     }
     .need h3 {
       font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
-      font-size: 1.6rem; line-height: 1; letter-spacing: .01em; margin-bottom: .55rem;
+      font-size: 1.5rem; line-height: 1; letter-spacing: .01em; margin-bottom: .55rem;
     }
     .need p { color: var(--text-soft); max-width: 34em; }
     .need-to { display: flex; flex-direction: column; gap: .5rem; padding-top: .2rem; }
@@ -266,7 +266,7 @@
     }
     .need-to a span { color: var(--muted); }
     .need-to a b { font-weight: 500; border-bottom: 1.5px solid var(--accent); }
-    .need-to a:hover b { color: var(--accent-ink); }
+    @media (hover: hover) and (pointer: fine) { .need-to a:hover b { color: var(--accent-ink); } }
 
     /* ── 4. КАК ПРОХОДИТ СЕАНС ── */
     .how-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 4.5rem; align-items: stretch; }
@@ -277,10 +277,10 @@
     }
     .steps { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; margin: 2.2rem 0 2.6rem; }
     .step { display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: start; }
-    .step .flap { font-size: 1.15rem; }
+    .step .flap { font-size: 1.25rem; }
     .step h3 {
       font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
-      font-size: 1.45rem; line-height: 1; margin-bottom: .5rem;
+      font-size: 1.5rem; line-height: 1; margin-bottom: .5rem;
     }
     .step p { color: var(--text-soft); }
     .visible .step .flap { animation: flip 420ms var(--ease-out) both; }
@@ -330,12 +330,12 @@
       background: var(--surface); border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
       transition: border-color 200ms ease;
     }
-    .svc-teaser:hover { border-color: var(--accent); }
+    @media (hover: hover) and (pointer: fine) { .svc-teaser:hover { border-color: var(--accent); } }
     .svc-photo { aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg-2); }
     .svc-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease-out); }
     @media (hover: hover) and (pointer: fine) { .svc-teaser:hover .svc-photo img { transform: scale(1.03); } }
     .svc-body { padding: 1.2rem 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
-    .svc-name { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.45rem; line-height: 1; }
+    .svc-name { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.5rem; line-height: 1; }
     .svc-fit { color: var(--text-soft); font-size: 1rem; line-height: 1.5; flex: 1; }
     .svc-more { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin-top: .4rem; }
     .formats-quote { margin-top: 2.4rem; }
@@ -356,7 +356,7 @@
     .faq-list details { border-bottom: 1px solid var(--line); }
     .faq-list summary {
       list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
-      padding: 1.35rem 0; font-family: var(--font-display); font-weight: 600; font-size: 1.35rem;
+      padding: 1.35rem 0; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem;
       text-transform: uppercase; line-height: 1.05;
     }
     .faq-list summary::-webkit-details-marker { display: none; }
@@ -388,13 +388,13 @@
     /* ── FOOTER ── */
     footer { background: #0C0C0B; color: #F1ECE2; padding: 3.5rem 0 calc(2.5rem + env(safe-area-inset-bottom)); }
     .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
-    .f-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: .04em; text-transform: uppercase; }
+    .f-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; }
     .f-logo span { color: var(--accent); }
     .f-place { margin-top: .6rem; color: #A9A397; font-size: 15px; }
     .f-col h3 { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #A9A397; margin-bottom: .8rem; }
     .f-col ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
     .f-col a { display: inline-block; padding: .3rem 0; color: #F1ECE2; text-decoration: none; font-size: 15px; }
-    .f-col a:hover { color: var(--accent); }
+    @media (hover: hover) and (pointer: fine) { .f-col a:hover { color: var(--accent); } }
     .f-copy { margin-top: 2.5rem; padding-top: 1.4rem; border-top: 1px solid rgba(241,236,226,.1); font-size: 13px; color: #A9A397; }
 
     /* ── ЛИПКАЯ КНОПКА (мобайл) ── */
@@ -409,12 +409,45 @@
     .sticky-cta.show { transform: none; }
 
     /* ── ПОЯВЛЕНИЕ ── */
-    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out); }
     .reveal.visible { opacity: 1; transform: none; }
 
     /* View Transitions между страницами */
     @view-transition { navigation: auto; }
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }
+
+    /* ── ПОЛИРОВКА (этап 6): доступность, тач, движение ── */
+    html { scroll-padding-top: 80px; }
+    body { overflow-x: clip; }
+    [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    :root:not([data-theme="dark"]) :is(a, button, summary, input, [tabindex]):focus-visible { outline-color: var(--accent-ink); }
+    .svc-card-summary:focus-visible { outline-offset: -3px; }
+    .skip { position: absolute; left: 1rem; top: -200px; z-index: 300; padding: .8rem 1.1rem; background: var(--accent); color: var(--on-accent); font: 600 15px var(--font-text); border-radius: 3px; text-decoration: none; }
+    .skip:focus { top: 1rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    button, .btn, summary, .live-slot { touch-action: manipulation; }
+    .btn, .live-slot, .svc-filter-chip { -webkit-user-select: none; user-select: none; }
+    :is(.theme-toggle, .burger, .rw-more, .channel, .svc-filter-chip, .svc-detail-close) { transition: transform 160ms var(--ease-out), color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+    :is(.theme-toggle, .burger, .rw-more, .channel, .svc-filter-chip, .svc-detail-close):active { transform: scale(.97); }
+    .svc-card { transition: border-color 200ms ease, transform 160ms var(--ease-out); }
+    .svc-card:has(.svc-card-summary:active) { transform: scale(.99); }
+    :is(.link, .need-to a, .crumbs a, .rw-more) { position: relative; }
+    :is(.link, .need-to a, .crumbs a, .rw-more)::after { content: ''; position: absolute; inset: -12px -4px; }
+    .f-col a { padding: .65rem 0; }
+    .faq-list details[open] .ans { animation: ans-in 200ms var(--ease-out); }
+    @keyframes ans-in { from { opacity: 0; transform: translateY(-4px); } }
+    .mob-menu { overscroll-behavior: contain; }
+    .mob-menu.open { transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out); }
+    @starting-style { .mob-menu.open { opacity: 0; transform: translateY(-8px); } }
+    nav#nav { view-transition-name: site-nav; }
+    .sticky-cta { view-transition-name: sticky-cta; transition-duration: 160ms; }
+    .sticky-cta.show { transition-duration: 240ms; }
+    .cert-row { overscroll-behavior-x: contain; }
+    .services-section { overflow-anchor: none; }
+    .svc-card.pop { animation: svc-in 220ms var(--ease-out) both; }
+    @keyframes svc-in { from { opacity: 0; transform: translateY(6px); } }
+    .svc-card-summary :is(.svc-card-photo, .svc-card-cat, .svc-card-title, .svc-card-fit) { display: block; }
+    @media (max-width: 860px) { html { scroll-padding-bottom: 90px; } }
 
     /* ── АДАПТИВ ── */
     @media (max-width: 1100px) {
@@ -441,7 +474,7 @@
       .hero-actions .link { margin-top: 0; }
 
       .trust ul { justify-content: flex-start; }
-      .flap { font-size: 1.3rem; }
+      .flap { font-size: 1.25rem; }
 
       .needs-grid, .how-grid, .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .need { grid-template-columns: 1fr; }
@@ -454,7 +487,7 @@
       .formats-hd { grid-template-columns: 1fr; }
       .svc-grid { grid-template-columns: 1fr; }
       .about-photo { aspect-ratio: 1 / 1; }
-      .faq-list summary { font-size: 1.2rem; }
+      .faq-list summary { font-size: 1.25rem; }
       .cta { min-height: 520px; }
       .cta-bg::after { background: linear-gradient(0deg, rgba(12,12,11,.92) 30%, rgba(12,12,11,.45)); }
       .cta .wrap { align-self: flex-end; padding-bottom: 3rem; }
@@ -466,13 +499,18 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; }
-      .reveal { opacity: 1; transform: none; }
-      .mk { background-size: 100% .26em; }
+      *, *::before, *::after { animation-delay: 0ms !important; transition-delay: 0ms !important; }
+      .reveal { transform: none !important; transition: opacity 200ms ease !important; }
+      .flap, .hero-left > *, .hero-right img, .svc-card.pop, .faq-list details[open] .ans { animation: rm-fade 200ms ease both !important; }
+      .mk { background-size: 100% .26em; transition: none !important; }
+      .burger span, .sticky-cta, .mob-menu.open { transition-property: opacity !important; }
+      ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+      @keyframes rm-fade { from { opacity: 0; } to { opacity: 1; } }
     }
   </style>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
   <nav id="nav" aria-label="Main navigation">
     <a href="index.html" class="nav-logo">Maugli <span>Bodywork</span></a>
@@ -484,7 +522,7 @@
     </ul>
     <div class="nav-tools">
       <a href="https://t.me/maugli_bodywork_bot?start=src_en_nav" target="_blank" rel="noopener" class="btn js-cta">Book</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Dark theme">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -493,14 +531,14 @@
     <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobMenu"><span></span><span></span><span></span></button>
   </nav>
 
-  <div class="mob-menu" id="mobMenu">
+  <div class="mob-menu" id="mobMenu" role="navigation" aria-label="Mobile menu">
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="journal/index.html">Journal</a>
     <a href="contacts.html">Booking & contacts</a>
     <a href="https://t.me/maugli_bodywork_bot?start=src_en_nav" target="_blank" rel="noopener" class="btn">Book</a>
     <div class="mob-tools">
-      <button class="theme-toggle" id="themeToggleMob" type="button" aria-label="Toggle theme">
+      <button class="theme-toggle" id="themeToggleMob" type="button" aria-label="Dark theme">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -508,7 +546,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main">
     <!-- 1. HERO -->
     <section class="hero">
       <div class="hero-left">
@@ -864,11 +902,16 @@
         burger.classList.toggle('open', open);
         mobMenu.classList.toggle('open', open);
         burger.setAttribute('aria-expanded', open);
-        document.body.style.overflow = open ? 'hidden' : '';
+        document.documentElement.style.overflow = open ? 'hidden' : '';
+        // фон под меню недоступен для Tab и скринридеров, фокус — в меню
+        document.querySelectorAll('main, footer, .sticky-cta').forEach(el => { el.inert = open; });
+        if (open) mobMenu.querySelector('a').focus();
       };
       burger.addEventListener('click', () => setMenu(!mobMenu.classList.contains('open')));
       mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && mobMenu.classList.contains('open')) { setMenu(false); burger.focus(); }
+      });
 
       // ── ТЕМА ──
       const toggleTheme = () => {
@@ -876,7 +919,11 @@
         if (dark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
         else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
       };
-      document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', toggleTheme));
+      // кнопка темы сообщает состояние: нажата = тёмная
+      const syncTheme = () => document.querySelectorAll('.theme-toggle').forEach(b =>
+        b.setAttribute('aria-pressed', String(document.documentElement.getAttribute('data-theme') === 'dark')));
+      syncTheme();
+      document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', () => { toggleTheme(); syncTheme(); }));
 
       // ── ПОЯВЛЕНИЕ ──
       const obs = new IntersectionObserver(entries => entries.forEach(e => {
@@ -899,14 +946,19 @@
         body.after(btn);
       });
       const more = document.getElementById('reviewsMore');
-      if (more) more.addEventListener('click', () => document.getElementById('reviews').classList.add('all'));
+      if (more) more.addEventListener('click', () => {
+        document.getElementById('reviews').classList.add('all');
+        const first = document.querySelector('.rw-card.extra');
+        if (first) { first.tabIndex = -1; first.focus(); }
+      });
 
       // ── ЛИПКАЯ КНОПКА: прячется, когда на экране другая кнопка записи ──
       const sticky = document.getElementById('stickyCta');
       const ctas = [...document.querySelectorAll('.hero .js-cta, .cta .js-cta')];
       const inView = new Set();
       const update = () => {
-        const show = inView.size === 0 && window.scrollY > 200;
+        const typing = document.activeElement && document.activeElement.matches('input, textarea');
+        const show = (inView.size === 0 && window.scrollY > 200 && !typing) || sticky.contains(document.activeElement);
         sticky.classList.toggle('show', show);
         sticky.setAttribute('aria-hidden', String(!show));
         sticky.querySelector('a').tabIndex = show ? 0 : -1;
@@ -917,6 +969,8 @@
       });
       ctas.forEach(c => ctaObs.observe(c));
       window.addEventListener('scroll', update, { passive: true });
+      document.addEventListener('focusin', update);
+      document.addEventListener('focusout', () => setTimeout(update));
     });
   </script>
 </body>

@@ -149,6 +149,18 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 - Обращение «ты», но без рода: никаких «готов/уверен/устал/пришёл» о читателе.
 - Пункт меню «Контакты» → «Запись и контакты» (адрес contacts.html прежний).
 
+ЭТАП 6 (04.10.2026) — финальная проверка (accessibility-review, emil-design-eng, mobile-native, детектор impeccable):
+- Ссылка «К содержанию» (#main), фокус-рамка янтарём (в светлой теме — --accent-ink), меню на мобиле:
+  фокус внутрь, фон inert, Esc закрывает и возвращает фокус на бургер.
+- Hover-эффекты только для мыши: @media (hover:hover) and (pointer:fine) (оборачивается автоматически при сборке).
+- prefers-reduced-motion: без сдвигов, только мягкое появление opacity 200ms; view transitions отключаются.
+- services: внутри кнопки карточки только span; фокус в панель при открытии с клавиатуры, Esc возвращает
+  фокус на карточку; карточка не прыгает при переносе панели; hashchange открывает карточку;
+  aria-live «Показано форматов: N»; ошибки промо-формы role="alert".
+- DESIGN.md в корне — описание дизайн-системы (токены + правила). Creative North Star — «Табло в тихой комнате» (утверждено).
+- СБОРКА: about, contacts, journal/* и все en/* собираются скриптами из index.html и services.html —
+  .claude/build/ (README там). Правишь RU → пересобираешь → en_build. Руками EN не править.
+
 КОНТАКТЫ И ФАКТЫ ДЛЯ FAQ (04.10.2026):
 - Бот записи: @maugli_bodywork_bot · личный Telegram: @van.maugli · Instagram: @maugli.bodywork
 - Где: Тбилиси, Мтацминда, метро Liberty Square (улицу/дом на сайте НЕ публиковать).
