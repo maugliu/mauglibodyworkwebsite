@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Maugli Bodywork — Телесная практика в Тбилиси</title>
   <meta name="description" content="Телесная практика и кинезиомассаж в Тбилиси. Работаю с причиной боли и напряжения — через диагностику, мышечное тестирование и телесные техники. Иван Маугли Устиченко." />
-  <meta name="theme-color" content="#F4EFE7" />
+  <meta name="theme-color" content="#0C0C0B" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -13,1388 +13,910 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="hero.webp" as="image" />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Geologica:wght@300;400&display=swap" /></noscript>
-  <style>
-
-
-
-    /* ── DARK MODE ── */
-    :root {
-      --bg: #F4EFE7;
-      --bg-2: #FAF6F0;
-      --bg-dark: #1A1510;
-      --text: #1A1510;
-      --text-soft: #2C2620;
-      --muted: #8A7D72;
-      --accent: #C4694A;
-      --line: #D8CFC4;
-      --white: #FAF6F0;
-    }
-    [data-theme="dark"] {
-      --bg: #15110D;
-      --bg-2: #1E1A14;
-      --bg-dark: #0B0908;
-      --text: #F0E8DE;
-      --text-soft: #D8CFC4;
-      --muted: #8A7D72;
-      --accent: #D77A5B;
-      --line: #2A241E;
-      --white: #F0E8DE;
-    }
-    [data-theme="dark"] body::before { opacity: 0.06; mix-blend-mode: screen; }
-    [data-theme="dark"] .rw-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
-    [data-theme="dark"] .rw-card:hover { background: rgba(255,255,255,0.06); }
-    [data-theme="dark"] .reviews-wall { background: var(--bg-dark); }
-    [data-theme="dark"] .mob-menu, [data-theme="dark"] .mobile-menu { background: var(--bg); }
-
-    /* Theme toggle button */
-    .theme-toggle {
-      background: none; border: 1px solid var(--line);
-      border-radius: 50%; width: 36px; height: 36px;
-      cursor: pointer; padding: 0; margin-left: 0.8rem;
-      display: inline-flex; align-items: center; justify-content: center;
-      color: var(--text); transition: all 0.25s;
-    }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .theme-toggle svg { width: 16px; height: 16px; }
-    .theme-toggle .moon { display: none; }
-    .theme-toggle .sun  { display: block; }
-    [data-theme="dark"] .theme-toggle .moon { display: block; }
-    [data-theme="dark"] .theme-toggle .sun  { display: none; }
-    [data-theme="dark"] .theme-toggle { color: var(--accent); border-color: var(--line); }
-
-    @media (max-width: 860px) {
-      .theme-toggle { width: 32px; height: 32px; margin-left: 0.5rem; }
-    }
-
-    /* Smooth transition on theme switch */
-    body, body * {
-      transition: background-color 0.4s ease, color 0.3s ease, border-color 0.3s ease;
-    }
-    body *::before, body *::after { transition: none; }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 17px; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Geologica', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ─────────────── NAV ─────────────── */
-    /* ── NAV (unified) ── */
-    nav, .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: 64px;
-      display: flex; align-items: center;
-      padding: 0 3rem;
-      background: rgba(21, 17, 13, 0.72);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      transition: background 0.3s, border-color 0.3s;
-    }
-    /* nav.scrolled removed — nav always stays dark */
-    [data-theme="dark"] nav, [data-theme="dark"] .nav {
-      background: rgba(14, 11, 8, 0.75);
-    }
-    [data-theme="dark"] nav.scrolled, [data-theme="dark"] .nav.scrolled {
-      background: rgba(8, 6, 5, 0.92);
-    }
-    /* Light mode: keep nav dark for contrast */
-    .nav-logo, .logo {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      letter-spacing: -0.01em;
-      color: #F0E8DE; text-decoration: none;
-      margin-right: auto;
-    }
-    .nav-links {
-      display: flex; gap: 2.2rem; list-style: none; margin-right: 2rem; align-items: center;
-    }
-    .nav-links a {
-      font-family: 'Geologica', sans-serif;
-      font-size: 0.9rem; font-weight: 300;
-      letter-spacing: 0.01em;
-      color: rgba(240,232,222,0.65); text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.current { color: #F0E8DE; }
-    .nav-links a.current { color: var(--accent); }
-    .nav-cta {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--white); background: var(--accent);
-      padding: 0.55rem 1.3rem; text-decoration: none;
-      transition: background 0.2s;
-      border-radius: 2px; margin-right: 1rem;
-    }
-    .nav-cta:hover { background: #a8553a; }
-    /* Lang switch in nav */
-    .lang-switch {
-      display: flex; align-items: center; gap: 0.4rem; margin-left: 0.8rem;
-    }
-    .lang-btn {
-      font-family: 'Geologica', sans-serif;
-      font-size: 0.78rem; font-weight: 400;
-      letter-spacing: 0.04em;
-      color: rgba(240,232,222,0.5); text-decoration: none;
-      padding: 0.2rem 0.4rem;
-      border: 1px solid transparent; border-radius: 3px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .lang-btn:hover { color: #F0E8DE; }
-    .lang-btn.active { color: var(--accent); border-color: var(--accent); pointer-events: none; font-weight: 500; }
-    .lang-sep { font-size: 0.7rem; color: rgba(255,255,255,0.2); margin: 0 0.1rem; }
-    /* Theme toggle in nav */
-    .theme-toggle {
-      background: none; border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 50%; width: 34px; height: 34px;
-      cursor: pointer; padding: 0; margin-left: 0.6rem;
-      display: inline-flex; align-items: center; justify-content: center;
-      color: rgba(240,232,222,0.65); transition: all 0.25s;
-    }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .theme-toggle svg { width: 15px; height: 15px; }
-    .theme-toggle .moon { display: none; }
-    .theme-toggle .sun { display: block; }
-    [data-theme="dark"] .theme-toggle .moon { display: block; }
-    [data-theme="dark"] .theme-toggle .sun { display: none; }
-    /* Light mode nav override */
-    :root:not([data-theme="dark"]) nav,
-    :root:not([data-theme="dark"]) .nav {
-      background: rgba(244, 239, 231, 0.82);
-      border-bottom: 1px solid rgba(28,22,16,0.08);
-    }
-    :root:not([data-theme="dark"]) nav.scrolled,
-    :root:not([data-theme="dark"]) .nav.scrolled {
-      background: rgba(244, 239, 231, 0.95);
-      border-color: rgba(28,22,16,0.1);
-    }
-    :root:not([data-theme="dark"]) .nav-logo,
-    :root:not([data-theme="dark"]) .logo { color: #1A1510; }
-    :root:not([data-theme="dark"]) .nav-links a { color: rgba(28,22,16,0.6); }
-    :root:not([data-theme="dark"]) .nav-links a:hover { color: #1A1510; }
-    :root:not([data-theme="dark"]) .lang-btn { color: rgba(28,22,16,0.45); }
-    :root:not([data-theme="dark"]) .lang-sep { color: rgba(28,22,16,0.2); }
-    :root:not([data-theme="dark"]) .burger span { background: rgba(28,22,16,0.85); }
-    :root:not([data-theme="dark"]) .theme-toggle {
-      border-color: rgba(28,22,16,0.18);
-      color: rgba(28,22,16,0.65);
-    }
-    /* Burger */
-    .burger {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; padding: 4px; cursor: pointer; margin-left: auto;
-    }
-    .burger span { display: block; width: 22px; height: 1.5px; background: rgba(240,232,222,0.85); transition: all 0.3s; }
-    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .burger.open span:nth-child(2) { opacity: 0; }
-    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* burger */
-    .burger {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; padding: 4px; cursor: pointer; margin-left: auto;
-    }
-    .burger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s; }
-    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .burger.open span:nth-child(2) { opacity: 0; }
-    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    .mob-menu {
-      display: none; position: fixed; inset: 0; background: var(--bg); z-index: 190;
-      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
-    }
-    .mob-menu.open { display: flex; }
-    .mob-menu a {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 1.1rem; font-weight: 300; color: var(--text); text-decoration: none;
-    }
-    .mob-menu .mob-cta {
-      color: var(--white); background: var(--accent);
-      padding: 0.75rem 2rem; border-radius: 2px; font-size: 0.78rem;
-    }
-
-    /* ─────────────── HERO ─────────────── */
-    .hero {
-      min-height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;
-      padding-top: 64px;
-    }
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 5rem 3rem 5rem;
-    }
-    .hero-tag {
-      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 2rem;
-      display: flex; align-items: center; gap: 0.75rem;
-      opacity: 0; animation: fadeUp 0.6s 0.15s forwards;
-    }
-    .hero-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent); flex-shrink: 0; }
-
-    .hero-h1 {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700;
-      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--text);
-      margin-bottom: 1.8rem;
-      opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
-    }
-    .hero-h1 .hi { color: var(--accent); }
-
-    .hero-sub {
-      font-size: 1.05rem; color: var(--muted);
-      line-height: 1.75; max-width: 400px;
-      margin-bottom: 2.5rem;
-      opacity: 0; animation: fadeUp 0.6s 0.45s forwards;
-    }
-    .hero-actions {
-      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp 0.6s 0.6s forwards;
-    }
-    .btn-accent {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      color: var(--white); background: var(--accent);
-      padding: 0.9rem 2rem; text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-accent:hover { background: var(--accent-h); transform: translateY(-1px); }
-    .btn-ghost-text {
-      font-size: 0.8rem; color: var(--muted);
-      text-decoration: none;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .btn-ghost-text:hover { color: var(--text); border-color: var(--text); }
-
-    .hero-trust {
-      margin-top: 1.4rem; font-size: 0.73rem; color: var(--muted);
-      opacity: 0; animation: fadeUp 0.6s 0.75s forwards;
-    }
-
-    .hero-right {
-      position: relative; overflow: hidden;
-    }
-    .hero-right img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: 50% 15%;
-      display: block;
-    }
-    /* тонкий градиент только слева */
-    .hero-right::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0; width: 80px; z-index: 1;
-      background: linear-gradient(to right, var(--bg), transparent);
-    }
-
-    /* ─────────────── MARQUEE ─────────────── */
-    .marquee-wrap {
-      background: var(--bg-dark);
-      overflow: hidden; padding: 0.85rem 0;
-    }
-    .marquee-inner {
-      display: flex; width: max-content;
-      animation: marquee 22s linear infinite;
-    }
-    .marquee-inner:hover { animation-play-state: paused; }
-    .mi {
-      display: flex; align-items: center; gap: 1.8rem;
-      padding: 0 1.8rem; white-space: nowrap; flex-shrink: 0;
-    }
-    .mi span {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 0.65rem; font-weight: 300;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(253,250,245,0.5);
-    }
-    .mi-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* ─────────────── STATS ─────────────── */
-    .stats {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      background: var(--bg-2);
-      border-bottom: 1px solid var(--line);
-    }
-    .stat {
-      padding: 2.5rem 3rem;
-      border-right: 1px solid var(--line);
-    }
-    .stat:last-child { border-right: none; }
-    .stat-val {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: clamp(2rem, 4vw, 3.2rem);
-      color: var(--text); line-height: 1; letter-spacing: -0.03em;
-      margin-bottom: 0.4rem;
-    }
-    .stat-val .acc { color: var(--accent); }
-    .stat-lbl {
-      font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ─────────────── FOR WHOM ─────────────── */
-    .for-whom {
-      padding: 6rem 3rem;
-      max-width: 1280px; margin: 0 auto;
-    }
-    .fw-top {
-      display: grid; grid-template-columns: 1fr 1.4fr;
-      gap: 5rem; align-items: end; margin-bottom: 3.5rem;
-    }
-    .fw-h {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: clamp(2rem, 3.8vw, 3.5rem);
-      line-height: 1.05; letter-spacing: -0.025em; color: var(--text);
-    }
-    .fw-h .acc { color: var(--accent); }
-    .fw-desc { font-size: 1rem; color: var(--muted); line-height: 1.75; }
-
-    .fw-cards {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      border: 1px solid var(--line);
-    }
-    .fw-card {
-      padding: 1.8rem 1.5rem;
-      border-right: 1px solid var(--line);
-      transition: background 0.2s;
-    }
-    .fw-card:nth-child(2n) { border-right: none; }
-    .fw-card:nth-child(n+3) { border-top: 1px solid var(--line); }
-    .fw-card:hover { background: var(--white); }
-    .fw-n {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 0.55rem; font-weight: 600;
-      letter-spacing: 0.15em; color: var(--accent);
-      margin-bottom: 1rem; display: block;
-    }
-    .fw-t { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
-
-    /* ─────────────── SPLIT: PHILOSOPHY ─────────────── */
-    .split {
-      display: grid; grid-template-columns: 1fr 1fr;
-      min-height: 80vh;
-    }
-    .split-img {
-      position: relative; overflow: hidden;
-    }
-    .split-img img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center 20%;
-      display: block; transition: transform 0.8s ease;
-    }
-    .split-img:hover img { transform: scale(1.03); }
-
-    .split-body {
-      background: var(--bg-dark);
-      padding: 5rem 4rem;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .s-tag {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1.8rem;
-      display: flex; align-items: center; gap: 0.7rem;
-    }
-    .s-tag::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
-    .s-h {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 300; font-size: clamp(1.6rem, 2.8vw, 2.5rem);
-      line-height: 1.2; color: var(--white);
-      margin-bottom: 2.2rem; letter-spacing: -0.02em;
-    }
-    .s-h strong { font-weight: 700; color: var(--accent); }
-    .s-txt { font-size: 0.95rem; color: rgba(253,250,245,0.55); line-height: 1.85; }
-    .s-txt p + p { margin-top: 1.1rem; }
-    .s-txt strong { color: rgba(253,250,245,0.85); font-weight: 400; }
-
-    /* ─────────────── APPROACH ─────────────── */
-    .approach {
-      padding: 6rem 3rem;
-      max-width: 1280px; margin: 0 auto;
-    }
-    .ap-hd {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 3rem; gap: 3rem;
-    }
-    .ap-ttl {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: clamp(2rem, 3.8vw, 3.5rem);
-      line-height: 1.05; letter-spacing: -0.025em; color: var(--text);
-    }
-    .ap-sub { font-size: 0.92rem; color: var(--muted); line-height: 1.7; max-width: 300px; text-align: right; }
-
-    .ap-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      border: 1px solid var(--line);
-    }
-    .ap-card {
-      padding: 2.5rem 2.2rem;
-      border-right: 1px solid var(--line);
-      position: relative; overflow: hidden;
-      transition: background 0.25s;
-    }
-    .ap-card:last-child { border-right: none; }
-    .ap-card:hover { background: var(--white); }
-    .ap-card::after {
-      content: attr(data-n);
-      position: absolute; bottom: -1.5rem; right: -0.5rem;
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: 7rem; line-height: 1;
-      color: rgba(196,105,74,0.07); pointer-events: none;
-      letter-spacing: -0.04em; transition: color 0.25s;
-    }
-    .ap-card:hover::after { color: rgba(196,105,74,0.13); }
-    .ap-n { font-family: 'Unbounded', sans-serif; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 1.1rem; }
-    .ap-ttl2 { font-family: 'Unbounded', sans-serif; font-weight: 400; font-size: 0.95rem; color: var(--text); margin-bottom: 1rem; line-height: 1.3; }
-    .ap-txt { font-size: 0.9rem; color: var(--muted); line-height: 1.7; position: relative; z-index: 1; }
-
-    /* ─────────────── SERVICES ─────────────── */
-    .services {
-      position: relative;
-      overflow: hidden;
-      padding: 6rem 3rem;
-    }
-    .services-bg {
-      position: absolute; inset: 0; z-index: 0;
-    }
-    .services-bg img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center 25%;
-      display: block;
-    }
-    .services-bg::after {
-      content: ''; position: absolute; inset: 0;
-      background: rgba(26,21,16,0.82);
-    }
-    .svc-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
-    .svc-hd {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 3rem;
-    }
-    .svc-ttl {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: clamp(2rem, 3.8vw, 3.5rem);
-      line-height: 1.05; letter-spacing: -0.025em; color: var(--white);
-    }
-
-    .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
-    .svc-teaser {
-      display: block; text-decoration: none; color: inherit;
-      border-radius: 10px; overflow: hidden;
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    }
-    .svc-teaser:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(28,21,14,0.35); border-color: var(--accent); }
-    .svc-teaser-photo { position: relative; height: 150px; overflow: hidden; }
-    .svc-teaser-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .svc-teaser-photo img.pos-taping { object-position: center 40%; }
-    .svc-teaser-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 65%); }
-    .svc-teaser-body { padding: 0.9rem 1.1rem 1.15rem; }
-    .svc-teaser-name { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1rem; color: var(--white); line-height: 1.25; margin-bottom: 0.5rem; }
-    .svc-teaser-line { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 0.7rem; }
-    .svc-teaser-more { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-
-    @media (max-width: 560px) {
-      .svc-grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); gap: 12px; }
-      .svc-teaser-photo { height: 130px; }
-      .svc-teaser-name { font-size: 0.88rem; }
-    }
-
-    /* ─────────────── HOW ─────────────── */
-    .how {
-      padding: 6rem 3rem;
-      max-width: 1280px; margin: 0 auto;
-    }
-    .how-hd { margin-bottom: 3rem; }
-    .how-ttl {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: clamp(2rem, 3.8vw, 3.5rem);
-      line-height: 1.05; letter-spacing: -0.025em; color: var(--text);
-    }
-    .how-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      border: 1px solid var(--line);
-    }
-    .how-card {
-      border-right: 1px solid var(--line); overflow: hidden;
-    }
-    .how-card:last-child { border-right: none; }
-    .how-img { overflow: hidden; aspect-ratio: 4/5; }
-    .how-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s ease; }
-    .how-card:hover .how-img img { transform: scale(1.05); }
-    .how-body { padding: 1.8rem 2rem 2.2rem; }
-    .how-n { font-family: 'Unbounded', sans-serif; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.7rem; }
-    .how-ttl2 { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 1rem; color: var(--text); margin-bottom: 0.6rem; line-height: 1.3; }
-    .how-txt { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
-
-    /* ─────────────── CTA ─────────────── */
-    .cta {
-      position: relative; overflow: hidden;
-      min-height: 540px; display: flex; align-items: center;
-    }
-    .cta-bg { position: absolute; inset: 0; }
-    .cta-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
-    .cta-bg::after { content: ''; position: absolute; inset: 0; background: rgba(30,26,20,0.78); }
-    .cta-inner { position: relative; z-index: 2; padding: 5rem 3rem; max-width: 640px; }
-    .cta-tag { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
-    .cta-tag::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
-    .cta-h {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: clamp(2rem, 4vw, 3.8rem);
-      line-height: 1.1; letter-spacing: -0.025em;
-      color: var(--white); margin-bottom: 2.5rem;
-    }
-    .cta-h .acc { color: var(--accent); }
-    .btn-light {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      color: var(--text); background: var(--white);
-      padding: 1rem 2.5rem; text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.2s, transform 0.15s; display: inline-block;
-    }
-    .btn-light:hover { background: #E8C4B4; transform: translateY(-1px); }
-
-    /* ─────────────── FOOTER ─────────────── */
-    footer {
-      background: var(--bg-dark);
-      padding: 2.5rem 3rem;
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .f-logo { font-family: 'Unbounded', sans-serif; font-size: 0.68rem; font-weight: 300; color: rgba(253,250,245,0.5); }
-    .f-links { display: flex; gap: 2rem; list-style: none; }
-    .f-links a { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(253,250,245,0.28); text-decoration: none; transition: color 0.2s; }
-    .f-links a:hover { color: rgba(253,250,245,0.7); }
-    .f-copy { font-size: 0.62rem; color: rgba(253,250,245,0.18); }
-
-    /* ─────────────── UTILS ─────────────── */
-    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
-    .reveal { opacity:0; transform:translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
-
-    /* ─────────────── MOBILE ─────────────── */
-    /* hero picture element fix */
-    .hero-right picture { display: block; width: 100%; height: 100%; }
-    .hero-right picture img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
-
-
-      @media (max-width: 860px) {
-        .marquee-inner { animation-play-state: running !important; }
-      }
-    @media (max-width: 860px) {
-      nav { padding: 0 1.4rem; }
-      .nav-links, .nav-cta { display: none; }
-      .burger { display: flex; }
-
-      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 64px; }
-      .hero-right { height: 55vw; position: relative; }
-      .hero-right::before { background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%); width: 100%; height: 100%; top: 0; left: 0; }
-      .hero-left { padding: 2.5rem 1.4rem 4rem; }
-      .hero-h1 { font-size: clamp(2rem, 8vw, 3rem); }
-
-      .stats { grid-template-columns: 1fr; }
-      .stat { border-right: none; border-bottom: 1px solid var(--line); padding: 1.8rem 1.4rem; }
-      .stat:last-child { border-bottom: none; }
-
-      .for-whom { padding: 4rem 1.4rem; }
-      .fw-top { grid-template-columns: 1fr; gap: 1.5rem; }
-      .fw-cards { grid-template-columns: 1fr 1fr; }
-      .fw-card:nth-child(2n) { border-right: none; }
-      .fw-card:nth-child(n+3) { border-top: 1px solid var(--line); }
-
-      .split { grid-template-columns: 1fr; min-height: auto; }
-      .split-img { height: 55vw; }
-      .split-body { padding: 3rem 1.4rem; }
-      .s-h { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-
-      .approach { padding: 4rem 1.4rem; }
-      .ap-hd { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .ap-sub { text-align: left; }
-      .ap-grid { grid-template-columns: 1fr; }
-      .ap-card { border-right: none; border-bottom: 1px solid var(--line); }
-      .ap-card:last-child { border-bottom: none; }
-
-      .services { padding: 4rem 1.4rem; }
-      .svc-hd { flex-direction: column; align-items: flex-start; gap: 1rem; }
-
-      .how { padding: 4rem 1.4rem; }
-      .how-grid { grid-template-columns: 1fr; }
-      .how-card { border-right: none; border-bottom: 1px solid var(--line); }
-      .how-card:last-child { border-bottom: none; }
-
-      .cta-inner { padding: 4rem 1.4rem; }
-      .cta-h { font-size: clamp(1.8rem, 7vw, 3rem); }
-
-      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.4rem; }
-      .f-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-    }
-
-    .lang-switch {
-      display: flex; align-items: center; gap: 0.5rem;
-      margin-left: 1.5rem;
-    }
-    .lang-btn {
-      font-family: 'Geologica', sans-serif;
-      font-size: 0.78rem; font-weight: 400;
-      letter-spacing: 0.04em;
-      color: var(--muted); text-decoration: none;
-      padding: 0.2rem 0.4rem;
-      border: 1px solid transparent; border-radius: 3px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .lang-btn:hover { color: var(--text); }
-    .lang-btn.active { color: var(--accent); border-color: var(--accent); pointer-events: none; font-weight: 500; }
-    .lang-sep { font-size: 0.7rem; color: var(--line); margin: 0 0.1rem; }
-
-    /* ── REVIEWS INLINE (A) ── */
-    .review-inline {
-      display: flex; justify-content: flex-end;
-      padding: 0 3rem 3rem;
-    }
-    .review-inline.left { justify-content: flex-start; }
-    .msg-bubble { max-width: 480px; }
-    .msg-bubble .bubble {
-      background: var(--bg-dark);
-      color: var(--white);
-      border-radius: 18px 18px 4px 18px;
-      padding: 1.1rem 1.4rem;
-      font-size: 0.92rem; line-height: 1.65;
-      position: relative;
-    }
-    .msg-bubble.left .bubble { border-radius: 18px 18px 18px 4px; }
-    .bubble-name {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 0.52rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.5rem; display: block;
-    }
-    .bubble-time {
-      font-size: 0.62rem; color: rgba(250,246,240,0.3);
-      margin-top: 0.5rem; text-align: right; display: block;
-    }
-    .msg-bubble .bubble::after {
-      content: ''; position: absolute;
-      bottom: 0; right: -8px;
-      width: 0; height: 0;
-      border-left: 8px solid var(--bg-dark);
-      border-bottom: 8px solid transparent;
-    }
-    .msg-bubble.left .bubble::after {
-      right: auto; left: -8px;
-      border-left: none;
-      border-right: 8px solid var(--bg-dark);
-    }
-
-    /* ── REVIEWS WALL (B) ── */
-    .reviews-wall {
-      background: var(--bg-dark);
-      padding: 6rem 3rem;
-    }
-    .rw-header {
-      max-width: 1280px; margin: 0 auto 4rem;
-      display: flex; justify-content: space-between; align-items: flex-end;
-    }
-    .rw-ttl {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 700; font-size: clamp(2rem, 3.8vw, 3.5rem);
-      letter-spacing: -0.025em; color: var(--white); line-height: 1.05;
-    }
-    .rw-sub {
-      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(250,246,240,0.25); max-width: 180px; text-align: right; line-height: 1.6;
-    }
-    .rw-grid {
-      max-width: 1280px; margin: 0 auto;
-      columns: 3; column-gap: 1.5rem;
-    }
-    .rw-card {
-      break-inside: avoid; margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px 16px 16px 4px;
-      padding: 1.5rem;
-      transition: background 0.25s;
-    }
-    .rw-card:hover { background: rgba(255,255,255,0.07); }
-    .rw-card.rt { border-radius: 16px 16px 4px 16px; }
-    .rw-name {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 0.52rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.7rem; display: block;
-    }
-    .rw-text { font-size: 0.92rem; color: rgba(250,246,240,0.75); line-height: 1.7; }
-    .rw-emoji { display: block; margin-top: 0.7rem; font-size: 1rem; }
-    .rw-note { margin-top: 0.5rem; font-size: 0.75rem; color: rgba(250,246,240,0.3); }
-
-    @media (max-width: 860px) {
-      .review-inline { padding: 0 1.4rem 2rem; }
-      .msg-bubble { max-width: 100%; }
-      .reviews-wall { padding: 4rem 1.4rem; }
-      .rw-grid { columns: 1; }
-      .rw-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
-      .rw-sub { text-align: left; }
-    }
-    @media (min-width: 861px) and (max-width: 1100px) {
-      .rw-grid { columns: 2; }
-    }
-
-    .mob-lang { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
-    .mob-lang .ml-active { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); }
-    .mob-lang .ml-sep { color: var(--line); font-size: 0.8rem; }
-    .mob-lang .ml-other { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); text-decoration: none; }
-
-    /* ── PERFORMANCE & UX IMPROVEMENTS ── */
-
-    /* Parallax hero */
-    .hero-right { will-change: transform; }
-
-    /* Hover lift on how cards */
-    .how-card { transition: box-shadow 0.3s ease; }
-    .how-card:hover { box-shadow: 0 8px 24px rgba(28,21,14,0.1); }
-
-    /* Marquee pause on hover */
-    .marquee-inner:hover { animation-play-state: paused; }
-
-    /* Stagger for fw-cards */
-    .fw-card:nth-child(1) { transition-delay: 0.05s; }
-    .fw-card:nth-child(2) { transition-delay: 0.1s; }
-    .fw-card:nth-child(3) { transition-delay: 0.15s; }
-    .fw-card:nth-child(4) { transition-delay: 0.2s; }
-    .fw-card:nth-child(5) { transition-delay: 0.25s; }
-    .fw-card:nth-child(6) { transition-delay: 0.3s; }
-
-    /* Stagger for rw-cards */
-    .rw-card { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease, background 0.25s; }
-    .rw-card.visible { opacity: 1; transform: none; }
-    .rw-card:nth-child(1) { transition-delay: 0.05s; }
-    .rw-card:nth-child(2) { transition-delay: 0.12s; }
-    .rw-card:nth-child(3) { transition-delay: 0.19s; }
-    .rw-card:nth-child(4) { transition-delay: 0.26s; }
-    .rw-card:nth-child(5) { transition-delay: 0.33s; }
-    .rw-card:nth-child(6) { transition-delay: 0.4s; }
-    .rw-card:nth-child(7) { transition-delay: 0.47s; }
-    .rw-card:nth-child(8) { transition-delay: 0.54s; }
-    .rw-card:nth-child(9) { transition-delay: 0.61s; }
-
-    /* Scroll indicator on hero */
-    .scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-      z-index: 3; opacity: 1; transition: opacity 0.4s;
-      pointer-events: none;
-    }
-    .scroll-hint.hidden { opacity: 0; }
-    .scroll-hint-line {
-      width: 1px; height: 40px;
-      background: linear-gradient(to bottom, rgba(250,246,245,0.5), transparent);
-      animation: scrollPulse 1.6s ease-in-out infinite;
-    }
-    .scroll-hint-label {
-      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(250,246,245,0.45);
-    }
-    @keyframes scrollPulse {
-      0%,100% { opacity: 0.4; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.15); }
-    }
-
-    /* Smooth bubble reveal */
-    .msg-bubble { opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .msg-bubble.visible { opacity: 1; transform: none; }
-
-    /* Inline review background blend */
-    .review-inline { position: relative; }
-
-    /* ── GRAIN TEXTURE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-      mix-blend-mode: multiply;
-    }
-
-    /* ── COLORED ACCENT SHADOWS ── */
-    .svc-teaser:hover {
-      box-shadow: 0 16px 40px -8px rgba(196,105,74,0.25), 0 4px 12px rgba(28,21,14,0.06) !important;
-    }
-    /* How cards on home */
-    .how-card:hover {
-      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.18), 0 2px 8px rgba(28,21,14,0.04) !important;
-    }
-    /* CTA buttons */
-    .btn-accent:hover, .nav-cta:hover {
-      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.45);
-    }
-    .btn-light:hover {
-      box-shadow: 0 8px 24px -4px rgba(196,105,74,0.35);
-    }
-    /* Cert cards */
-    .cert-card:hover {
-      box-shadow: 0 12px 32px -6px rgba(196,105,74,0.2) !important;
-    }
-    /* Service blocks */
-    .book-btn:hover {
-      box-shadow: 0 6px 20px -4px rgba(74,122,155,0.45);
-    }
-
-    /* ── PREMIUM EFFECTS ── */
-
-    
-
-    /* Magnetic buttons */
-    .btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn {
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.3s;
-      will-change: transform;
-    }
-
-    /* Glow spotlight on review cards in wall */
-    .reviews-wall { position: relative; overflow: hidden; }
-    .rw-grid {
-      position: relative;
-    }
-    .rw-spotlight {
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(196,105,74,0.18) 0%, transparent 60%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      transform: translate(-50%, -50%);
-      z-index: 0;
-    }
-    .rw-grid:hover .rw-spotlight { opacity: 1; }
-    .rw-card { position: relative; z-index: 1; }
-
-    /* View Transitions API — page transitions */
-    @view-transition {
-      navigation: auto;
-    }
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-      animation-duration: 0.4s;
-    }
-
-    /* Scroll-driven hero parallax (CSS native, fallback to JS) */
-    }
-
-    /* Smoother focus state */
-    a:focus-visible, button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-      border-radius: 2px;
-    }
-
-    /* Reduced motion respect */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .marquee-inner { animation: none !important; }
-      .split-text .word { transform: none !important; }
-    }
-
-    .nav.scrolled .burger span { background: rgba(240,232,222,0.9); }
-    .nav.scrolled .nav-links a { color: rgba(240,232,222,0.7); }
-    .nav.scrolled .nav-links a:hover { color: var(--accent); }
-    .nav.scrolled .lang-btn.active { color: var(--accent); }
-  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Onest:wght@400;500;600&display=swap" />
   <script>
-    // Apply theme before paint to avoid flash
-    (function() {
+    // Тема до отрисовки: тёмная по умолчанию, светлая = отсутствие data-theme
+    (function () {
       var saved = localStorage.getItem('theme');
       if (saved !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
     })();
   </script>
+  <style>
+    /* ── ТОКЕНЫ ── светлая тема = без атрибута, тёмная = data-theme="dark" */
+    :root {
+      --bg: #F2F1EE;
+      --bg-2: #E8E6E1;
+      --surface: #DEDBD4;
+      --text: #161512;
+      --text-soft: #3A3833;
+      --muted: #645F56;
+      --accent: #F2A93B;
+      --accent-h: #E89A26;
+      --accent-ink: #7A4706;
+      --on-accent: #0C0C0B;
+      --line: #D2CEC6;
+      --paper: #F1ECE2;
+      --ink: #0C0C0B;
+      --flap: #262623;
+      --font-display: 'Fira Sans Condensed', 'Arial Narrow', sans-serif;
+      --font-text: 'Onest', system-ui, sans-serif;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-io: cubic-bezier(0.77, 0, 0.175, 1);
+      --gutter: 3rem;
+      --maxw: 1280px;
+      --marker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 60 3, 120 12, 180 7 S 268 3, 297 8' stroke='%23F2A93B' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    [data-theme="dark"] {
+      --bg: #0C0C0B;
+      --bg-2: #141413;
+      --surface: #1F1F1C;
+      --text: #F1ECE2;
+      --text-soft: #CFC9BE;
+      --muted: #A9A397;
+      --accent-ink: #F2A93B;
+      --line: #2E2E2B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-text); font-weight: 400; font-size: 1.0625rem; line-height: 1.6;
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    ::selection { background: var(--accent); color: var(--on-accent); }
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px;
+    }
+
+    /* ── GRAIN ── обязателен на всех страницах */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      opacity: 0.035; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+    [data-theme="dark"] body::before { opacity: 0.06; mix-blend-mode: screen; }
+
+    /* ── ТИПОГРАФИКА ── */
+    .h-display, .h2 {
+      font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0; line-height: 0.92; text-wrap: balance;
+    }
+    .h2 { font-size: clamp(2.4rem, 4.6vw, 4.2rem); margin-bottom: 1.5rem; }
+    .label {
+      font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .lead { font-size: 1.125rem; line-height: 1.6; color: var(--text-soft); max-width: 36em; }
+    /* Маркер: янтарная линия прорисовывается под акцентным словом при появлении блока */
+    .mk {
+      background: var(--marker) no-repeat 0 98% / 0% .26em;
+      padding-bottom: .04em;
+      -webkit-box-decoration-break: clone; box-decoration-break: clone;
+      transition: background-size 900ms var(--ease-io) 250ms;
+    }
+    .visible .mk, .mk.visible { background-size: 100% .26em; }
+
+    /* ── КНОПКИ ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      font-family: var(--font-display); font-weight: 600; font-size: 16px; line-height: 1;
+      letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none;
+      color: var(--on-accent); background: var(--accent);
+      padding: 1.05rem 1.7rem; border-radius: 3px; border: 0; cursor: pointer;
+      transition: transform 160ms var(--ease-out), background-color 200ms ease;
+    }
+    .btn:hover { background: var(--accent-h); }
+    .btn:active { transform: scale(0.97); }
+    .btn-note { display: block; margin-top: .6rem; font-size: 13px; color: var(--muted); }
+    .link {
+      font-size: 1rem; color: var(--text); text-decoration: none;
+      border-bottom: 1.5px solid var(--accent); padding-bottom: 2px;
+      transition: color 200ms ease;
+    }
+    .link:hover { color: var(--accent-ink); }
+
+    /* ── NAV ── всегда тёмный */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 64px;
+      display: flex; align-items: center; gap: 2rem; padding: 0 var(--gutter);
+      background: rgba(12, 12, 11, 0.86);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(241, 236, 226, 0.08);
+      color: #F1ECE2;
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: .04em;
+      text-transform: uppercase; text-decoration: none; color: #F1ECE2; margin-right: auto; white-space: nowrap;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      font-size: 15px; color: rgba(241, 236, 226, 0.72); text-decoration: none; white-space: nowrap;
+      transition: color 200ms ease;
+    }
+    .nav-links a:hover { color: #F1ECE2; }
+    .nav-tools { display: flex; align-items: center; gap: .9rem; }
+    nav .btn { font-size: 14px; padding: .7rem 1.05rem; }
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: none; border: 1px solid rgba(241, 236, 226, 0.2); color: rgba(241, 236, 226, 0.8);
+      transition: border-color 200ms ease, color 200ms ease;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle svg { width: 16px; height: 16px; }
+    .theme-toggle .moon { display: none; }
+    [data-theme="dark"] .theme-toggle .moon { display: block; }
+    [data-theme="dark"] .theme-toggle .sun { display: none; }
+    .lang { display: flex; align-items: center; gap: .15rem; font-size: 14px; }
+    .lang a, .lang span { padding: .55rem .45rem; text-decoration: none; border-radius: 3px; }
+    .lang a { color: rgba(241, 236, 226, 0.72); }
+    .lang a:hover { color: #F1ECE2; }
+    .lang .on { color: var(--accent); }
+    .burger {
+      display: none; width: 44px; height: 44px; margin-right: -10px;
+      background: none; border: 0; cursor: pointer;
+      flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    }
+    .burger span { display: block; width: 22px; height: 2px; background: #F1ECE2; transition: transform 250ms var(--ease-out), opacity 200ms ease; }
+    .burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mob-menu {
+      display: none; position: fixed; inset: 64px 0 0; z-index: 190; background: #0C0C0B; color: #F1ECE2;
+      flex-direction: column; justify-content: center; gap: 1.6rem; padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom));
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu a:not(.btn) {
+      font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; line-height: 1;
+      text-transform: uppercase; text-decoration: none; color: #F1ECE2;
+    }
+    .mob-menu .btn { align-self: flex-start; margin-top: 1rem; }
+    .mob-tools { display: flex; align-items: center; gap: 1rem; margin-top: .5rem; }
+
+    /* ── СЕКЦИИ ── */
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+    section { position: relative; }
+    .sec { padding: 7rem 0; }
+
+    /* ── 1. HERO ── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: min(100svh, 900px); padding-top: 64px;
+    }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 4rem var(--gutter); }
+    .hero h1 {
+      font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(3.2rem, 6vw, 6rem); line-height: 0.9; letter-spacing: -0.005em;
+      margin-bottom: 1.8rem; text-wrap: balance;
+    }
+    .hero h1 .hi { color: var(--accent-ink); }
+    [data-theme="dark"] .hero h1 .hi { color: var(--accent); }
+    .hero .lead { margin-bottom: 2.4rem; max-width: 30em; }
+    .hero-actions { display: flex; align-items: flex-start; gap: 1.8rem; flex-wrap: wrap; }
+    .hero-actions .link { margin-top: .95rem; }
+    .hero-right { position: relative; overflow: hidden; background: var(--surface); }
+    .hero-right img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: 50% 84%;
+    }
+    .hero-right::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 18%; z-index: 1;
+      background: linear-gradient(to right, var(--bg), transparent);
+    }
+    .hero-left > * { animation: rise 600ms var(--ease-out) both; }
+    .hero-left > :nth-child(2) { animation-delay: 80ms; }
+    .hero-left > :nth-child(3) { animation-delay: 160ms; }
+    .hero-right img { animation: fade 900ms ease 100ms both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ── 2. ПОЛОСА ДОВЕРИЯ ── */
+    .trust { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .trust ul {
+      list-style: none; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem;
+      padding-top: 1.4rem; padding-bottom: 1.4rem;
+    }
+    .trust li { display: flex; align-items: center; gap: .8rem; }
+    .flap {
+      display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; line-height: 1;
+      letter-spacing: .02em; color: #F1ECE2; padding: .3rem .45rem; border-radius: 3px;
+      background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)) center / 100% 1px no-repeat, var(--flap);
+      font-variant-numeric: tabular-nums;
+    }
+    .flap .a { color: var(--accent); }
+    .trust .label { color: var(--text-soft); }
+    .visible .flap { animation: flip 420ms var(--ease-out) both; }
+    .visible li:nth-child(2) .flap { animation-delay: 70ms; }
+    .visible li:nth-child(3) .flap { animation-delay: 140ms; }
+    @keyframes flip { from { transform: perspective(300px) rotateX(85deg); filter: brightness(1.8); } to { transform: none; filter: none; } }
+
+    /* ── ПУЗЫРИ-ОТЗЫВЫ (переписка) ── */
+    .bubble {
+      position: relative; max-width: 26rem; background: var(--surface); color: var(--text);
+      border-radius: 18px 18px 18px 4px; padding: 1rem 1.25rem .8rem; font-size: 1rem; line-height: 1.55;
+    }
+    .bubble.out { border-radius: 18px 18px 4px 18px; margin-left: auto; }
+    .bubble-name {
+      display: block; font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: .35rem;
+    }
+    .bubble-time { display: block; text-align: right; font-size: 12px; color: var(--muted); margin-top: .35rem; font-variant-numeric: tabular-nums; }
+
+    /* ── 3. С ЧЕМ ПРИХОДЯТ ── */
+    .needs-grid { display: grid; grid-template-columns: 7fr 4fr; gap: 4rem; align-items: end; }
+    .needs { list-style: none; border-top: 1px solid var(--line); }
+    .need {
+      display: grid; grid-template-columns: 1fr auto; gap: .5rem 2.5rem; align-items: start;
+      padding: 1.8rem 0; border-bottom: 1px solid var(--line);
+    }
+    .need h3 {
+      font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
+      font-size: 1.6rem; line-height: 1; letter-spacing: .01em; margin-bottom: .55rem;
+    }
+    .need p { color: var(--text-soft); max-width: 34em; }
+    .need-to { display: flex; flex-direction: column; gap: .5rem; padding-top: .2rem; }
+    .need-to a {
+      display: inline-flex; align-items: baseline; gap: .5rem; text-decoration: none; white-space: nowrap;
+      font-size: 15px; color: var(--text);
+    }
+    .need-to a span { color: var(--muted); }
+    .need-to a b { font-weight: 500; border-bottom: 1.5px solid var(--accent); }
+    .need-to a:hover b { color: var(--accent-ink); }
+
+    /* ── 4. КАК ПРОХОДИТ СЕАНС ── */
+    .how-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 4.5rem; align-items: stretch; }
+    .how-photo { position: relative; overflow: hidden; border-radius: 4px; min-height: 520px; background: var(--surface); }
+    .how-photo img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      object-position: 38% 100%; transform: scale(1.32); transform-origin: 36% 92%;
+    }
+    .steps { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; margin: 2.2rem 0 2.6rem; }
+    .step { display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: start; }
+    .step .flap { font-size: 1.15rem; }
+    .step h3 {
+      font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
+      font-size: 1.45rem; line-height: 1; margin-bottom: .5rem;
+    }
+    .step p { color: var(--text-soft); }
+    .visible .step .flap { animation: flip 420ms var(--ease-out) both; }
+    .visible .step:nth-child(2) .flap { animation-delay: 90ms; }
+    .visible .step:nth-child(3) .flap { animation-delay: 180ms; }
+    .principles {
+      display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line);
+      font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .principles span { display: inline-flex; align-items: center; gap: .55rem; }
+    .principles span::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    .how-quote { margin-top: 2.6rem; }
+
+    /* ── 5. ОТЗЫВЫ ── */
+    .reviews { background: var(--bg-2); }
+    .reviews-hd { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 3rem; }
+    .reviews-hd .h2 { margin-bottom: 0; }
+    .rw-grid { columns: 3; column-gap: 1.4rem; }
+    .rw-card {
+      break-inside: avoid; margin-bottom: 1.4rem; background: var(--bg); border: 1px solid var(--line);
+      border-radius: 18px 18px 18px 4px; padding: 1.4rem 1.4rem 1.2rem;
+    }
+    .rw-card.out { border-radius: 18px 18px 4px 18px; }
+    .rw-name {
+      display: block; font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: .6rem;
+    }
+    .rw-text { font-size: 1rem; line-height: 1.6; color: var(--text); }
+    .rw-text + .rw-text { margin-top: .5rem; }
+    .rw-note { margin-top: .6rem; font-size: 14px; color: var(--muted); }
+    .rw-body.clamp { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+    .rw-more {
+      margin-top: .6rem; background: none; border: 0; padding: .35rem 0; cursor: pointer;
+      font: 500 14px var(--font-text); color: var(--text); border-bottom: 1.5px solid var(--accent);
+    }
+    .rw-card.extra { display: none; }
+    .reviews.all .rw-card.extra { display: block; }
+    .reviews-foot { margin-top: 1rem; }
+    .reviews.all .reviews-foot { display: none; }
+
+    /* ── 6. ФОРМАТЫ ── */
+    .formats-hd { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem; margin-bottom: 3rem; }
+    .formats-hd .h2 { margin-bottom: .8rem; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .svc-teaser {
+      display: flex; flex-direction: column; text-decoration: none; color: inherit;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
+      transition: border-color 200ms ease;
+    }
+    .svc-teaser:hover { border-color: var(--accent); }
+    .svc-photo { aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg-2); }
+    .svc-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease-out); }
+    @media (hover: hover) and (pointer: fine) { .svc-teaser:hover .svc-photo img { transform: scale(1.03); } }
+    .svc-body { padding: 1.2rem 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+    .svc-name { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.45rem; line-height: 1; }
+    .svc-fit { color: var(--text-soft); font-size: 1rem; line-height: 1.5; flex: 1; }
+    .svc-more { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin-top: .4rem; }
+    .formats-quote { margin-top: 2.4rem; }
+
+    /* ── 7. ОБО МНЕ ── */
+    .about-grid { display: grid; grid-template-columns: 4fr 5fr; gap: 4.5rem; align-items: center; }
+    .about-photo { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px; background: var(--surface); }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 64% 50%; }
+    .about-role { margin-bottom: 1.6rem; }
+    .about-text p { color: var(--text-soft); max-width: 34em; }
+    .about-text p + p { margin-top: 1rem; }
+    .about-facts { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; margin: 2rem 0 2.2rem; }
+
+    /* ── 8. FAQ ── */
+    .faq { background: var(--bg-2); }
+    .faq-grid { display: grid; grid-template-columns: 4fr 7fr; gap: 4rem; align-items: start; }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-list details { border-bottom: 1px solid var(--line); }
+    .faq-list summary {
+      list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+      padding: 1.35rem 0; font-family: var(--font-display); font-weight: 600; font-size: 1.35rem;
+      text-transform: uppercase; line-height: 1.05;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: ''; flex: none; width: 14px; height: 14px;
+      background: linear-gradient(var(--accent), var(--accent)) center / 14px 2px no-repeat,
+                  linear-gradient(var(--accent), var(--accent)) center / 2px 14px no-repeat;
+      transition: transform 250ms var(--ease-out);
+    }
+    .faq-list details[open] summary::after { transform: rotate(45deg); }
+    .faq-list .ans { padding: 0 0 1.5rem; color: var(--text-soft); max-width: 40em; }
+    .faq-list .ans a { color: var(--text); text-underline-offset: 4px; text-decoration-color: var(--accent); }
+    .faq-more { margin-top: 2rem; }
+
+    /* ── 9. ФИНАЛЬНЫЙ CTA ── */
+    .cta { position: relative; overflow: hidden; min-height: 600px; display: flex; align-items: center; background: #0C0C0B; color: #F1ECE2; }
+    .cta-bg { position: absolute; inset: 0; }
+    .cta-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 74%; }
+    .cta-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,12,11,.9) 0%, rgba(12,12,11,.55) 60%, rgba(12,12,11,.15)); }
+    .cta .wrap { position: relative; z-index: 1; width: 100%; }
+    .cta .h2 { max-width: 9em; margin-bottom: 2.2rem; }
+    .cta .btn-note { color: rgba(241,236,226,.7); }
+
+    /* ── ФОТО: чуть теплее, без серости ── */
+    .hero-right img, .how-photo img, .svc-photo img, .about-photo img, .cta-bg img {
+      filter: sepia(.1) saturate(1.12) contrast(1.04) brightness(1.02);
+    }
+
+    /* ── FOOTER ── */
+    footer { background: #0C0C0B; color: #F1ECE2; padding: 3.5rem 0 calc(2.5rem + env(safe-area-inset-bottom)); }
+    .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
+    .f-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: .04em; text-transform: uppercase; }
+    .f-logo span { color: var(--accent); }
+    .f-place { margin-top: .6rem; color: #A9A397; font-size: 15px; }
+    .f-col h3 { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #A9A397; margin-bottom: .8rem; }
+    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+    .f-col a { display: inline-block; padding: .3rem 0; color: #F1ECE2; text-decoration: none; font-size: 15px; }
+    .f-col a:hover { color: var(--accent); }
+    .f-copy { margin-top: 2.5rem; padding-top: 1.4rem; border-top: 1px solid rgba(241,236,226,.1); font-size: 13px; color: #A9A397; }
+
+    /* ── ЛИПКАЯ КНОПКА (мобайл) ── */
+    .sticky-cta {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 150; display: none;
+      padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom));
+      background: rgba(12,12,11,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(241,236,226,.08);
+      transform: translateY(110%); transition: transform 300ms var(--ease-out);
+    }
+    .sticky-cta .btn { width: 100%; }
+    .sticky-cta.show { transform: none; }
+
+    /* ── ПОЯВЛЕНИЕ ── */
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* View Transitions между страницами */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }
+
+    /* ── АДАПТИВ ── */
+    @media (max-width: 1100px) {
+      :root { --gutter: 2rem; }
+      .nav-links { gap: 1.3rem; }
+      nav { gap: 1.3rem; }
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      .rw-grid { columns: 2; }
+    }
+    @media (max-width: 860px) {
+      :root { --gutter: 1.25rem; }
+      nav { padding: 0 var(--gutter); }
+      .nav-links, .nav-tools { display: none; }
+      .burger { display: flex; }
+      .sec { padding: 4.5rem 0; }
+
+      .hero { grid-template-columns: 1fr; min-height: 0; }
+      .hero-right { order: -1; height: 78vw; max-height: 520px; }
+      .hero-right::before { width: 100%; background: linear-gradient(to bottom, transparent 55%, var(--bg)); }
+      .hero-left { padding: 1.8rem var(--gutter) 3rem; }
+      .hero h1 { font-size: clamp(2.8rem, 12.5vw, 4rem); margin-bottom: 1.3rem; }
+      .hero .lead { font-size: 1.0625rem; margin-bottom: 1.8rem; }
+      .hero-actions { flex-direction: column; gap: 1.2rem; }
+      .hero-actions .link { margin-top: 0; }
+
+      .trust ul { justify-content: flex-start; }
+      .flap { font-size: 1.3rem; }
+
+      .needs-grid, .how-grid, .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .need { grid-template-columns: 1fr; }
+      .need-to { padding-top: .4rem; }
+      .need-to a { white-space: normal; flex-wrap: wrap; }
+      .needs-grid > *, .how-grid > *, .about-grid > *, .faq-grid > * { min-width: 0; }
+      .how-photo { min-height: 0; aspect-ratio: 4 / 3; }
+      .reviews-hd { flex-direction: column; align-items: flex-start; }
+      .rw-grid { columns: 1; }
+      .formats-hd { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .about-photo { aspect-ratio: 1 / 1; }
+      .faq-list summary { font-size: 1.2rem; }
+      .cta { min-height: 520px; }
+      .cta-bg::after { background: linear-gradient(0deg, rgba(12,12,11,.92) 30%, rgba(12,12,11,.45)); }
+      .cta .wrap { align-self: flex-end; padding-bottom: 3rem; }
+      .f-grid { grid-template-columns: 1fr 1fr; }
+      .f-grid > :first-child { grid-column: 1 / -1; }
+      .sticky-cta { display: block; }
+      footer { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      .mk { background-size: 100% .26em; }
+    }
+  </style>
 </head>
 <body>
-<!-- NAV -->
-  <nav id="nav">
-    <a href="index.html" class="nav-logo">Maugli Bodywork</a>
+
+  <nav id="nav" aria-label="Основная навигация">
+    <a href="index.html" class="nav-logo">Maugli <span>Bodywork</span></a>
     <ul class="nav-links">
       <li><a href="services.html">Форматы</a></li>
       <li><a href="about.html">Обо мне</a></li>
       <li><a href="journal/index.html">Журнал</a></li>
-      <li>
-        <a href="contacts.html">Контакты</a></li>
+      <li><a href="contacts.html">Запись и контакты</a></li>
     </ul>
-    <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="nav-cta">Записаться</a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-    <div class="lang-switch"><span class="lang-btn active">RU</span><span class="lang-sep">/</span><a href="en/index.html" class="lang-btn">EN</a></div>
-    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="nav-tools">
+      <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn js-cta">Записаться</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Сменить тему">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="lang"><span class="on" aria-current="true">RU</span><a href="en/index.html" lang="en">EN</a></div>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobMenu"><span></span><span></span><span></span></button>
   </nav>
 
   <div class="mob-menu" id="mobMenu">
-    <a href="index.html">Главная</a>
     <a href="services.html">Форматы</a>
     <a href="about.html">Обо мне</a>
     <a href="journal/index.html">Журнал</a>
-        <a href="contacts.html">Контакты</a>
-    <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="mob-cta">Записаться</a>  </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <p class="hero-tag">Телесная практика · Тбилиси</p>
-      <h1 class="hero-h1">
-        Тело знает.<br>
-        Нужно лишь<br>
-        <span class="hi">научиться слушать</span>
-      </h1>
-      <p class="hero-sub">
-        Помогаю убрать боль, напряжение и зажатость через диагностику и работу с причиной — не симптомом.
-      </p>
-      <div class="hero-actions">
-        <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="btn-accent">Записаться на сеанс</a>
-        <a href="services.html" class="btn-ghost-text">Форматы и цены</a>
-      </div>
-      <p class="hero-trust">6+ лет практики · эффект после 1–2 сеансов</p>
-    </div>
-    <div class="hero-right">
-      <picture>
-        <source media="(max-width: 860px)" srcset="hero_mobile.webp" />
-        <img src="hero.webp" alt="Maugli Bodywork — сеанс" fetchpriority="high" width="900" height="1200" />
-      </picture>
-    </div>
-    <div class="scroll-hint" id="scrollHint">
-    <span class="scroll-hint-label">скролл</span>
-    <div class="scroll-hint-line"></div>
-  </div>
-</section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-wrap" aria-hidden="true">
-    <div class="marquee-inner">
-      <div class="mi"><span>Bodywork</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Кинезиология</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Миофасциальный релиз</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Знакомство с телом</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Работа с причиной</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Мышечное тестирование</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Глубокотканный массаж</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Соматика</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Телесная практика</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Восстановление после родов</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Миофасциальный релиз</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Тбилиси</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Работа с причиной</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Мышечное тестирование</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Глубокотканный массаж</span><div class="mi-dot"></div></div>
-      <div class="mi"><span>Соматика</span><div class="mi-dot"></div></div>
+    <a href="contacts.html">Запись и контакты</a>
+    <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться</a>
+    <div class="mob-tools">
+      <button class="theme-toggle" id="themeToggleMob" type="button" aria-label="Сменить тему">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="lang"><span class="on">RU</span><a href="en/index.html" lang="en">EN</a></div>
     </div>
   </div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat reveal">
-      <div class="stat-val">2500<span class="acc">+</span></div>
-      <div class="stat-lbl">часов практики</div>
-    </div>
-    <div class="stat reveal d1">
-      <div class="stat-val">300<span class="acc">+</span></div>
-      <div class="stat-lbl">клиентов</div>
-    </div>
-    <div class="stat reveal d2">
-      <div class="stat-val">с <span class="acc">2020</span></div>
-      <div class="stat-lbl">года</div>
-    </div>
-  </div>
-
-  <!-- FOR WHOM -->
-  <section class="for-whom">
-    <div class="fw-top reveal">
-      <h2 class="fw-h">Это<br>про <span class="acc">тебя?</span></h2>
-      <p class="fw-desc">Если хоть один пункт — про тебя, значит я могу тебе помочь. Большинство людей находят себя сразу в нескольких</p>
-    </div>
-    <div class="fw-cards reveal">
-      <div class="fw-card"><span class="fw-n">01</span><p class="fw-t">Боль в спине, шее или пояснице — острая или хроническая</p></div>
-      <div class="fw-card"><span class="fw-n">02</span><p class="fw-t">Зажатость и усталость, которая не уходит после сна</p></div>
-      <div class="fw-card"><span class="fw-n">03</span><p class="fw-t">Сидячая работа — IT, офис, удалёнка</p></div>
-      <div class="fw-card"><span class="fw-n">04</span><p class="fw-t">Сложно расслабиться и «отключить голову»</p></div>
-      <div class="fw-card"><span class="fw-n">05</span><p class="fw-t">Работать с причиной, а не глушить симптомы</p></div>
-      <div class="fw-card"><span class="fw-n">06</span><p class="fw-t">Хочется больше узнать о себе и своём теле</p></div>
-    </div>
-  </section>
-
-
-  <!-- REVIEW INLINE A1 -->
-  <div class="review-inline">
-    <div class="msg-bubble">
-      <div class="bubble">
-        массаж такой словно меня боженька трогал
-        <span class="bubble-time">19:40</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- PHILOSOPHY / SPLIT -->
-  <section class="split">
-    <div class="split-img">
-      <img loading="lazy" decoding="async" src="diag2.webp" alt="Диагностика — Maugli Bodywork" />
-    </div>
-    <div class="split-body">
-      <p class="s-tag">Подход</p>
-      <h2 class="s-h reveal">Не навязать свою волю — а дать телу <strong>ответить</strong></h2>
-      <div class="s-txt reveal d1">
-        <p>Каждый сеанс начинается с анализа: беседа, визуальная диагностика, мануальное мышечное тестирование. Только после этого — работа.</p>
-        <p>В арсенале: шведский массаж, миофасциальный релиз, глубокотканная техника, триггерные точки, лимфодренаж, соматика. Набор инструментов — под твой запрос.</p>
-        <p>Сторонник <strong>научного подхода</strong>, но с уважением к тому, что работает на практике. Без эзотерики. С уважением к твоим границам.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- REVIEW INLINE A2 -->
-  <div class="review-inline left">
-    <div class="msg-bubble left">
-      <div class="bubble">
-        <span class="bubble-name">Ира Логинова</span>
-        У меня не болит шея! Я тебе очень благодарна, всё что происходит невероятно ❤️
-        <span class="bubble-time">вчера</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- APPROACH -->
-  <section class="approach">
-    <div class="ap-hd reveal">
-      <h2 class="ap-ttl">Три принципа<br>в основе работы</h2>
-      <p class="ap-sub">Не методология ради методологии — просто то, что реально работает</p>
-    </div>
-    <div class="ap-grid">
-      <div class="ap-card reveal" data-n="01">
-        <p class="ap-n">01</p>
-        <h3 class="ap-ttl2">Причина,<br>не симптом</h3>
-        <p class="ap-txt">Без понимания «что, когда и зачем» я делаю — работа только с симптомами. Я использую анатомию, мышечное тестирование и теорию Анатомических поездов, чтобы результаты оставались надолго </p>
-      </div>
-      <div class="ap-card reveal d1" data-n="02">
-        <p class="ap-n">02</p>
-        <h3 class="ap-ttl2">Научно,<br>не догматично</h3>
-        <p class="ap-txt">Я сторонник доказательного подхода. Но тело во многом остаётся загадкой — есть место и для практик, которые хорошо работают на деле</p>
-      </div>
-      <div class="ap-card reveal d2" data-n="03">
-        <p class="ap-n">03</p>
-        <h3 class="ap-ttl2">Уважение<br>к границам</h3>
-        <p class="ap-txt">Я не лезу в чужие «травмы» и эзотерику. Моя задача — создать безопасное пространство и помочь телу запустить внутренние процессы</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services">
-    <div class="services-bg"><img loading="lazy" decoding="async" src="approach.webp" alt="" /></div>
-    <div class="svc-inner">
-      <div class="svc-hd reveal">
-        <h2 class="svc-ttl">Форматы<br>практики</h2>
-      </div>
-      <div class="svc-grid reveal">
-        <a href="services.html#intro" class="svc-teaser">
-          <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="consultation.webp" alt="Знакомство" /></div>
-          <div class="svc-teaser-body">
-            <p class="svc-teaser-name">Знакомство</p>
-            <p class="svc-teaser-line">Диагностика: мышечный тест, локальные коррекции и рекомендации.</p>
-            <p class="svc-teaser-more">Подробнее →</p>
+  <main>
+    <!-- 1. HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Тело знает. Нужно лишь <span class="hi">научиться слушать</span></h1>
+        <p class="lead">Помогаю убрать боль, напряжение и зажатость: сначала диагностика, потом работа с&nbsp;причиной, а&nbsp;не&nbsp;с&nbsp;симптомом. Многие замечают разницу уже после 1–2 сеансов.</p>
+        <div class="hero-actions">
+          <div>
+            <a href="https://t.me/maugli_bodywork_bot?start=src_home_hero" target="_blank" rel="noopener" class="btn js-cta">Записаться</a>
+            <span class="btn-note">откроется бот в Telegram</span>
           </div>
-        </a>
-        <a href="services.html#kinesiofocus" class="svc-teaser">
-          <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="diag3.webp" alt="Кинезио · Фокус" /></div>
-          <div class="svc-teaser-body">
-            <p class="svc-teaser-name">Кинезио · Фокус</p>
-            <p class="svc-teaser-line">Восстановление и прицельная работа.</p>
-            <p class="svc-teaser-more">Подробнее →</p>
-          </div>
-        </a>
-        <a href="services.html#bodypractice" class="svc-teaser">
-          <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="bodypractice.webp" alt="Телесная практика" /></div>
-          <div class="svc-teaser-body">
-            <p class="svc-teaser-name">Телесная практика</p>
-            <p class="svc-teaser-line">Медитативная практика для глубокой релаксации.</p>
-            <p class="svc-teaser-more">Подробнее →</p>
-          </div>
-        </a>
-        <a href="services.html#kinesio" class="svc-teaser">
-          <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Кинезио · Комплекс" /></div>
-          <div class="svc-teaser-body">
-            <p class="svc-teaser-name">Кинезио · Комплекс</p>
-            <p class="svc-teaser-line">Полный аналитический формат.</p>
-            <p class="svc-teaser-more">Подробнее →</p>
-          </div>
-        </a>
-        <a href="services.html#taping" class="svc-teaser">
-          <div class="svc-teaser-photo"><img class="pos-taping" loading="lazy" decoding="async" src="taping.webp" alt="Кинезиотейпирование" /></div>
-          <div class="svc-teaser-body">
-            <p class="svc-teaser-name">Кинезиотейпирование</p>
-            <p class="svc-teaser-line">Прицельное тейпирование мышц и суставов.</p>
-            <p class="svc-teaser-more">Подробнее →</p>
-          </div>
-        </a>
-        <a href="services.html#postnatal" class="svc-teaser">
-          <div class="svc-teaser-photo"><img loading="lazy" decoding="async" src="postnatal.webp" alt="Восстановление после родов" /></div>
-          <div class="svc-teaser-body">
-            <p class="svc-teaser-name">Восстановление после родов</p>
-            <p class="svc-teaser-line">Мягкое восстановление тела после родов.</p>
-            <p class="svc-teaser-more">Подробнее →</p>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW -->
-  <section class="how">
-    <div class="how-hd reveal">
-      <h2 class="how-ttl">Как это<br>происходит</h2>
-    </div>
-    <div class="how-grid">
-      <div class="how-card reveal">
-        <div class="how-img"><img loading="lazy" decoding="async" src="diag2.webp" alt="Диагностика" /></div>
-        <div class="how-body">
-          <p class="how-n">01 — Диагностика</p>
-          <h3 class="how-ttl2">Слушаем тело</h3>
-          <p class="how-txt">Беседа, визуальная диагностика и мануальное мышечное тестирование. Составляем картину состояния.</p>
+          <a href="services.html" class="link">Форматы и цены</a>
         </div>
       </div>
-      <div class="how-card reveal d1">
-        <div class="how-img"><img loading="lazy" decoding="async" src="approach.webp" alt="Работа" /></div>
-        <div class="how-body">
-          <p class="how-n">02 — Работа</p>
-          <h3 class="how-ttl2">Идём вглубь</h3>
-          <p class="how-txt">Сеанс в спокойном ритме. Слежу за реакциями тела и подстраиваю воздействие в моменте.</p>
+      <div class="hero-right">
+        <img src="hero.webp" alt="Иван работает с плечевым поясом и спиной клиентки" fetchpriority="high" width="1226" height="2179" />
+      </div>
+    </section>
+
+    <!-- 2. ПОЛОСА ДОВЕРИЯ -->
+    <div class="trust reveal">
+      <ul class="wrap">
+        <li><span class="flap">6<span class="a">+</span></span><span class="label">лет практики</span></li>
+        <li><span class="flap">2500<span class="a">+</span></span><span class="label">часов практики</span></li>
+        <li><span class="flap">300<span class="a">+</span></span><span class="label">клиентов</span></li>
+        <li><span class="label">Тбилиси · Мтацминда</span></li>
+      </ul>
+    </div>
+
+    <!-- 3. С ЧЕМ ПРИХОДЯТ -->
+    <section class="sec">
+      <div class="wrap needs-grid">
+        <div class="reveal">
+          <h2 class="h2">С чем <span class="mk">приходят</span></h2>
+          <ul class="needs">
+            <li class="need">
+              <div>
+                <h3>Болит спина, шея или поясница</h3>
+                <p>Часто — после многих часов за ноутбуком. Ищем, какие мышцы не включаются и тянут за собой остальные.</p>
+              </div>
+              <div class="need-to">
+                <a href="services.html#kinesiofocus"><span>одна зона →</span><b>Кинезио · Фокус</b></a>
+                <a href="services.html#kinesio"><span>давно и в нескольких местах →</span><b>Кинезио · Комплекс</b></a>
+              </div>
+            </li>
+            <li class="need">
+              <div>
+                <h3>Напряжение, которое не уходит</h3>
+                <p>Усталость не проходит даже после сна, сложно «выключить голову».</p>
+              </div>
+              <div class="need-to">
+                <a href="services.html#bodypractice"><span>→</span><b>Телесная практика</b></a>
+              </div>
+            </li>
+            <li class="need">
+              <div>
+                <h3>Хочется понять своё тело</h3>
+                <p>Без конкретной боли: разобраться, что происходит, и узнать, что с этим делать самостоятельно.</p>
+              </div>
+              <div class="need-to">
+                <a href="services.html#intro"><span>→</span><b>Знакомство</b></a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="bubble out">
+            <span class="bubble-name">Ира Логинова</span>
+            У меня не болит шея! Я тебе очень благодарна, всё что происходит невероятно ❤️
+            <span class="bubble-time">вчера</span>
+          </div>
         </div>
       </div>
-      <div class="how-card reveal d2">
-        <div class="how-img"><img loading="lazy" decoding="async" src="bodypractice.webp" alt="Завершение" /></div>
-        <div class="how-body">
-          <p class="how-n">03 — Рекомендации</p>
-          <h3 class="how-ttl2">Закрепляем эффект</h3>
-          <p class="how-txt">Советы по движению, дыханию и упражнения для закрепления результата.</p>
+    </section>
+
+    <!-- 4. КАК ПРОХОДИТ СЕАНС -->
+    <section class="sec" style="padding-top:0">
+      <div class="wrap how-grid">
+        <div class="how-photo reveal">
+          <img loading="lazy" decoding="async" src="diag2.webp" alt="Диагностика: Иван оценивает осанку клиентки" width="1360" height="906" />
+        </div>
+        <div class="reveal">
+          <h2 class="h2">Как проходит <span class="mk">сеанс</span></h2>
+          <ol class="steps">
+            <li class="step">
+              <span class="flap">01</span>
+              <div>
+                <h3>Диагностика</h3>
+                <p>Беседа, оценка осанки и мануальное мышечное тестирование. Составляем картину: что, где и почему.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="flap">02</span>
+              <div>
+                <h3>Работа</h3>
+                <p>Инструменты — под запрос: миофасциальный релиз, триггерные точки, глубокотканная техника, лимфодренаж, соматика. В спокойном ритме, с вниманием к реакциям тела.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="flap">03</span>
+              <div>
+                <h3>Рекомендации</h3>
+                <p>Советы по движению и дыханию и упражнения, чтобы результат держался.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="principles"><span>Причина, не симптом</span><span>Научно, без догм и эзотерики</span><span>С уважением к границам</span></p>
+          <div class="bubble how-quote">
+            массаж такой словно меня боженька трогал
+            <span class="bubble-time">19:40</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-
-  <!-- REVIEW INLINE A3 -->
-  <div class="review-inline">
-    <div class="msg-bubble">
-      <div class="bubble">
-        <span class="bubble-name">Вера</span>
-        Ощущения от тейпа на спине огонь! И по фото очень виден результат!
-        <span class="bubble-time">11:23</span>
+    <!-- 5. ОТЗЫВЫ -->
+    <section class="sec reviews" id="reviews">
+      <div class="wrap">
+        <div class="reviews-hd reveal">
+          <h2 class="h2">Что говорят клиенты</h2>
+          <p class="label">Реальные сообщения — без редактуры</p>
+        </div>
+        <div class="rw-grid">
+          <div class="rw-card reveal">
+            <span class="rw-name">Егор Лапин</span>
+            <div class="rw-body">
+              <p class="rw-text">Несколько дней следил за ощущениями: 1) перестала болеть левая нога в лодыжке, ноги при ходьбе меньше устают. 2) заработали ягодицы — реально чувствую при ходьбе. 3) поясница начала расслабляться. Очень неожиданно, если честно.</p>
+            </div>
+            <p class="rw-note">— после первого сеанса</p>
+          </div>
+          <div class="rw-card out reveal">
+            <p class="rw-text">Не так просто вырубить образцового неврастеника, который 24/7 с ноутбуком и 2-мя телефонами. Опять улетела, отлетела и взлетела, так сладко давно не спала. Я в любви, восторге и внутреннем счастье. Лучше не бывает. 🖤🖤</p>
+          </div>
+          <div class="rw-card reveal">
+            <span class="rw-name">Вадим</span>
+            <div class="rw-body">
+              <p class="rw-text">12 лет боролся с кожей на спине и лице. Всё неожиданно прошло после домашних заданий и практик. Ещё раз спасибо огромное. Надо теперь закрепить результат надолго.</p>
+              <p class="rw-note">Удивительно, что проблема была связана с неработающими мышцами шеи и дельтами.</p>
+            </div>
+          </div>
+          <div class="rw-card out reveal">
+            <span class="rw-name">Владислав Лаврентьев</span>
+            <div class="rw-body">
+              <p class="rw-text">1) выпрямились плечи и они даже не сгибаются вперёд. Визуально стал шире.<br>2) ноги вообще не устают от ходьбы. Хоть 30 километров ходи.<br>3) в пояснице очень лёгкие ощущения. Не болит вообще.</p>
+              <p class="rw-text">Никогда такой осанки не было. Домашку продолжаю делать, следим за динамикой.</p>
+            </div>
+          </div>
+          <div class="rw-card reveal">
+            <span class="rw-name">Вера Тишкова</span>
+            <div class="rw-body">
+              <p class="rw-text">Была сегодня на первом занятии по танцам. Тренер похвалил мою спину и сказал, что он давно не видел плечей без перекоса! Говорит, что мой кинезиолог супер!</p>
+              <p class="rw-text">Ну а я с ним на 100% согласна!!! Спасибо тебе 🙏</p>
+            </div>
+          </div>
+          <div class="rw-card out reveal">
+            <span class="rw-name">Виктория Подлеских</span>
+            <div class="rw-body">
+              <p class="rw-text">Сегодня многие отметили, что я мега расслабленная и что давно такой меня не видели. Это и правда, так интересно ощущать такую лёгкость и безмятежность в теле и отчасти в голове. ❤️</p>
+            </div>
+          </div>
+          <div class="rw-card extra">
+            <span class="rw-name">Макс</span>
+            <p class="rw-text">Последнюю неделю много езжу за рулём, постоянно слежу за тем, чтобы голова была прижата, и это просто вау. С новым годом, спасибо тебе большое, что помогаешь нам!</p>
+          </div>
+          <div class="rw-card out extra">
+            <p class="rw-text">Сложно описать словами то состояние, в котором покидаешь телесную практику. Я обычно живу на высоких оборотах — и этот акт заботы о своём теле мне был необходим!</p>
+          </div>
+          <div class="rw-card extra">
+            <p class="rw-text">По эффекту с экзистенциальным опытом сравниваю практику, рекомендую всем друзьям.</p>
+          </div>
+        </div>
+        <div class="reviews-foot">
+          <button type="button" class="rw-more" id="reviewsMore">Ещё отзывы</button>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <div class="cta-bg"><img loading="lazy" decoding="async" src="cta_hands.webp" alt="" /></div>
-    <div class="cta-inner">
-      <p class="cta-tag">Записаться</p>
-      <h2 class="cta-h">Готов познакомиться<br>с <span class="acc">собственным</span><br>телом?</h2>
-      <a href="https://t.me/maugli_bodywork_bot" target="_blank" class="btn-light">Оставить заявку</a>
-    </div>
-  </section>
-
-  <!-- REVIEWS WALL -->
-  <section class="reviews-wall">
-    <div class="rw-header reveal">
-      <h2 class="rw-ttl">Что говорят<br>клиенты</h2>
-      <p class="rw-sub">реальные сообщения — без редактуры</p>
-    </div>
-    <div class="rw-grid reveal">
-
-      <div class="rw-card">
-        <span class="rw-name">Вадим</span>
-        <p class="rw-text">12 лет боролся с кожей на спине и лице. Всё неожиданно прошло после домашних заданий и практик. Ещё раз спасибо огромное. Надо теперь закрепить результат надолго.</p>
-        <p class="rw-note">Удивительно, что проблема была связана с неработающими мышцами шеи и дельтами.</p>
+    <!-- 6. ФОРМАТЫ -->
+    <section class="sec" id="formats">
+      <div class="wrap">
+        <div class="formats-hd reveal">
+          <div>
+            <h2 class="h2">Форматы</h2>
+            <p class="lead">Сомневаешься — начни со Знакомства: его стоимость засчитывается в первую полную сессию.</p>
+          </div>
+          <a href="services.html" class="link">Все форматы и цены</a>
+        </div>
+        <div class="svc-grid">
+          <a href="services.html#intro" class="svc-teaser reveal">
+            <div class="svc-photo"><img loading="lazy" decoding="async" src="consultation.webp" alt="Знакомство: беседа и диагностика" style="object-position:50% 30%" /></div>
+            <div class="svc-body">
+              <p class="svc-name">Знакомство</p>
+              <p class="svc-fit">Первый визит: посмотреть, что происходит с телом.</p>
+              <p class="svc-more">Подробнее →</p>
+            </div>
+          </a>
+          <a href="services.html#kinesiofocus" class="svc-teaser reveal">
+            <div class="svc-photo"><img loading="lazy" decoding="async" src="bodypractice.webp" alt="Прицельная работа с плечевым поясом" style="object-position:50% 72%" /></div>
+            <div class="svc-body">
+              <p class="svc-name">Кинезио · Фокус</p>
+              <p class="svc-fit">Одна зона, конкретная боль — или восстановление после нагрузок.</p>
+              <p class="svc-more">Подробнее →</p>
+            </div>
+          </a>
+          <a href="services.html#bodypractice" class="svc-teaser reveal">
+            <div class="svc-photo"><img loading="lazy" decoding="async" src="diag3.webp" alt="Телесная практика: работа с клиенткой на столе" style="object-position:50% 68%" /></div>
+            <div class="svc-body">
+              <p class="svc-name">Телесная практика</p>
+              <p class="svc-fit">Когда нужно выдохнуть и снять напряжение.</p>
+              <p class="svc-more">Подробнее →</p>
+            </div>
+          </a>
+          <a href="services.html#kinesio" class="svc-teaser reveal">
+            <div class="svc-photo"><img loading="lazy" decoding="async" src="kinesio.webp" alt="Мышечный тест сгибателей бедра" style="object-position:35% 60%" /></div>
+            <div class="svc-body">
+              <p class="svc-name">Кинезио · Комплекс</p>
+              <p class="svc-fit">Всё тело: когда болит давно или в нескольких местах.</p>
+              <p class="svc-more">Подробнее →</p>
+            </div>
+          </a>
+          <a href="services.html#taping" class="svc-teaser reveal">
+            <div class="svc-photo"><img loading="lazy" decoding="async" src="taping.webp" alt="Кинезиотейп на стопе" style="object-position:50% 40%" /></div>
+            <div class="svc-body">
+              <p class="svc-name">Кинезиотейпирование</p>
+              <p class="svc-fit">Закрепить результат или подготовиться к нагрузке.</p>
+              <p class="svc-more">Подробнее →</p>
+            </div>
+          </a>
+          <a href="services.html#postnatal" class="svc-teaser reveal">
+            <div class="svc-photo"><img loading="lazy" decoding="async" src="postnatal.webp" alt="Восстановление после родов" /></div>
+            <div class="svc-body">
+              <p class="svc-name">Восстановление после родов</p>
+              <p class="svc-fit">Мягкое восстановление через 1–2 недели после родов.</p>
+              <p class="svc-more">Подробнее →</p>
+            </div>
+          </a>
+        </div>
+        <div class="bubble out formats-quote reveal">
+          <span class="bubble-name">Вера</span>
+          Ощущения от тейпа на спине огонь! И по фото очень виден результат!
+          <span class="bubble-time">11:23</span>
+        </div>
       </div>
+    </section>
 
-      <div class="rw-card rt">
-        <span class="rw-name">Вера Тишкова</span>
-        <p class="rw-text">Была сегодня на первом занятии по танцам. Тренер похвалил мою спину и сказал, что он давно не видел плечей без перекоса! Говорит, что мой кинезиолог супер!</p>
-        <p class="rw-text" style="margin-top:0.5rem">Ну а я с ним на 100% согласна!!! Спасибо тебе 🙏</p>
+    <!-- 7. ОБО МНЕ -->
+    <section class="sec" style="padding-top:0">
+      <div class="wrap about-grid">
+        <div class="about-photo reveal">
+          <img loading="lazy" decoding="async" src="portrait.webp" alt="Иван Маугли в кабинете" width="6469" height="4313" />
+        </div>
+        <div class="about-text reveal">
+          <h2 class="h2">Иван Маугли</h2>
+          <p class="label about-role">Массажист · кинезиолог · телесный практик</p>
+          <p>С 19 лет я жил с больной спиной и по себе знаю, что значит искать решение годами. Пазл сложился, когда к работе руками добавились анатомия и мышечное тестирование.</p>
+          <p>Теперь делюсь этим опытом с другими — с тем же азартом, что и в начале.</p>
+          <div class="about-facts">
+            <span class="label">5 сертификатов</span>
+            <span class="label">Массаж · кинезиология · послеродовое восстановление</span>
+          </div>
+          <a href="about.html" class="link">Подробнее обо мне</a>
+        </div>
       </div>
+    </section>
 
-      <div class="rw-card">
-        <span class="rw-name">Виктория Подлеских</span>
-        <p class="rw-text">Сегодня многие отметили, что я мега расслабленная и что давно такой меня не видели. Это и правда, так интересно ощущать такую лёгкость и безмятежность в теле и отчасти в голове.</p>
-        <span class="rw-emoji">❤️</span>
+    <!-- 8. FAQ -->
+    <section class="sec faq" id="faq">
+      <div class="wrap faq-grid">
+        <div class="reveal">
+          <h2 class="h2">Перед первым визитом</h2>
+        </div>
+        <div class="reveal">
+          <div class="faq-list">
+            <details>
+              <summary>Где проходят сеансы?</summary>
+              <p class="ans">В Тбилиси, район Мтацминда, рядом с метро Liberty Square. Точный адрес пришлю после записи.</p>
+            </details>
+            <details>
+              <summary>Что взять с собой?</summary>
+              <p class="ans">Только резинку для волос. Сеанс проходит в нижнем белье, полотенце есть на месте. Одноразовые простыни я не использую — у тебя будет персональная хлопковая простынка.</p>
+            </details>
+            <details>
+              <summary>Как оплатить?</summary>
+              <p class="ans">Наличными или переводом, после сеанса. Знакомство — по предоплате.</p>
+            </details>
+            <details>
+              <summary>Можно отменить или перенести?</summary>
+              <p class="ans">Да — напиши мне в Telegram (<a href="https://t.me/van.maugli" target="_blank" rel="noopener">@van.maugli</a>) или <a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener">боту</a>. Больше чем за 24 часа до сеанса — бесплатно, от 24 до 12 часов — 50% стоимости, позже — 100%.</p>
+            </details>
+            <details>
+              <summary>Есть противопоказания?</summary>
+              <p class="ans">Да: температура, острые воспаления, инфекции в острой фазе и ещё несколько состояний. <a href="services.html#contra">Полный список</a> — на странице форматов.</p>
+            </details>
+            <details>
+              <summary>Когда можно после родов?</summary>
+              <p class="ans">Через 1–2 недели после родов, после кесарева — когда шов заживёт. Нужно согласие врача. Сеанс проходит без малыша.</p>
+            </details>
+          </div>
+          <a href="contacts.html" class="link faq-more">Все вопросы, запись и контакты</a>
+        </div>
       </div>
+    </section>
 
-      <div class="rw-card rt">
-        <p class="rw-text">Не так просто вырубить образцового неврастеника, который 24/7 с ноутбуком и 2-мя телефонами. Опять улетела, отлетела и взлетела, так сладко давно не спала. Я в любви, восторге и внутреннем счастье. Лучше не бывает.</p>
-        <span class="rw-emoji">🖤🖤</span>
+    <!-- 9. ФИНАЛЬНЫЙ CTA -->
+    <section class="cta">
+      <div class="cta-bg"><img loading="lazy" decoding="async" src="cta_hands.webp" alt="" /></div>
+      <div class="wrap reveal">
+        <h2 class="h2">Пора <span class="mk">познакомиться</span> со своим телом</h2>
+        <a href="https://t.me/maugli_bodywork_bot?start=src_home_final" target="_blank" rel="noopener" class="btn js-cta">Записаться</a>
+        <span class="btn-note">откроется бот в Telegram</span>
       </div>
-
-      <div class="rw-card">
-        <p class="rw-text">По эффекту с экзистенциальным опытом сравниваю практику, рекомендую всем друзьям.</p>
-      </div>
-
-      <div class="rw-card rt">
-        <span class="rw-name">Егор Лапин</span>
-        <p class="rw-text">Несколько дней следил за ощущениями: 1) перестала болеть левая нога в лодыжке, ноги при ходьбе меньше устают. 2) заработали ягодицы — реально чувствую при ходьбе. 3) поясница начала расслабляться. Очень неожиданно, если честно.</p>
-        <p class="rw-note">— после первого сеанса</p>
-      </div>
-
-      <div class="rw-card">
-        <span class="rw-name">Макс</span>
-        <p class="rw-text">Последнюю неделю много езжу за рулём, постоянно слежу за тем, чтобы голова была прижата, и это просто вау. С новым годом, спасибо тебе большое, что помогаешь нам!</p>
-      </div>
-
-      <div class="rw-card rt">
-        <span class="rw-name">Владислав Лаврентьев</span>
-        <p class="rw-text">1) выпрямились плечи и они даже не сгибаются вперёд. Визуально стал шире.<br>2) ноги вообще не устают от ходьбы. Хоть 30 километров ходи.<br>3) в пояснице очень лёгкие ощущения. Не болит вообще.<br><br>Никогда такой осанки не было. Домашку продолжаю делать, следим за динамикой.</p>
-      </div>
-
-      <div class="rw-card">
-        <p class="rw-text">Сложно описать словами то состояние, в котором покидаешь телесную практику. Я обычно живу на высоких оборотах — и этот акт заботы о своём теле мне был необходим!</p>
-      </div>
-
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <span class="f-logo">Maugli Bodywork</span>
-    <ul class="f-links">
-      <li><a href="index.html">Главная</a></li>
-      <li><a href="services.html">Форматы</a></li>
-      <li><a href="about.html">Обо мне</a></li>
-      <li><a href="journal/index.html">Журнал</a>
-        <a href="contacts.html">Контакты</a></li>
-    </ul>
-    <span class="f-copy">Тбилиси, Грузия</span>
+    <div class="wrap">
+      <div class="f-grid">
+        <div>
+          <p class="f-logo">Maugli <span>Bodywork</span></p>
+          <p class="f-place">Тбилиси, Мтацминда · метро Liberty Square</p>
+        </div>
+        <div class="f-col">
+          <h3>Сайт</h3>
+          <ul>
+            <li><a href="services.html">Форматы</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="journal/index.html">Журнал</a></li>
+            <li><a href="contacts.html">Запись и контакты</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h3>Связь</h3>
+          <ul>
+            <li><a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener">Запись — бот в Telegram</a></li>
+            <li><a href="https://t.me/van.maugli" target="_blank" rel="noopener">Telegram — @van.maugli</a></li>
+            <li><a href="https://instagram.com/maugli.bodywork" target="_blank" rel="noopener">Instagram — @maugli.bodywork</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="f-copy">© 2026 Maugli Bodywork</p>
+    </div>
   </footer>
+
+  <div class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <a href="https://t.me/maugli_bodywork_bot?start=src_sticky" target="_blank" rel="noopener" class="btn" tabindex="-1">Записаться</a>
+  </div>
 
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
-
-      // ── NAV SCROLL ── (disabled: nav always dark)
-      // const nav = document.getElementById('nav');
-      // if (nav) {
-      //   window.addEventListener('scroll', () => {
-      //     nav.classList.toggle('scrolled', window.scrollY > 40);
-      //   }, { passive: true });
-      // }
-
-      // ── BURGER ──
+      // ── МЕНЮ ──
       const burger = document.getElementById('burger');
       const mobMenu = document.getElementById('mobMenu');
-      if (burger && mobMenu) {
-        burger.addEventListener('click', () => {
-          burger.classList.toggle('open');
-          mobMenu.classList.toggle('open');
-          document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
-        });
-        mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-          burger.classList.remove('open');
-          mobMenu.classList.remove('open');
-          document.body.style.overflow = '';
-        }));
-      }
+      const setMenu = open => {
+        burger.classList.toggle('open', open);
+        mobMenu.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+      burger.addEventListener('click', () => setMenu(!mobMenu.classList.contains('open')));
+      mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-      // ── REVEAL ON SCROLL ──
+      // ── ТЕМА ──
+      const toggleTheme = () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (dark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+      };
+      document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', toggleTheme));
+
+      // ── ПОЯВЛЕНИЕ ──
       const obs = new IntersectionObserver(entries => entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      }), { threshold: 0.07 });
-      document.querySelectorAll('.reveal, .rw-card, .msg-bubble').forEach(el => obs.observe(el));
+      }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-      // ── MAGNETIC BUTTONS ──
-      document.querySelectorAll('.btn-accent, .btn-light, .btn-cta, .nav-cta, .book-btn').forEach(btn => {
-        btn.addEventListener('mousemove', e => {
-          const r = btn.getBoundingClientRect();
-          const x = (e.clientX - r.left - r.width / 2) * 0.25;
-          const y = (e.clientY - r.top - r.height / 2) * 0.35;
-          btn.style.transform = `translate(${x}px, ${y}px)`;
+      // ── ОТЗЫВЫ: свернуть длинные, «ещё» ──
+      document.querySelectorAll('.rw-body').forEach(body => {
+        body.classList.add('clamp');
+        if (body.scrollHeight - body.clientHeight < 8) { body.classList.remove('clamp'); return; }
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'rw-more'; btn.textContent = 'Читать целиком';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.addEventListener('click', () => {
+          const open = body.classList.toggle('clamp') === false;
+          btn.textContent = open ? 'Свернуть' : 'Читать целиком';
+          btn.setAttribute('aria-expanded', open);
         });
-        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+        body.after(btn);
       });
+      const more = document.getElementById('reviewsMore');
+      if (more) more.addEventListener('click', () => document.getElementById('reviews').classList.add('all'));
 
-      // ── REVIEW WALL SPOTLIGHT ──
-      const rwGrid = document.querySelector('.rw-grid');
-      if (rwGrid) {
-        const spot = document.createElement('div');
-        spot.className = 'rw-spotlight';
-        rwGrid.appendChild(spot);
-        rwGrid.addEventListener('mousemove', e => {
-          const r = rwGrid.getBoundingClientRect();
-          spot.style.left = (e.clientX - r.left) + 'px';
-          spot.style.top  = (e.clientY - r.top)  + 'px';
-        });
-      }
-
-      // ── MARQUEE SPEED ON SCROLL ──
-      const marqueeInner = document.querySelector('.marquee-inner');
-      if (marqueeInner) {
-        let lastY = window.scrollY, base = 22;
-        window.addEventListener('scroll', () => {
-          const delta = window.scrollY - lastY;
-          lastY = window.scrollY;
-          const speed = Math.min(3, Math.max(0.5, 1 + Math.abs(delta) / 30));
-          marqueeInner.style.animationDuration = (base / speed) + 's';
-          marqueeInner.style.animationDirection = delta < -8 ? 'reverse' : 'normal';
-          clearTimeout(window.__mq);
-          window.__mq = setTimeout(() => { marqueeInner.style.animationDuration = base + 's'; }, 200);
-        }, { passive: true });
-      }
-
-      // ── SCROLL: NAV + HINT + PARALLAX ──
-      const hint = document.getElementById('scrollHint');
-      const heroImg = document.querySelector('.hero-right img');
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (nav) nav.classList.toggle('scrolled', y > 40);
-        if (hint) hint.classList.toggle('hidden', y > 80);
-        if (heroImg && y < window.innerHeight) {
-          heroImg.style.transform = `translateY(${y * 0.18}px)`;
-        }
-      }, { passive: true });
-      // ── THEME TOGGLE ──
-      const themeToggle = document.getElementById('themeToggle');
-      if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          if (isDark) {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-          } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-          }
-        });
-      }
-
-    
-
+      // ── ЛИПКАЯ КНОПКА: прячется, когда на экране другая кнопка записи ──
+      const sticky = document.getElementById('stickyCta');
+      const ctas = [...document.querySelectorAll('.hero .js-cta, .cta .js-cta')];
+      const inView = new Set();
+      const update = () => {
+        const show = inView.size === 0 && window.scrollY > 200;
+        sticky.classList.toggle('show', show);
+        sticky.setAttribute('aria-hidden', String(!show));
+        sticky.querySelector('a').tabIndex = show ? 0 : -1;
+      };
+      const ctaObs = new IntersectionObserver(entries => {
+        entries.forEach(e => e.isIntersecting ? inView.add(e.target) : inView.delete(e.target));
+        update();
+      });
+      ctas.forEach(c => ctaObs.observe(c));
+      window.addEventListener('scroll', update, { passive: true });
     });
   </script>
 </body>

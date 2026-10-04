@@ -1,2 +1,6 @@
 .DS_Store
 .fuse_hidden*
+.claude/
+.agents/
+.impeccable/
+skills-lock.json

@@ -39,33 +39,49 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   gift-cert-bg
   massage_certificate01-05.webp
   Не используются нигде: bodypractice_svc, diag1, "Gen 4 Turbo Gentle Movement.mp4"
+  hero_mobile — больше не используется на главной RU (мобайл берёт hero.webp с кадром),
+  ещё используется на страницах до их этапа
 </file_structure>
 
 <design_tokens>
-Шрифты: Unbounded (заголовки, логотип, акценты) + Geologica (текст, nav)
+РЕДИЗАЙН «C + маркер» (утверждён 02–04.10.2026). Переносится постранично:
+этап 1 — index.html (готово), дальше services → about/contacts → journal → EN →
+страницы вне меню (promo, gift, staya_promo; промо-механику не трогать).
+Пока страница не переведена, на ней действует старая система (Unbounded + Geologica,
+терракота) — её не «чинить» под новую без этапа.
 
-CSS-переменные (светлая тема):
---bg: #F4EFE7
---bg-2: #FAF6F0
---bg-dark: #1A1510
---text: #1A1510
---text-soft: #2C2620
---muted: #8A7D72
---accent: #C4694A
---line: #D8CFC4
---sage: #5C7A62
+Шрифты: Fira Sans Condensed 500/600/700 (заголовки КАПСОМ, логотип, метки 13px
+с трекингом .14em, кнопки) + Onest 400/500/600 (текст, nav).
 
-Тёмная тема (DEFAULT, data-theme="dark" на <html>):
---bg:#15110D  --bg-2:#1E1A14  --bg-dark:#0B0908
---text:#F0E8DE  --accent:#D77A5B  --line:#2A241E
+Тёмная тема (DEFAULT, data-theme="dark"):
+--bg:#0C0C0B  --bg-2:#141413  --surface:#1F1F1C  --line:#2E2E2B
+--text:#F1ECE2  --text-soft:#CFC9BE  --muted:#A9A397
+--accent:#F2A93B (янтарь, заливка кнопок)  --accent-h:#E89A26  --accent-ink:#F2A93B
+--on-accent:#0C0C0B (текст на янтаре — всегда тёмный)
+Светлая тема (без атрибута):
+--bg:#F2F1EE  --bg-2:#E8E6E1  --surface:#DEDBD4  --line:#D2CEC6
+--text:#161512  --text-soft:#3A3833  --muted:#645F56
+--accent-ink:#7A4706 (янтарь для ТЕКСТА на светлом — иначе нет контраста)
+Общие: --paper:#F1ECE2  --flap:#262623 (плашки-флажки табло под цифрами)
 
-Nav: всегда тёмный (rgba(21,17,13,0.72) + backdrop-blur), не меняется при скролле.
-Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — обязателен на всех страницах.
+Маркер: янтарная линия-подчёркивание (SVG в --marker, класс .mk), прорисовывается
+при появлении блока. Только на акцентных словах в H2 ниже героя (сейчас 3 места).
+В H1 героя — НЕ маркер, а цвет. Новых мест маркера не добавлять без запроса.
+Фото: естественный цвет, чуть теплее (sepia .1, saturate 1.12, contrast 1.04).
+Серой/обесцвеченной обработки НЕ делать. Плёночные рамки/кадры — отвергнуты.
+
+Nav: всегда тёмный (rgba(12,12,11,0.86) + backdrop-blur) в обеих темах.
+Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0.06 screen) —
+обязателен на всех страницах.
+Анимации: только transform/opacity/clip-path, ease-out cubic-bezier(0.23,1,0.32,1),
+появление 12px + opacity; флажки переворачиваются при появлении; prefers-reduced-motion
+учитывается. Без magnetic-кнопок, прожектора, бегущей строки, параллакса.
 </design_tokens>
 
 <decisions>
 НЕЛЬЗЯ МЕНЯТЬ:
-- Шрифты только Unbounded + Geologica
+- Шрифты: Fira Sans Condensed + Onest на переведённых страницах (см. design_tokens);
+  Unbounded + Geologica — только на ещё не переведённых, до их этапа
 - Тёмная тема = DEFAULT, антифликер-скрипт в head. Светлая = отсутствие атрибута
   data-theme (не data-theme="light"), тёмная = data-theme="dark" на <html>
 - Nav всегда тёмный (многократно проверено)
@@ -75,10 +91,10 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
 - Цвета в промо-ценах брать из переменных (var(--text) / var(--muted)),
   не хардкодить #fff — иначе цена пропадает в светлой теме
 
-СЕТКА ФОРМАТОВ (обновлено 05.09.2026, 6 карточек):
+СЕТКА ФОРМАТОВ (обновлено 05.09.2026, 6 карточек; цены Фокус 150 / Практика 180 — с 04.10.2026):
   #intro         Знакомство / Intro Session        25 мин    100 GEL   Вход
-  #kinesiofocus  Кинезио · Фокус / Kinesio·Focus   50 мин    140 GEL   Кинезио
-  #bodypractice  Телесная практика / Bodywork      80 мин    170 GEL   Релакс
+  #kinesiofocus  Кинезио · Фокус / Kinesio·Focus   50 мин    150 GEL   Кинезио
+  #bodypractice  Телесная практика / Bodywork      80 мин    180 GEL   Релакс
   #kinesio       Кинезио · Комплекс / Kinesio·Full 80 мин    200 GEL   Кинезио
   #taping        Кинезиотейпирование / Taping      по зонам  30 GEL/зона  Кинезио
   #postnatal     Восстановление после родов        2×90 мин  500 GEL   Послеродовое
@@ -107,11 +123,42 @@ Grain overlay: body::before SVG noise, opacity 0.035, mix-blend multiply — о�
 - Пути в её JS жёстко зашиты: src() собирает slides/webinar-tejp/s-NN.jpg,
   кнопка PDF ведёт на slides/webinar-tejp.pdf. Файлы не переименовывать.
 - В навигацию не добавлять, в sitemap не включать — доступ только по прямой ссылке.
+
+КЛАВИАТУРА БОТА (15.09.2026), MAIN_KEYBOARD, порядок кнопок:
+  Записаться на сеанс · Форматы · Сайт · 🎁 Подарочный сертификат · Контакты
+- Reply-клавиатура НЕ поддерживает URL-кнопки (это умеет только inline), и у одного
+  сообщения может быть лишь одна reply_markup. Поэтому «Форматы» и «Сайт» — обычные
+  текстовые кнопки, а сама ссылка приходит inline-кнопкой в ответном сообщении.
+- Константы SITE_URL и SERVICES_URL — рядом с MAIN_KEYBOARD, ведут на
+  mauglibodywork.com и mauglibodywork.com/services (чистые URL, без .html).
+
+ГЛАВНАЯ (04.10.2026), 9 блоков: герой → полоса доверия → «С чем приходят»
+(3 запроса → формат) → «Как проходит сеанс» (3 шага + принципы) → отзывы
+(6 + «ещё», длинные свёрнуты) → форматы (БЕЗ цен — за ценой идут на services,
+решение владельца) → обо мне коротко → FAQ → финальный CTA.
+- Главная кнопка везде «Записаться» + подпись «откроется бот в Telegram».
+- Метки источника в ссылках на бота: ?start=src_<место> (src_nav, src_home_hero,
+  src_home_final, src_sticky, дальше src_svc_<якорь>, src_about, src_contacts,
+  src_journal_<slug>; EN — src_en_…). promo_* и slot_* не трогать.
+  Обработка меток в боте — отдельная задача, промт: .claude/notes/bot-prompt-start-tags.md
+- Липкая кнопка «Записаться» на мобиле (≤860px), прячется, когда видна другая кнопка записи.
+- Обращение «ты», но без рода: никаких «готов/уверен/устал/пришёл» о читателе.
+- Пункт меню «Контакты» → «Запись и контакты» (адрес contacts.html прежний).
+
+КОНТАКТЫ И ФАКТЫ ДЛЯ FAQ (04.10.2026):
+- Бот записи: @maugli_bodywork_bot · личный Telegram: @van.maugli · Instagram: @maugli.bodywork
+- Где: Тбилиси, Мтацминда, метро Liberty Square (улицу/дом на сайте НЕ публиковать).
+- С собой: резинка для волос; сеанс в нижнем белье; полотенце на месте; одноразовые
+  простыни не используются — персональная хлопковая простынка.
+- Оплата: наличные или перевод, после сеанса; Знакомство — по предоплате.
+- Отмена/перенос: >24 ч бесплатно, 24–12 ч 50%, позже 100%; писать в личку или боту.
+- После родов: через 1–2 недели, после кесарева — когда шов заживёт, с согласия врача, без малыша.
+- Знакомство засчитывается только в Телесную практику или Кинезио·Комплекс в течение 14 дней.
 </decisions>
 
 <pending_tasks>
-Актуально на 05.09.2026. Закрыто ранее: фон #5C7A62, hero_mobile, фото форматов,
-контакты «Экспресс», конвертация в WebP.
+Актуально на 15.09.2026. Закрыто ранее: фон #5C7A62, hero_mobile, фото форматов,
+контакты «Экспресс», конвертация в WebP, контакты в боте (Instagram/Telegram).
 
 БЕЗОПАСНОСТЬ (из аудита 04.09.2026):
 1. GitHub PAT лежит открытым текстом в .git/config (remote URL) — отозвать и
@@ -145,13 +192,11 @@ SEO (из аудита 04.09.2026):
     бота остаётся статической ?start=promo_first, в отличие от promo.html:453.
 13. Бот: перевести бронирование на чисто временные слоты (30/60/90 мин),
     убрать привязку к форматам. Сайт уже показывает только время.
-14. Бот (src/index.js:379): «Instagram: @mauglibodywork» устарел →
-    @maugli.bodywork; «Telegram (бот): @mauglibodywork» → @maugli_bodywork_bot.
-15. contacts.html:466 — подпись @mirror_focus_bot при ссылке на
+14. contacts.html:466 — подпись @mirror_focus_bot при ссылке на
     @maugli_bodywork_bot.
-16. contacts.html:478 / en/contacts.html:478 — в шагах записи перечислена
+15. contacts.html:478 / en/contacts.html:478 — в шагах записи перечислена
     «Разминка» / «Warm-up», формата больше нет.
-17. promo.html:329, en/promo.html:230, staya_promo.html:239 — ссылки на
+16. promo.html:329, en/promo.html:230, staya_promo.html:239 — ссылки на
     services.html#warmup, якоря больше нет.
 </pending_tasks>
 
