@@ -590,7 +590,7 @@
       <div class="svc-success" id="svcSuccess">
         <p class="svc-success-title" id="svcSuccessTitle">Done!</p>
         <p class="svc-success-text">One more step — activate your discount in Telegram. The bot will lock in your −15% for 14 days.</p>
-        <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="svc-tg-btn">Activate in Telegram →</a>
+        <a href="https://t.me/maugli_bodywork_bot?start=promo_first" target="_blank" class="svc-tg-btn" id="svcTgLink">Activate in Telegram →</a>
       </div>
     </div>
   </div>
@@ -859,6 +859,11 @@
                 body: JSON.stringify({ name })
               });
               if (!res.ok) throw new Error('server error');
+              // id заявки — в ссылку на бота, чтобы активация привязалась именно к ней (как в promo.html)
+              const data = await res.json().catch(() => null);
+              if (data && data.leadId) {
+                document.getElementById('svcTgLink').href = 'https://t.me/maugli_bodywork_bot?start=promo_first_' + data.leadId;
+              }
               svcTitle.textContent = 'Done, ' + name + '!';
               svcWrap.style.display = 'none';
               svcSucc.style.display = 'block';

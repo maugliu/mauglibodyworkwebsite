@@ -99,9 +99,14 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
   #taping        Кинезиотейпирование / Taping      по зонам  30 GEL/зона  Кинезио
   #postnatal     Восстановление после родов        2×90 мин  500 GEL   Послеродовое
 
-ФИЛЬТРЫ (05.09.2026): all / entry / relax / kinesio / postnatal.
-  data-cat многозначный, через пробел (у #taping — "entry kinesio"),
-  матчинг в JS: card.dataset.cat.split(' ').includes(filter)
+ФИЛЬТРЫ (значения 05.09.2026, подписи 04.10.2026): all «Все» / entry «Первый раз» /
+  relax «Расслабиться» / kinesio «Боль и зажатость» / postnatal «После родов».
+  data-cat-label на карточках — те же слова. data-cat многозначный, через пробел
+  (матчинг: card.dataset.cat.split(' ').includes(filter)); у #taping с 04.10 только "kinesio".
+  На карточке services: строка «кому подходит» (.svc-card-fit), в панели — «ближайшее
+  свободное время» (первый слот из /api/slots), кнопка с меткой src_svc_<якорь>,
+  строка «Отмена бесплатно за 24 часа · оплата после сеанса» (у #intro — «по предоплате»).
+  Общая полоса свободных окон над сеткой остаётся. Блок противопоказаний — id="contra".
 
 ТЕКСТЫ КАРТОЧЕК: data-desc — короткий (карточка + тизер на главной),
   data-longdesc — развёрнутый (детальная панель), фолбэк longdesc || desc
@@ -161,8 +166,7 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 контакты «Экспресс», конвертация в WebP, контакты в боте (Instagram/Telegram).
 
 БЕЗОПАСНОСТЬ (из аудита 04.09.2026):
-1. GitHub PAT лежит открытым текстом в .git/config (remote URL) — отозвать и
-   перейти на SSH. В историю коммитов не попал.
+1. ✅ 04.10.2026 — токен из .git/config убран, вход через gh, старый токен истёк.
 2. CLAUDE.md публично отдаётся с сайта (mauglibodywork.com/CLAUDE.md, 200),
    репозиторий public. Внутри — префикс ключа Dikidi. Перенести в .claude/
    или закрыть через _redirects.
@@ -188,8 +192,7 @@ SEO (из аудита 04.09.2026):
 11. У 48 из 50 <img> нет width/height → layout shift.
 
 ПРОЧЕЕ:
-12. Промо-форма на services.html игнорирует leadId из ответа API — ссылка на
-    бота остаётся статической ?start=promo_first, в отличие от promo.html:453.
+12. ✅ 04.10.2026 — services (RU/EN) передаёт leadId в ссылку бота: ?start=promo_first_<leadId>.
 13. Бот: перевести бронирование на чисто временные слоты (30/60/90 мин),
     убрать привязку к форматам. Сайт уже показывает только время.
 14. contacts.html:466 — подпись @mirror_focus_bot при ссылке на
@@ -228,14 +231,15 @@ SEO (из аудита 04.09.2026):
 Репозиторий: https://github.com/maugliu/mauglibodyworkwebsite.git
 Ветка: main
 
-После каждой выполненной задачи — предложить коммит:
-  cd /Users/macbookairm1/Documents/mauglibodywork.com/mauglibodyworkwebsite
-  git add .
+После каждого этапа, который владелец одобрил («ок», «нравится», «дальше», «готовь коммит»
+и т.п.) — Claude сам обновляет CLAUDE.md, коммитит и пушит, без отдельного «да»
+(решение 04.10.2026). В отчёте — хэш коммита и что в него вошло.
+  git add .   (служебное — .claude/, .agents/, .impeccable/, skills-lock.json — в .gitignore)
   git commit -m "описание"
-  git push
+  git push    (авторизация через gh: credential helper настроен, токена в URL нет)
 
 Правила коммитов:
-- Делать ТОЛЬКО после явного подтверждения («да» / «пуш» / «коммить»)
+- Без одобрения результата этапа — не коммитить и не пушить
 - Сообщение на английском, коротко: тип + что именно
 - Типы: fix / add / update / remove
 - Примеры:
