@@ -157,6 +157,8 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 - services: внутри кнопки карточки только span; фокус в панель при открытии с клавиатуры, Esc возвращает
   фокус на карточку; карточка не прыгает при переносе панели; hashchange открывает карточку;
   aria-live «Показано форматов: N»; ошибки промо-формы role="alert".
+- Промо (с согласия владельца): строки без скидки и старые цены — цвет var(--muted) вместо opacity .5–.55
+  (контраст AA), на promo/en-promo/staya_promo и services?promo=first.
 - DESIGN.md в корне — описание дизайн-системы (токены + правила). Creative North Star — «Табло в тихой комнате» (утверждено).
 - СБОРКА: about, contacts, journal/* и все en/* собираются скриптами из index.html и services.html —
   .claude/build/ (README там). Правишь RU → пересобираешь → en_build. Руками EN не править.
