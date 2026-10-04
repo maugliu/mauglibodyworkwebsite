@@ -100,7 +100,7 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
   #postnatal     Восстановление после родов        2×90 мин  500 GEL   Послеродовое
 
 ФИЛЬТРЫ (значения 05.09.2026, подписи 04.10.2026): all «Все» / entry «Первый раз» /
-  relax «Расслабиться» / kinesio «Боль и зажатость» / postnatal «После родов».
+  relax «Расслабиться» / kinesio «Боль и скованность» / postnatal «После родов».
   data-cat-label на карточках — те же слова. data-cat многозначный, через пробел
   (матчинг: card.dataset.cat.split(' ').includes(filter)); у #taping с 04.10 только "kinesio".
   На карточке services: строка «кому подходит» (.svc-card-fit), в панели — «ближайшее
