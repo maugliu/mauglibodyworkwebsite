@@ -39,16 +39,15 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   gift-cert-bg
   massage_certificate01-05.webp
   Не используются нигде: bodypractice_svc, diag1, "Gen 4 Turbo Gentle Movement.mp4"
-  hero_mobile — больше не используется на главной RU (мобайл берёт hero.webp с кадром),
-  ещё используется на страницах до их этапа
+  hero_mobile — больше не используется (мобайл берёт hero.webp с кадром)
 </file_structure>
 
 <design_tokens>
-РЕДИЗАЙН «C + маркер» (утверждён 02–04.10.2026). Переносится постранично:
-этап 1 — index.html (готово), дальше services → about/contacts → journal → EN →
-страницы вне меню (promo, gift, staya_promo; промо-механику не трогать).
-Пока страница не переведена, на ней действует старая система (Unbounded + Geologica,
-терракота) — её не «чинить» под новую без этапа.
+РЕДИЗАЙН «C + маркер» (утверждён 02–04.10.2026) — перенесён на все страницы сайта
+(RU, EN, журнал, promo/gift/staya_promo). Исключение — webinar-tejp.html (свой дизайн).
+На promo/gift/staya_promo/en/promo заменены только шрифты и цвета (блок
+«РЕДИЗАЙН 10.2026» в конце <style>), разметка и промо-механика прежние.
+EN-страницы собраны из RU тем же шаблоном (одинаковые блоки), метки бота src_en_*.
 
 Шрифты: Fira Sans Condensed 500/600/700 (заголовки КАПСОМ, логотип, метки 13px
 с трекингом .14em, кнопки) + Onest 400/500/600 (текст, nav).
@@ -80,8 +79,8 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 
 <decisions>
 НЕЛЬЗЯ МЕНЯТЬ:
-- Шрифты: Fira Sans Condensed + Onest на переведённых страницах (см. design_tokens);
-  Unbounded + Geologica — только на ещё не переведённых, до их этапа
+- Шрифты: Fira Sans Condensed + Onest (см. design_tokens). Unbounded и Geologica
+  на сайте больше не используются (кроме webinar-tejp.html — там системные шрифты)
 - Тёмная тема = DEFAULT, антифликер-скрипт в head. Светлая = отсутствие атрибута
   data-theme (не data-theme="light"), тёмная = data-theme="dark" на <html>
 - Nav всегда тёмный (многократно проверено)
@@ -181,8 +180,7 @@ SEO (из аудита 04.09.2026):
 6. Schema.org нет вообще — нужен LocalBusiness + Service + Person.
 7. Open Graph и Twitter Card отсутствуют везде. Критично: воронка идёт через
    Telegram, ссылка разворачивается без превью.
-8. en/journal/index.html = «Coming soon», не ссылается ни на один из четырёх
-   существующих EN-постов — они недостижимы для краулера.
+8. ✅ 04.10.2026 — en/journal/index.html: список из 4 EN-постов вместо «Coming soon».
 
 ПРОИЗВОДИТЕЛЬНОСТЬ:
 9. Картинки в исходном разрешении с камеры (portrait 6469×4313 / 1.67 MB,
@@ -197,8 +195,7 @@ SEO (из аудита 04.09.2026):
     убрать привязку к форматам. Сайт уже показывает только время.
 14. ✅ 04.10.2026 — contacts переделан, подпись бота @maugli_bodywork_bot (EN — на этапе 5).
 15. ✅ RU 04.10.2026 — «Разминка» убрана из шагов записи (EN — на этапе 5).
-16. promo.html:329, en/promo.html:230, staya_promo.html:239 — ссылки на
-    services.html#warmup, якоря больше нет.
+16. ✅ 04.10.2026 — строка «Разминка» убрана из promo, en/promo и staya_promo.
 </pending_tasks>
 
 <rules>

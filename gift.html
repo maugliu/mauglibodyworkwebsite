@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta name="theme-color" content="#15110D" />
+  <meta name="theme-color" content="#0C0C0B" />
   <title>Подарочный сертификат — Maugli Bodywork</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -12,9 +12,9 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700&family=Geologica:wght@300;400&family=PT+Mono&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700&family=Geologica:wght@300;400&family=PT+Mono&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700&family=Geologica:wght@300;400&family=PT+Mono&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Onest:wght@400;500;600&family=PT+Mono&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Onest:wght@400;500;600&family=PT+Mono&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Onest:wght@400;500;600&family=PT+Mono&display=swap" /></noscript>
   <style>
     :root {
       --bg: #F4EFE7; --bg-2: #FAF6F0; --bg-dark: #1A1510;
@@ -31,7 +31,7 @@
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg); color: var(--text);
-      font-family: 'Geologica', sans-serif; font-weight: 300;
+      font-family: 'Onest', sans-serif; font-weight: 300;
       line-height: 1.6; min-height: 100vh;
       transition: background 0.4s ease, color 0.3s ease;
     }
@@ -53,7 +53,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .logo {
-      font-family: 'Unbounded', sans-serif;
+      font-family: 'Fira Sans Condensed', sans-serif;
       font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em;
       color: #F0E8DE;
     }
@@ -72,7 +72,7 @@
       color: var(--muted); margin-bottom: 0.8rem;
     }
     .gift-hint {
-      font-family: 'Unbounded', sans-serif;
+      font-family: 'Fira Sans Condensed', sans-serif;
       font-weight: 300;
       font-size: clamp(1.3rem, 3.4vw, 1.9rem);
       letter-spacing: -0.01em;
@@ -132,7 +132,7 @@
       font-family: 'PT Mono', monospace; font-weight: 400;
     }
     .cert-overlay .field-number {
-      font-family: 'Unbounded', sans-serif; font-weight: 500;
+      font-family: 'Fira Sans Condensed', sans-serif; font-weight: 500;
     }
 
     .gift-actions {
@@ -142,7 +142,7 @@
     }
     .btn-gift {
       display: inline-flex; align-items: center; gap: 0.6rem;
-      font-family: 'Unbounded', sans-serif;
+      font-family: 'Fira Sans Condensed', sans-serif;
       font-size: 0.78rem; font-weight: 600;
       letter-spacing: 0.06em; text-transform: uppercase;
       padding: 1rem 1.9rem;
@@ -168,6 +168,37 @@
       .btn-gift { justify-content: center; }
     }
 
+  
+    /* ── РЕДИЗАЙН 10.2026: шрифты и цвета (разметка и промо-механика без изменений) ── */
+    :root {
+      --bg: #F2F1EE; --bg-2: #E8E6E1; --bg-dark: #0C0C0B;
+      --text: #161512; --text-soft: #3A3833; --muted: #645F56;
+      --accent: #7A4706; --line: #D2CEC6; --white: #F1ECE2;
+      --sage: #F2A93B; --amber: #F2A93B; --amber-h: #E89A26; --on-amber: #0C0C0B; --price: #161512;
+    }
+    [data-theme="dark"] {
+      --bg: #0C0C0B; --bg-2: #1F1F1C; --bg-dark: #0C0C0B;
+      --text: #F1ECE2; --text-soft: #CFC9BE; --muted: #A9A397;
+      --accent: #F2A93B; --line: #2E2E2B; --white: #F1ECE2; --price: #F1ECE2;
+    }
+    body { font-weight: 400; }
+    .nav { background: rgba(12, 12, 11, 0.86) !important; }
+    .logo { text-transform: uppercase; letter-spacing: .04em !important; }
+    h1, h2, .promo-title, .fam-title, .gift-hint { text-transform: uppercase; letter-spacing: 0 !important; line-height: .95 !important; }
+    .promo-subtitle, .fam-subtitle { font-family: 'Onest', sans-serif !important; font-weight: 400 !important; text-transform: none; }
+    .pfmt-name, .ffmt-name { text-transform: uppercase; font-weight: 600 !important; }
+    .promo-badge, .pfmt-tag, .btn-promo, .btn-promo-submit, .btn-tg, .btn-gift.primary, .fam-badge, .ffmt-tag, .btn-fam {
+      background: var(--amber) !important; color: var(--on-amber) !important; box-shadow: none !important; border-radius: 3px;
+      transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 200ms ease;
+    }
+    .btn-promo:hover, .btn-promo-submit:hover, .btn-tg:hover, .btn-gift.primary:hover, .btn-fam:hover { background: var(--amber-h) !important; }
+    .btn-promo:active, .btn-promo-submit:active, .btn-tg:active, .btn-gift.primary:active, .btn-fam:active { transform: scale(.97); }
+    .pfmt-new, .ffmt-new { color: var(--price) !important; }
+    .promo-success { border-left: 0 !important; border: 1px solid var(--amber) !important; border-radius: 4px; }
+    .promo-success-title { color: var(--text) !important; text-transform: uppercase; }
+    .promo-input:focus { border-color: var(--amber) !important; }
+    .lang-btn.active { color: #F2A93B !important; border-color: #F2A93B !important; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #F2A93B; outline-offset: 3px; }
   </style>
   <script>
     (function() {
@@ -188,9 +219,9 @@
     <div class="envelope-wrap" id="envelopeWrap">
       <div class="envelope">
         <svg viewBox="0 0 400 267" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="392" height="259" rx="6" fill="#1E1A14" stroke="#5C7A62" stroke-width="1.5"/>
-          <path d="M8 12 L200 160 L392 12" fill="none" stroke="#5C7A62" stroke-width="1.5" stroke-linejoin="round"/>
-          <path d="M8 12 L8 255 L392 255 L392 12" fill="none" stroke="#5C7A62" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="4" y="4" width="392" height="259" rx="6" fill="#1F1F1C" stroke="#F2A93B" stroke-width="1.5"/>
+          <path d="M8 12 L200 160 L392 12" fill="none" stroke="#F2A93B" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M8 12 L8 255 L392 255 L392 12" fill="none" stroke="#F2A93B" stroke-width="1.5" stroke-linejoin="round"/>
           <circle cx="200" cy="133" r="16" fill="none" stroke="#D77A5B" stroke-width="1.5"/>
           <path d="M192 133 L198 139 L210 125" fill="none" stroke="#D77A5B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -210,7 +241,7 @@
           <text class="field-name" id="fieldName" fill="#A8431E" font-family="'PT Mono', monospace" font-size="31" letter-spacing="0"><tspan x="540.002" y="292"></tspan></text>
           <text class="field-service" id="fieldService" fill="#A8431E" font-family="'PT Mono', monospace" font-size="31" letter-spacing="0"><tspan x="493.061" y="356"></tspan></text>
           <text class="field-until" id="fieldUntil" fill="#A8431E" font-family="'PT Mono', monospace" font-size="28" letter-spacing="0"><tspan x="541.125" y="420"></tspan></text>
-          <text class="field-number" id="fieldNumber" fill="#1A1510" font-family="'Unbounded', sans-serif" font-weight="500" font-size="20" transform="translate(29 640) rotate(-90)"><tspan x="0.353516" y="20"></tspan></text>
+          <text class="field-number" id="fieldNumber" fill="#1A1510" font-family="'Fira Sans Condensed', sans-serif" font-weight="500" font-size="20" transform="translate(29 640) rotate(-90)"><tspan x="0.353516" y="20"></tspan></text>
         </svg>
       </div>
       <div class="gift-actions">
