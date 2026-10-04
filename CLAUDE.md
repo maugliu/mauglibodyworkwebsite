@@ -195,10 +195,8 @@ SEO (из аудита 04.09.2026):
 12. ✅ 04.10.2026 — services (RU/EN) передаёт leadId в ссылку бота: ?start=promo_first_<leadId>.
 13. Бот: перевести бронирование на чисто временные слоты (30/60/90 мин),
     убрать привязку к форматам. Сайт уже показывает только время.
-14. contacts.html:466 — подпись @mirror_focus_bot при ссылке на
-    @maugli_bodywork_bot.
-15. contacts.html:478 / en/contacts.html:478 — в шагах записи перечислена
-    «Разминка» / «Warm-up», формата больше нет.
+14. ✅ 04.10.2026 — contacts переделан, подпись бота @maugli_bodywork_bot (EN — на этапе 5).
+15. ✅ RU 04.10.2026 — «Разминка» убрана из шагов записи (EN — на этапе 5).
 16. promo.html:329, en/promo.html:230, staya_promo.html:239 — ссылки на
     services.html#warmup, якоря больше нет.
 </pending_tasks>
