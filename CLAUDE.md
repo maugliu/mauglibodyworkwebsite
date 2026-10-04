@@ -164,7 +164,7 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
   .claude/build/ (README там). Правишь RU → пересобираешь → en_build. Руками EN не править.
 
 КОНТАКТЫ И ФАКТЫ ДЛЯ FAQ (04.10.2026):
-- Бот записи: @maugli_bodywork_bot · личный Telegram: @van.maugli · Instagram: @maugli.bodywork
+- Бот записи: @maugli_bodywork_bot · личный Telegram: @vanmaugli · Instagram: @maugli.bodywork
 - Где: Тбилиси, Мтацминда, метро Liberty Square (улицу/дом на сайте НЕ публиковать).
 - С собой: резинка для волос; сеанс в нижнем белье; полотенце на месте; одноразовые
   простыни не используются — персональная хлопковая простынка.
