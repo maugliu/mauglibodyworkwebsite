@@ -160,8 +160,10 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 - Промо (с согласия владельца): строки без скидки и старые цены — цвет var(--muted) вместо opacity .5–.55
   (контраст AA), на promo/en-promo/staya_promo и services?promo=first.
 - DESIGN.md в корне — описание дизайн-системы (токены + правила). Creative North Star — «Табло в тихой комнате» (утверждено).
+- ВЕБИНАР: пока непубличный — noindex, без sitemap. Когда откроем: добавить текстовую версию слайдов
+  и включить индексацию.
 - СБОРКА: about, contacts, journal/* и все en/* собираются скриптами из index.html и services.html —
-  .claude/build/ (README там). Правишь RU → пересобираешь → en_build. Руками EN не править.
+  .claude/build/ (README там). Правишь RU → пересобираешь → en_build. Руками EN не править. Последним шагом — seo.py (canonical/OG/sitemap).
 
 КОНТАКТЫ И ФАКТЫ ДЛЯ FAQ (04.10.2026):
 - Бот записи: @maugli_bodywork_bot · личный Telegram: @vanmaugli · Instagram: @maugli.bodywork
@@ -180,28 +182,26 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 
 БЕЗОПАСНОСТЬ (из аудита 04.09.2026):
 1. ✅ 04.10.2026 — токен из .git/config убран, вход через gh, старый токен истёк.
-2. CLAUDE.md публично отдаётся с сайта (mauglibodywork.com/CLAUDE.md, 200),
-   репозиторий public. Внутри — префикс ключа Dikidi. Перенести в .claude/
-   или закрыть через _redirects.
-3. admin.html шлёт токен в query string (admin.html:437) — перенести в
-   заголовок Authorization. Сам эндпоинт защищён, без токена отдаёт 401.
+2. ✅ 05.10.2026 — _redirects: /CLAUDE.md, /PRODUCT.md, /DESIGN.md → 301 на главную.
+3. admin.html шлёт токен в query string (admin.html:437) — задача 4 в
+   .claude/notes/bot-prompt-start-tags.md (правка воркера + admin.html в одной сессии).
 
 SEO (из аудита 04.09.2026):
-4. sitemap.xml отсутствует (404). robots.txt — дефолтная заглушка Cloudflare
-   без директивы Sitemap.
-5. Ни canonical, ни hreflang ни на одной из 23 страниц. Cloudflare Pages при
-   этом редиректит /page.html → /page (307), то есть доступны обе формы URL.
-6. Schema.org нет вообще — нужен LocalBusiness + Service + Person.
-7. Open Graph и Twitter Card отсутствуют везде. Критично: воронка идёт через
-   Telegram, ссылка разворачивается без превью.
+4. ✅ 05.10.2026 — sitemap.xml (18 URL, RU+EN с hreflang) и свой robots.txt
+   (Content-Signal: search=yes, ai-input=yes, ai-train=no; Disallow /admin.html; Sitemap).
+5. ✅ 05.10.2026 — canonical (чистые URL без .html) + hreflang ru/en/x-default на основных страницах.
+6. ✅ 05.10.2026 — JSON-LD HealthAndBeautyBusiness (основатель, каталог цен) на главной RU/EN.
+7. ✅ 05.10.2026 — OG + Twitter на всех страницах (и на promo/gift для превью в Telegram),
+   обложки og-cover.jpg / og-cover-en.jpg (1200×630, из cta_hands).
 8. ✅ 04.10.2026 — en/journal/index.html: список из 4 EN-постов вместо «Coming soon».
 
 ПРОИЗВОДИТЕЛЬНОСТЬ:
-9. Картинки в исходном разрешении с камеры (portrait 6469×4313 / 1.67 MB,
-   4480×6720 у нескольких). index.html тянет 4.63 MB, about.html 4.59 MB.
-10. Cloudflare отдаёт .webp с cache-control: max-age=0 — нужен файл _headers
-    с max-age=31536000, immutable.
-11. У 48 из 50 <img> нет width/height → layout shift.
+9. ✅ 05.10.2026 — фото ужаты до 2000px (сертификаты 1600px), все .webp: 10 МБ → 2 МБ.
+   Оригиналы — в истории git.
+10. ✅ 05.10.2026 — _headers: картинки кешируются на год (immutable).
+    ПРАВИЛО: новое или заменённое фото = новое имя файла, иначе посетители увидят старое.
+11. ✅ почти закрыто: новые страницы держат пропорции контейнерами (aspect-ratio),
+    у ключевых фото есть width/height.
 
 ПРОЧЕЕ:
 12. ✅ 04.10.2026 — services (RU/EN) передаёт leadId в ссылку бота: ?start=promo_first_<leadId>.
