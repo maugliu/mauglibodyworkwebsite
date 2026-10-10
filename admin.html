@@ -408,14 +408,16 @@
   let currentFilter = 'all';
 
   // ── Auth ──
-  function savedToken() { return localStorage.getItem('mbw_admin_token') || ''; }
+  // Токен живёт только до закрытия вкладки; старую копию из localStorage стираем
+  try { localStorage.removeItem('mbw_admin_token'); } catch (e) {}
+  function savedToken() { return sessionStorage.getItem('mbw_admin_token') || ''; }
 
   async function doLogin() {
     const token = document.getElementById('tokenInput').value.trim();
     if (!token) return;
     const ok = await fetchLeads(token);
     if (ok) {
-      localStorage.setItem('mbw_admin_token', token);
+      sessionStorage.setItem('mbw_admin_token', token);
       showMain();
     } else {
       document.getElementById('authError').style.display = 'block';
@@ -427,14 +429,14 @@
   });
 
   function logout() {
-    localStorage.removeItem('mbw_admin_token');
+    sessionStorage.removeItem('mbw_admin_token');
     location.reload();
   }
 
   // ── Data ──
   async function fetchLeads(token) {
     try {
-      const resp = await fetch(`${API}?token=${encodeURIComponent(token)}`);
+      const resp = await fetch(API, { headers: { Authorization: `Bearer ${token}` } });
       if (resp.status === 401) return false;
       const data = await resp.json();
       allLeads = data.leads || [];

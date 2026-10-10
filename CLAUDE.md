@@ -183,8 +183,9 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 БЕЗОПАСНОСТЬ (из аудита 04.09.2026):
 1. ✅ 04.10.2026 — токен из .git/config убран, вход через gh, старый токен истёк.
 2. ✅ 05.10.2026 — _redirects: /CLAUDE.md, /PRODUCT.md, /DESIGN.md → 301 на главную.
-3. admin.html шлёт токен в query string (admin.html:437) — задача 4 в
-   .claude/notes/bot-prompt-start-tags.md (правка воркера + admin.html в одной сессии).
+3. ✅ 10.10.2026 — admin.html шлёт токен в заголовке Authorization: Bearer, хранит в sessionStorage;
+   ADMIN_TOKEN ротирован (владелец, wrangler secret put). Осталось: убрать ?token= из воркера.
+   Админку проверять только на живом сайте — с file:// запрос режется CORS и выглядит как «Неверный токен».
 
 SEO (из аудита 04.09.2026):
 4. ✅ 05.10.2026 — sitemap.xml (18 URL, RU+EN с hreflang) и свой robots.txt
