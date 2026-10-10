@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Онлайн-вебинар Ивана Маугли о самомассаже дома: заметить сигналы тела, понять, почему мышцы зажимаются и болят, проработать. 17 октября, 11:00 (Тбилиси, GMT+4). Участие за донат." />
+  <meta name="theme-color" content="#0C0C0B" />
+  <title>Почувствуй своё тело — вебинар о самомассаже, 17 октября | Maugli Bodywork</title>
+  <!-- seo -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Maugli Bodywork" />
+  <meta property="og:title" content="Почувствуй своё тело — вебинар о самомассаже, 17 октября | Maugli Bodywork" />
+  <meta property="og:description" content="Онлайн-вебинар Ивана Маугли о самомассаже дома: заметить сигналы тела, понять, почему мышцы зажимаются и болят, проработать. 17 октября, 11:00 (Тбилиси, GMT+4). Участие за донат." />
+  <meta property="og:image" content="https://mauglibodywork.com/og-webinar.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Почувствуй своё тело — вебинар о самомассаже, 17 октября | Maugli Bodywork" />
+  <meta name="twitter:description" content="Онлайн-вебинар Ивана Маугли о самомассаже дома: заметить сигналы тела, понять, почему мышцы зажимаются и болят, проработать. 17 октября, 11:00 (Тбилиси, GMT+4). Участие за донат." />
+  <meta name="twitter:image" content="https://mauglibodywork.com/og-webinar.jpg" />
+  <!-- /seo -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Onest:wght@400;500;600&display=swap" />
+  <meta name="robots" content="noindex" />
+  <script>
+    // Тема до отрисовки: тёмная по умолчанию, светлая = отсутствие data-theme
+    (function () {
+      var saved = localStorage.getItem('theme');
+      if (saved !== 'light') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+  <style>
+    /* ── ТОКЕНЫ ── светлая тема = без атрибута, тёмная = data-theme="dark" */
+    :root {
+      --bg: #F2F1EE;
+      --bg-2: #E8E6E1;
+      --surface: #DEDBD4;
+      --text: #161512;
+      --text-soft: #3A3833;
+      --muted: #645F56;
+      --accent: #F2A93B;
+      --accent-h: #E89A26;
+      --accent-ink: #7A4706;
+      --on-accent: #0C0C0B;
+      --line: #D2CEC6;
+      --paper: #F1ECE2;
+      --flap: #262623;
+      --font-display: 'Fira Sans Condensed', 'Arial Narrow', sans-serif;
+      --font-text: 'Onest', system-ui, sans-serif;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --gutter: 3rem;
+      --maxw: 1280px;
+    }
+    [data-theme="dark"] {
+      --bg: #0C0C0B;
+      --bg-2: #141413;
+      --surface: #1F1F1C;
+      --text: #F1ECE2;
+      --text-soft: #CFC9BE;
+      --muted: #A9A397;
+      --accent-ink: #F2A93B;
+      --line: #2E2E2B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-text); font-weight: 400; font-size: 1.0625rem; line-height: 1.6;
+      overflow-x: clip; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    ::selection { background: var(--accent); color: var(--on-accent); }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px;
+    }
+
+    /* ── GRAIN ── обязателен на всех страницах */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      opacity: 0.035; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+    [data-theme="dark"] body::before { opacity: 0.06; mix-blend-mode: screen; }
+
+    /* ── ТИПОГРАФИКА ── */
+    .h1, .h2 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 0.92; text-wrap: balance; }
+    .h1 { font-size: clamp(3rem, 6vw, 5.6rem); margin-bottom: 1.4rem; }
+    .h2 { font-size: clamp(2.4rem, 4.6vw, 4.2rem); margin-bottom: 1.5rem; }
+    .label { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .lead { font-size: 1.125rem; line-height: 1.6; color: var(--text-soft); max-width: 36em; }
+
+    /* ── КНОПКИ ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      font-family: var(--font-display); font-weight: 600; font-size: 16px; line-height: 1;
+      letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none;
+      color: var(--on-accent); background: var(--accent);
+      padding: 1.05rem 1.7rem; border-radius: 3px; border: 0; cursor: pointer;
+      transition: transform 160ms var(--ease-out), background-color 200ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--accent-h); } }
+    .btn:active { transform: scale(0.97); }
+    .btn-note { display: block; margin-top: .6rem; font-size: 13px; color: var(--muted); }
+    .link { font-size: 1rem; color: var(--text); text-decoration: none; border-bottom: 1.5px solid var(--accent); padding-bottom: 2px; transition: color 200ms ease; }
+    @media (hover: hover) and (pointer: fine) { .link:hover { color: var(--accent-ink); } }
+
+    /* ── NAV ── всегда тёмный */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 64px;
+      display: flex; align-items: center; gap: 2rem; padding: 0 var(--gutter);
+      background: rgba(12, 12, 11, 0.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(241, 236, 226, 0.08); color: #F1ECE2;
+    }
+    .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; color: #F1ECE2; margin-right: auto; white-space: nowrap; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { font-size: 15px; color: rgba(241, 236, 226, 0.72); text-decoration: none; white-space: nowrap; transition: color 200ms ease; }
+    @media (hover: hover) and (pointer: fine) { .nav-links a:hover { color: #F1ECE2; } }
+    .nav-links a[aria-current] { color: var(--accent); }
+    .nav-tools { display: flex; align-items: center; gap: .9rem; }
+    nav .btn { font-size: 14px; padding: .7rem 1.05rem; }
+    .theme-toggle { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; background: none; border: 1px solid rgba(241, 236, 226, 0.2); color: rgba(241, 236, 226, 0.8); transition: border-color 200ms ease, color 200ms ease; }
+    @media (hover: hover) and (pointer: fine) { .theme-toggle:hover { border-color: var(--accent); color: var(--accent); } }
+    .theme-toggle svg { width: 16px; height: 16px; }
+    .theme-toggle .moon { display: none; }
+    [data-theme="dark"] .theme-toggle .moon { display: block; }
+    [data-theme="dark"] .theme-toggle .sun { display: none; }
+    .lang { display: flex; align-items: center; gap: .15rem; font-size: 14px; }
+    .lang a, .lang span { padding: .55rem .45rem; text-decoration: none; border-radius: 3px; }
+    .lang a { color: rgba(241, 236, 226, 0.72); }
+    @media (hover: hover) and (pointer: fine) { .lang a:hover { color: #F1ECE2; } }
+    .lang .on { color: var(--accent); }
+    .burger { display: none; width: 44px; height: 44px; margin-right: -10px; background: none; border: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+    .burger span { display: block; width: 22px; height: 2px; background: #F1ECE2; transition: transform 250ms var(--ease-out), opacity 200ms ease; }
+    .burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mob-menu { display: none; position: fixed; inset: 64px 0 0; z-index: 190; background: #0C0C0B; color: #F1ECE2; flex-direction: column; justify-content: center; gap: 1.6rem; padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom)); }
+    .mob-menu.open { display: flex; }
+    .mob-menu > a:not(.btn) { font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; line-height: 1; text-transform: uppercase; text-decoration: none; color: #F1ECE2; }
+    .mob-menu a[aria-current] { color: var(--accent); }
+    .mob-menu .btn { align-self: flex-start; margin-top: 1rem; }
+    .mob-tools { display: flex; align-items: center; gap: 1rem; margin-top: .5rem; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* ── ШАПКА СТРАНИЦЫ ── */
+    .page-hd { padding: calc(64px + 4.5rem) 0 3rem; }
+    .crumbs { position: static; height: auto; display: block; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; margin-bottom: 1.6rem; font-size: 14px; color: var(--muted); }
+    .crumbs a { color: var(--muted); text-decoration: none; }
+    @media (hover: hover) and (pointer: fine) { .crumbs a:hover { color: var(--text); } }
+    .hint { position: relative; margin-top: 1.6rem; padding-left: 1.3rem; color: var(--text-soft); max-width: 44em; }
+    .hint::before { content: ''; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .hint a { color: var(--text); text-decoration: none; border-bottom: 1.5px solid var(--accent); }
+
+
+    .flap {
+      display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1;
+      letter-spacing: .02em; color: #F1ECE2; padding: .3rem .45rem; border-radius: 3px; font-variant-numeric: tabular-nums;
+      background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)) center / 100% 1px no-repeat, var(--flap);
+    }
+    .flap .a { color: var(--accent); }
+    .visible .flap { animation: flip 420ms var(--ease-out) both; }
+    .visible > :nth-child(2) .flap, .visible > :nth-child(2).flap { animation-delay: 80ms; }
+    .visible > :nth-child(3) .flap { animation-delay: 160ms; }
+    @keyframes flip { from { transform: perspective(300px) rotateX(85deg); opacity: .6; } to { transform: none; opacity: 1; } }
+    .sec { padding: 6.5rem 0; }
+    .bubble {
+      position: relative; max-width: 26rem; background: var(--surface); color: var(--text);
+      border-radius: 18px 18px 18px 4px; padding: 1rem 1.25rem .8rem; font-size: 1rem; line-height: 1.55;
+    }
+    .bubble.out { border-radius: 18px 18px 4px 18px; }
+    .bubble-name { display: block; font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: .35rem; }
+    .bubble-time { display: block; text-align: right; font-size: 12px; color: var(--muted); margin-top: .35rem; font-variant-numeric: tabular-nums; }
+    .photo-warm { filter: sepia(.1) saturate(1.12) contrast(1.04) brightness(1.02); }
+
+    /* ── HERO ── */
+    .w-hero { display: grid; grid-template-columns: 6fr 5fr; gap: 4.5rem; align-items: center; padding-top: calc(64px + 3.5rem); padding-bottom: 5rem; }
+    .w-hero .label { display: block; margin-bottom: 1.2rem; }
+    .w-hero .h1 .a { color: var(--accent-ink); }
+    .w-hero .lead { font-size: 1.2rem; margin-bottom: 2.2rem; }
+    .w-photo { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px; background: #DEDBD4; }
+    .w-photo img { width: 100%; height: 100%; object-fit: cover; animation: fade 900ms ease both; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    .when { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .7rem; }
+    .when .flap { font-size: 2rem; }
+    .when .tz { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-soft); margin-left: .4rem; }
+    .when-alt { color: var(--muted); font-size: 15px; margin-bottom: 1.6rem; }
+    .facts { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin-bottom: 2.4rem; color: var(--text-soft); }
+    .facts li { position: relative; padding-left: 1rem; }
+    .facts li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    /* ── ПРОГРАММА ── */
+    .prog { background: var(--bg-2); }
+    .prog-grid { display: grid; grid-template-columns: 4fr 7fr; gap: 4rem; align-items: start; }
+    .prog-list { list-style: none; display: flex; flex-direction: column; gap: 2.4rem; }
+    .pr { display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: start; }
+    .pr .flap { font-size: 1.25rem; }
+    .pr h3 { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.75rem; line-height: 1; margin-bottom: .55rem; }
+    .pr p { color: var(--text-soft); max-width: 36em; }
+    .prog-list.visible .pr:nth-child(2) .flap { animation-delay: 90ms; }
+    .prog-list.visible .pr:nth-child(3) .flap { animation-delay: 180ms; }
+
+    /* ── ЕСЛИ ЗНАКОМО ── */
+    .pains { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .pains li { background: var(--surface); border-radius: 18px 18px 18px 4px; padding: 1rem 1.25rem; color: var(--text); line-height: 1.5; }
+
+    /* ── ЧТО ПОЛУЧИШЬ ── */
+    .gets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+    .get { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 1.5rem 1.4rem; }
+    .get .label { display: block; margin-bottom: .8rem; color: var(--accent-ink); }
+    .get h3 { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.4rem; line-height: 1.05; margin-bottom: .6rem; }
+    .get p { color: var(--text-soft); font-size: 15px; }
+    .bring { margin-top: 2rem; }
+
+    /* ── ВЕДУЩИЕ ── */
+    .hosts { background: var(--bg-2); }
+    .hosts-grid { display: grid; grid-template-columns: 4fr 7fr; gap: 4rem; align-items: start; }
+    .host-list { display: flex; flex-direction: column; gap: 2.2rem; }
+    .host { display: grid; grid-template-columns: 96px 1fr; gap: 1.4rem; align-items: start; }
+    .host-ph { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; background: var(--surface); display: grid; place-items: center;
+               font-family: var(--font-display); font-weight: 700; font-size: 2rem; color: var(--accent-ink); }
+    .host-ph img { width: 100%; height: 100%; object-fit: cover; object-position: 64% 40%; }
+    .host h3 { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 1.5rem; line-height: 1; margin-bottom: .35rem; }
+    .host .label { display: block; margin-bottom: .7rem; }
+    .host p { color: var(--text-soft); max-width: 36em; }
+    .host p + p { margin-top: .6rem; }
+
+    /* ── ФОРМА ── */
+    .reg-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 4rem; align-items: start; }
+    .reg-side p { color: var(--text-soft); max-width: 30em; }
+    .reg-side p + p { margin-top: 1rem; }
+    .reg-card { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 2rem; }
+    .field { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1.3rem; }
+    .field > label, .field legend { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-soft); }
+    .field .opt { color: var(--muted); letter-spacing: .06em; text-transform: none; font-family: var(--font-text); font-weight: 400; }
+    .field input[type=text], .field input[type=email], .field input[type=tel] {
+      font: inherit; font-size: 16px; color: var(--text); background: var(--bg); border: 1px solid var(--line);
+      border-radius: 3px; padding: .85rem 1rem; min-height: 48px; width: 100%;
+      transition: border-color 200ms ease;
+    }
+    .field input::placeholder { color: var(--muted); }
+    .field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+    .field input[aria-invalid=true] { border-color: #E07070; }
+    fieldset.field { border: 0; padding: 0; margin: 0 0 .7rem; min-width: 0; }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; width: max-content; }
+    .seg input { position: absolute; opacity: 0; pointer-events: none; }
+    .seg label { cursor: pointer; padding: .6rem 1rem; min-height: 44px; display: flex; align-items: center; font-size: 15px; color: var(--text-soft); transition: background-color 200ms ease, color 200ms ease; }
+    .seg input:checked + label { background: var(--bg); color: var(--text); box-shadow: inset 0 -2px 0 var(--accent); }
+    .seg input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.6rem; }
+    .btn-ghost { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--line); }
+    @media (hover: hover) and (pointer: fine) { .btn-ghost:hover { background: transparent; box-shadow: inset 0 0 0 1.5px var(--accent); } }
+    .btn[disabled] { opacity: .6; cursor: progress; }
+    .form-note { margin-top: 1rem; font-size: 13px; color: var(--muted); }
+    .form-err { margin-top: 1rem; color: #E07070; font-size: 15px; }
+    .form-err:empty { display: none; }
+
+    /* ── ПОСЛЕ ОТПРАВКИ ── */
+    .done[hidden] { display: none; }
+    .done:focus { outline: none; }  /* фокус ставится скриптом для скринридера, рамка не нужна */
+    .done h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 2rem; line-height: 1; margin-bottom: .8rem; }
+    .done > p { color: var(--text-soft); }
+    .done .btn { margin-top: 1.4rem; }
+    .done .btn-note { margin-bottom: 1.6rem; }
+    .donate { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 1.2rem; }
+    .donate summary { cursor: pointer; list-style: none; font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 44px; }
+    .donate summary::-webkit-details-marker { display: none; }
+    .donate summary::after { content: '+'; color: var(--accent-ink); font-size: 1.4rem; transition: transform 250ms var(--ease-out); }
+    .donate[open] summary::after { transform: rotate(45deg); }
+    .donate summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .donate-intro { color: var(--text-soft); margin: .4rem 0 1rem; }
+    .donate-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .donate-list li { display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; align-items: center; background: var(--bg); border: 1px solid var(--line); border-radius: 3px; padding: .8rem 1rem; }
+    .donate-list .bank { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .donate-list .val { grid-column: 1; font-variant-numeric: tabular-nums; word-break: break-all; }
+    .donate-list .note { grid-column: 1; font-size: 13px; color: var(--muted); }
+    .donate-list .copy, .donate-list .go { grid-column: 2; grid-row: 1 / span 3; font: inherit; font-size: 14px; color: var(--text); background: none; border: 1px solid var(--line); border-radius: 3px; padding: .5rem .8rem; min-height: 44px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
+    @media (hover: hover) and (pointer: fine) { .donate-list .copy:hover, .donate-list .go:hover { border-color: var(--accent); } }
+    .donate-empty { color: var(--muted); }
+
+    /* ── FAQ ── */
+    .faq { background: var(--bg-2); }
+    .faq-grid { display: grid; grid-template-columns: 4fr 7fr; gap: 4rem; align-items: start; }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-list details { border-bottom: 1px solid var(--line); }
+    .faq-list summary {
+      list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+      padding: 1.35rem 0; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; text-transform: uppercase; line-height: 1.05;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: ''; flex: none; width: 14px; height: 14px;
+      background: linear-gradient(var(--accent), var(--accent)) center / 14px 2px no-repeat, linear-gradient(var(--accent), var(--accent)) center / 2px 14px no-repeat;
+      transition: transform 250ms var(--ease-out);
+    }
+    .faq-list details[open] summary::after { transform: rotate(45deg); }
+    .faq-list summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .faq-list .ans { padding: 0 0 1.5rem; color: var(--text-soft); max-width: 40em; }
+    .faq-list .ans a { color: var(--text); text-underline-offset: 4px; text-decoration-color: var(--accent); }
+
+    @media (max-width: 860px) {
+      .sec { padding: 4rem 0; }
+      .w-hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: calc(64px + 2rem); }
+      .w-photo { order: -1; aspect-ratio: 4 / 3; }
+      .w-photo img { object-position: 50% 35%; }
+      .prog-grid, .hosts-grid, .reg-grid, .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .gets { grid-template-columns: 1fr; }
+      .reg-card { padding: 1.4rem; }
+      .actions .btn { width: 100%; }
+    }
+    /* ── FOOTER ── */
+    footer { background: #0C0C0B; color: #F1ECE2; padding: 3.5rem 0 calc(2.5rem + env(safe-area-inset-bottom)); }
+    .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
+    .f-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; }
+    .f-logo span { color: var(--accent); }
+    .f-place { margin-top: .6rem; color: #A9A397; font-size: 15px; }
+    .f-col h3 { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #A9A397; margin-bottom: .8rem; }
+    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+    .f-col a { display: inline-block; padding: .3rem 0; color: #F1ECE2; text-decoration: none; font-size: 15px; }
+    @media (hover: hover) and (pointer: fine) { .f-col a:hover { color: var(--accent); } }
+    .f-copy { margin-top: 2.5rem; padding-top: 1.4rem; border-top: 1px solid rgba(241,236,226,.1); font-size: 13px; color: #A9A397; }
+
+    /* ── ЛИПКАЯ КНОПКА (мобайл) ── */
+    .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 150; display: none; padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom)); background: rgba(12,12,11,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid rgba(241,236,226,.08); transform: translateY(110%); transition: transform 300ms var(--ease-out); }
+    .sticky-cta .btn { width: 100%; }
+    .sticky-cta.show { transform: none; }
+
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: none; }
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }
+
+    /* ── ПОЛИРОВКА (этап 6): доступность, тач, движение ── */
+    html { scroll-padding-top: 80px; }
+    body { overflow-x: clip; }
+    [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    :root:not([data-theme="dark"]) :is(a, button, summary, input, [tabindex]):focus-visible { outline-color: var(--accent-ink); }
+    .svc-card-summary:focus-visible { outline-offset: -3px; }
+    .skip { position: absolute; left: 1rem; top: -200px; z-index: 300; padding: .8rem 1.1rem; background: var(--accent); color: var(--on-accent); font: 600 15px var(--font-text); border-radius: 3px; text-decoration: none; }
+    .skip:focus { top: 1rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    button, .btn, summary, .live-slot { touch-action: manipulation; }
+    .btn, .live-slot, .svc-filter-chip { -webkit-user-select: none; user-select: none; }
+    :is(.theme-toggle, .burger, .rw-more, .channel, .svc-filter-chip, .svc-detail-close) { transition: transform 160ms var(--ease-out), color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+    :is(.theme-toggle, .burger, .rw-more, .channel, .svc-filter-chip, .svc-detail-close):active { transform: scale(.97); }
+    .svc-card { transition: border-color 200ms ease, transform 160ms var(--ease-out); }
+    .svc-card:has(.svc-card-summary:active) { transform: scale(.99); }
+    :is(.link, .need-to a, .crumbs a, .rw-more) { position: relative; }
+    :is(.link, .need-to a, .crumbs a, .rw-more)::after { content: ''; position: absolute; inset: -12px -4px; }
+    .f-col a { padding: .65rem 0; }
+    .faq-list details[open] .ans { animation: ans-in 200ms var(--ease-out); }
+    @keyframes ans-in { from { opacity: 0; transform: translateY(-4px); } }
+    .mob-menu { overscroll-behavior: contain; }
+    .mob-menu.open { transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out); }
+    @starting-style { .mob-menu.open { opacity: 0; transform: translateY(-8px); } }
+    nav#nav { view-transition-name: site-nav; }
+    .sticky-cta { view-transition-name: sticky-cta; transition-duration: 160ms; }
+    .sticky-cta.show { transition-duration: 240ms; }
+    .cert-row { overscroll-behavior-x: contain; }
+    .services-section { overflow-anchor: none; }
+    .svc-card.pop { animation: svc-in 220ms var(--ease-out) both; }
+    @keyframes svc-in { from { opacity: 0; transform: translateY(6px); } }
+    .svc-card-summary :is(.svc-card-photo, .svc-card-cat, .svc-card-title, .svc-card-fit) { display: block; }
+    @media (max-width: 860px) { html { scroll-padding-bottom: 90px; } }
+
+
+    @media (max-width: 1100px) {
+      :root { --gutter: 2rem; }
+      .nav-links { gap: 1.3rem; }
+      nav { gap: 1.3rem; }
+    }
+    @media (max-width: 860px) {
+      :root { --gutter: 1.25rem; }
+      nav { padding: 0 var(--gutter); }
+      .nav-links, .nav-tools { display: none; }
+      .burger { display: flex; }
+      .page-hd { padding: calc(64px + 2.5rem) 0 2rem; }
+      .f-grid { grid-template-columns: 1fr 1fr; }
+      .f-grid > :first-child { grid-column: 1 / -1; }
+      .sticky-cta { display: block; }
+      footer { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-delay: 0ms !important; transition-delay: 0ms !important; }
+      .reveal { transform: none !important; transition: opacity 200ms ease !important; }
+      .flap, .hero-left > *, .hero-right img, .svc-card.pop, .faq-list details[open] .ans { animation: rm-fade 200ms ease both !important; }
+      .mk { background-size: 100% .26em; transition: none !important; }
+      .burger span, .sticky-cta, .mob-menu.open { transition-property: opacity !important; }
+      ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+      @keyframes rm-fade { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">К содержанию</a>
+  <nav id="nav" aria-label="Основная навигация">
+    <a href="index.html" class="nav-logo">Maugli <span>Bodywork</span></a>
+    <ul class="nav-links">
+      <li><a href="services.html">Форматы</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="journal/index.html">Журнал</a></li>
+      <li><a href="contacts.html">Запись и контакты</a></li>
+    </ul>
+    <div class="nav-tools">
+      <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться</a>
+      <button class="theme-toggle" type="button" aria-label="Тёмная тема">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="lang"><span class="on" aria-current="true">RU</span><a href="en/" lang="en">EN</a></div>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobMenu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mob-menu" id="mobMenu" role="navigation" aria-label="Мобильное меню">
+    <a href="services.html">Форматы</a>
+    <a href="about.html">Обо мне</a>
+    <a href="journal/index.html">Журнал</a>
+    <a href="contacts.html">Запись и контакты</a>
+    <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться</a>
+    <div class="mob-tools">
+      <button class="theme-toggle" type="button" aria-label="Тёмная тема">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="lang"><span class="on">RU</span><a href="en/" lang="en">EN</a></div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="wrap w-hero">
+      <div>
+        <span class="label">Вебинар · онлайн · участие за донат</span>
+        <h1 class="h1">Почувствуй своё <span class="a">тело</span></h1>
+        <p class="lead">Вебинар о самомассаже дома: как замечать сигналы тела, почему мышцы зажимаются и болят — и что с этим можно сделать самому.</p>
+        <div class="when" aria-label="17 октября, 11:00 по Тбилиси, GMT+4">
+          <span class="flap">17.10</span><span class="flap">11:00</span><span class="tz">GMT+4 · Тбилиси</span>
+        </div>
+        <p class="when-alt">10:00 по Москве · 09:00 по Берлину</p>
+        <ul class="facts">
+          <li>около 2 часов с перерывом</li>
+          <li>понадобится массажный мяч</li>
+          <li>PDF с чек-листами — всем</li>
+        </ul>
+        <a href="#reg" class="btn js-cta">Записаться</a>
+        <span class="btn-note">бесплатно или за донат — как решишь</span>
+      </div>
+      <div class="w-photo"><img src="mbw_photo_001.webp" alt="Человек держится руками за затылок и шею" width="1200" height="1500" fetchpriority="high" class="photo-warm" /></div>
+    </section>
+
+    <section class="sec prog">
+      <div class="wrap prog-grid">
+        <div class="reveal">
+          <h2 class="h2">Три шага</h2>
+          <p class="lead">Первая часть — заметить и осознать: знать себя. Вторая — проработать: практика вместе, в эфире.</p>
+        </div>
+        <ol class="prog-list reveal">
+          <li class="pr">
+            <span class="flap">01</span>
+            <div>
+              <h3>Заметить</h3>
+              <p>Научимся замечать сигналы тела: где зажато, как ты дышишь, что подсказывает привычная поза. По ходу соберёшь свой профиль — какие зоны и акценты именно твои.</p>
+            </div>
+          </li>
+          <li class="pr">
+            <span class="flap">02</span>
+            <div>
+              <h3>Осознать</h3>
+              <p>Поймём, почему мышцы зажимаются и болят: какие бывают типы напряжения, как на тело влияют работа, возраст, тревога и дыхание.</p>
+            </div>
+          </li>
+          <li class="pr">
+            <span class="flap">03</span>
+            <div>
+              <h3>Проработать</h3>
+              <p>Разберём техники самомассажа по зонам — голова и челюсть, шея и плечи, грудной отдел, поясница и таз, ноги. И где проходит граница: с какой болью работать самому, а с какой — к врачу.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="wrap reveal">
+        <h2 class="h2">Если знакомо</h2>
+        <p class="lead">Самые частые жалобы тех, кто много сидит и работает за компьютером. На вебинаре разберём, откуда они берутся и что с ними делать.</p>
+        <ul class="pains">
+          <li>Шея к вечеру деревянная, голова «как в обруче»</li>
+          <li>Плечи сами ползут к ушам</li>
+          <li>Ноет между лопатками после дня за компьютером</li>
+          <li>Поясница напоминает о себе после долгого сидения</li>
+          <li>Ловишь себя на сжатой челюсти</li>
+          <li>Не получается вдохнуть полной грудью</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:0">
+      <div class="wrap reveal">
+        <h2 class="h2">Что получишь</h2>
+        <div class="gets">
+          <div class="get">
+            <span class="label">В эфире</span>
+            <h3>Свой профиль</h3>
+            <p>Анкету заполняешь по ходу вебинара — к концу становится понятно, на какие зоны смотреть и что делать в первую очередь.</p>
+          </div>
+          <div class="get">
+            <span class="label">Всем участникам</span>
+            <h3>PDF для самопроверки</h3>
+            <p>Анкета «Мой профиль», чек-лист «Какое напряжение у меня?», красные флаги и практики — с иллюстрациями и короткими тезисами-напоминалками.</p>
+          </div>
+          <div class="get">
+            <span class="label">Тем, кто поддержал</span>
+            <h3>Запись эфира</h3>
+            <p>Пришлю после вебинара всем, кто поддержал донатом, — чтобы пересмотреть практики в своём темпе.</p>
+          </div>
+        </div>
+        <p class="hint bring">С собой: массажный мяч — теннисный или собачий, место на полу и удобная одежда.</p>
+      </div>
+    </section>
+
+    <section class="sec hosts">
+      <div class="wrap hosts-grid">
+        <h2 class="h2 reveal">Ведущие</h2>
+        <div class="host-list reveal">
+          <div class="host">
+            <div class="host-ph"><img src="portrait.webp" alt="" width="2000" height="1333" loading="lazy" class="photo-warm" /></div>
+            <div>
+              <h3>Иван Маугли</h3>
+              <span class="label">Массажист, кинезиолог · 7 лет практики</span>
+              <p>Работаю в Тбилиси: ортопедическая диагностика, мышечное тестирование, миофасциальный релиз, работа с триггерными точками и дыханием. В профессию пришёл через собственную грыжу в 19 лет — и знаю, как много зависит от своей включённости.</p>
+              <p><a class="link" href="about.html">Подробнее обо мне</a></p>
+            </div>
+          </div>
+          <div class="host">
+            <div class="host-ph" aria-hidden="true">Н</div>
+            <div>
+              <h3>Настя</h3>
+              <span class="label">Модератор · начинающий массажист</span>
+              <p>Давно практикует самомассаж и недавно пришла в профессию. Задаёт вопросы от лица слушателя и делится своим опытом — то, что обычно хочется спросить, но неловко.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="reg">
+      <div class="wrap reg-grid">
+        <div class="reg-side reveal">
+          <h2 class="h2">Записаться</h2>
+          <p>Участие за донат: можно поддержать любой суммой, а можно прийти бесплатно — решать тебе. Реквизиты покажу после записи.</p>
+          <p>Ссылку на эфир пришлю за сутки и за час до начала.</p>
+        </div>
+        <div class="reg-card reveal">
+          <form id="regForm" novalidate>
+            <div class="field">
+              <label for="fName">Имя</label>
+              <input type="text" id="fName" name="name" autocomplete="given-name" maxlength="80" required>
+            </div>
+            <fieldset class="field">
+              <legend>Куда прислать ссылку</legend>
+              <div class="seg">
+                <input type="radio" name="contact_type" id="ctTg" value="telegram" checked><label for="ctTg">Telegram</label>
+                <input type="radio" name="contact_type" id="ctWa" value="whatsapp"><label for="ctWa">WhatsApp</label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="fContact" id="fContactLabel">Ник в Telegram</label>
+              <input type="text" id="fContact" name="contact" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@nickname" maxlength="40" required aria-describedby="fErr">
+            </div>
+            <div class="field">
+              <label for="fEmail">Email <span class="opt">— по желанию, для PDF</span></label>
+              <input type="email" id="fEmail" name="email" autocomplete="email" maxlength="120" placeholder="name@example.com">
+            </div>
+            <div class="hp" aria-hidden="true"><label>Сайт <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+            <div class="actions">
+              <button type="submit" class="btn js-cta" name="choice" value="support">Записаться и поддержать</button>
+              <button type="submit" class="btn btn-ghost" name="choice" value="free">Записаться бесплатно</button>
+            </div>
+            <p class="form-err" id="fErr" role="alert"></p>
+            <p class="form-note">Контакты нужны только для напоминаний о вебинаре и материалов после него.</p>
+          </form>
+
+          <div class="done" id="regDone" hidden tabindex="-1">
+            <h3>Место за тобой</h3>
+            <p id="doneText">Ссылку на эфир пришлю за сутки и за час до начала.</p>
+            <a href="#" id="tgLink" class="btn" target="_blank" rel="noopener">Получать напоминания в Telegram</a>
+            <span class="btn-note">откроется бот — нажми «Старт»</span>
+            <details class="donate" id="donate">
+              <summary>Реквизиты для доната</summary>
+              <p class="donate-intro" id="donateIntro"></p>
+              <div id="donateBody"></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec faq" id="faq">
+      <div class="wrap faq-grid">
+        <h2 class="h2 reveal">Частые вопросы</h2>
+        <div class="faq-list reveal">
+            <details>
+              <summary>Где проходит?</summary>
+              <p class="ans">Онлайн. Платформу назову ближе к дате, а ссылку на эфир пришлю за сутки и за час до начала — в Telegram или WhatsApp, который ты укажешь в форме.</p>
+            </details>
+            <details>
+              <summary>Сколько длится?</summary>
+              <p class="ans">Около двух часов, с перерывом на 10–15 минут. Начало — 17 октября в 11:00 по Тбилиси (GMT+4): это 10:00 по Москве и 09:00 по Берлину.</p>
+            </details>
+            <details>
+              <summary>Что подготовить?</summary>
+              <p class="ans">Массажный мяч — подойдёт теннисный или собачий. Место на полу или коврик и удобную одежду: часть практик будем делать вместе.</p>
+            </details>
+            <details>
+              <summary>Сколько стоит?</summary>
+              <p class="ans">Участие за донат: поддержать можно любой суммой или прийти бесплатно — решать тебе. Реквизиты увидишь после записи, их же пришлю в боте.</p>
+            </details>
+            <details>
+              <summary>Будет запись?</summary>
+              <p class="ans">Запись эфира получат те, кто поддержал донатом. PDF с анкетой «Мой профиль», чек-листами и практиками — все участники.</p>
+            </details>
+            <details>
+              <summary>Это медицинская консультация?</summary>
+              <p class="ans">Нет. Я массажист и кинезиолог, медицинского образования у меня нет — делюсь опытом практики. Отдельно разберём красные флаги: когда с болью не экспериментировать, а идти к врачу.</p>
+            </details>
+            <details>
+              <summary>У меня грыжа или сколиоз — можно?</summary>
+              <p class="ans">Да. Расскажу, что можно делать самому, а с чем лучше не работать без специалиста. Под конкретную проблему нужны конкретные инструкции — это разбираем уже индивидуально.</p>
+            </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="f-grid">
+        <div>
+          <p class="f-logo">Maugli <span>Bodywork</span></p>
+          <p class="f-place">Тбилиси, Мтацминда · метро Liberty Square</p>
+        </div>
+        <div class="f-col">
+          <h3>Сайт</h3>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="services.html">Форматы</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="journal/index.html">Журнал</a></li>
+            <li><a href="contacts.html">Запись и контакты</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h3>Связь</h3>
+          <ul>
+            <li><a href="https://t.me/maugli_bodywork_bot" target="_blank" rel="noopener">Запись — бот в Telegram</a></li>
+            <li><a href="https://t.me/vanmaugli" target="_blank" rel="noopener">Telegram — @vanmaugli</a></li>
+            <li><a href="https://instagram.com/maugli.bodywork" target="_blank" rel="noopener">Instagram — @maugli.bodywork</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="f-copy">© 2026 Maugli Bodywork</p>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <a href="#reg" class="btn" tabindex="-1">Записаться</a>
+  </div>
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ── МЕНЮ ──
+      const burger = document.getElementById('burger');
+      const mobMenu = document.getElementById('mobMenu');
+      const setMenu = open => {
+        burger.classList.toggle('open', open);
+        mobMenu.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', open);
+        document.documentElement.style.overflow = open ? 'hidden' : '';
+        // фон под меню недоступен для Tab и скринридеров, фокус — в меню
+        document.querySelectorAll('main, footer, .sticky-cta').forEach(el => { el.inert = open; });
+        if (open) mobMenu.querySelector('a').focus();
+      };
+      burger.addEventListener('click', () => setMenu(!mobMenu.classList.contains('open')));
+      mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && mobMenu.classList.contains('open')) { setMenu(false); burger.focus(); }
+      });
+
+      // ── ТЕМА ──
+      const toggleTheme = () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (dark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+      };
+      // кнопка темы сообщает состояние: нажата = тёмная
+      const syncTheme = () => document.querySelectorAll('.theme-toggle').forEach(b =>
+        b.setAttribute('aria-pressed', String(document.documentElement.getAttribute('data-theme') === 'dark')));
+      syncTheme();
+      document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', () => { toggleTheme(); syncTheme(); }));
+
+      // ── ПОЯВЛЕНИЕ ──
+      const obs = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      }), { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+      // ── ЛИПКАЯ КНОПКА: прячется, когда на экране другая кнопка записи ──
+      const sticky = document.getElementById('stickyCta');
+      const inView = new Set();
+      const update = () => {
+        const typing = document.activeElement && document.activeElement.matches('input, textarea');
+        const show = (inView.size === 0 && window.scrollY > 200 && !typing) || sticky.contains(document.activeElement);
+        sticky.classList.toggle('show', show);
+        sticky.setAttribute('aria-hidden', String(!show));
+        sticky.querySelector('a').tabIndex = show ? 0 : -1;
+      };
+      const ctaObs = new IntersectionObserver(entries => {
+        entries.forEach(e => e.isIntersecting ? inView.add(e.target) : inView.delete(e.target));
+        update();
+      });
+      document.querySelectorAll('main .js-cta').forEach(c => ctaObs.observe(c));
+      window.addEventListener('scroll', update, { passive: true });
+      document.addEventListener('focusin', update);
+      document.addEventListener('focusout', () => setTimeout(update));
+
+      // ── ЗАПИСЬ НА ВЕБИНАР ──
+      const API = 'https://mauglibodywork.com/api/webinar-register';
+      const BOT = 'https://t.me/maugli_bodywork_bot';
+      const DONATE = [];
+      const form = document.getElementById('regForm');
+      const err = document.getElementById('fErr');
+      const contact = document.getElementById('fContact');
+      const contactLabel = document.getElementById('fContactLabel');
+
+      form.querySelectorAll('input[name=contact_type]').forEach(r => r.addEventListener('change', () => {
+        const wa = r.value === 'whatsapp' && r.checked;
+        if (r.checked) {
+          contactLabel.textContent = wa ? 'Номер WhatsApp' : 'Ник в Telegram';
+          contact.placeholder = wa ? '+995 555 12 34 56' : '@nickname';
+          contact.type = wa ? 'tel' : 'text';
+          contact.autocomplete = wa ? 'tel' : 'off';
+        }
+      }));
+
+      const fail = (msg, field) => {
+        err.textContent = msg;
+        form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+        if (field) { field.setAttribute('aria-invalid', 'true'); field.focus(); }
+      };
+
+      const renderDonate = choice => {
+        const box = document.getElementById('donate');
+        document.getElementById('donateIntro').textContent = choice === 'support'
+          ? 'Спасибо за поддержку! Любая сумма — по ссылке или переводом.'
+          : 'Участие бесплатное. Если захочется поддержать — вот куда.';
+        const body = document.getElementById('donateBody');
+        if (!DONATE.length) {
+          body.innerHTML = '<p class="donate-empty">Реквизиты появятся здесь ближе к эфиру — и придут в боте.</p>';
+        } else {
+          body.innerHTML = '<ul class="donate-list">' + DONATE.map((d, i) =>
+            `<li><span class="bank">${d.bank}</span>` +
+            (d.value ? `<span class="val">${d.value}</span>` : '') +
+            (d.note ? `<span class="note">${d.note}</span>` : '') +
+            (d.href ? `<a class="go" href="${d.href}" target="_blank" rel="noopener">Открыть</a>`
+                    : `<button type="button" class="copy" data-i="${i}">Скопировать</button>`) +
+            '</li>').join('') + '</ul>';
+          body.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(DONATE[b.dataset.i].value); b.textContent = 'Скопировано'; }
+            catch (e) { b.textContent = 'Не вышло'; }
+            setTimeout(() => { b.textContent = 'Скопировать'; }, 1800);
+          }));
+        }
+        box.open = choice === 'support';
+      };
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const choice = (e.submitter && e.submitter.value) || 'free';
+        const data = Object.fromEntries(new FormData(form));
+        const name = (data.name || '').trim();
+        const type = data.contact_type;
+        const raw = (data.contact || '').trim();
+        if (!name) return fail('Напиши, как к тебе обращаться.', document.getElementById('fName'));
+        if (type === 'telegram' && !/^@?[A-Za-z0-9_]{4,32}$/.test(raw.replace(/^(https?:\/\/)?t\.me\//i, '')))
+          return fail('Ник в Telegram — латиница, цифры и _, например @nickname.', contact);
+        if (type === 'whatsapp' && raw.replace(/\D/g, '').length < 8)
+          return fail('Номер WhatsApp с кодом страны, например +995 555 12 34 56.', contact);
+        const email = (data.email || '').trim();
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+          return fail('Проверь email — или оставь поле пустым.', document.getElementById('fEmail'));
+        fail('');
+
+        const buttons = form.querySelectorAll('button');
+        buttons.forEach(b => { b.disabled = true; });
+        try {
+          const resp = await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, contact_type: type, contact: raw, email, choice, website: data.website || '' }),
+          });
+          const res = await resp.json().catch(() => ({}));
+          if (!resp.ok || !res.success) {
+            if (res.error === 'contact') return fail(type === 'telegram' ? 'Не похоже на ник в Telegram — проверь, пожалуйста.' : 'Не похоже на номер — проверь код страны.', contact);
+            if (res.error === 'email') return fail('Проверь email — или оставь поле пустым.', document.getElementById('fEmail'));
+            throw new Error(res.error || resp.status);
+          }
+          document.getElementById('tgLink').href = `${BOT}?start=webinar_${res.id}_${res.key}`;
+          document.getElementById('doneText').textContent = type === 'whatsapp'
+            ? 'Напоминания пришлю в WhatsApp. Если есть Telegram — подключи бота: там ссылка придёт автоматически.'
+            : 'Подключи бота — ссылку на эфир он пришлёт за сутки и за час до начала.';
+          renderDonate(choice);
+          form.hidden = true;
+          const done = document.getElementById('regDone');
+          done.hidden = false;
+          done.focus();
+        } catch (e2) {
+          console.error(e2);
+          fail('Не получилось отправить. Попробуй ещё раз или напиши мне в Telegram: @vanmaugli.');
+        } finally {
+          buttons.forEach(b => { b.disabled = false; });
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>

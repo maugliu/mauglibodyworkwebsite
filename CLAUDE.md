@@ -24,6 +24,8 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   staya_promo.html           ← noindex, не в меню
   admin.html                 ← noindex, панель лидов, токен-авторизация
   webinar-tejp.html          ← noindex, только по прямой ссылке, не в меню и не в sitemap
+  webinar.html               ← noindex, запись на вебинар «Почувствуй своё тело» (17.10.2026),
+                               собирается .claude/build/webinar_build.py, не в меню и не в sitemap
   slides/
     webinar-tejp.pdf         ← кнопка «Скачать PDF» на странице вебинара
     webinar-tejp/            ← s-01…28.jpg, 1500×844
@@ -38,6 +40,7 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   cta_hands, diag1, diag2, diag3, kinesio, portrait, postnatal, taping,
   gift-cert-bg
   massage_certificate01-05.webp
+  mbw_photo_001.webp — фото с афиши вебинара (герой webinar.html); og-webinar.jpg — превью
   Не используются нигде: bodypractice_svc, diag1, "Gen 4 Turbo Gentle Movement.mp4"
   hero_mobile — больше не используется (мобайл берёт hero.webp с кадром)
 </file_structure>
@@ -127,6 +130,20 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 - Пути в её JS жёстко зашиты: src() собирает slides/webinar-tejp/s-NN.jpg,
   кнопка PDF ведёт на slides/webinar-tejp.pdf. Файлы не переименовывать.
 - В навигацию не добавлять, в sitemap не включать — доступ только по прямой ссылке.
+
+ВЕБИНАР «ПОЧУВСТВУЙ СВОЁ ТЕЛО» (10.10.2026):
+- 17.10.2026, 11:00 GMT+4 Тбилиси (10:00 Москва, 09:00 Берлин), онлайн, ~2 ч с перерывом.
+  Ведущие: Иван (эксперт) и Настя (модератор). С собой — массажный мяч (теннисный/собачий).
+- Участие за донат по желанию: две кнопки «Записаться и поддержать» / «Записаться бесплатно».
+  Реквизиты получают все (у «бесплатно» свёрнуты). Без платёжных форм и выбора суммы —
+  только список: TBC, BoG, ссылка Альфа-банка. Пока заглушки: DONATE в webinar_build.py
+  и WEBINAR.donate в боте.
+- Запись эфира — только поддержавшим (отметку supported ставит владелец); PDF — всем.
+- Форма → POST /api/webinar-register → таблица webinar_regs (ключ webinar+контакт, повтор
+  обновляет строку) → ссылка в бота ?start=webinar_<id>_<key> привязывает Telegram.
+  Конфиг вебинара в боте — константа WEBINAR (код feel-2026-10, startsAt, platform, url).
+- Этап 2 (до 16.10): напоминания за 24 ч и 1 ч, вкладка «Вебинар» в admin.html.
+  Этап 3 (после 17.10): рассылка PDF всем и записи поддержавшим.
 
 КЛАВИАТУРА БОТА (15.09.2026), MAIN_KEYBOARD, порядок кнопок:
   Записаться на сеанс · Форматы · Сайт · 🎁 Подарочный сертификат · Контакты
