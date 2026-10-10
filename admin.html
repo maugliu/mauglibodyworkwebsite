@@ -322,6 +322,18 @@
       #authBlock { padding: 28px 20px; margin-top: 40px; }
       .input-row { flex-direction: column; }
     }
+    /* Повторы и ручное удаление */
+    .hits { display:inline-block; margin-left:6px; padding:1px 6px; border-radius:6px;
+            background: var(--bg-2); border:1px solid var(--line); color: var(--text-soft);
+            font-size:11px; font-family: monospace; }
+    td.sel-col, th.sel-col { width: 28px; }
+    .sel-col input { accent-color: var(--accent); cursor: pointer; }
+    .row-del { background:none; border:1px solid transparent; color: var(--muted); cursor:pointer;
+               font-size:14px; padding:2px 6px; border-radius:6px; }
+    .row-del:hover, .row-del:focus-visible { color:#e07070; border-color:#5a2020; }
+    .bulk-del { color:#e07070; border-color:#5a2020; }
+    .bulk-del[hidden] { display:none; }
+    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
   </style>
 </head>
 <body>
@@ -378,6 +390,7 @@
         <button class="filter-btn" onclick="setFilter('activated', this)">Активированы</button>
         <button class="filter-btn" onclick="setFilter('booked', this)">Записались</button>
       </div>
+      <button class="btn btn-ghost bulk-del" id="bulkDel" hidden onclick="deleteSelected()">Удалить выбранные</button>
     </div>
 
     <!-- Table -->
@@ -386,13 +399,16 @@
       <table id="leadsTable" style="display:none;">
         <thead>
           <tr>
+            <th class="sel-col"><input type="checkbox" id="selAll" aria-label="Выбрать все" onchange="toggleAll(this.checked)"></th>
             <th>#</th>
             <th>Имя</th>
             <th>Telegram</th>
             <th>Источник</th>
-            <th>Дата формы</th>
+            <th>Первый приход</th>
+            <th>Последний</th>
             <th>Активация</th>
             <th>Статус</th>
+            <th><span class="sr-only">Удалить</span></th>
           </tr>
         </thead>
         <tbody id="leadsBody"></tbody>
@@ -508,26 +524,74 @@
           ? '<span class="badge badge-activated">Активирован</span>'
           : '<span class="badge badge-new">Новый</span>';
 
-      const formDate  = l.form_at      ? fmtDate(l.form_at)      : '—';
+      const formDate  = fmtDate(l.form_at || l.created_at);
+      const lastDate  = l.hits > 1 ? fmtDate(l.last_seen_at) : '—';
+      const hits      = l.hits > 1 ? `<span class="hits" title="Приходов: ${l.hits}">×${l.hits}</span>` : '';
       const activDate = l.activated_at ? fmtDate(l.activated_at) : '—';
 
       return `<tr>
+        <td class="sel-col"><input type="checkbox" class="sel" value="${l.id}" aria-label="Выбрать лид #${l.id}" ${selected.has(l.id) ? 'checked' : ''} onchange="toggleOne(${l.id}, this.checked)"></td>
         <td class="id-col">${l.id}</td>
-        <td class="name">${esc(l.name)}</td>
+        <td class="name">${esc(l.name)}${hits}</td>
         <td>${tg}</td>
         <td style="color:var(--muted);font-size:12px;">${l.source || '—'}</td>
         <td>${formDate}</td>
+        <td>${lastDate}</td>
         <td>${activDate}</td>
         <td>${badge}</td>
+        <td><button class="row-del" title="Удалить" aria-label="Удалить лид #${l.id}" onclick="deleteLeads([${l.id}])">✕</button></td>
       </tr>`;
     }).join('');
+    syncBulk();
+  }
+
+  // ── Удаление ──
+  const selected = new Set();
+
+  function toggleOne(id, on) { on ? selected.add(id) : selected.delete(id); syncBulk(); }
+
+  function toggleAll(on) {
+    filteredLeads().forEach(l => on ? selected.add(l.id) : selected.delete(l.id));
+    renderTable();
+  }
+
+  function syncBulk() {
+    const btn = document.getElementById('bulkDel');
+    btn.hidden = selected.size === 0;
+    btn.textContent = `Удалить выбранные (${selected.size})`;
+    const visible = filteredLeads();
+    document.getElementById('selAll').checked =
+      visible.length > 0 && visible.every(l => selected.has(l.id));
+  }
+
+  function deleteSelected() { deleteLeads([...selected]); }
+
+  async function deleteLeads(ids) {
+    if (!ids.length) return;
+    const msg = ids.length === 1
+      ? `Удалить лид #${ids[0]}? Это нельзя отменить.`
+      : `Удалить лидов: ${ids.length}? Это нельзя отменить.`;
+    if (!confirm(msg)) return;
+    try {
+      const resp = await fetch(API + '/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${savedToken()}` },
+        body: JSON.stringify({ ids }),
+      });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      ids.forEach(id => selected.delete(id));
+      await refreshData();
+    } catch (e) {
+      console.error(e);
+      alert('Не получилось удалить. Обнови страницу и попробуй ещё раз.');
+    }
   }
 
   // ── CSV ──
   function exportCSV() {
     const leads = filteredLeads();
     if (!leads.length) return;
-    const cols = ['id','name','tg_id','tg_username','source','form_at','activated_at','booked'];
+    const cols = ['id','name','tg_id','tg_username','source','hits','created_at','last_seen_at','form_at','activated_at','booked'];
     const header = cols.join(',');
     const rows = leads.map(l =>
       cols.map(c => {

@@ -184,7 +184,11 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 1. ✅ 04.10.2026 — токен из .git/config убран, вход через gh, старый токен истёк.
 2. ✅ 05.10.2026 — _redirects: /CLAUDE.md, /PRODUCT.md, /DESIGN.md → 301 на главную.
 3. ✅ 10.10.2026 — admin.html шлёт токен в заголовке Authorization: Bearer, хранит в sessionStorage;
-   ADMIN_TOKEN ротирован (владелец, wrangler secret put). Осталось: убрать ?token= из воркера.
+   ADMIN_TOKEN ротирован (владелец, wrangler secret put). ?token= из воркера убран (10.10.2026).
+   ЛИДЫ (10.10.2026): повтор = счётчик hits (+ last_seen_at), ключ «tg_id + source»,
+   promo_first не склеивается; владелец (OWNER_ID) в лиды не пишется. В админке — ×N,
+   удаление строки и пачкой (POST /api/admin/leads/delete). Миграции бота — migrations/*.sql,
+   бэкап до склейки: таблица leads_backup_20261010 (удалить, когда всё ок).
    Админку проверять только на живом сайте — с file:// запрос режется CORS и выглядит как «Неверный токен».
 
 SEO (из аудита 04.09.2026):
