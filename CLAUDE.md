@@ -42,6 +42,7 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   massage_certificate01-05.webp
   mbw_photo_001.webp — фото с афиши вебинара (герой webinar.html); og-webinar.jpg — превью
   mbw_photo_002.webp — Нана Ригер, аватар на webinar.html
+  mbw_photo_003.webp — Ваня анфас, аватар на webinar.html (выбран владельцем)
   Не используются нигде: bodypractice_svc, diag1, "Gen 4 Turbo Gentle Movement.mp4"
   hero_mobile — больше не используется (мобайл берёт hero.webp с кадром)
 </file_structure>
