@@ -144,7 +144,12 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 - Форма → POST /api/webinar-register → таблица webinar_regs (ключ webinar+контакт, повтор
   обновляет строку) → ссылка в бота ?start=webinar_<id>_<key> привязывает Telegram.
   Конфиг вебинара в боте — константа WEBINAR (код feel-2026-10, startsAt, platform, url).
-- Этап 2 (до 16.10): напоминания за 24 ч и 1 ч, вкладка «Вебинар» в admin.html.
+- ✅ 12.10.2026 — вкладка «Вебинар» в admin.html: список, отметка «поддержал», удаление,
+  копирование номеров WhatsApp (только без Telegram) и текста напоминания.
+  API: GET /api/admin/webinar, POST /api/admin/webinar/update, /api/admin/webinar/delete.
+- ✅ 12.10.2026 — подключивший Telegram записавшийся попадает в leads (source webinar, upsertLead);
+  старые перенесены миграцией 0003. Только WhatsApp — остаются лишь в webinar_regs.
+- Этап 2 (до 16.10): напоминания за 24 ч и 1 ч (нужны платформа и ссылка).
   Этап 3 (после 17.10): рассылка PDF всем и записи поддержавшим.
 
 КЛАВИАТУРА БОТА (15.09.2026), MAIN_KEYBOARD, порядок кнопок:

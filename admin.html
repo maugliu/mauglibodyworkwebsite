@@ -334,6 +334,17 @@
     .bulk-del { color:#e07070; border-color:#5a2020; }
     .bulk-del[hidden] { display:none; }
     .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+    /* Вкладки «Лиды / Вебинар» */
+    .tabs { display:flex; gap:8px; margin-bottom:24px; border-bottom:1px solid var(--line); }
+    .tab { background:none; border:0; border-bottom:2px solid transparent; color: var(--text-soft); font: inherit; font-size:14px;
+           padding:10px 4px; margin-right:16px; cursor:pointer; }
+    .tab[aria-selected=true] { color: var(--text); border-bottom-color: var(--accent); }
+    .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .w-meta { color: var(--text-soft); margin-bottom: 20px; font-size: 13px; }
+    .w-meta b { color: var(--text); font-weight: 500; }
+    .sup-toggle { accent-color: var(--accent); width:16px; height:16px; cursor:pointer; }
+    .choice-support { color: var(--accent); }
+    .copied { color: var(--sage) !important; border-color: var(--sage) !important; }
   </style>
 </head>
 <body>
@@ -362,6 +373,12 @@
 
   <!-- MAIN -->
   <div id="mainBlock">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tabLeads" aria-selected="true" aria-controls="leadsView" onclick="showTab('leads')">Лиды</button>
+      <button class="tab" role="tab" id="tabWebinar" aria-selected="false" aria-controls="webinarView" onclick="showTab('webinar')">Вебинар</button>
+    </div>
+
+    <div id="leadsView" role="tabpanel" aria-labelledby="tabLeads">
     <!-- Stats -->
     <div class="stats">
       <div class="stat-card">
@@ -414,6 +431,46 @@
         <tbody id="leadsBody"></tbody>
       </table>
       <div class="empty" id="tableEmpty" style="display:none;">Нет лидов по этому фильтру</div>
+    </div>
+    </div>
+
+    <!-- ВЕБИНАР -->
+    <div id="webinarView" role="tabpanel" aria-labelledby="tabWebinar" hidden>
+      <p class="w-meta" id="wMeta"></p>
+      <div class="stats">
+        <div class="stat-card"><div class="stat-label">Записались</div><div class="stat-value" id="wTotal">—</div></div>
+        <div class="stat-card accent"><div class="stat-label">Хотят поддержать</div><div class="stat-value" id="wWant">—</div></div>
+        <div class="stat-card sage"><div class="stat-label">Поддержали</div><div class="stat-value" id="wSup">—</div></div>
+        <div class="stat-card"><div class="stat-label">Telegram подключён</div><div class="stat-value" id="wTg">—</div></div>
+        <div class="stat-card"><div class="stat-label">Только WhatsApp</div><div class="stat-value" id="wWa">—</div></div>
+      </div>
+      <div class="toolbar">
+        <div class="filters">
+          <button class="btn btn-ghost" id="copyWa" onclick="copyWhatsApp(this)">Скопировать номера WhatsApp</button>
+          <button class="btn btn-ghost" id="copyWaText" onclick="copyWhatsAppText(this)">Скопировать текст напоминания</button>
+        </div>
+        <button class="btn btn-ghost bulk-del" id="wBulkDel" hidden onclick="deleteRegs([...wSelected])">Удалить выбранные</button>
+      </div>
+      <div class="table-wrap">
+        <table id="wTable" style="display:none;">
+          <thead>
+            <tr>
+              <th class="sel-col"><input type="checkbox" id="wSelAll" aria-label="Выбрать все" onchange="wToggleAll(this.checked)"></th>
+              <th>#</th>
+              <th>Имя</th>
+              <th>Контакт</th>
+              <th>Email</th>
+              <th>Выбор</th>
+              <th>Поддержал</th>
+              <th>Бот</th>
+              <th>Дата</th>
+              <th><span class="sr-only">Удалить</span></th>
+            </tr>
+          </thead>
+          <tbody id="wBody"></tbody>
+        </table>
+        <div class="empty" id="wEmpty" style="display:none;">Пока никто не записался</div>
+      </div>
     </div>
   </div>
 </div>
@@ -468,6 +525,7 @@
   }
 
   async function refreshData() {
+    if (!document.getElementById('webinarView').hidden) { await fetchWebinar(); return; }
     await fetchLeads(savedToken());
   }
 
@@ -608,6 +666,136 @@
     a.download = `mbw_leads_${new Date().toISOString().slice(0,10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
+  }
+
+  // ── ВЕБИНАР ──
+  const WAPI = 'https://mauglibodywork.com/api/admin/webinar';
+  let wData = null;
+  const wSelected = new Set();
+
+  function showTab(t) {
+    const w = t === 'webinar';
+    document.getElementById('leadsView').hidden = w;
+    document.getElementById('webinarView').hidden = !w;
+    document.getElementById('tabLeads').setAttribute('aria-selected', String(!w));
+    document.getElementById('tabWebinar').setAttribute('aria-selected', String(w));
+    if (w && !wData) fetchWebinar();
+  }
+
+  async function wFetch(path, body) {
+    const resp = await fetch(WAPI + path, body ? {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${savedToken()}` },
+      body: JSON.stringify(body),
+    } : { headers: { Authorization: `Bearer ${savedToken()}` } });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return resp.json();
+  }
+
+  async function fetchWebinar() {
+    try {
+      wData = await wFetch('');
+      renderWebinar();
+    } catch (e) {
+      console.error(e);
+      document.getElementById('wMeta').textContent = 'Не получилось загрузить записи. Нажми «Обновить».';
+    }
+  }
+
+  function renderWebinar() {
+    const { webinar: w, stats: st, regs } = wData;
+    document.getElementById('wMeta').innerHTML =
+      `<b>${esc(w.title)}</b> · ${esc(w.when)} · ${w.platform ? esc(w.platform) : 'платформа не указана'}` +
+      (w.url ? ` · <a href="${esc(w.url)}" target="_blank" rel="noopener" style="color:var(--accent)">ссылка на эфир</a>` : ' · ссылки на эфир пока нет');
+    document.getElementById('wTotal').textContent = st.total;
+    document.getElementById('wWant').textContent  = st.wantSupport;
+    document.getElementById('wSup').textContent   = st.supported;
+    document.getElementById('wTg').textContent    = st.telegram;
+    document.getElementById('wWa').textContent    = regs.filter(r => r.contact_type === 'whatsapp' && !r.tg_id).length;
+
+    const table = document.getElementById('wTable');
+    document.getElementById('wEmpty').style.display = regs.length ? 'none' : 'block';
+    table.style.display = regs.length ? 'table' : 'none';
+
+    document.getElementById('wBody').innerHTML = regs.map(r => {
+      const contact = r.contact_type === 'telegram'
+        ? `<a href="https://t.me/${esc(r.contact)}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">@${esc(r.contact)}</a>`
+        : `<a href="https://wa.me/${esc(r.contact.replace('+',''))}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">WA ${esc(r.contact)}</a>`;
+      const choice = r.choice === 'support' ? '<span class="choice-support">поддержать</span>' : 'бесплатно';
+      const bot = r.tg_id ? '✓' : '<span style="color:var(--muted)">—</span>';
+      return `<tr>
+        <td class="sel-col"><input type="checkbox" aria-label="Выбрать запись #${r.id}" ${wSelected.has(r.id) ? 'checked' : ''} onchange="wToggleOne(${r.id}, this.checked)"></td>
+        <td class="id-col">${r.id}</td>
+        <td class="name">${esc(r.name)}</td>
+        <td>${contact}</td>
+        <td style="color:var(--text-soft);font-size:12px;">${r.email ? esc(r.email) : '—'}</td>
+        <td>${choice}</td>
+        <td><input type="checkbox" class="sup-toggle" aria-label="Донат пришёл: ${esc(r.name)}" ${r.supported ? 'checked' : ''} onchange="setSupported(${r.id}, this)"></td>
+        <td>${bot}</td>
+        <td>${fmtDate(r.created_at)}</td>
+        <td><button class="row-del" title="Удалить" aria-label="Удалить запись #${r.id}" onclick="deleteRegs([${r.id}])">✕</button></td>
+      </tr>`;
+    }).join('');
+    wSyncBulk();
+  }
+
+  function wToggleOne(id, on) { on ? wSelected.add(id) : wSelected.delete(id); wSyncBulk(); }
+  function wToggleAll(on) { wData.regs.forEach(r => on ? wSelected.add(r.id) : wSelected.delete(r.id)); renderWebinar(); }
+  function wSyncBulk() {
+    const btn = document.getElementById('wBulkDel');
+    btn.hidden = wSelected.size === 0;
+    btn.textContent = `Удалить выбранные (${wSelected.size})`;
+    document.getElementById('wSelAll').checked = wData.regs.length > 0 && wData.regs.every(r => wSelected.has(r.id));
+  }
+
+  async function setSupported(id, box) {
+    box.disabled = true;
+    try {
+      await wFetch('/update', { id, supported: box.checked ? 1 : 0 });
+      const r = wData.regs.find(x => x.id === id);
+      if (r) r.supported = box.checked ? 1 : 0;
+      document.getElementById('wSup').textContent = wData.regs.filter(x => x.supported).length;
+    } catch (e) {
+      console.error(e);
+      box.checked = !box.checked;
+      alert('Не получилось сохранить. Попробуй ещё раз.');
+    } finally { box.disabled = false; }
+  }
+
+  async function deleteRegs(ids) {
+    if (!ids.length) return;
+    const msg = ids.length === 1 ? `Удалить запись #${ids[0]}? Это нельзя отменить.` : `Удалить записей: ${ids.length}? Это нельзя отменить.`;
+    if (!confirm(msg)) return;
+    try {
+      await wFetch('/delete', { ids });
+      ids.forEach(id => wSelected.delete(id));
+      await fetchWebinar();
+    } catch (e) {
+      console.error(e);
+      alert('Не получилось удалить. Обнови страницу и попробуй ещё раз.');
+    }
+  }
+
+  async function copyText(btn, text, label) {
+    try { await navigator.clipboard.writeText(text); btn.textContent = 'Скопировано'; btn.classList.add('copied'); }
+    catch (e) { btn.textContent = 'Не вышло скопировать'; }
+    setTimeout(() => { btn.textContent = label; btn.classList.remove('copied'); }, 1800);
+  }
+
+  // Номера тех, кому бот напомнить не сможет: записались через WhatsApp и Telegram не подключили
+  function copyWhatsApp(btn) {
+    const nums = (wData?.regs || []).filter(r => r.contact_type === 'whatsapp' && !r.tg_id).map(r => r.contact);
+    if (!nums.length) { alert('Нет записей только с WhatsApp.'); return; }
+    copyText(btn, nums.join('\n'), 'Скопировать номера WhatsApp');
+  }
+
+  function copyWhatsAppText(btn) {
+    const w = wData?.webinar || {};
+    const text = `Привет! Напоминаю: вебинар «${w.title}» — ${w.when}.\n` +
+      `Ссылка на эфир: ${w.url || '[ссылка]'}\n` +
+      `Подготовь мяч — лучше твёрдый, для йоги, но подойдёт и теннисный или даже мяч твоего питомца.\n` +
+      `До встречи!`;
+    copyText(btn, text, 'Скопировать текст напоминания');
   }
 
   // ── UI ──
