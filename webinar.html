@@ -182,6 +182,14 @@
     .bubble-time { display: block; text-align: right; font-size: 12px; color: var(--muted); margin-top: .35rem; font-variant-numeric: tabular-nums; }
     .photo-warm { filter: sepia(.1) saturate(1.12) contrast(1.04) brightness(1.02); }
 
+    .nav-tools .btn { white-space: nowrap; }  /* «Записаться на сеанс» — в одну строку */
+    /* кнопка в шапке длиннее обычной — на узких ноутбуках сжимаем отступы, чтобы шапка влезла */
+    @media (max-width: 1240px) {
+      nav { gap: 1rem; }
+      .nav-links { gap: 1rem; }
+      .nav-tools { gap: .6rem; }
+      .nav-tools .btn { padding-left: 1.1rem; padding-right: 1.1rem; }
+    }
     /* ── HERO ── */
     .w-hero { display: grid; grid-template-columns: 6fr 5fr; gap: 4.5rem; align-items: center; padding-top: calc(64px + 3.5rem); padding-bottom: 5rem; }
     .w-hero .label { display: block; margin-bottom: 1.2rem; }
@@ -379,6 +387,12 @@
       .nav-links { gap: 1.3rem; }
       nav { gap: 1.3rem; }
     }
+    /* пять пунктов меню не влезают на узких ноутбуках/планшетах — пункты в бургер, кнопка остаётся */
+    @media (min-width: 861px) and (max-width: 1060px) {
+      .nav-links { display: none; }
+      .nav-tools { margin-left: auto; }
+      .burger { display: flex; }
+    }
     @media (max-width: 860px) {
       :root { --gutter: 1.25rem; }
       nav { padding: 0 var(--gutter); }
@@ -410,10 +424,11 @@
       <li><a href="services.html">Форматы</a></li>
       <li><a href="about.html">Обо мне</a></li>
       <li><a href="journal/index.html">Журнал</a></li>
+      <li class="nav-tmp"><a href="webinar.html" aria-current="page">Вебинар</a></li>
       <li><a href="contacts.html">Запись и контакты</a></li>
     </ul>
     <div class="nav-tools">
-      <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться</a>
+      <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться на сеанс</a>
       <button class="theme-toggle" type="button" aria-label="Тёмная тема">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -427,8 +442,9 @@
     <a href="services.html">Форматы</a>
     <a href="about.html">Обо мне</a>
     <a href="journal/index.html">Журнал</a>
+    <a href="webinar.html" class="nav-tmp" aria-current="page">Вебинар</a>
     <a href="contacts.html">Запись и контакты</a>
-    <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться</a>
+    <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться на сеанс</a>
     <div class="mob-tools">
       <button class="theme-toggle" type="button" aria-label="Тёмная тема">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -453,7 +469,7 @@
           <li>понадобится мяч</li>
           <li>PDF с чек-листами — всем</li>
         </ul>
-        <a href="#reg" class="btn js-cta">Записаться</a>
+        <a href="#reg" class="btn js-cta">Записаться на вебинар</a>
         <span class="btn-note">бесплатно или за донат — как решишь</span>
       </div>
       <div class="w-photo"><img src="mbw_photo_001.webp" alt="Человек держится руками за затылок и шею" width="1200" height="1500" fetchpriority="high" class="photo-warm" /></div>
@@ -538,9 +554,9 @@
             <div class="host-ph"><img src="mbw_photo_003.webp" alt="" width="320" height="320" loading="lazy" class="photo-warm" /></div>
             <div>
               <h3>Ваня Маугли</h3>
-              <span class="label">Массажист, кинезиолог · 7 лет практики</span>
-              <p>Работаю в Тбилиси: ортопедическая диагностика, мышечное тестирование, миофасциальный релиз, работа с триггерными точками и дыханием. В профессию пришёл через собственную грыжу в 19 лет — и знаю, как много зависит от своей включённости.</p>
-              <p>На вебинаре веду первую часть: как замечать сигналы тела и почему мышцы зажимаются и болят.</p>
+              <span class="label">Массажист, кинезиолог · теоретическая часть</span>
+              <p>В профессию пришёл больше семи лет назад, но началось всё гораздо раньше — в 19, когда я впервые узнал о своей грыже. С тех пор искал ответы на собственные вопросы о теле и за эти годы смог привести себя в гораздо лучшее состояние. В работе смотрю на тело целиком — как мышцы, дыхание и эмоции влияют друг на друга.</p>
+              <p>На вебинаре веду блок с теорией: расскажу, какие сигналы тела замечать и почему мышцы могут зажиматься и болеть.</p>
               <p><a class="link" href="about.html">Подробнее обо мне</a></p>
             </div>
           </div>
@@ -560,7 +576,7 @@
     <section class="sec" id="reg">
       <div class="wrap reg-grid">
         <div class="reg-side reveal">
-          <h2 class="h2">Записаться</h2>
+          <h2 class="h2">Записаться на вебинар</h2>
           <p>Участие за донат: можно поддержать любой суммой, а можно прийти бесплатно — решать тебе. Реквизиты покажу после записи.</p>
           <p>Ссылку на эфир пришлю за сутки и за час до начала.</p>
         </div>
@@ -677,7 +693,7 @@
   </footer>
 
   <div class="sticky-cta" id="stickyCta" aria-hidden="true">
-    <a href="#reg" class="btn" tabindex="-1">Записаться</a>
+    <a href="#reg" class="btn" tabindex="-1">Записаться на вебинар</a>
   </div>
 
   <script defer>

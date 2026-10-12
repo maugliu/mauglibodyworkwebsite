@@ -291,6 +291,12 @@
       .nav-links { gap: 1.3rem; }
       nav { gap: 1.3rem; }
     }
+    /* пять пунктов меню не влезают на узких ноутбуках/планшетах — пункты в бургер, кнопка остаётся */
+    @media (min-width: 861px) and (max-width: 1060px) {
+      .nav-links { display: none; }
+      .nav-tools { margin-left: auto; }
+      .burger { display: flex; }
+    }
     @media (max-width: 860px) {
       :root { --gutter: 1.25rem; }
       nav { padding: 0 var(--gutter); }
@@ -322,6 +328,7 @@
       <li><a href="../services.html">Форматы</a></li>
       <li><a href="../about.html">Обо мне</a></li>
       <li><a href="../journal/index.html" aria-current="page">Журнал</a></li>
+      <li class="nav-tmp"><a href="../webinar.html">Вебинар</a></li>
       <li><a href="../contacts.html">Запись и контакты</a></li>
     </ul>
     <div class="nav-tools">
@@ -339,6 +346,7 @@
     <a href="../services.html">Форматы</a>
     <a href="../about.html">Обо мне</a>
     <a href="../journal/index.html" aria-current="page">Журнал</a>
+    <a href="../webinar.html" class="nav-tmp">Вебинар</a>
     <a href="../contacts.html">Запись и контакты</a>
     <a href="https://t.me/maugli_bodywork_bot?start=src_nav" target="_blank" rel="noopener" class="btn">Записаться</a>
     <div class="mob-tools">

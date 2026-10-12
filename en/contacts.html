@@ -312,6 +312,12 @@
       .nav-links { gap: 1.3rem; }
       nav { gap: 1.3rem; }
     }
+    /* пять пунктов меню не влезают на узких ноутбуках/планшетах — пункты в бургер, кнопка остаётся */
+    @media (min-width: 861px) and (max-width: 1060px) {
+      .nav-links { display: none; }
+      .nav-tools { margin-left: auto; }
+      .burger { display: flex; }
+    }
     @media (max-width: 860px) {
       :root { --gutter: 1.25rem; }
       nav { padding: 0 var(--gutter); }
