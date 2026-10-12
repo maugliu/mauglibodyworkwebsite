@@ -333,6 +333,8 @@
     .row-del:hover, .row-del:focus-visible { color:#e07070; border-color:#5a2020; }
     .bulk-del { color:#e07070; border-color:#5a2020; }
     .bulk-del[hidden] { display:none; }
+    .remember { display:flex; align-items:center; gap:8px; margin-top:14px; color: var(--text-soft); font-size:13px; cursor:pointer; }
+    .remember input { accent-color: var(--accent); width:16px; height:16px; }
     .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
     /* Вкладки «Лиды / Вебинар» */
     .tabs { display:flex; gap:8px; margin-bottom:24px; border-bottom:1px solid var(--line); }
@@ -364,10 +366,15 @@
   <div id="authBlock">
     <h2>Вход в панель</h2>
     <p>Введи токен администратора</p>
-    <div class="input-row">
-      <input type="password" id="tokenInput" placeholder="Admin token" autocomplete="current-password">
-      <button class="btn" onclick="doLogin()">Войти</button>
-    </div>
+    <!-- форма с логином нужна, чтобы Safari/Chrome предложили сохранить токен в связке ключей -->
+    <form id="authForm" autocomplete="on">
+      <input type="text" name="username" value="admin" autocomplete="username" class="sr-only" tabindex="-1" aria-hidden="true" readonly>
+      <div class="input-row">
+        <input type="password" id="tokenInput" name="password" placeholder="Admin token" autocomplete="current-password" aria-label="Токен администратора">
+        <button class="btn" type="submit">Войти</button>
+      </div>
+      <label class="remember"><input type="checkbox" id="rememberMe"> Запомнить на этом устройстве</label>
+    </form>
     <div class="auth-error" id="authError">Неверный токен</div>
   </div>
 
@@ -481,28 +488,44 @@
   let currentFilter = 'all';
 
   // ── Auth ──
-  // Токен живёт только до закрытия вкладки; старую копию из localStorage стираем
-  try { localStorage.removeItem('mbw_admin_token'); } catch (e) {}
-  function savedToken() { return sessionStorage.getItem('mbw_admin_token') || ''; }
+  // По умолчанию токен живёт до закрытия вкладки (sessionStorage).
+  // Галочка «Запомнить на этом устройстве» — в localStorage, до «Выйти».
+  const TOKEN_KEY = 'mbw_admin_token';
+  function store(kind) { try { return window[kind]; } catch (e) { return null; } }
+  function savedToken() {
+    return (store('sessionStorage')?.getItem(TOKEN_KEY)) || (store('localStorage')?.getItem(TOKEN_KEY)) || '';
+  }
+  function saveToken(token, remember) {
+    try {
+      store('sessionStorage')?.removeItem(TOKEN_KEY);
+      store('localStorage')?.removeItem(TOKEN_KEY);
+      store(remember ? 'localStorage' : 'sessionStorage')?.setItem(TOKEN_KEY, token);
+    } catch (e) {}
+  }
 
   async function doLogin() {
     const token = document.getElementById('tokenInput').value.trim();
     if (!token) return;
     const ok = await fetchLeads(token);
     if (ok) {
-      sessionStorage.setItem('mbw_admin_token', token);
+      saveToken(token, document.getElementById('rememberMe').checked);
       showMain();
     } else {
       document.getElementById('authError').style.display = 'block';
     }
   }
 
-  document.getElementById('tokenInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doLogin();
+  document.getElementById('authForm').addEventListener('submit', e => {
+    e.preventDefault();
+    doLogin();
   });
 
+  function logoutQuiet() {
+    try { store('sessionStorage')?.removeItem(TOKEN_KEY); store('localStorage')?.removeItem(TOKEN_KEY); } catch (e) {}
+  }
+
   function logout() {
-    sessionStorage.removeItem('mbw_admin_token');
+    logoutQuiet();
     location.reload();
   }
 
@@ -829,6 +852,7 @@
     if (token) {
       const ok = await fetchLeads(token);
       if (ok) showMain();
+      else logoutQuiet();  // токен сменили — забываем старый, показываем форму
     }
   })();
 </script>
