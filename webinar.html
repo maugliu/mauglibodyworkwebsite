@@ -737,10 +737,15 @@
       document.addEventListener('focusin', update);
       document.addEventListener('focusout', () => setTimeout(update));
 
-      // ── /webinar/reg → к форме. Переадресация несёт #reg; ?reg — запасной путь, если якорь потеряется ──
-      if (new URLSearchParams(location.search).has('reg')) {
-        document.getElementById('reg').scrollIntoView();
-        history.replaceState(null, '', location.pathname + '#reg');
+      // ── /webinar/reg → к форме. Переадресация несёт #reg (?reg — запасной путь).
+      // После переадресации браузеры не всегда прыгают к якорю сами — докручиваем после загрузки ──
+      if (location.hash === '#reg' || new URLSearchParams(location.search).has('reg')) {
+        const toReg = () => {
+          const reg = document.getElementById('reg');
+          if (Math.abs(reg.getBoundingClientRect().top) > 80) reg.scrollIntoView({ behavior: 'instant' });
+        };
+        if (location.search) history.replaceState(null, '', location.pathname + '#reg');
+        if (document.readyState === 'complete') toReg(); else window.addEventListener('load', toReg, { once: true });
       }
 
       // ── ЗАПИСЬ НА ВЕБИНАР ──
