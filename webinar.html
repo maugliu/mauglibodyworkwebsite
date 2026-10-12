@@ -737,6 +737,12 @@
       document.addEventListener('focusin', update);
       document.addEventListener('focusout', () => setTimeout(update));
 
+      // ── /webinar/reg → к форме. Переадресация несёт #reg; ?reg — запасной путь, если якорь потеряется ──
+      if (new URLSearchParams(location.search).has('reg')) {
+        document.getElementById('reg').scrollIntoView();
+        history.replaceState(null, '', location.pathname + '#reg');
+      }
+
       // ── ЗАПИСЬ НА ВЕБИНАР ──
       const API = 'https://mauglibodywork.com/api/webinar-register';
       const BOT = 'https://t.me/maugli_bodywork_bot';

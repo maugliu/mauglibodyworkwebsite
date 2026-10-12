@@ -2,3 +2,7 @@
 /CLAUDE.md   /   301
 /PRODUCT.md  /   301
 /DESIGN.md   /   301
+
+# Вебинар: короткая ссылка сразу к форме записи
+/webinar/reg   /webinar#reg   302
+/webinar/reg/  /webinar#reg   302
