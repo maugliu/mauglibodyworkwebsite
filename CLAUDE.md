@@ -141,6 +141,9 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
   только список: TBC, BoG, ссылка Альфа-банка. Пока заглушки: DONATE в webinar_build.py
   и WEBINAR.donate в боте.
 - Запись эфира — только поддержавшим (отметку supported ставит владелец); PDF — всем.
+- Ссылки: mauglibodywork.com/webinar — страница сверху (описание); mauglibodywork.com/webinar/reg —
+  сразу к форме (_redirects 302 → /webinar#reg, плюс JS докручивает к #reg после загрузки:
+  после переадресации браузер сам к якорю не прыгает). Кириллический /вебинар — решили не делать.
 - Форма → POST /api/webinar-register → таблица webinar_regs (ключ webinar+контакт, повтор
   обновляет строку) → ссылка в бота ?start=webinar_<id>_<key> привязывает Telegram.
   Конфиг вебинара в боте — константа WEBINAR (код feel-2026-10, startsAt, platform, url).
