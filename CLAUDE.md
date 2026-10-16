@@ -158,7 +158,12 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
   API: GET /api/admin/webinar, POST /api/admin/webinar/update, /api/admin/webinar/delete.
 - ✅ 12.10.2026 — подключивший Telegram записавшийся попадает в leads (source webinar, upsertLead);
   старые перенесены миграцией 0003. Только WhatsApp — остаются лишь в webinar_regs.
-- Этап 2 (до 16.10): напоминания за 24 ч и 1 ч (нужны платформа и ссылка).
+- ✅ 16.10.2026 — напоминания: Zoom (WEBINAR.url/zoomId/zoomCode в боте), cron в :00 —
+  за сутки 16.10 08:00 UTC, за час 17.10 07:00 UTC; тексты разные для support/free (у support —
+  «если планы поменялись — ничего страшного»), согласованы с владельцем. Флаг WEBINAR.remindersOn.
+  Владельцу — отчёт о доставке. /webinar_preview — предпросмотр 4 вариантов (только владелец).
+  Записавшимся меньше чем за сутки ссылка приходит сразу в подтверждении.
+  Бот не пишет первым: ник в Telegram без нажатия «Старт» и WhatsApp — вручную из админки.
   Этап 3 (после 17.10): рассылка PDF всем и записи поддержавшим.
 
 КЛАВИАТУРА БОТА (15.09.2026), MAIN_KEYBOARD, порядок кнопок:
