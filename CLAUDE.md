@@ -24,8 +24,10 @@ Telegram bot: @maugli_bodywork_bot — Cloudflare Worker (repo: telegram-bot, "T
   staya_promo.html           ← noindex, не в меню
   admin.html                 ← noindex, панель лидов, токен-авторизация
   webinar-tejp.html          ← noindex, только по прямой ссылке, не в меню и не в sitemap
-  webinar.html               ← noindex, запись на вебинар «Услышать своё тело» (17.10.2026),
+  webinar.html               ← noindex, запись на вебинар «Услышать своё тело» (17.10.2026, прошёл),
                                собирается .claude/build/webinar_build.py, не в меню и не в sitemap
+  course-waitlist.html       ← noindex, лист ожидания курса «Основы прикосновений и массаж дома»,
+                               собирается .claude/build/course_build.py; в меню RU — пункт «Курс»
   slides/
     webinar-tejp.pdf         ← кнопка «Скачать PDF» на странице вебинара
     webinar-tejp/            ← s-01…28.jpg, 1500×844
@@ -142,9 +144,9 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
   Альфа-банк СБП по номеру (₽, получатель «Анастасия Т.» — так показывает банк) — DONATE в webinar_build.py и WEBINAR.donate в боте.
   Возможна ссылка PayPal — DONATE поддерживает {bank, href, note} (кнопка «Открыть»).
 - Запись эфира — только поддержавшим (отметку supported ставит владелец); PDF — всем.
-- МЕНЮ (12.10.2026): пункт «Вебинар» в шапке и мобильном меню RU (class="nav-tmp", в исходниках
-  index.html и services.html; en_build вырезает его из EN). Пока временный, но может стать
-  постоянным разделом «Школа» — тогда переименовать и завести отдельную страницу.
+- МЕНЮ (21.10.2026): пункт «Вебинар» заменён на «Курс» → course-waitlist.html (class="nav-ru",
+  в исходниках index.html и services.html; en_build вырезает его из EN). Возможно, позже —
+  раздел «Школа».
   Из-за пятого пункта на 861–1060 px пункты меню уходят в бургер (кнопка, тема, язык остаются).
   На webinar.html кнопки к форме — «Записаться на вебинар», кнопка бота в шапке — «Записаться на сеанс».
 - Ссылки: mauglibodywork.com/webinar — страница сверху (описание); mauglibodywork.com/webinar/reg —
@@ -165,6 +167,20 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
   Записавшимся меньше чем за сутки ссылка приходит сразу в подтверждении.
   Бот не пишет первым: ник в Telegram без нажатия «Старт» и WhatsApp — вручную из админки.
   Этап 3 (после 17.10): рассылка PDF всем и записи поддержавшим.
+
+ЛИСТ ОЖИДАНИЯ КУРСА (21.10.2026):
+- Страница /course-waitlist: та же форма, что у вебинара, одна кнопка «Встать в лист ожидания», без доната.
+- POST /api/webinar-register с list='course-waitlist' → та же таблица webinar_regs, поле webinar =
+  'course-waitlist' (новых полей нет; без list — как раньше, текущий вебинар).
+- Бот: ?start=course_waitlist_<id>_<key> — привязка Telegram, подтверждение, leads (source
+  course_waitlist); голый ?start=course_waitlist — описание + ссылка на страницу. Константа COURSE.
+- Уведомления владельцу: «📝 Лист ожидания курса», «🔗 Лист ожидания курса: … подключил(а) Telegram».
+- Админка: вкладка «Курс» (GET /api/admin/webinar?code=course-waitlist), без доната и напоминаний.
+
+РАССЫЛКИ ВЕБИНАРА (21.10.2026): этапы 24h / 1h / start (migrations/0004 — reminded_start).
+Окна: 24h до start−70 мин, 1h — [start−70; start−10), «Начинаем» — [start−10; start+30).
+Кто подключил бота позже этапа — сразу получает сообщение текущего этапа (поздние после 11:00
+получают «за час», после старта — «Начинаем»). /webinar_preview показывает все 5 вариантов.
 
 КЛАВИАТУРА БОТА (15.09.2026), MAIN_KEYBOARD, порядок кнопок:
   Записаться на сеанс · Форматы · Сайт · 🎁 Подарочный сертификат · Контакты

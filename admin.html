@@ -347,6 +347,8 @@
     .sup-toggle { accent-color: var(--accent); width:16px; height:16px; cursor:pointer; }
     .choice-support { color: var(--accent); }
     .copied { color: var(--sage) !important; border-color: var(--sage) !important; }
+    /* вкладка «Курс» — тот же список, без доната и напоминаний */
+    #webinarView.is-course .w-only { display: none !important; }
   </style>
 </head>
 <body>
@@ -383,6 +385,7 @@
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" id="tabLeads" aria-selected="true" aria-controls="leadsView" onclick="showTab('leads')">Лиды</button>
       <button class="tab" role="tab" id="tabWebinar" aria-selected="false" aria-controls="webinarView" onclick="showTab('webinar')">Вебинар</button>
+      <button class="tab" role="tab" id="tabCourse" aria-selected="false" aria-controls="webinarView" onclick="showTab('course')">Курс</button>
     </div>
 
     <div id="leadsView" role="tabpanel" aria-labelledby="tabLeads">
@@ -446,15 +449,15 @@
       <p class="w-meta" id="wMeta"></p>
       <div class="stats">
         <div class="stat-card"><div class="stat-label">Записались</div><div class="stat-value" id="wTotal">—</div></div>
-        <div class="stat-card accent"><div class="stat-label">Хотят поддержать</div><div class="stat-value" id="wWant">—</div></div>
-        <div class="stat-card sage"><div class="stat-label">Поддержали</div><div class="stat-value" id="wSup">—</div></div>
+        <div class="stat-card accent w-only"><div class="stat-label">Хотят поддержать</div><div class="stat-value" id="wWant">—</div></div>
+        <div class="stat-card sage w-only"><div class="stat-label">Поддержали</div><div class="stat-value" id="wSup">—</div></div>
         <div class="stat-card"><div class="stat-label">Telegram подключён</div><div class="stat-value" id="wTg">—</div></div>
         <div class="stat-card"><div class="stat-label">Только WhatsApp</div><div class="stat-value" id="wWa">—</div></div>
       </div>
       <div class="toolbar">
         <div class="filters">
           <button class="btn btn-ghost" id="copyWa" onclick="copyWhatsApp(this)">Скопировать номера WhatsApp</button>
-          <button class="btn btn-ghost" id="copyWaText" onclick="copyWhatsAppText(this)">Скопировать текст напоминания</button>
+          <button class="btn btn-ghost w-only" id="copyWaText" onclick="copyWhatsAppText(this)">Скопировать текст напоминания</button>
         </div>
         <button class="btn btn-ghost bulk-del" id="wBulkDel" hidden onclick="deleteRegs([...wSelected])">Удалить выбранные</button>
       </div>
@@ -467,8 +470,8 @@
               <th>Имя</th>
               <th>Контакт</th>
               <th>Email</th>
-              <th>Выбор</th>
-              <th>Поддержал</th>
+              <th class="w-only">Выбор</th>
+              <th class="w-only">Поддержал</th>
               <th>Бот</th>
               <th>Дата</th>
               <th><span class="sr-only">Удалить</span></th>
@@ -476,7 +479,7 @@
           </thead>
           <tbody id="wBody"></tbody>
         </table>
-        <div class="empty" id="wEmpty" style="display:none;">Пока никто не записался</div>
+        <div class="empty" id="wEmpty" style="display:none;">Пока никого нет</div>
       </div>
     </div>
   </div>
@@ -694,15 +697,20 @@
   // ── ВЕБИНАР ──
   const WAPI = 'https://mauglibodywork.com/api/admin/webinar';
   let wData = null;
+  let wCode = '';            // '' — текущий вебинар, 'course-waitlist' — лист ожидания курса
   const wSelected = new Set();
 
   function showTab(t) {
-    const w = t === 'webinar';
+    const w = t === 'webinar' || t === 'course';
     document.getElementById('leadsView').hidden = w;
     document.getElementById('webinarView').hidden = !w;
-    document.getElementById('tabLeads').setAttribute('aria-selected', String(!w));
-    document.getElementById('tabWebinar').setAttribute('aria-selected', String(w));
-    if (w && !wData) fetchWebinar();
+    document.getElementById('webinarView').classList.toggle('is-course', t === 'course');
+    document.getElementById('tabLeads').setAttribute('aria-selected', String(t === 'leads'));
+    document.getElementById('tabWebinar').setAttribute('aria-selected', String(t === 'webinar'));
+    document.getElementById('tabCourse').setAttribute('aria-selected', String(t === 'course'));
+    if (!w) return;
+    const code = t === 'course' ? 'course-waitlist' : '';
+    if (code !== wCode || !wData) { wCode = code; wData = null; wSelected.clear(); fetchWebinar(); }
   }
 
   async function wFetch(path, body) {
@@ -717,7 +725,7 @@
 
   async function fetchWebinar() {
     try {
-      wData = await wFetch('');
+      wData = await wFetch(wCode ? '?code=' + encodeURIComponent(wCode) : '');
       renderWebinar();
     } catch (e) {
       console.error(e);
@@ -727,9 +735,10 @@
 
   function renderWebinar() {
     const { webinar: w, stats: st, regs } = wData;
-    document.getElementById('wMeta').innerHTML =
-      `<b>${esc(w.title)}</b> · ${esc(w.when)} · ${w.platform ? esc(w.platform) : 'платформа не указана'}` +
-      (w.url ? ` · <a href="${esc(w.url)}" target="_blank" rel="noopener" style="color:var(--accent)">ссылка на эфир</a>` : ' · ссылки на эфир пока нет');
+    document.getElementById('wMeta').innerHTML = wCode
+      ? `<b>Лист ожидания: ${esc(w.title)}</b> · ${esc(w.when)}`
+      : `<b>${esc(w.title)}</b> · ${esc(w.when)} · ${w.platform ? esc(w.platform) : 'платформа не указана'}` +
+        (w.url ? ` · <a href="${esc(w.url)}" target="_blank" rel="noopener" style="color:var(--accent)">ссылка на эфир</a>` : ' · ссылки на эфир пока нет');
     document.getElementById('wTotal').textContent = st.total;
     document.getElementById('wWant').textContent  = st.wantSupport;
     document.getElementById('wSup').textContent   = st.supported;
@@ -752,8 +761,8 @@
         <td class="name">${esc(r.name)}</td>
         <td>${contact}</td>
         <td style="color:var(--text-soft);font-size:12px;">${r.email ? esc(r.email) : '—'}</td>
-        <td>${choice}</td>
-        <td><input type="checkbox" class="sup-toggle" aria-label="Донат пришёл: ${esc(r.name)}" ${r.supported ? 'checked' : ''} onchange="setSupported(${r.id}, this)"></td>
+        <td class="w-only">${choice}</td>
+        <td class="w-only"><input type="checkbox" class="sup-toggle" aria-label="Донат пришёл: ${esc(r.name)}" ${r.supported ? 'checked' : ''} onchange="setSupported(${r.id}, this)"></td>
         <td>${bot}</td>
         <td>${fmtDate(r.created_at)}</td>
         <td><button class="row-del" title="Удалить" aria-label="Удалить запись #${r.id}" onclick="deleteRegs([${r.id}])">✕</button></td>
