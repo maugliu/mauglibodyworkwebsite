@@ -181,6 +181,7 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 _headers /files/*). Рассылка — один текст всем (без записи эфира, с реквизитами), запускает владелец
 в боте: /webinar_followup_preview → /webinar_followup_send → /webinar_followup_send_yes
 (поле followup_sent, миграция 0005). WhatsApp и не открывшим бота — админка, «Текст после вебинара».
+P.S. со ссылкой на лист ожидания курса в эту рассылку НЕ добавляли — добавить в следующую (решение 21.10.2026).
 
 РАССЫЛКИ ВЕБИНАРА (21.10.2026): этапы 24h / 1h / start (migrations/0004 — reminded_start).
 Окна: 24h до start−70 мин, 1h — [start−70; start−10), «Начинаем» — [start−10; start+30).
