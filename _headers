@@ -13,3 +13,7 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+# Материалы для участников (памятки и т.п.) — по прямой ссылке, без индексации
+/files/*
+  X-Robots-Tag: noindex

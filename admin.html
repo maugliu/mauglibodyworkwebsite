@@ -458,6 +458,7 @@
         <div class="filters">
           <button class="btn btn-ghost" id="copyWa" onclick="copyWhatsApp(this)">Скопировать номера WhatsApp</button>
           <button class="btn btn-ghost w-only" id="copyWaText" onclick="copyWhatsAppText(this)">Скопировать текст напоминания</button>
+          <button class="btn btn-ghost w-only" id="copyFollowup" onclick="copyFollowupText(this)">Текст после вебинара</button>
         </div>
         <button class="btn btn-ghost bulk-del" id="wBulkDel" hidden onclick="deleteRegs([...wSelected])">Удалить выбранные</button>
       </div>
@@ -828,6 +829,19 @@
       `Подготовь мяч — лучше твёрдый, для йоги, но подойдёт и теннисный или даже мяч твоего питомца.\n` +
       `До встречи!`;
     copyText(btn, text, 'Скопировать текст напоминания');
+  }
+
+  // Памятка после вебинара — для WhatsApp и тех, кто не открыл бота (тот же текст, что рассылает бот)
+  function copyFollowupText(btn) {
+    const w = wData?.webinar || {};
+    const text = `Спасибо за участие в вебинаре «${w.title}»!\n\n` +
+      `Держи памятку: профиль, чек-лист «Какое напряжение у меня?», самопроверки, дыхание, движение и карта самопомощи. ` +
+      `Начни с 2–3 зон, которые беспокоят больше всего, — регулярность важнее интенсивности.\n` +
+      `https://mauglibodywork.com/files/uslyshat-svoe-telo-pamyatka.pdf\n\n` +
+      `Если захочется поддержать вебинар — реквизиты:\n` +
+      `• TBC Bank (GEL / EUR / USD), IBAN: GE09TB7814345064400007 — Ivan Ustichenko\n` +
+      `• Альфа-банк (₽), СБП по номеру: +79215776564 — Анастасия Т.`;
+    copyText(btn, text, 'Текст после вебинара');
   }
 
   // ── UI ──

@@ -177,6 +177,11 @@ Grain overlay: body::before SVG noise, opacity 0.035 multiply (в тёмной 0
 - Уведомления владельцу: «📝 Лист ожидания курса», «🔗 Лист ожидания курса: … подключил(а) Telegram».
 - Админка: вкладка «Курс» (GET /api/admin/webinar?code=course-waitlist), без доната и напоминаний.
 
+ПАМЯТКА ПОСЛЕ ВЕБИНАРА (21.10.2026): files/uslyshat-svoe-telo-pamyatka.pdf (11 стр., noindex через
+_headers /files/*). Рассылка — один текст всем (без записи эфира, с реквизитами), запускает владелец
+в боте: /webinar_followup_preview → /webinar_followup_send → /webinar_followup_send_yes
+(поле followup_sent, миграция 0005). WhatsApp и не открывшим бота — админка, «Текст после вебинара».
+
 РАССЫЛКИ ВЕБИНАРА (21.10.2026): этапы 24h / 1h / start (migrations/0004 — reminded_start).
 Окна: 24h до start−70 мин, 1h — [start−70; start−10), «Начинаем» — [start−10; start+30).
 Кто подключил бота позже этапа — сразу получает сообщение текущего этапа (поздние после 11:00
