@@ -230,6 +230,8 @@ P.S. со ссылкой на лист ожидания курса в эту р�
 - СБОРКА: about, contacts, journal/* и все en/* собираются скриптами из index.html и services.html —
   .claude/build/ (README там). Правишь RU → пересобираешь → en_build. Руками EN не править. Последним шагом — seo.py (canonical/OG/sitemap).
 
+- Отзывы на сайте: только имена клиентов, без фамилий (24.10.2026 — согласия на публикацию фамилий не брали).
+
 КОНТАКТЫ И ФАКТЫ ДЛЯ FAQ (04.10.2026):
 - Бот записи: @maugli_bodywork_bot · Instagram: @maugli.bodywork. Личный Telegram (@vanmaugli)
   на сайте и в боте НЕ публикуем (12.10.2026) — для связи только бот и Instagram.

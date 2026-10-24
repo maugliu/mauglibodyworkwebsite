@@ -48,7 +48,7 @@ Maugli Bodywork is the practice of Ivan "Maugli" — massage therapist, kinesiol
 ## Evidence on Hand
 
 - Stats on the site are real and conservative (actual numbers are higher): 2500+ hours of practice, 300+ clients, practicing since 2020, 6+ years. Update upward only with figures from Maugli; never invent them.
-- Real client testimonials (e.g. Ира Логинова) shown as message bubbles on the homepage.
+- Real client testimonials (e.g. Ира) shown as message bubbles on the homepage.
 - Certificates: Vector Massage I & II (2020, 2021), Kinesiology — pelvis/lower limbs and shoulder girdle (2020), Postnatal recovery — Dr. Krutov school / NL-School (2022). Scans: `massage_certificate01–05.webp`.
 - Photography: `hero`, `portrait`, `approach`, format photos (`kinesio`, `bodypractice`, `taping`, `postnatal`, `consultation`), `cta_hands`, `diag2/3`.
 - Absent: medical credentials, clinical studies, press. Do not fabricate.
